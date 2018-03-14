@@ -21,3 +21,7 @@
 /yarn-error.log
 
 .byebug_history
+
+# Ignore files that are commonly globally gitignored
+.DS_Store
+._*
