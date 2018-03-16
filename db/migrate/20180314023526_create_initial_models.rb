@@ -36,7 +36,7 @@ class CreateInitialModels < ActiveRecord::Migration[5.1]
       t.string :type
       t.string :name
       t.string :practice_time
-      t.string :locked
+      t.boolean :locked
 
       # Relations
       t.belongs_to :user, index: true

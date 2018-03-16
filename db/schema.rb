@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 20180314023526) do
     t.string "type"
     t.string "name"
     t.string "practice_time"
-    t.string "locked"
+    t.boolean "locked"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
