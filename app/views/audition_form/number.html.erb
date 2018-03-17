@@ -1,0 +1,13 @@
+<body id="audition-form-body">
+<div class="audnum">
+<h3>
+    <b><%= @dancer.name %></b>,<br>
+    your audition number is<br><br>
+    <b><%= @dancer.id.to_s %></b>
+</h3>
+
+<br>
+
+<center><%= link_to "BACK", audition_form_path, style: "color: white" %></center>
+</div>
+</body>
