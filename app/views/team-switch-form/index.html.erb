@@ -1,0 +1,66 @@
+<body id="audition-form-body">
+<%= form_for :team_switch_request, :url => team_switch_form_path, :html => {:class => "audition-form"} do |f| %>
+	<h2>AFX TEAM SWITCH FORM</h2>
+	<% if @request.errors.any? %>
+		<% @request.errors.full_messages.each do |message| %>
+			<div style="color: red"> <li><%= message %></li>  </div>
+		<% end %>
+	<% end %>
+
+	<div style="text-align: left">
+		<p>Welcome to AFX Spring 2018! If you are on this form it means that you are unable to participate on the team that you were initially placed onto due to a time conflict. To drop AFX entirely, select the "Click this to drop AFX"</p>
+		<p>DEADLINE FOR SUBMISSION: SUNDAY FEBRUARY 11TH  @11:59 PM.</p>
+		<p>If you have any questions, comments, or concerns, please email afxdanceviceexecutive@gmail.com.</p>
+	</div>
+
+	<%= f.text_field :name, required: true, placeholder: "Name" %><br>
+	<%= f.text_field :email, required: true, placeholder: "Email" %><br>
+	<%= f.text_field :phone, required: true, placeholder: "Phone XXX-XXX-XXXX" %><br>
+
+	<div style="text-align: left">
+	  Check all the times that you will be available, at least 2 times must be checked. Do not check a project team if you are not a project team member (otherwise your request will be denied).
+	</div>
+
+	<div class="times">
+	<%= f.fields_for :availability do |f_availability| %>
+		<%# Janky way to sort timestrings: #%>
+		<% available_teams = Team.all.sort_by {
+			|team| team.timestring.sub(/monday/i, '1')
+								  .sub(/tuesday/i, '2')
+								  .sub(/wednesday/i, '3')
+								  .sub(/thursday/i, '4')
+								  .sub(/friday/i, '5')
+								  .sub(/saturday/i, '6')
+								  .sub(/sunday/i, '7')
+	}.each do |team| %>
+		<div>
+			<label for="<%= "availability-#{team.id}" %>">
+			<% %>
+				<%= f_availability.check_box team.id, checked: (params.fetch(:team_switch_request, {}).fetch(:availability, {})[team.id.to_s] == '1'), id: "availability-#{team.id}", class: "availability-checkbox" %>
+				<span class="availability-display">
+					<code class="availability-display-busy">BUSY</code>
+					<code class="availability-display-free">FREE</code>
+				</span>
+
+				<% if team.name != "Drop" %>
+					[<%= team.project ? "Project" : "Training" %>]
+				<% end %>
+				<%= team.timestring %>
+			</label>
+		</div>
+	  <% end %>
+	<% end %>
+	</div>
+
+	<div style="text-align: left">
+		<p>Please enter your reason for switching, your request may or may not be approved</p>
+		<%= f.text_area :reason, required: true, placeholder: "Reason" %>
+	</div>
+
+	<div class = "submit">
+    <%= f.submit "Submit team switch request" %>
+  </div>
+
+	<br><br>
+<% end %>
+</body>
