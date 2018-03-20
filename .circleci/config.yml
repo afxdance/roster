@@ -17,7 +17,7 @@ jobs:
     working_directory: ~/repo
 
     steps:
-      - checkout:
+      - checkout
 
       - restore_cache:
           name: Attempt to restore dependencies
@@ -46,25 +46,31 @@ jobs:
       - run:
           name: Run RuboCop
           command: |
-            bundle exec ruboocop
+            bundle exec rubocop
 
       - run:
           name: Run tests
           command: |
-            mkdir /tmp/test-results
-            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
+            bundle exec rake test
 
-            bundle exec rspec --format progress \
-                            --format RspecJunitFormatter \
-                            --out /tmp/test-results/rspec.xml \
-                            --format progress \
-                            $TEST_FILES
-
-      - store_test_results:
-          name: Collect reports
-          path: /tmp/test-results
-
-      - store_artifacts:
-          name: Collect reports
-          path: /tmp/test-results
-          destination: test-results
+      # # These are the sample instructions provided by CircleCI
+      # - run:
+      #     name: Run tests
+      #     command: |
+      #       mkdir /tmp/test-results
+      #       TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
+      #
+      #       bundle exec rspec --format progress \
+      #                       --format RspecJunitFormatter \
+      #                       --out /tmp/test-results/rspec.xml \
+      #                       --format progress \
+      #                       $TEST_FILES
+      #
+      # - store_test_results:
+      #     name: Collect reports
+      #     path: /tmp/test-results
+      #
+      # - store_artifacts:
+      #     name: Collect reports
+      #     path: /tmp/test-results
+      #     destination: test-results
