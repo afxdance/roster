@@ -1,8 +1,8 @@
 AllCops:
-  TargetRubyVersion: 2.4
+  TargetRubyVersion: 2.5
   # RuboCop has a bunch of cops enabled by default. This setting tells RuboCop
   # to ignore them, so only the ones explicitly set in this file are enabled.
-  DisabledByDefault: true
+  # DisabledByDefault: true
   Exclude:
     - '**/templates/**/*'
     - '**/vendor/**/*'
@@ -93,7 +93,7 @@ Style/MethodDefParentheses:
   Enabled: true
 
 Style/FrozenStringLiteralComment:
-  Enabled: true
+  Enabled: false
   EnforcedStyle: always
   Exclude:
     - 'actionview/test/**/*.builder'
@@ -140,7 +140,7 @@ Style/UnneededPercentQ:
 
 # Align `end` with the matching keyword or starting expression except for
 # assignments, where it should be aligned with the LHS.
-Lint/EndAlignment:
+Layout/EndAlignment:
   Enabled: true
   EnforcedStyleAlignWith: variable
   AutoCorrect: true
@@ -160,3 +160,73 @@ Style/Semicolon:
 # Prefer Foo.method over Foo::method
 Style/ColonMethodCall:
   Enabled: true
+
+################
+# Custom rules #
+# ##############
+
+Layout/SpaceInsideArrayLiteralBrackets:
+  EnforcedStyle: no_space
+  EnforcedStyleForEmptyBrackets: no_space
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/LineLength:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/ExpandPathArguments:
+  Enabled: false
+
+Style/MixinUsage:
+  Exclude:
+    - 'bin/**/*'
+
+Style/NumericLiterals:
+  Enabled: false
+
+Style/StringLiteralsInInterpolation:
+  EnforcedStyle: double_quotes
+
+Style/SymbolArray:
+  Enabled: true
+  EnforcedStyle: brackets
+
+Style/TrailingCommaInArrayLiteral:
+  Enabled: true
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInHashLiteral:
+  Enabled: true
+  EnforcedStyleForMultiline: comma
+
+Style/WordArray:
+  Enabled: true
+  EnforcedStyle: brackets
+
+# Bundler/DuplicatedGem:
+#   Enabled: true
+#
+# Bundler/OrderedGems:
+#   Enabled: true
+#
+# Style/SymbolLiteral:
+#   Enabled: true
+#
+# Style/UnlessElse:
+#   Enabled: true
+#
+# Style/YodaCondition:
+#   Enabled: true
