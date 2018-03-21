@@ -20,13 +20,19 @@ class TeamSwitchFormController < ApplicationController
     end
 
     if @request.save
+      #Make current request open 
+      @request.status = "open"
+
+      #Reject all previous requests
+      for r in @request.where(dancer: @request.dancer)
+        r.status = "rejected"
+      end
+
       render "team_switch_form/confirm"
     else
       render "team_switch_form/index"
     end
   end
-
-  private
 
   # Returns a dancer if name and a contact point (phone OR email) has been filled out properly
   def find_dancer(name, phone, email)
