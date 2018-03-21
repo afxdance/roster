@@ -19,4 +19,23 @@ ActiveAdmin.register TeamSwitchRequest do
       :locked,
     ].compact
   end
+
+  controller do
+    def approve_helper(ids)
+      admin_type = current_admin_user.admin_type
+      if admin_type != 'admin'
+        flash[:alert] = 'You do not have sufficient permissions to do this!'
+      else
+        ids.each do |id|
+          switch_request = TeamSwitchRequest.find(id)
+          switch_request.accept
+        end
+        #redirect_to '/admin/team_switch_requests'
+      end
+    end
+  end
+
+  batch_action :approve do |ids|
+    approve_helper(ids)
+  end
 end
