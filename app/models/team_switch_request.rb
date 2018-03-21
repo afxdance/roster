@@ -12,16 +12,15 @@ class TeamSwitchRequest < ApplicationRecord
       available_teams += [Team.find(key)]
     end
 
-    dict = TeamSwitchRequest.new.probe_possibilities(available_teams, dancer_to_switch)
-    best_team = TeamSwitchRequest.new.choose_team(dict)
-    new_team = Team.where(name: best_team).first
+    # default: switch dancer onto first team on list -- should be optimized for team balancing
+    new_team = available_teams[0]
 
     ActiveRecord::Base.transaction do
     	self.new_team = new_team
     	# save! throws exception if attempt to save invalid record
     	self.save!
 
-    	unless dancer.teams.length < 2
+    	unless dancer.teams.length == 1
     		raise "Dancer on more than one team"
     	end
 
