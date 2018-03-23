@@ -38,17 +38,8 @@ ActiveAdmin.register Dancer do
   # batch_action :remove_from_team do
   # end
   #
-  form do |f|
-    f.inputs do
-      f.input :name
-      f.input :email
-      f.input :phone
-      f.input :reason
-      f.input :approved_at
-      f.input :status
-    end
-    f.actions
-  end
+  # form do |f|
+  # end
   #
   # index do
   # end
