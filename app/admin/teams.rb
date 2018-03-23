@@ -19,16 +19,4 @@ ActiveAdmin.register Team do
       :locked,
     ].compact
   end
-  #
-  # member_action :toggle_lock, :method => :post do
-  # end
-  #
-  # form do |f|
-  # end
-  #
-  # index do
-  # end
-  #
-  # show do |user|
-  # end
 end
