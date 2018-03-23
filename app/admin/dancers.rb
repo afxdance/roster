@@ -22,4 +22,37 @@ ActiveAdmin.register Dancer do
       :status,
     ].compact
   end
+  #
+  # member_action :add_to_team, :method => :post do
+  # end
+  #
+  # member_action :remove_from_team, :method => :post do
+  # end
+  #
+  # controller do
+  # end
+  #
+  # batch_action :add_to_team do
+  # end
+  #
+  # batch_action :remove_from_team do
+  # end
+  #
+  form do |f|
+    f.inputs do
+      f.input :name
+      f.input :email
+      f.input :phone
+      f.input :reason
+      f.input :approved_at
+      f.input :status
+    end
+    f.actions
+  end
+  #
+  # index do
+  # end
+  #
+  # show do
+  # end
 end

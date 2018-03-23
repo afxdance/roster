@@ -19,4 +19,22 @@ ActiveAdmin.register Team do
       :locked,
     ].compact
   end
+  #
+  # member_action :toggle_lock, :method => :post do
+  # end
+  #
+  # form do |f|
+  #   f.inputs do
+  #     f.input :name
+  #     f.input :practice_time
+  #     f.input :locked
+  #   end
+  #   f.actions
+  # end
+  #
+  # index do
+  # end
+  #
+  # show do |user|
+  # end
 end
