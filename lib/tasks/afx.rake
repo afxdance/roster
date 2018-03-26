@@ -11,7 +11,7 @@ include AfxRakeHelper
 
 define_task "afx:db:reset" do |t|
   t.describe <<~EOS
-    This command resets the db to what is described in in db/migrate.
+    Reset the db to what is described in in db/migrate.
     WARNING: All your database data will be deleted.
   EOS
 

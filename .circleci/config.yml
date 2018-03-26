@@ -56,7 +56,7 @@ jobs:
       - run:
           name: Run `rails afx:db:reset`
           command: |
-            echo | bundle exec rails afx:db:reset
+            bundle exec rails afx:db:reset
 
       # # These are the sample instructions provided by CircleCI
       # - run:

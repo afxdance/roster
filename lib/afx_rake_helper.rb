@@ -135,11 +135,18 @@ module AfxRakeHelper
     # Run phases
 
     def before_run
+      is_interactive = ENV["CI"] != "true"
+
       print_description
       print_arg_summary
-      print_command_summary
+      if is_interactive
+        print_command_summary
+      end
       check_assertions
-      print_confirmation
+      if is_interactive
+        print_confirmation
+      end
+      return
     end
 
     def run
