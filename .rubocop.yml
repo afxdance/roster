@@ -151,7 +151,7 @@ Lint/RequireParentheses:
   Enabled: true
 
 Style/RedundantReturn:
-  Enabled: true
+  Enabled: false
   AllowMultipleReturnValues: true
 
 Style/Semicolon:
@@ -176,10 +176,16 @@ Metrics/AbcSize:
 Metrics/BlockLength:
   Enabled: false
 
+Metrics/ClassLength:
+  Enabled: false
+
 Metrics/MethodLength:
   Enabled: false
 
 Metrics/LineLength:
+  Enabled: false
+
+Naming/HeredocDelimiterNaming:
   Enabled: false
 
 Style/ClassAndModuleChildren:
@@ -188,12 +194,27 @@ Style/ClassAndModuleChildren:
 Style/Documentation:
   Enabled: false
 
+Style/EmptyLineAfterGuardClause:
+  Enabled: true
+
 Style/ExpandPathArguments:
+  Enabled: false
+
+Style/For:
+  Enabled: false
+  EnforcedStyle: for
+
+Style/IfUnlessModifier:
   Enabled: false
 
 Style/MixinUsage:
   Exclude:
     - 'bin/**/*'
+    - 'lib/tasks/**/*'
+    - 'Rakefile'
+
+Style/NegatedIf:
+  EnforcedStyle: postfix
 
 Style/NumericLiterals:
   Enabled: false
@@ -201,9 +222,16 @@ Style/NumericLiterals:
 Style/StringLiteralsInInterpolation:
   EnforcedStyle: double_quotes
 
+Style/NumericPredicate:
+  Enabled: false
+
 Style/SymbolArray:
   Enabled: true
   EnforcedStyle: brackets
+
+Style/TrailingCommaInArguments:
+  Enabled: true
+  EnforcedStyleForMultiline: comma
 
 Style/TrailingCommaInArrayLiteral:
   Enabled: true
