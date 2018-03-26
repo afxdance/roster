@@ -53,6 +53,11 @@ jobs:
           command: |
             bundle exec rake test
 
+      - run:
+          name: Run `rails afx:db:reset`
+          command: |
+            yes | bundle exec rails afx:db:reset
+
       # # These are the sample instructions provided by CircleCI
       # - run:
       #     name: Run tests
