@@ -76,6 +76,7 @@ group :development do
   ##############################
 
   gem "debase", require: false
+  gem "mdl", require: false
   gem "ruby-debug-ide", require: false
 end
 

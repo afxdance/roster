@@ -88,7 +88,7 @@ module AfxRakeHelper
     def print_description
       return unless @description
 
-      puts "This command will do the following:"
+      puts "This command will do the following:".green
       puts @description.gsub("WARNING", "WARNING".red)
       puts
     end
