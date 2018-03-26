@@ -1,0 +1,11 @@
+{
+    "editor.insertSpaces": true,
+    "editor.rulers": [100],
+    "editor.tabSize": 2,
+    "editor.wordWrap": "bounded",
+    "editor.wordWrapColumn": 100,
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
+    "workbench.editor.closeOnFileDelete": false,
+}
