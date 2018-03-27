@@ -49,8 +49,10 @@ To set up this app for the first time:
    - **rbenv**: `rbenv install 2.5.0`
    - **rvm**: `rvm install 2.5.0`
 4. Install all required gems:
-   - `bundle install`
-   - Then run `rbenv rehash` if you're using rbenv
+   1. `gem install bundler`
+   2. `rbenv rehash` (if you're using rbenv)
+   3. `bundle install`
+   4. `rbenv rehash` (if you're using rbenv)
 
 ### Database setup
 
