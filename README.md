@@ -1,6 +1,6 @@
 # afxdance/roster
 
-This app manages the AFX Dancer roster each semester.
+This app manages the AFX Dance roster each semester.
 
 ## Setup
 
