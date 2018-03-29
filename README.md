@@ -14,7 +14,7 @@ We support the following editors:
   - Install elsewhere: <https://code.visualstudio.com/>
   - After you open VSCode, install either the `Sublime Text Keymap` or `Atom Keymap` extensions. (The default VSCode keymap is very different from that of the other editors.)
 - **Github Atom**:
-  - Atom techncially has support for the most features, but it is slower, and its plugins tend to be buggier.
+  - Atom technically has support for the most features, but it is slower, and its plugins tend to be buggier.
   - Install on Mac: `brew cask install atom`
   - Install elsewhere: <https://atom.io/>
 - **Sublime Text**:
