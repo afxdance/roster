@@ -9,13 +9,16 @@ This app manages the AFX Dancer roster each semester.
 We support the following editors:
 
 - **Visual Studio Code** (highly recommended):
+  - VSCode is highly recommended because it is reasonably fast and has a built-in terminal (even for Windows!) that works well.
   - Install on Mac: `brew cask install visual-studio-code`
   - Install elsewhere: <https://code.visualstudio.com/>
-  - After you open VSCode, install either the `Sublime Text Keymap` or `Atom Keymap` extensions. (The default keymap is very different from that of the other editors.)
+  - After you open VSCode, install either the `Sublime Text Keymap` or `Atom Keymap` extensions. (The default VSCode keymap is very different from that of the other editors.)
 - **Github Atom**:
+  - Atom techncially has support for the most features, but it is slower, and its plugins tend to be buggier.
   - Install on Mac: `brew cask install atom`
   - Install elsewhere: <https://atom.io/>
 - **Sublime Text**:
+  - Sublime Text is very fast and lean but its UI is limited. (For example, you have to check the status bar for linter messages.)
   - Install on Mac: `brew cask install sublime-text`
   - Install elsewhere: <https://www.sublimetext.com/>
 
@@ -24,10 +27,11 @@ Note: Using `brew cask install` is preferred on Mac, because it will also instal
 In addition to downloading the editor, you should also install the following:
 
 | Feature             | VSCode extension | Atom package     | Sublime Text package    |
-| :------------------ | :--------------- | :--------------- | :---------------------- |
+|---------------------|------------------|------------------|-------------------------|
 | Package manager     | Built-in!        | Built-in!        | Package Control         |
 | Linting framework   | Built-in!        | `linter`         | `SublimeLinter`         |
 | rubocop linter      | `ruby-rubocop`   | `linter-rubocop` | `SublimeLinter-rubocop` |
+| Ruby support        | `ruby-symbols`   | Built-in!        | Built-in!               |
 | Ruby debugger       | `Ruby`           | Unsupported      | Unsupported             |
 | Integrated terminal | Built-in!        | Unsupported      | Unsupported             |
 | File commands       | `File Utils`     | Built-in!        | `SideBarEnhancements`   |
@@ -39,7 +43,8 @@ To set up this app for the first time:
 1. Install a Ruby environment manager. There are two popular options:
     - **rbenv** (recommended):
        - Install on Mac: <https://github.com/rbenv/rbenv#homebrew-on-macos>
-       - Install elsewhere: <https://github.com/rbenv/rbenv#basic-github-checkout>
+       - Install elsewhere: <https://github.com/rbenv/rbenv#basic-github-checkout> \
+         You need to follow the optional step to install ruby-build.
     - **rvm**:
        - Install: <https://rvm.io/>
 2. Clone this repo
