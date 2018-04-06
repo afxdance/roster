@@ -4,14 +4,9 @@ one:
   name: MyString
   email: MyString
   phone: MyString
-  gender: MyString
-  year: MyString
-  experience: MyString
-
-two:
-  name: MyString
-  email: MyString
-  phone: MyString
+  reason: MyString
+  approved_at: MyString
+  status: MyString
   gender: MyString
   year: MyString
   experience: MyString
