@@ -22,12 +22,12 @@ ActiveAdmin.register Dancer do
       :status,
     ].compact
   end
-  member_action :add_dancer, :method => :post do
+  member_action :add_dancer, method: :post do
     ids = params[:id]
     add_helper(ids)
   end
 
-  member_action :remove_dancer, :method => :post do
+  member_action :remove_dancer, method: :post do
     ids = params[:id]
     remove_helper(ids)
   end
