@@ -65,9 +65,11 @@ ActiveAdmin.register Dancer do
     # column :reason
     # column :approved_at
     # column :status
+
     column :add_dancer do |dancer|
       link_to "Add", "/admin/dancers/#{dancer.id}/add_to_team" , method: :post
     end
+
     column :remove_dancer do |dancer|
       link_to "Remove", "/admin/dancers/#{dancer.id}/remove_from_team" , method: :post
     end
