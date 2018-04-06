@@ -22,4 +22,43 @@ ActiveAdmin.register Dancer do
       :status,
     ].compact
   end
+
+  form do |f|
+    f.inputs do
+      f.input :name
+      f.input :email
+      f.input :phone
+      # f.input :reason
+      # f.input :approved_at
+      # f.input :status
+    end
+    f.actions
+  end
+
+  index do
+    selectable_column
+    column :id
+    column :name
+    column :email
+    column :phone
+    # column :reason
+    # column :approved_at
+    # column :status
+    column :add_dancer
+    column :remove_dancer
+    actions
+  end
+
+  show do |dancers|
+    panel "Detail" do
+      attributes_table_for dancers do
+        row :name
+        row :email
+        row :phone
+        row :reason
+        row :approved_at
+        row :status
+      end
+    end
+  end
 end
