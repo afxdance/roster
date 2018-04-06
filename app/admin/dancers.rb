@@ -62,11 +62,7 @@ ActiveAdmin.register Dancer do
     column :email
     column :phone
     column :add_dancer do |dancers|
-
-    end
     column :remove_dancer do |dancers|
-
-    end
     actions
   end
 
