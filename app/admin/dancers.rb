@@ -24,6 +24,7 @@ ActiveAdmin.register Dancer do
     ].compact
   end
 
+<<<<<<< HEAD
   member_action :add_to_team, method: :post do
     ids = params[:id]
     add_helper(ids)
@@ -44,6 +45,8 @@ ActiveAdmin.register Dancer do
     end
   end
 
+=======
+>>>>>>> 078ac711ebc742a88cca5f34959867c72e3f8928
   form do |f|
     f.inputs do
       f.input :name
@@ -65,6 +68,7 @@ ActiveAdmin.register Dancer do
     # column :reason
     # column :approved_at
     # column :status
+<<<<<<< HEAD
 
     column :add_dancer do |dancer|
       link_to "Add", "/admin/dancers/#{dancer.id}/add_to_team" , method: :post
@@ -73,6 +77,10 @@ ActiveAdmin.register Dancer do
     column :remove_dancer do |dancer|
       link_to "Remove", "/admin/dancers/#{dancer.id}/remove_from_team" , method: :post
     end
+=======
+    column :add_dancer
+    column :remove_dancer
+>>>>>>> 078ac711ebc742a88cca5f34959867c72e3f8928
     actions
   end
 
