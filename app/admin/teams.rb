@@ -19,4 +19,34 @@ ActiveAdmin.register Team do
       :locked,
     ].compact
   end
+
+  form do |f|
+    f.inputs do
+      f.input :name
+      f.input :practice_time
+      f.input :locked
+      f.input :project
+    end
+    f.actions
+  end
+
+  index do
+    selectable_column
+    column :id
+    column :name
+    column :practice_time
+    column :locked
+    # column :project
+    actions
+  end
+
+  show do |teams|
+    panel "Detail" do
+      attributes_table_for teams do
+        row :name
+        row :locked
+        row :project
+      end
+    end
+  end
 end
