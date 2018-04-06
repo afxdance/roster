@@ -22,4 +22,60 @@ ActiveAdmin.register Dancer do
       :status,
     ].compact
   end
+  member_action :add_dancer, method: :post do
+    ids = params[:id]
+    add_helper(ids)
+  end
+
+  member_action :remove_dancer, method: :post do
+    ids = params[:id]
+    remove_helper(ids)
+  end
+
+  # controller do
+  #   def add_helper(ids)
+  #
+  #     added = teams.
+  #
+  #
+  #   def remove_helper(ids)
+  #
+  #   end
+  # end
+
+  form do |f|
+    f.inputs do
+      f.input :name
+      f.input :email
+      f.input :phone
+      # f.input :reason
+      # f.input :approved_at
+      # f.input :status
+    end
+    f.actions
+  end
+
+  index do
+    selectable_column
+    column :id
+    column :name
+    column :email
+    column :phone
+    column :add_dancer do |dancers|
+    column :remove_dancer do |dancers|
+    actions
+  end
+
+  show do |dancers|
+    panel "Detail" do
+      attributes_table_for dancers do
+        row :name
+        row :email
+        row :phone
+        row :reason
+        row :approved_at
+        row :status
+      end
+    end
+  end
 end
