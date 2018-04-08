@@ -10,28 +10,43 @@
     <%= f.text_field :name, required: true, placeholder: "Name"%>
     <br>
     <!-- Email regex copied from http://emailregex.com/ -->
-    <%= f.text_field :email, required: true, placeholder: "Email", pattern: "[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*" %>
+    <%= f.text_field :email, required: true, placeholder: "Email",
+        pattern: "[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*" %>
     <br>
-    <%= f.text_field :phone, required: true, placeholder: "Phone Number (###-###-####)", pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}" %>
+    <%= f.text_field :phone, required: true, placeholder: "Phone Number (###-###-####)", pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}",
+        id: "phone" %>
+    <!-- the following commented-out code is a failed attempt to customize the error message
+         that pops up when you put the wrong phone number -->
+    <!-- <%= javascript_tag do %>
+        var phone = document.getElementById("phone");
+
+        phone.addEventListener("input", function (event) {
+            if (phone.validity.patternMismatch) {
+                phone.setCustomValidity("Phone number should be of the form ###-###-####");
+            } else {
+                phone.setCustomValidity("");
+            }
+        });
+    <% end %> -->
     <br>
     <%= f.select :gender, options_for_select([
         'Male',
         'Female',
         'Other'
-    ]), prompt: "Gender", required: true %>
+    ]), {prompt: "Gender"}, required: true %>
     <br>
     <%= f.select :year, options_for_select([
         ['Freshman or younger', '1'],
         ['Sophomore', '2'],
         ['Junior', '3'],
         ['Senior or older', '4']
-    ]), prompt: "Year", required: true %>
+    ]), {prompt: 'Year'}, required: true %>
     <br>
     <%= f.select :experience, options_for_select([
         ['No', 'No'],
         ['Yes, and I have been in AFX before', 'YesYesAFX'],
         ['Yes, but I have not been in AFX before', 'YesNoAFX'],
-    ]), prompt: "Do you have prior dance experience?", required: true %>
+    ]), {prompt: "Do you have prior dance experience?"}, required: true %>
     <br>
     <br>
 
