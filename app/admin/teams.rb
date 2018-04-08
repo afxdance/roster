@@ -15,16 +15,18 @@ ActiveAdmin.register Team do
   permit_params do
     [
       :name,
+      :type,
       :practice_time,
       :locked,
-      :project,
     ].compact
   end
 
   form do |f|
     f.inputs do
       f.input :name
-      f.input :practice_time
+      f.input :type
+      f.input :practice_time,
+              label: "Practice time<br>(EX. Thu 7-8:30, Sat 4-5:30)".html_safe
       f.input :locked
     end
     f.actions
@@ -33,9 +35,9 @@ ActiveAdmin.register Team do
   index do
     selectable_column
     column :name
+    column :type
     column :practice_time
     column :locked
-    column :project
     actions
   end
 
@@ -43,9 +45,9 @@ ActiveAdmin.register Team do
     panel "Detail" do
       attributes_table_for team do
         row :name
+        row :type
         row :practice_time
         row :locked
-        row :project
       end
     end
   end

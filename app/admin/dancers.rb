@@ -18,9 +18,8 @@ ActiveAdmin.register Dancer do
       :email,
       :phone,
       :gender,
-      # :reason,
-      # :approved_at,
-      # :status,
+      :year,
+      :experience,
     ].compact
   end
 
@@ -36,11 +35,11 @@ ActiveAdmin.register Dancer do
 
   controller do
     def add_helper(ids)
-      redirect_to '/admin/dancers', :alert => "to add dancers at index #{ids}"
+      redirect_to "/admin/dancers", alert: "to add dancers at index #{ids}"
     end
 
     def remove_helper(ids)
-      redirect_to '/admin/dancers', :alert => "to remove dancers at index #{ids}"
+      redirect_to "/admin/dancers", alert: "to remove dancers at index #{ids}"
     end
   end
 
@@ -49,9 +48,9 @@ ActiveAdmin.register Dancer do
       f.input :name
       f.input :email
       f.input :phone
-      # f.input :reason
-      # f.input :approved_at
-      # f.input :status
+      f.input :gender
+      f.input :year
+      f.input :experience
     end
     f.actions
   end
@@ -62,16 +61,16 @@ ActiveAdmin.register Dancer do
     column :name
     column :email
     column :phone
-    # column :reason
-    # column :approved_at
-    # column :status
+    column :gender
+    column :year
+    column :experience
 
     column :add_dancer do |dancer|
-      link_to "Add", "/admin/dancers/#{dancer.id}/add_to_team" , method: :post
+      link_to "Add", "/admin/dancers/#{dancer.id}/add_to_team", method: :post
     end
 
     column :remove_dancer do |dancer|
-      link_to "Remove", "/admin/dancers/#{dancer.id}/remove_from_team" , method: :post
+      link_to "Remove", "/admin/dancers/#{dancer.id}/remove_from_team", method: :post
     end
     actions
   end
@@ -82,9 +81,9 @@ ActiveAdmin.register Dancer do
         row :name
         row :email
         row :phone
-        row :reason
-        row :approved_at
-        row :status
+        row :gender
+        row :year
+        row :experience
       end
     end
   end
