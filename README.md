@@ -86,8 +86,9 @@ To start the server:
 1. In your VSCode terminal or regular terminal, type: \
    `rails server` (`rails s` for short)
 2. The app is served from <http://localhost:3000/>. Check out these pages:
-   - <http://localhost:3000/>
-   - <http://localhost:3000/admin>
+   - <http://localhost:3000/> – this is just a static page for now
+   - <http://localhost:3000/admin> – this is the ActiveAdmin interface
+   - <http://localhost:3000/rails/db> – this shows you the raw database
 
 ## Contributing
 
