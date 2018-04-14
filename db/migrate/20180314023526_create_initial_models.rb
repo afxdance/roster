@@ -28,12 +28,12 @@ class CreateInitialModels < ActiveRecord::Migration[5.1]
       t.belongs_to :dancer, index: true
 
       # Default colunmns
-      t.timestamps
+      t.timestampss
     end
 
     create_table :teams do |t|
       # Data columns
-      t.string :type
+      t.string :type # 'type' is a restricted word in ruby
       t.string :name
       t.string :practice_time
       t.boolean :locked
