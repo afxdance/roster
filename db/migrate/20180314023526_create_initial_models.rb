@@ -33,8 +33,8 @@ class CreateInitialModels < ActiveRecord::Migration[5.1]
 
     create_table :teams do |t|
       # Data columns
-      t.string :type
       t.string :name
+      t.string :type_of #'type' is a restricted word in ruby
       t.string :practice_time
       t.boolean :locked
 
