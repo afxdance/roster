@@ -15,7 +15,7 @@ class Team < ApplicationRecord
     return false
   end
 
-  #returns whether or not a given team can pick dancers
+  # returns whether or not a given team can pick dancers
   def can_pick
     if !project
       # if there is a project team that is not locked,
@@ -118,18 +118,24 @@ class Team < ApplicationRecord
     end
   end
 
+  # randomizes all dancers not yet in teams into a training team
   def self.final_randomization
 
     # split all auditionees not hand picked by directors into two groups based
     # on gender
-    teamless_guys = []
-    teamless_girls = []
+    teamless = Array.new(9,[])
+
+    # makes our code alot cleaner
+    offset = 4
+
+    # separate each dancer based on attributes
     Dancer.all.each do |dancer|
+      # if dancer does't have a team yet
       if dancer.teams.length == 0
         if dancer.gender == "M"
-          teamless_guys << dancer
+          teamless[dancer.year] << dancer
         else
-          teamless_girls << dancer
+          teamless[dancer.year + offset] = dancer
         end
       end
     end
@@ -140,21 +146,18 @@ class Team < ApplicationRecord
       training_teams << team
     end
 
+    # puts dancers into teams randomly
     if training_teams.length > 0
-      # maintaining gender ratios
-      while teamless_guys.length > 0
-        teamless_guys.shuffle
-        training_teams.sort! { |a,b| a.dancers.length <=> b.dancers.length }
-        training_teams[0].dancers << teamless_guys.shift
-      end
-
-      while teamless_girls.length > 0
-        teamless_girls.shuffle
-        training_teams.sort! { |a,b| a.dancers.length <=> b.dancers.length }
-        training_teams[0].dancers << teamless_girls.shift
+      teamsless.each do |group|
+        while group.length > 0
+          group.shuffle
+          training_teams.sort! { |a,b| a.dancers.length <=> b.dancers.length }
+          training_team[0].dancers << group.shift
+        end
       end
     end
 
+    # save changes!
     training_teams.each do |team|
       team.save
     end
@@ -162,3 +165,4 @@ class Team < ApplicationRecord
   end
 
 end
+
