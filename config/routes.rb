@@ -6,5 +6,9 @@ Rails.application.routes.draw do
   # audition_form_controller
   get '/auditionform', to: 'audition_form#index'
   post '/auditionform', to: 'audition_form#create_dancer', as: "audition_form"
-  
+
+  # edit_form_controller
+  get '/auditionform/:id/edit', to: 'audition_form#edit', as: :edit_dancer
+  put '/auditionform/:id', to: 'audition_form#update'
+
 end
