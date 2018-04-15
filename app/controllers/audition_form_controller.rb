@@ -17,7 +17,13 @@ class AuditionFormController < ApplicationController
     @dancer = Dancer.find(params[:id])
   end
 
-  def update; end
+  def update
+    @dancer = Dancer.find(params[:id])
+    @dancer.update(name: params[:dancer][:name], phone: params[:dancer][:phone], year: params[:dancer][:year],
+                   gender: params[:dancer][:gender], email: params[:dancer][:email],
+                   experience: params[:dancer][:experience])
+    render "audition_form/updated"
+  end
 
   private
 

@@ -1,5 +1,5 @@
 <body id="audition-form-body">
-<%= form_for :dancer, :url => audition_form_path, :html => {:class => "audition-form"} do |f| %>
+<%= form_for :dancer, :url => {:action => "update", :id => @dancer.id}, :html => {:class => "audition-form"}, method: "put" do |f| %>
     <h2>AFX AUDITIONS, EDIT DANCER</h2>
     <% if @dancer.errors.any? %>
         <% @dancer.errors.full_messages.each do |message| %>
