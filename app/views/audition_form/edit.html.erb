@@ -20,20 +20,20 @@
         'Male',
         'Female',
         'Other'
-    ]), {prompt: "Gender"}, required: true %>
+    ], @dancer.gender), {prompt: "Gender"}, required: true %>
     <br>
     <%= f.select :year, options_for_select([
         ['Freshman or younger', '1'],
         ['Sophomore', '2'],
         ['Junior', '3'],
         ['Senior or older', '4']
-    ]), {prompt: 'Year'}, required: true %>
+    ], @dancer.year), {prompt: 'Year'}, required: true %>
     <br>
     <%= f.select :experience, options_for_select([
         ['No', 'No'],
         ['Yes, and I have been in AFX before', 'YesYesAFX'],
         ['Yes, but I have not been in AFX before', 'YesNoAFX'],
-    ]), {prompt: "Do you have prior dance experience?"}, required: true %>
+    ], @dancer.experience), {prompt: "Do you have prior dance experience?"}, required: true %>
     <br>
     <br>
 
