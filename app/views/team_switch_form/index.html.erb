@@ -25,7 +25,7 @@
 	<%= f.fields_for :availability do |f_availability| %>
 		<%# Janky way to sort timestrings: #%>
 		<% available_teams = Team.all.sort_by {
-			|team| team.timestring.sub(/monday/i, '1')
+			|team| team.practice_time.sub(/monday/i, '1')
 								  .sub(/tuesday/i, '2')
 								  .sub(/wednesday/i, '3')
 								  .sub(/thursday/i, '4')
@@ -42,10 +42,8 @@
 					<code class="availability-display-free">FREE</code>
 				</span>
 
-				<% if team.name != "Drop" %>
-					[<%= team.project ? "Project" : "Training" %>]
-				<% end %>
-				<%= team.timestring %>
+
+				<%= team.practice_time %>
 			</label>
 		</div>
 	  <% end %>

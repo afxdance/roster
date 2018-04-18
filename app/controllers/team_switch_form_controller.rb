@@ -11,9 +11,9 @@ class TeamSwitchFormController < ApplicationController
     @request.dancer = find_dancer(@request.name, @request.phone, @request.email)
     if @request.dancer != nil
       if @request.dancer.teams.length == 0
-        @request.original_team = nil
+        @request.old_team = nil
       elsif @request.dancer.teams.length == 1
-        @request.original_team = @request.dancer.teams[0]
+        @request.old_team = @request.dancer.teams[0]
       else
         raise RuntimeError.new("Dancer on more than one team")
       end
@@ -50,7 +50,7 @@ class TeamSwitchFormController < ApplicationController
       :name,
       :phone,
       :reason,
-      availability: params[:team_switch_request][:availability] ? params[:team_switch_request][:availability].keys : nil
+      datetime: params[:team_switch_request][:datetime] ? params[:team_switch_request][:datetime].keys : nil
     )
   end
 
