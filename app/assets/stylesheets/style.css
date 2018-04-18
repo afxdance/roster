@@ -1,0 +1,135 @@
+#audition-form-body {
+    background: url('/assets/blurred-bg.jpg') no-repeat center center fixed;
+    vertical-align: middle;
+    text-align: left;
+    padding: 50px 0;
+}
+
+.audition-form{
+    font-family: 'Open Sans Condensed', arial, sans;
+    width: 600px;
+    padding: 30px;
+    background: #fff;
+    opacity: 0.7;
+    margin: 0 auto;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.22);
+    -moz-box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.22);
+    -webkit-box-shadow:  0px 0px 30px rgba(0, 0, 0, 0.22);
+
+}
+.audition-form h2{
+    background: #4D4D4D;
+    text-transform: uppercase;
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: #fff;
+    font-size: 34px;
+    text-align: center;
+    font-weight: bold;
+    padding: 20px;
+    margin: -30px -30px 30px -30px;
+}
+.audition-form input[type="text"],
+.audition-form input[type="date"],
+.audition-form input[type="datetime"],
+.audition-form input[type="email"],
+.audition-form input[type="number"],
+.audition-form input[type="search"],
+.audition-form input[type="time"],
+.audition-form input[type="url"],
+.audition-form input[type="password"],
+.audition-form textarea,
+.audition-form select
+{
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    outline: none;
+    display: block;
+    width: 100%;
+    padding: 7px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    background: transparent;
+    margin-bottom: 10px;
+    font: 16px Arial, Helvetica, sans-serif;
+    height: 45px;
+}
+.audition-form textarea{
+    resize:none;
+    overflow: hidden;
+}
+.audition-form input[type="button"],
+.audition-form input[type="submit"]{
+    -moz-box-shadow: inset 0px 1px 0px 0px #45D6D6;
+    background-color: #000000 !important;
+    opacity: 0.8;
+    border: 1px solid #808080;
+    border-radius: 0px;
+    display: inline-block;
+    cursor: pointer;
+    color: #FFFFFF;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 14px;
+    padding: 8px 18px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.audition-form input[type="button"]:hover,
+.audition-form input[type="submit"]:hover {
+    background:linear-gradient(to bottom, #34CACA 5%, #30C9C9 100%);
+    background-color:#34CACA;
+}
+
+.audnum h3 {
+    background: #4D4D4D;
+    width: 500px;
+    opacity: 0.7;
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: #fff;
+    font-size: 32px;
+    padding: 30px;
+    margin: 50px auto;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.22);
+    -moz-box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.22);
+    -webkit-box-shadow:  0px 0px 30px rgba(0, 0, 0, 0.22);
+}
+
+.audition-form label {
+    -webkit-user-select: none;
+}
+/*.audition-form .availability-checkbox {
+    display: none;
+}*/
+.availability-display-free {
+    color: green;
+}
+.audition-form .availability-checkbox + .availability-display .availability-display-free {
+    display: none;
+}
+
+.audition-form .availability-checkbox:checked + .availability-display .availability-display-free {
+    display: inline;
+}
+
+.audition-form .availability-checkbox:checked + .availability-display .availability-display-busy {
+    display: none;
+}
+
+.times {
+    font-size: 16px;
+    text-align: left
+}
+
+form p {
+  margin: 1em 0;
+}
+
+.submit {
+    text-align: center;
+
+}
+
+html, body {
+    height: 100%;
+    overflow: auto;
+}

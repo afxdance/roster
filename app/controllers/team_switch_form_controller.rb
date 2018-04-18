@@ -20,12 +20,12 @@ class TeamSwitchFormController < ApplicationController
     end
 
     if @request.save
-      #Make current request open 
+      #Make current request open
       @request.status = "open"
 
       #Reject all previous requests
       for r in @request.where(dancer: @request.dancer)
-        r.status = "rejected"
+        r.status = "auto-rejected"
       end
 
       render "team_switch_form/confirm"
