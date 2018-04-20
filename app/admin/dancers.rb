@@ -25,25 +25,25 @@ ActiveAdmin.register Dancer do
 
   member_action :add_to_team, method: :post do
     ids = params[:id]
-    add_helper(ids)
+    add_helper(ids, current_user)
   end
 
   member_action :remove_from_team, method: :post do
     ids = params[:id]
-    remove_helper(ids)
+    remove_helper(ids, current_user)
   end
 
   controller do
     def add_helper(ids, current_user)
       if current_user.team.nil?
-        redirect_to "/admin/dancers", alert: "Your account is not associated with a team"
+        redirect_to "/admin/dancers", alert: "Your account, #{current_user.email}, is not associated with a team"
       elsif current_user.team.locked
-        redirect_to "/admin/dancers", alert: "#{current.user.team.name} is currently locked right now."
+        redirect_to "/admin/dancers", alert: "#{current_user.team.name} is currently locked right now."
       elsif current_user.team.can_pick
         # If current_user.team is a training team, checks if all project teams are done picking.
         if current_user.team.can_add(ids.length)
           # If current_user.team has not reached maximum picks, add the dancer.
-          added = cureent_user.team.add_dancers(ids)
+          added = current_user.team.add_dancers(ids)
           redirect_to "/admin/dancers", alert: "#{added} has been added to #{current_user.team.name}."
         else
           # If current_user.team has hit maximum picks...
@@ -55,8 +55,19 @@ ActiveAdmin.register Dancer do
       end
     end
 
-    def remove_helper(ids)
-      redirect_to "/admin/dancers", alert: "to remove dancers at index #{ids}"
+    def remove_helper(ids, current_user)
+      if current_user.team.nil?
+        redirect_to "/admin/dancers", alert: "Your account, #{current_user.email}, is not asscoiated with a team."
+      elsif current_user.locked
+        redirect_to "/admin/dancers", alert: "#{current_user.team.name} is locked."
+      elsif current_user.team.can_pick
+        # If current_user.team is a training team, checks if all project teams are done picking.
+        removed = current_user.team.remove_dancer(ids)
+        redirect_to "/admin/dancers", alert: "#{removed} have been removed from #{current_user.team.name}"
+      else
+        # do not know if this is needed, because training teams won't have any dancers if project teams are still picking.
+        redirect_to "/admin/dancers", alert: "#{current_user.team/name} cannot remove right now because project teams are still picking."
+      end
     end
   end
 
