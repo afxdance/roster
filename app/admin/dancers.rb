@@ -35,8 +35,23 @@ ActiveAdmin.register Dancer do
 
   controller do
     def add_helper(ids, current_user)
-      if current_user.team == nil
-        redirect_to '/admin/dancers', :alert => "Your account is not associated with a team"
+      if current_user.team.nil?
+        redirect_to "/admin/dancers", alert: "Your account is not associated with a team"
+      elsif current_user.team.locked
+        redirect_to "/admin/dancers", alert: "#{current.user.team.name} is currently locked right now."
+      elsif current_user.team.can_pick
+        # If current_user.team is a training team, checks if all project teams are done picking.
+        if current_user.team.can_add(ids.length)
+          # If current_user.team has not reached maximum picks, add the dancer.
+          added = cureent_user.team.add_dancers(ids)
+          redirect_to "/admin/dancers", alert: "#{added} has been added to #{current_user.team.name}."
+        else
+          # If current_user.team has hit maximum picks...
+          redirect_to "/admin/dancers", alert: "#{current_user.team.name} has exceeded the maximum number of picks."
+        end
+      else
+        # If current_user.team is a training team and all project teams are not locked...
+        redirect_to "/admin/dancers", alert: "#{current_user.team.name} cannot pick right now because project teams are still picking."
       end
     end
 
