@@ -74,9 +74,10 @@ ActiveRecord::Schema.define(version: 20180314023526) do
 
   create_table "teams", force: :cascade do |t|
     t.string "name"
-    t.string "type"
+    t.string "type_of"
     t.string "practice_time"
     t.boolean "locked"
+    t.integer "maximum_picks"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
