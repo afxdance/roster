@@ -34,8 +34,10 @@ ActiveAdmin.register Dancer do
   end
 
   controller do
-    def add_helper(ids)
-      redirect_to "/admin/dancers", alert: "to add dancers at index #{ids}"
+    def add_helper(ids, current_user)
+      if current_user.team == nil
+        redirect_to '/admin/dancers', :alert => "Your account is not associated with a team"
+      end
     end
 
     def remove_helper(ids)

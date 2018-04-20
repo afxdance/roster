@@ -34,9 +34,10 @@ class CreateInitialModels < ActiveRecord::Migration[5.1]
     create_table :teams do |t|
       # Data columns
       t.string :name
-      t.string :type
+      t.string :type_of
       t.string :practice_time
       t.boolean :locked
+      t.integer :maximum_picks
 
       # Relations
       t.belongs_to :user, index: true
