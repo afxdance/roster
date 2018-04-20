@@ -66,7 +66,7 @@ ActiveAdmin.register Dancer do
         redirect_to "/admin/dancers", alert: "#{removed} have been removed from #{current_user.team.name}"
       else
         # do not know if this is needed, because training teams won't have any dancers if project teams are still picking.
-        redirect_to "/admin/dancers", alert: "#{current_user.team/name} cannot remove right now because project teams are still picking."
+        redirect_to "/admin/dancers", alert: "#{current_user.team.name} cannot remove right now because project teams are still picking."
       end
     end
   end
