@@ -1,0 +1,15 @@
+{
+	// See http://go.microsoft.com/fwlink/?LinkId=827846
+	// for the documentation about the extensions.json format
+	"recommendations": [
+		// Extension identifier format: ${publisher}.${name}. Example: vscode.csharp
+		"DavidAnson.vscode-markdownlint",
+		"gurgeous.bust-a-gem",
+		"josa.markdown-table-formatter",
+		"patrys.vscode-code-outline",
+		"rebornix.ruby",
+		"redhat.vscode-yaml",
+		"sleistner.vscode-fileutils",
+		"stkb.rewrap",
+	]
+}
