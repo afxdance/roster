@@ -22,9 +22,10 @@ class TeamSwitchFormController < ApplicationController
     if @request.save
       #Make current request open
       @request.status = "open"
+      # @request.new_team = ""
 
       #Reject all previous requests
-      for r in @request.where(dancer: @request.dancer)
+      for r in TeamSwitchRequest.where(dancer: @request.dancer)
         r.status = "auto-rejected"
       end
 
@@ -50,6 +51,8 @@ class TeamSwitchFormController < ApplicationController
       :name,
       :phone,
       :reason,
+      # :old_team,
+      # :new_team,
       datetime: params[:team_switch_request][:datetime] ? params[:team_switch_request][:datetime].keys : nil
     )
   end
