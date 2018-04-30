@@ -13,12 +13,20 @@ Rails.application.configure do
   config.consider_all_requests_local = true
 
   # Enable/disable caching. By default caching is disabled.
+<<<<<<< HEAD
   if Rails.root.join("tmp/caching-dev.txt").exist?
+=======
+  if Rails.root.join('tmp/caching-dev.txt').exist?
+>>>>>>> origin/team-switch-approval
     config.action_controller.perform_caching = true
 
     config.cache_store = :memory_store
     config.public_file_server.headers = {
+<<<<<<< HEAD
       "Cache-Control" => "public, max-age=#{2.days.seconds.to_i}",
+=======
+      'Cache-Control' => "public, max-age=#{2.days.seconds.to_i}"
+>>>>>>> origin/team-switch-approval
     }
   else
     config.action_controller.perform_caching = false

@@ -8,6 +8,10 @@ class CreateActiveAdminComments < ActiveRecord::Migration::Current
       t.timestamps
     end
     add_index :active_admin_comments, [:namespace]
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/team-switch-approval
   end
 
   def self.down

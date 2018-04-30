@@ -7,9 +7,12 @@
 # Ignore bundler config.
 /.bundle
 
+<<<<<<< HEAD
 # Ignore bundler-installed gems
 /vendor/bundle
 
+=======
+>>>>>>> origin/team-switch-approval
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-journal

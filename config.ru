@@ -1,5 +1,9 @@
 # This file is used by Rack-based servers to start the application.
 
+<<<<<<< HEAD
 require_relative "config/environment"
+=======
+require_relative 'config/environment'
+>>>>>>> origin/team-switch-approval
 
 run Rails.application

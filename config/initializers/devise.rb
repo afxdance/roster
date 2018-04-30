@@ -14,7 +14,11 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
+<<<<<<< HEAD
   config.mailer_sender = "please-change-me-at-config-initializers-devise@example.com"
+=======
+  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+>>>>>>> origin/team-switch-approval
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -26,7 +30,11 @@ Devise.setup do |config|
   # Load and configure the ORM. Supports :active_record (default) and
   # :mongoid (bson_ext recommended) by default. Other ORMs may be
   # available as additional gems.
+<<<<<<< HEAD
   require "devise/orm/active_record"
+=======
+  require 'devise/orm/active_record'
+>>>>>>> origin/team-switch-approval
 
   # ==> Configuration for any authentication mechanism
   # Configure which keys are used when authenticating a user. The default is

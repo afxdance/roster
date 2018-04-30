@@ -24,4 +24,8 @@ ActiveAdmin.register User do
     end
     f.actions
   end
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/team-switch-approval
 end

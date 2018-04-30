@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # afxdance/roster
 
 This app manages the AFX Dance roster each semester.
@@ -107,3 +108,29 @@ Then:
 6. When your feature is ready, get someone to code review the PR.
 7. According to our current process, you should ask an AFX Tech Committee Lead for a review as well.
 8. All good? Merge the PR! Thank you for your contributions!
+=======
+# README
+
+This README would normally document whatever steps are necessary to get the
+application up and running.
+
+Things you may want to cover:
+
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
+>>>>>>> origin/team-switch-approval

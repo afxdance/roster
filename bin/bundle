@@ -1,3 +1,8 @@
 #!/usr/bin/env ruby
+<<<<<<< HEAD
 ENV["BUNDLE_GEMFILE"] ||= File.expand_path("../../Gemfile", __FILE__)
 load Gem.bin_path("bundler", "bundle")
+=======
+ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../../Gemfile', __FILE__)
+load Gem.bin_path('bundler', 'bundle')
+>>>>>>> origin/team-switch-approval
