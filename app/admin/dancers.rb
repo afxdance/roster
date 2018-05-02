@@ -35,38 +35,38 @@ ActiveAdmin.register Dancer do
 
   controller do
     def add_helper(ids, current_user)
-      if current_user.team.nil?
+      if current_user.teams.nil?
         redirect_to "/admin/dancers", alert: "Your account, #{current_user.email}, is not associated with a team"
-      elsif current_user.team.locked
-        redirect_to "/admin/dancers", alert: "#{current_user.team.name} is currently locked right now."
-      elsif current_user.team.can_pick
+      elsif current_user.teams.find(1).locked
+        redirect_to "/admin/dancers", alert: "#{current_user.teams.find(1).name} is currently locked right now."
+      elsif current_user.teams.find(1).can_pick
         # If current_user.team is a training team, checks if all project teams are done picking.
-        if current_user.team.can_add(ids.length)
+        if current_user.teams.find(1).can_add(ids.length)
           # If current_user.team has not reached maximum picks, add the dancer.
-          added = current_user.team.add_dancers(ids)
-          redirect_to "/admin/dancers", alert: "#{added} has been added to #{current_user.team.name}."
+          added = current_user.teams.find(1).add_dancers(ids)
+          redirect_to "/admin/dancers", alert: "#{added} has been added to #{current_user.teams.find(1).name}."
         else
           # If current_user.team has hit maximum picks...
-          redirect_to "/admin/dancers", alert: "#{current_user.team.name} has exceeded the maximum number of picks."
+          redirect_to "/admin/dancers", alert: "#{current_user.teams.find(1).name} has exceeded the maximum number of picks."
         end
       else
         # If current_user.team is a training team and all project teams are not locked...
-        redirect_to "/admin/dancers", alert: "#{current_user.team.name} cannot pick right now because project teams are still picking."
+        redirect_to "/admin/dancers", alert: "#{current_user.teams.find(1).name} cannot pick right now because project teams are still picking."
       end
     end
 
     def remove_helper(ids, current_user)
-      if current_user.team.nil?
+      if current_user.teams.nil?
         redirect_to "/admin/dancers", alert: "Your account, #{current_user.email}, is not asscoiated with a team."
-      elsif current_user.locked
-        redirect_to "/admin/dancers", alert: "#{current_user.team.name} is locked."
-      elsif current_user.team.can_pick
+      elsif current_user.teams.find(1).locked
+        redirect_to "/admin/dancers", alert: "#{current_user.team.find(1).name} is locked."
+      elsif current_user.teams.find(1).can_pick
         # If current_user.team is a training team, checks if all project teams are done picking.
-        removed = current_user.team.remove_dancer(ids)
-        redirect_to "/admin/dancers", alert: "#{removed} have been removed from #{current_user.team.name}"
+        removed = current_user.teams.find(1).remove_dancers(ids)
+        redirect_to "/admin/dancers", alert: "#{removed} have been removed from #{current_user.teams.find(1).name}"
       else
         # do not know if this is needed, because training teams won't have any dancers if project teams are still picking.
-        redirect_to "/admin/dancers", alert: "#{current_user.team.name} cannot remove right now because project teams are still picking."
+        redirect_to "/admin/dancers", alert: "#{current_user.teams.find(1).name} cannot remove right now because project teams are still picking."
       end
     end
   end

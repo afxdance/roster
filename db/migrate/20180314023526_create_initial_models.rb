@@ -39,24 +39,29 @@ class CreateInitialModels < ActiveRecord::Migration[5.1]
       t.boolean :locked
       t.integer :maximum_picks
 
-      # Relations
-      t.belongs_to :user, index: true
+      # Default colunmns
+      t.timestamps
+    end
+
+
+    create_join_table :dancers, :teams do |t|
+      # Join table columns
+      t.index [:dancer_id, :team_id]
+      t.index [:team_id, :dancer_id]
 
       # Default colunmns
       t.timestamps
     end
 
-    create_join_table :user, :team, table_name:
-    :users_team do |t|
+    create_join_table :users, :teams do |t|
       # Join table of users to teams
-      t.index [:user_id, :team_id], name:
-      :index_users_teams_on_user_and_team
-      t.index [:team_id, :user_id], name:
-      :index_users_teams_on_team_user
+      t.index [:user_id, :team_id]
+      t.index [:team_id, :user_id]
 
       # Default
       t.timestamps
     end
+
 
     create_join_table :team_switch_requests, :teams, table_name: :team_switch_requests_available_teams do |t|
       # Join table columns
