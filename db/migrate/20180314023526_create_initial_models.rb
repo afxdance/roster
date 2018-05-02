@@ -46,12 +46,15 @@ class CreateInitialModels < ActiveRecord::Migration[5.1]
       t.timestamps
     end
 
-    create_join_table :dancers, :teams do |t|
-      # Join table columns
-      t.index [:dancer_id, :team_id]
-      t.index [:team_id, :dancer_id]
+    create_join_table :user, :team, table_name:
+    :users_team do |t|
+      # Join table of users to teams
+      t.index [:user_id, :team_id], name:
+      :index_users_teams_on_user_and_team
+      t.index [:team_id, :user_id], name:
+      :index_users_teams_on_team_user
 
-      # Default colunmns
+      # Default
       t.timestamps
     end
 

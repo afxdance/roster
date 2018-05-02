@@ -19,13 +19,15 @@ ActiveAdmin.register Team do
       :practice_time,
       :locked,
       :maximum_picks,
+      user_ids: [],
     ].compact
   end
 
   form do |f|
     f.inputs do
       f.input :name
-      f.input :type_of
+      f.input :type_of, collection: ["Project", "Training"]
+      f.input :users_team, member_label: proc { |c| c.email.to_s }
       f.input :practice_time,
               label: "Practice time<br>(EX. Thu 7-8:30, Sat 4-5:30)".html_safe
       f.input :locked

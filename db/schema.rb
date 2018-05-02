@@ -37,15 +37,6 @@ ActiveRecord::Schema.define(version: 20180314023526) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "dancers_teams", id: false, force: :cascade do |t|
-    t.integer "dancer_id", null: false
-    t.integer "team_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["dancer_id", "team_id"], name: "index_dancers_teams_on_dancer_id_and_team_id"
-    t.index ["team_id", "dancer_id"], name: "index_dancers_teams_on_team_id_and_dancer_id"
-  end
-
   create_table "team_switch_requests", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -99,6 +90,15 @@ ActiveRecord::Schema.define(version: 20180314023526) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "users_team", id: false, force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "team_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id", "user_id"], name: "index_users_teams_on_team_user"
+    t.index ["user_id", "team_id"], name: "index_users_teams_on_user_and_team"
   end
 
 end
