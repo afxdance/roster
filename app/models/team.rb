@@ -13,8 +13,8 @@ class Team < ApplicationRecord
   end
 
   def can_add(num_of_dancers)
-    # checks if current team is over maximum picks(i.e. if the team still has space)
-    # return true if maximum_picks nil?
+    # Checks if current team is over maximum picks(i.e. if the team still has space)
+    return true if maximum_picks.nil?
     return false if dancers.length + num_of_dancers > maximum_picks
 
     return true

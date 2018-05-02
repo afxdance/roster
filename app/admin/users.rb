@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  permit_params :email, :password, :password_confirmation, team_ids: []
+  permit_params :email, :password, :password_confirmation, team_ids: [] # Necessary in order to properly link users and teams
 
   index do
     selectable_column
@@ -26,6 +26,7 @@ ActiveAdmin.register User do
       f.input :email
       f.input :password
       f.input :password_confirmation
+      # Creates the selection menu so the user can choose a team
       f.input :teams, collection: Team.all.map { |team| [team.name, team.id] }
     end
     f.actions

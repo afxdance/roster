@@ -35,8 +35,10 @@ ActiveAdmin.register Dancer do
 
   controller do
     def add_helper(ids, current_user)
+      # Make sure to use teams since the relation between users and teams is has and belongs to many
       if current_user.teams.nil?
         redirect_to "/admin/dancers", alert: "Your account, #{current_user.email}, is not associated with a team"
+      # The find(1) method is basically finding the first team in the user's list of teams(should eventually change)
       elsif current_user.teams.find(1).locked
         redirect_to "/admin/dancers", alert: "#{current_user.teams.find(1).name} is currently locked right now."
       elsif current_user.teams.find(1).can_pick

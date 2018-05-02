@@ -19,6 +19,7 @@ ActiveAdmin.register Team do
       :practice_time,
       :locked,
       :maximum_picks,
+      # Necessary in order to properly link users and teams
       user_ids: [],
     ].compact
   end
@@ -28,6 +29,7 @@ ActiveAdmin.register Team do
       f.input :name
       # Creates a drop down that allows you to choose from "Project" and "Training"
       f.input :type_of, collection: ["Project", "Training"]
+      # Creates a selection menu so the team can be linked to a user
       f.input :users, collection: User.all.map { |user| [user.email, user.id] }
       f.input :practice_time,
               label: "Practice time<br>(EX. Thu 7-8:30, Sat 4-5:30)".html_safe
