@@ -49,6 +49,7 @@ class Team < ApplicationRecord
       self[:locked] = false
     else
       self[:locked] = true
+    end
   end
 
   # attempts to add dancers with id in 'ids' array into team

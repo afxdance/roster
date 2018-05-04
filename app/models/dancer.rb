@@ -1,10 +1,10 @@
-class Dancer < ApplicationRecord::Base
+class Dancer < ApplicationRecord
   # relating dancer class to teams and team_switch_requests
   has_and_belongs_to_many :teams
   has_many :team_switch_requests
 
   # not sure what this does yet :/
-  serialize :availability :Hash
+  serialize :availability, Hash
 
   # following statements serve to validate different elements of the dancers
   # for example, the following line makes sure each of these variables exist

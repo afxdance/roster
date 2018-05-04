@@ -96,3 +96,58 @@ define_task "afx:git:stash" do |t|
   t.shell "git add --all :/"
   t.shell "git stash"
 end
+
+
+=begin
+define_task "afx:app:models:team_randomizations" => :environment do |t|
+  t.describe <<~EOS
+    This tests the final randomization method.
+    You should run rails afx:db:reset beforehand if you want this applied to a clean db.
+  EOS
+
+  t.step "Create test dancers" do
+    Dancer.create(id: 0, name: "Dancer", year: "1", gender: "female")
+    Dancer.create(id: 1, name: "Dancer", year: "1", gender: "female")
+    Dancer.create(id: 2, name: "Dancer", year: "1", gender: "male")
+    Dancer.create(id: 3, name: "Dancer", year: "1", gender: "male")
+    Dancer.create(id: 4, name: "Dancer", year: "1", gender: "male")
+    Dancer.create(id: 5, name: "Dancer", year: "2", gender: "female")
+    Dancer.create(id: 6, name: "Dancer", year: "2", gender: "female")
+    Dancer.create(id: 7, name: "Dancer", year: "2", gender: "male")
+    Dancer.create(id: 8, name: "Dancer", year: "2", gender: "male")
+    Dancer.create(id: 9, name: "Dancer", year: "2", gender: "male")
+    Dancer.create(id: 10, name: "Dancer", year: "3", gender: "female")
+    Dancer.create(id: 11, name: "Dancer", year: "3", gender: "female")
+    Dancer.create(id: 12, name: "Dancer", year: "3", gender: "male")
+    Dancer.create(id: 13, name: "Dancer", year: "3", gender: "male")
+    Dancer.create(id: 14, name: "Dancer", year: "3", gender: "male")
+    Dancer.create(id: 15, name: "Dancer", year: "4", gender: "female")
+    Dancer.create(id: 16, name: "Dancer", year: "4", gender: "female")
+    Dancer.create(id: 17, name: "Dancer", year: "4", gender: "male")
+    Dancer.create(id: 18, name: "Dancer", year: "4", gender: "male")
+    Dancer.create(id: 19, name: "Dancer", year: "4", gender: "male")
+  end
+
+  t.step "Create test teams" do
+    Team.create(name: "AFX HigHKey")
+    Team.create(name: "AFX LoWKey")
+    Team.create(name: "AFX MiDKey")
+    Team.create(name: "AFX KeYKey")
+  end
+
+  t.step "Randomize teams" do
+    Team.final_randomization
+  end
+
+  t.step "Look at teams" do
+    for team in Team.all
+      puts
+      puts team.name
+      for dancer in team.dancers
+        puts dancer
+      end
+    end
+  end
+
+end
+=end
