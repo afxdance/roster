@@ -15,19 +15,6 @@
     <br>
     <%= f.text_field :phone, required: true, placeholder: "Phone Number (###-###-####)", pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}",
         id: "phone" %>
-    <!-- the following commented-out code is a failed attempt to customize the error message
-         that pops up when you put the wrong phone number -->
-    <!-- <%= javascript_tag do %>
-        var phone = document.getElementById("phone");
-
-        phone.addEventListener("input", function (event) {
-            if (phone.validity.patternMismatch) {
-                phone.setCustomValidity("Phone number should be of the form ###-###-####");
-            } else {
-                phone.setCustomValidity("");
-            }
-        });
-    <% end %> -->
     <br>
     <%= f.select :gender, options_for_select([
         'Male',

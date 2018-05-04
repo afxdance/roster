@@ -3,6 +3,10 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+#These codes determine the url.
+  #get: the url that displays the form
+  #post or put: the url that the form's "submit" button leads to.
+
   # audition_form_controller
   get "/auditionform", to: "audition_form#index"
   post "/auditionform", to: "audition_form#create_dancer", as: "audition_form"
