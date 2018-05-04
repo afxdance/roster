@@ -34,6 +34,7 @@ class CreateInitialModels < ActiveRecord::Migration[5.1]
     create_table :teams do |t|
       # Data columns
       t.string :type
+      t.string :project
       t.string :name
       t.string :practice_time
       t.boolean :locked

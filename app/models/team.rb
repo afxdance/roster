@@ -129,34 +129,60 @@ class Team < ApplicationRecord
     # makes our code alot cleaner
     offset = 4
 
+    puts "Separating dancers"
+
     # separate each dancer based on attributes
     Dancer.all.each do |dancer|
+      puts "Dancers exist, separating dancers by gender"
       # if dancer does't have a team yet
       if dancer.teams.length == 0
         if dancer.gender == "M"
-          teamless[dancer.year] << dancer
+          puts "Adding dancer to male list"
+          puts dancer.id
+          puts dancer.year
+          puts dancer.year.to_i
+          teamless[dancer.year.to_i] << dancer
         else
-          teamless[dancer.year + offset] = dancer
+          puts "Adding dancer to female list"
+          puts dancer.id
+          puts dancer.year
+          puts dancer.year.to_i
+          teamless[dancer.year.to_i + offset] << dancer
         end
       end
     end
 
+    puts "················"
+    for num in 0...9
+      puts teamless[num].length
+    end
+    puts "················"
+
+
     # add all training teams to training_teams array
     training_teams = []
     Team.where("project = ?", false).each do |team|
+      puts team.name
       training_teams << team
     end
 
     # puts dancers into teams randomly
     if training_teams.length > 0
-      teamsless.each do |group|
-        while group.length > 0
-          group.shuffle
+      puts "Training teams exist"
+      for num in 0...9
+        puts
+        puts num
+        teamless[num].each do |dancer|
+          puts dancer.name
+        end
+        while teamless[num].length > 0
+          teamless[num].shuffle!
           training_teams.sort! { |a,b| a.dancers.length <=> b.dancers.length }
-          training_team[0].dancers << group.shift
+          training_teams[0].dancers << teamless[num].shift
         end
       end
     end
+
 
     # save changes!
     training_teams.each do |team|

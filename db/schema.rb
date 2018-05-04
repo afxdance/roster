@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20180314023526) do
 
   create_table "teams", force: :cascade do |t|
     t.string "type"
+    t.string "project"
     t.string "name"
     t.string "practice_time"
     t.boolean "locked"
