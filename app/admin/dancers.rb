@@ -111,7 +111,7 @@ ActiveAdmin.register Dancer do
   end
 
   batch_action :remove_from_my_team do |ids|
-      remove_helper(ids, current_user)
+    remove_helper(ids, current_user)
   end
 
   show do |dancers|
