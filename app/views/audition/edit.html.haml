@@ -1,0 +1,3 @@
+%body#audition-form-body
+  = form_for :dancer, :url => {:action => "update", :id => @dancer.id}, :html => {:class => "audition-form"}, method: "put" do |f|
+    = render partial: "audition/fields", locals: {f: f}

@@ -2,12 +2,14 @@ class CreateInitialModels < ActiveRecord::Migration[5.1]
   def change
     create_table :dancers do |t|
       # Data columns
-      t.string :name
-      t.string :email
-      t.string :phone
-      t.string :gender
-      t.string :year
-      t.string :experience
+      t.string :name, null: false
+      t.string :email, null: false
+      t.string :phone, null: false
+      t.string :gender, null: false
+      t.string :year, null: false
+      t.string :dance_experience, null: false
+      t.string :exp_interest, null: false
+      t.string :tech_interest, null: false
 
       # Default colunmns
       t.timestamps
@@ -15,12 +17,12 @@ class CreateInitialModels < ActiveRecord::Migration[5.1]
 
     create_table :team_switch_requests do |t|
       # Data columns
-      t.string :name
-      t.string :email
-      t.string :phone
-      t.text :reason
-      t.datetime :approved_at
-      t.string :status
+      t.string :name, null: false
+      t.string :email, null: false
+      t.string :phone, null: false
+      t.text :reason, null: false
+      t.datetime :approved_at, null: false
+      t.string :status, null: false
 
       # Relations
       t.belongs_to :old_team, index: true
@@ -33,10 +35,10 @@ class CreateInitialModels < ActiveRecord::Migration[5.1]
 
     create_table :teams do |t|
       # Data columns
-      t.string :type
-      t.string :name
-      t.string :practice_time
-      t.boolean :locked
+      t.string :type, null: false
+      t.string :name, null: false
+      t.string :practice_time, null: false
+      t.boolean :locked, null: false
 
       # Relations
       t.belongs_to :user, index: true

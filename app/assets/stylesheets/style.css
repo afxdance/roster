@@ -21,13 +21,22 @@
     background: #4D4D4D;
     text-transform: uppercase;
     font-family: 'Open Sans Condensed', sans-serif;
-    color: #fff;
+    color: #000;
     font-size: 34px;
     text-align: center;
     font-weight: bold;
     padding: 20px;
     margin: -30px -30px 30px -30px;
 }
+
+.audition-form td:first-child
+{
+    vertical-align: middle;
+    font-size: 1.2em;
+    text-align: right;
+    white-space: nowrap;
+}
+
 .audition-form input[type="text"],
 .audition-form input[type="date"],
 .audition-form input[type="datetime"],

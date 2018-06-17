@@ -1,17 +1,17 @@
 Rails.application.routes.draw do
   devise_for :users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  # For details on the DSL available within this file, see
+  # http://guides.rubyonrails.org/routing.html
 
-#These codes determine the url.
-  #get: the url that displays the form
-  #post or put: the url that the form's "submit" button leads to.
+  # These codes determine the url.
+  # get: the url that displays the form
+  # post or put: the url that the form's "submit" button leads to.
 
-  # audition_form_controller
-  get "/auditionform", to: "audition_form#index"
-  post "/auditionform", to: "audition_form#create_dancer", as: "audition_form"
+  # audition_controller
+  get "/audition", to: "audition#index"
+  post "/audition", to: "audition#create"
 
-  # edit_form_controller
-  get "/auditionform/:id/edit", to: "audition_form#edit", as: :edit_dancer
-  put "/auditionform/:id", to: "audition_form#update"
+  get "/audition/:id/edit", to: "audition#edit"
+  put "/audition/:id/edit", to: "audition#update"
 end

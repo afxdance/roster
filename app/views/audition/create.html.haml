@@ -1,0 +1,19 @@
+%body#audition-form-body
+  .audition-form
+    .audnum
+      %h3
+        %div
+          %b>= @dancer.name
+        %div
+          your audition number is
+          %b= @dancer.id
+    %hr/
+    #audition-form-affirmation
+      %center
+        Here's what we got from you:
+      = render partial: "audition/fields", locals: {f: nil}
+
+  %br/
+  %center= link_to "BACK TO FORM", audition_path, style: "color: white"
+  %br/
+  %center= link_to "EDIT INFO", {id: @dancer.id, action: "edit"}, style: "color: white"
