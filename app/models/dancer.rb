@@ -34,10 +34,9 @@ class Dancer < ApplicationRecord
   has_and_belongs_to_many :teams
   has_many :team_switch_requests
 
-  Dancer.columns.each do |column|
+  Dancer.table_exists? && Dancer.columns.each do |column|
     if column.null == false && !["id", "created_at", "updated_at"].include?(column.name)
       validates column.name, length: { minimum: 1 }
     end
   end
-
 end
