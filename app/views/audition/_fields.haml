@@ -38,7 +38,7 @@
       Gender
     %td
       - if f
-        = f.select(:gender, options_for_select(Dancer::GENDER_VALUES.invert, @dancer.gender), {prompt: ""}, {required: true})
+        = f.select(:gender, options_for_select(Dancer::GENDER_VALUES.invert, @dancer.gender), {include_blank: ""}, {required: true})
         %small
           This information is used to ensure teams are balanced, diverse, and inclusive. The form is processed by an algorithm and your response will not be seen beyond executive board.
       - else
@@ -49,7 +49,7 @@
       Year
     %td
       - if f
-        = f.select(:year, options_for_select(Dancer::YEAR_VALUES.invert, @dancer.year), {prompt: ""}, {required: true})
+        = f.select(:year, options_for_select(Dancer::YEAR_VALUES.invert, @dancer.year), {include_blank: ""}, {required: true})
       - else
         = Dancer::YEAR_VALUES[@dancer.year]
 
@@ -58,7 +58,7 @@
       Prior Dance Experience
     %td
       - if f
-        = f.select(:dance_experience, options_for_select(Dancer::DANCE_EXPERIENCE_VALUES.invert, @dancer.dance_experience), {prompt: ""}, {required: true})
+        = f.select(:dance_experience, options_for_select(Dancer::DANCE_EXPERIENCE_VALUES.invert, @dancer.dance_experience), {include_blank: ""}, {required: true})
       - else
         = Dancer::DANCE_EXPERIENCE_VALUES[@dancer.dance_experience]
 
@@ -68,7 +68,7 @@
         EXP Interest
       %td
         - if f
-          = f.select(:exp_interest, options_for_select(Dancer::BOOLEAN_OPTION_VALUES.invert, @dancer.exp_interest), {prompt: ""}, {required: true})
+          = f.select(:exp_interest, options_for_select(Dancer::BOOLEAN_OPTION_VALUES.invert, @dancer.exp_interest), {include_blank: ""}, {required: true})
         - else
           = Dancer::BOOLEAN_OPTION_VALUES[@dancer.exp_interest]
   - else
@@ -80,7 +80,7 @@
         AFX Tech Interest
       %td
         - if f
-          = f.select(:tech_interest, options_for_select(Dancer::BOOLEAN_OPTION_VALUES.invert, @dancer.tech_interest), {prompt: ""}, {required: true})
+          = f.select(:tech_interest, options_for_select(Dancer::BOOLEAN_OPTION_VALUES.invert, @dancer.tech_interest), {include_blank: ""}, {required: true})
         - else
           = Dancer::BOOLEAN_OPTION_VALUES[@dancer.tech_interest]
   - else
