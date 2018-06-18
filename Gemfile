@@ -39,7 +39,7 @@ group :production, :development, :test do
 
   gem "activeadmin"
   gem "devise"
-  gem 'haml'
+  gem "haml"
 end
 
 group :development, :test do
@@ -76,8 +76,8 @@ group :development do
   # Place all added gems below #
   ##############################
 
-  gem 'haml_lint', require: false
   gem "debase", require: false
+  gem "haml_lint", require: false
   gem "mdl", require: false
   gem "rails_db"
   gem "ruby-debug-ide", require: false
