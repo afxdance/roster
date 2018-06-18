@@ -31,6 +31,9 @@ class Dancer < ApplicationRecord
     "false" => "No",
   }.freeze
 
+  SHOW_EXP_INTEREST = true
+  SHOW_TECH_INTEREST = false
+
   has_and_belongs_to_many :teams
   has_many :team_switch_requests
 

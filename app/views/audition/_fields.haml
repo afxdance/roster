@@ -12,6 +12,7 @@
         = f.text_field(:name, required: true)
       - else
         = @dancer.name
+
   %tr
     %td
       Email
@@ -20,6 +21,7 @@
         = f.text_field(:email, required: true, pattern: Dancer::EMAIL_PATTERN)
       - else
         = @dancer.email
+
   %tr
     %td
       Phone
@@ -30,6 +32,7 @@
           Must follow this format: ###-###-####
       - else
         = @dancer.phone
+
   %tr
     %td
       Gender
@@ -40,6 +43,7 @@
           This information is used to ensure teams are balanced, diverse, and inclusive. The form is processed by an algorithm and your response will not be seen beyond executive board.
       - else
         = Dancer::GENDER_VALUES[@dancer.gender]
+
   %tr
     %td
       Year
@@ -48,6 +52,7 @@
         = f.select(:year, options_for_select(Dancer::YEAR_VALUES.invert, @dancer.year), {prompt: ""}, {required: true})
       - else
         = Dancer::YEAR_VALUES[@dancer.year]
+
   %tr
     %td
       Prior Dance Experience
@@ -56,22 +61,33 @@
         = f.select(:dance_experience, options_for_select(Dancer::DANCE_EXPERIENCE_VALUES.invert, @dancer.dance_experience), {prompt: ""}, {required: true})
       - else
         = Dancer::DANCE_EXPERIENCE_VALUES[@dancer.dance_experience]
-  %tr
-    %td
-      EXP Interest
-    %td
-      - if f
-        = f.select(:exp_interest, options_for_select(Dancer::BOOLEAN_OPTION_VALUES.invert, @dancer.exp_interest), {prompt: ""}, {required: true})
-      - else
-        = Dancer::BOOLEAN_OPTION_VALUES[@dancer.exp_interest]
-  %tr
-    %td
-      AFX Tech Interest
-    %td
-      - if f
-        = f.select(:tech_interest, options_for_select(Dancer::BOOLEAN_OPTION_VALUES.invert, @dancer.tech_interest), {prompt: ""}, {required: true})
-      - else
-        = Dancer::BOOLEAN_OPTION_VALUES[@dancer.tech_interest]
 
-- if f
-  = f.submit "I'm ready to audition!"
+  - if Dancer::SHOW_EXP_INTEREST
+    %tr
+      %td
+        EXP Interest
+      %td
+        - if f
+          = f.select(:exp_interest, options_for_select(Dancer::BOOLEAN_OPTION_VALUES.invert, @dancer.exp_interest), {prompt: ""}, {required: true})
+        - else
+          = Dancer::BOOLEAN_OPTION_VALUES[@dancer.exp_interest]
+  - else
+    = f.hidden_field(:tech_interest, value: 'field_hidden') if f
+
+  - if Dancer::SHOW_TECH_INTEREST
+    %tr
+      %td
+        AFX Tech Interest
+      %td
+        - if f
+          = f.select(:tech_interest, options_for_select(Dancer::BOOLEAN_OPTION_VALUES.invert, @dancer.tech_interest), {prompt: ""}, {required: true})
+        - else
+          = Dancer::BOOLEAN_OPTION_VALUES[@dancer.tech_interest]
+  - else
+    = f.hidden_field(:tech_interest, value: 'field_hidden') if f
+
+  - if f
+    %tr
+      %td
+      %td
+        = f.submit "I'm ready to audition!"
