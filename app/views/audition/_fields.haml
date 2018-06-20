@@ -65,14 +65,18 @@
   - if Dancer::SHOW_EXP_INTEREST
     %tr
       %td
-        EXP Interest
+        AFXsi Dance Camp
       %td
         - if f
           = f.select(:exp_interest, options_for_select(Dancer::BOOLEAN_OPTION_VALUES.invert, @dancer.exp_interest), {include_blank: ""}, {required: true})
+          %small
+            Are you interested in AFXsi Dance Camp?
+            %br
+            To apply, you will have to fill out an application that is linked on the audition event page.
         - else
           = Dancer::BOOLEAN_OPTION_VALUES[@dancer.exp_interest]
   - else
-    = f.hidden_field(:tech_interest, value: 'field_hidden') if f
+    = f.hidden_field(:exp_interest, value: 'field_hidden') if f
 
   - if Dancer::SHOW_TECH_INTEREST
     %tr
