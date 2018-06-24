@@ -1,0 +1,8 @@
+%body#audition-form-body
+  = form_for( |
+      :dancer, |
+      url: audition_path, |
+      html: {autocomplete: "off", class: "audition-form"}, |
+    ) do |f| |
+    %h2 AFX AUDITIONS
+    = render partial: "audition/fields", locals: {f: f}

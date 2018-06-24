@@ -1,0 +1,7 @@
+%body#audition-form-body
+  = form_for( |
+      :dancer, method: "put", |
+      url: {action: "update", id: @dancer.id}, |
+      html: {autocomplete: "off", class: "audition-form"}, |
+    ) do |f| |
+    = render partial: "audition/fields", locals: {f: f}

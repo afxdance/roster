@@ -1,4 +1,15 @@
 {
+    "[html.erb]": {
+        "editor.detectIndentation": false,
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+    },
+    "[ruby]": {
+        "editor.detectIndentation": false,
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+    },
+
     "editor.insertSpaces": true,
     "editor.rulers": [100],
     "editor.tabSize": 2,

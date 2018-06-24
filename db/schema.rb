@@ -27,12 +27,15 @@ ActiveRecord::Schema.define(version: 20180314023526) do
   end
 
   create_table "dancers", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.string "phone"
-    t.string "gender"
-    t.string "year"
-    t.string "experience"
+    t.string "name", null: false
+    t.string "email", null: false
+    t.string "phone", null: false
+    t.string "gender", null: false
+    t.string "year", null: false
+    t.string "dance_experience", null: false
+    t.string "exp_interest", null: false
+    t.string "tech_interest", null: false
+    t.string "camp_interest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -47,12 +50,12 @@ ActiveRecord::Schema.define(version: 20180314023526) do
   end
 
   create_table "team_switch_requests", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.string "phone"
-    t.text "reason"
-    t.datetime "approved_at"
-    t.string "status"
+    t.string "name", null: false
+    t.string "email", null: false
+    t.string "phone", null: false
+    t.text "reason", null: false
+    t.datetime "approved_at", null: false
+    t.string "status", null: false
     t.integer "old_team_id"
     t.integer "new_team_id"
     t.integer "dancer_id"
@@ -73,10 +76,10 @@ ActiveRecord::Schema.define(version: 20180314023526) do
   end
 
   create_table "teams", force: :cascade do |t|
-    t.string "type"
-    t.string "name"
-    t.string "practice_time"
-    t.boolean "locked"
+    t.string "type", null: false
+    t.string "name", null: false
+    t.string "practice_time", null: false
+    t.boolean "locked", null: false
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
