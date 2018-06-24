@@ -10,6 +10,7 @@ class CreateInitialModels < ActiveRecord::Migration[5.1]
       t.string :dance_experience, null: false
       t.string :exp_interest, null: false
       t.string :tech_interest, null: false
+      t.string :camp_interest, null: false
 
       # Default colunmns
       t.timestamps

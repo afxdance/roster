@@ -34,6 +34,7 @@ class AuditionController < ApplicationController
           :dance_experience,
           :exp_interest,
           :tech_interest,
+          :camp_interest,
         )
     end
 end

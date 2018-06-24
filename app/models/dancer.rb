@@ -1,4 +1,7 @@
 class Dancer < ApplicationRecord
+  NAME_PATTERN = begin
+    ".* .*"
+  end.freeze
   EMAIL_PATTERN = begin
     "[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*"
   end.freeze
@@ -31,8 +34,9 @@ class Dancer < ApplicationRecord
     "false" => "No",
   }.freeze
 
+  SHOW_CAMP_INTEREST = true
   SHOW_EXP_INTEREST = true
-  SHOW_TECH_INTEREST = false
+  SHOW_TECH_INTEREST = true
 
   has_and_belongs_to_many :teams
   has_many :team_switch_requests

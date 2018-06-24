@@ -6,10 +6,10 @@
 %table
   %tr
     %td
-      Name
+      Full Name
     %td
       - if f
-        = f.text_field(:name, required: true)
+        = f.text_field(:name, required: true, pattern: Dancer::NAME_PATTERN)
       - else
         = @dancer.name
 
@@ -62,17 +62,31 @@
       - else
         = Dancer::DANCE_EXPERIENCE_VALUES[@dancer.dance_experience]
 
-  - if Dancer::SHOW_EXP_INTEREST
+  - if Dancer::SHOW_CAMP_INTEREST
     %tr
       %td
-        AFXsi Dance Camp
+        Dance Camp Interest
       %td
         - if f
-          = f.select(:exp_interest, options_for_select(Dancer::BOOLEAN_OPTION_VALUES.invert, @dancer.exp_interest), {include_blank: ""}, {required: true})
+          = f.select(:camp_interest, options_for_select(Dancer::BOOLEAN_OPTION_VALUES.invert, @dancer.camp_interest), {include_blank: ""}, {required: true})
           %small
             Are you interested in AFXsi Dance Camp?
             %br
             To apply, you will have to fill out an application that is linked on the audition event page.
+        - else
+          = Dancer::BOOLEAN_OPTION_VALUES[@dancer.camp_interest]
+  - else
+    = f.hidden_field(:camp_interest, value: 'field_hidden') if f
+
+  - if Dancer::SHOW_EXP_INTEREST
+    %tr
+      %td
+        EXP Interest
+      %td
+        - if f
+          = f.select(:exp_interest, options_for_select(Dancer::BOOLEAN_OPTION_VALUES.invert, @dancer.exp_interest), {include_blank: ""}, {required: true})
+          %small
+            Are you interested in EXP? [Add longer description here]
         - else
           = Dancer::BOOLEAN_OPTION_VALUES[@dancer.exp_interest]
   - else
@@ -85,6 +99,8 @@
       %td
         - if f
           = f.select(:tech_interest, options_for_select(Dancer::BOOLEAN_OPTION_VALUES.invert, @dancer.tech_interest), {include_blank: ""}, {required: true})
+          %small
+            Are you interested in AFX Tech? [Add longer description here]
         - else
           = Dancer::BOOLEAN_OPTION_VALUES[@dancer.tech_interest]
   - else

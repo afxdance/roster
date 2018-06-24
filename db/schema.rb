@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20180314023526) do
     t.string "dance_experience", null: false
     t.string "exp_interest", null: false
     t.string "tech_interest", null: false
+    t.string "camp_interest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
