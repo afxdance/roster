@@ -19,6 +19,7 @@ ActiveAdmin.register Team do
       :practice_time,
       :locked,
       :maximum_picks,
+      :level,
       # Necessary in order to properly link users and teams
       user_ids: [],
     ].compact

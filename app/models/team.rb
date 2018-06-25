@@ -2,61 +2,89 @@ class Team < ApplicationRecord
   has_and_belongs_to_many :users
   has_and_belongs_to_many :dancers
 
-  def can_pick
-    if level != "Project"
-      if Team.where("level = ? AND locked = ?", "Project", false)
-        # Condition above checks if there are any project teams not locked, which means the project teams are not done picking.
-        return false
-      end
-    end
-    return true
+  PROJECT = "Project".freeze
+  TRAINING = "Training".freeze
+
+  # Condition above checks if there are any project teams not locked, which means the project teams
+  # are not done picking.
+  def self.project_teams_still_picking?
+    Team.where("level = ? AND locked = ?", PROJECT, false).any?
   end
 
-  def can_add(num_of_dancers)
-    # Checks if current team is over maximum picks(i.e. if the team still has space)
-    return true if maximum_picks.nil?
-    return false if dancers.length + num_of_dancers > maximum_picks
-
-    return true
-  end
-
-  def toggle_lock
-    self[:locked] = if locked
-      false
-    else
+  # Is it this teams's turn to pick dancers?
+  # (Training teams can't add unless project teams are done picking.)
+  def turn_to_add?
+    case level
+    when PROJECT
       true
+    when TRAINING
+      return false if Team.project_teams_still_picking?
+
+      true
+    else
+      raise
     end
   end
 
-  def add_dancers(ids)
-    # returns the list of added dancers to print
+  # rubocop:disable Naming/PredicateName
+  def has_space_for?(dancers_to_add)
+    new_team_size_if_the_dancers_are_added = dancers.length + dancers_to_add.length
+
+    return true if maximum_picks.nil?
+
+    # Checks if current team is over maximum picks (i.e. if the team still has space)
+    return new_team_size_if_the_dancers_are_added <= maximum_picks
+  end
+  # rubocop:enable Naming/PredicateName
+
+  # TODO: Do we need this method? Commenting out for now.
+  # def toggle_lock
+  #   update(locked: !locked)
+  # end
+
+  def add_dancers(dancer_ids)
     added = []
-    Dancer.find(Array(ids)).each do |id|
-      next unless id.teams.empty? # if the list of teams associated with a dancer is empty
+    already_in_this_team = []
+    already_in_another_team = []
 
-      if !id.teams.include? self # if the list of teams associated with a dancer does not include this team (self)...
-        id.teams << self # add the team to the list of teams
-        added << id.name # add the dancer to the list of added dancers
+    Dancer.find(dancer_ids).each do |dancer|
+      if dancer.teams.include? self
+        already_in_this_team << dancer
+      elsif dancer.teams.any?
+        already_in_another_team << dancer
+      else
+        added << dancer
       end
-      id.save
     end
-    return added
+
+    # Actually add the dancers to this team
+    dancers.push(*added)
+
+    return {
+      added: added,
+      already_in_this_team: already_in_this_team,
+      already_in_another_team: already_in_another_team,
+    }
   end
 
-  def remove_dancers(ids)
-    # returns the list of removed dancers to print
+  def remove_dancers(dancer_ids)
     removed = []
-    Dancer.find(Array(ids)).each do |id|
-      next unless id.teams.length == 1
+    not_in_this_team = []
 
-      if id.teams.include? self # if the list of teams associated with a dancer does include this team (self)...
-        removed << id.name # add the name of the dancer to be removed to the array that will be returned to be viewed in the banner
-        dancers.delete(id) # taking the dancer out of the team
-        save
-        id.reload
+    Dancer.find(dancer_ids).each do |dancer|
+      if dancer.teams.include? self
+        removed << dancer
+      else
+        not_in_this_team << dancer
       end
-      id.save
     end
-    return removed
+
+    # Actually remove the dancers from this team
+    dancers.delete(*removed)
+
+    return {
+      removed: removed,
+      not_in_this_team: not_in_this_team,
+    }
   end
 end
