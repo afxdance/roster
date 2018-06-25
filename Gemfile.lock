@@ -324,6 +324,7 @@ DEPENDENCIES
   awesome_print
   capybara (~> 2.13)
   coffee-rails (~> 4.2)
+  colorize
   cucumber
   cucumber_lint
   debase

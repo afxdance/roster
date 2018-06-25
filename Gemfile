@@ -39,6 +39,7 @@ group :production, :development, :test do
   ##############################
 
   gem "activeadmin"
+  gem "colorize"
   gem "devise"
   gem "haml"
 end
