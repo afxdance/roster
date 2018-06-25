@@ -76,14 +76,24 @@ ActiveRecord::Schema.define(version: 20180314023526) do
   end
 
   create_table "teams", force: :cascade do |t|
-    t.string "type", null: false
+    t.string "level", null: false
     t.string "name", null: false
     t.string "practice_time", null: false
     t.boolean "locked", null: false
+    t.integer "maximum_picks"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_teams_on_user_id"
+  end
+
+  create_table "teams_users", id: false, force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "team_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id", "user_id"], name: "index_teams_users_on_team_id_and_user_id"
+    t.index ["user_id", "team_id"], name: "index_teams_users_on_user_id_and_team_id"
   end
 
   create_table "users", force: :cascade do |t|

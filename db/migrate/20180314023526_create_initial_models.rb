@@ -36,10 +36,11 @@ class CreateInitialModels < ActiveRecord::Migration[5.1]
 
     create_table :teams do |t|
       # Data columns
-      t.string :type, null: false
+      t.string :level, null: false # "type" is a reserved word in ruby
       t.string :name, null: false
       t.string :practice_time, null: false
       t.boolean :locked, null: false
+      t.integer :maximum_picks
 
       # Relations
       t.belongs_to :user, index: true
@@ -54,6 +55,15 @@ class CreateInitialModels < ActiveRecord::Migration[5.1]
       t.index [:team_id, :dancer_id]
 
       # Default colunmns
+      t.timestamps
+    end
+
+    create_join_table :users, :teams do |t|
+      # Join table of users to teams
+      t.index [:user_id, :team_id]
+      t.index [:team_id, :user_id]
+
+      # Default
       t.timestamps
     end
 

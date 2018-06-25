@@ -1,13 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  type: 
+  type:
   name: MyString
   practice_time: MyString
   locked: MyString
+  project: MyBoolean
 
 two:
-  type: 
+  type:
   name: MyString
   practice_time: MyString
   locked: MyString
+  project: MyBoolean
