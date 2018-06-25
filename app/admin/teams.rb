@@ -31,7 +31,7 @@ ActiveAdmin.register Team do
       # Creates a drop down that allows you to choose from "Project" and "Training"
       f.input :level, collection: ["Project", "Training"]
       # Creates a selection menu so the team can be linked to a user
-      f.input :users, collection: User.all.map { |user| [user.email, user.id] }
+      f.input :users, collection: User.all.map { |user| [user.username, user.id] }
       f.input :practice_time,
               label: "Practice time<br>(EX. Thu 7-8:30, Sat 4-5:30)".html_safe
       f.input :locked
@@ -50,7 +50,7 @@ ActiveAdmin.register Team do
     # Allows us to view the Users that are connected to the team
     column "User" do |team|
       team.users.map do |user|
-        link_to user.email, admin_user_path(user)
+        link_to user.username, admin_user_path(user)
       end
     end
     # Allows us to view the Dancers that are connected to the team

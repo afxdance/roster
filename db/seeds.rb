@@ -10,7 +10,7 @@ dancer_extra_fields = { exp_interest: "not important rn",
                         tech_interest: "not important rn",
                         camp_interest: "not important rn" }
 
-User.create!(email: "admin@afx.dance",
+User.create!(username: "admin",
              password: "password",
              password_confirmation: "password")
 
