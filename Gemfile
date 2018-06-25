@@ -9,7 +9,8 @@ group :production, :development, :test do
   # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
   gem "rails", "~> 5.1.5", require: false
   # Use sqlite3 as the database for Active Record
-  gem "sqlite3", require: false
+  # sqlite is disabled here because we want to use it only for development.
+  # gem "sqlite3", require: false
   # Use Puma as the app server
   gem "puma", "~> 3.7", require: false
   # Use SCSS for stylesheets
@@ -42,6 +43,14 @@ group :production, :development, :test do
   gem "haml"
 end
 
+group :production do
+  ##############################
+  # Place all added gems below #
+  ##############################
+
+  gem "pg"
+end
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   # gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
@@ -60,6 +69,7 @@ group :development, :test do
   gem "pry-nav", require: true
   gem "pry-rails", require: true
   gem "rubocop", require: false
+  gem "sqlite3", require: false
 end
 
 group :development do
