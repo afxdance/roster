@@ -39,6 +39,7 @@ group :production, :development, :test do
 
   gem "activeadmin"
   gem "devise"
+  gem "haml"
 end
 
 group :development, :test do
@@ -76,6 +77,7 @@ group :development do
   ##############################
 
   gem "debase", require: false
+  gem "haml_lint", require: false
   gem "mdl", require: false
   gem "rails_db"
   gem "ruby-debug-ide", require: false
