@@ -3,8 +3,8 @@ class Team < ApplicationRecord
   has_and_belongs_to_many :dancers
 
   def can_pick
-    if type_of != "Project"
-      if Team.where("type_of = ? AND locked = ?", "Project", false)
+    if level != "Project"
+      if Team.where("level = ? AND locked = ?", "Project", false)
         # Condition above checks if there are any project teams not locked, which means the project teams are not done picking.
         return false
       end

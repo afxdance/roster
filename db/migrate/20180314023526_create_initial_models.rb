@@ -36,8 +36,7 @@ class CreateInitialModels < ActiveRecord::Migration[5.1]
 
     create_table :teams do |t|
       # Data columns
-      # "type" is a reserved word in ruby
-      t.string :type_of, null: false
+      t.string :level, null: false # "type" is a reserved word in ruby
       t.string :name, null: false
       t.string :practice_time, null: false
       t.boolean :locked, null: false

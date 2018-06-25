@@ -28,7 +28,7 @@ ActiveAdmin.register Team do
     f.inputs do
       f.input :name
       # Creates a drop down that allows you to choose from "Project" and "Training"
-      f.input :type_of, collection: ["Project", "Training"]
+      f.input :level, collection: ["Project", "Training"]
       # Creates a selection menu so the team can be linked to a user
       f.input :users, collection: User.all.map { |user| [user.email, user.id] }
       f.input :practice_time,
@@ -42,7 +42,7 @@ ActiveAdmin.register Team do
   index do
     selectable_column
     column :name
-    column :type_of
+    column :level
     column :practice_time
     column :locked
     column :maximum_picks
@@ -65,7 +65,7 @@ ActiveAdmin.register Team do
     panel "Detail" do
       attributes_table_for team do
         row :name
-        row :type_of
+        row :level
         row :practice_time
         row :locked
         row :maximum_picks
