@@ -63,7 +63,6 @@ group :development, :test do
   ##############################
 
   gem "awesome_print", require: true
-  gem "colorize", require: false
   gem "cucumber", require: false
   gem "cucumber_lint", require: false
   gem "pry-nav", require: true
