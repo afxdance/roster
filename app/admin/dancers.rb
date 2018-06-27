@@ -164,7 +164,11 @@ ActiveAdmin.register Dancer do
     if !current_user.can_modify_next_dancer_id?
       flash[:alert] = "You do not have sufficient permissions to do this!"
     else
-      flash[:notice] = "The next audition number is: #{Dancer.next_id}"
+      begin
+        flash[:notice] = "The next audition number is: #{Dancer.next_id}"
+      rescue RuntimeError => e
+        flash.now[:alert] = e.message
+      end
     end
     redirect_to "/admin/dancers"
   end

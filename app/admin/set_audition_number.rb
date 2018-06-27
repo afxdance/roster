@@ -10,7 +10,7 @@ ActiveAdmin.register_page "Set Audition Number" do
       begin
         flash.now[:notice] = "You have set the next audition number to #{Dancer.next_id = id}"
       rescue RuntimeError => e
-        flash.now[:alert] = "There are dancer ids that are greater or equal to the given id."
+        flash.now[:alert] = e.message
       end
     end
   end
