@@ -51,13 +51,11 @@ ActiveAdmin.register Team do
     column "User" do |team|
       team.users.map do |user|
         link_to user.username, admin_user_path(user)
-      end
+      end.join.html_safe
     end
     # Allows us to view the Dancers that are connected to the team
-    column "Dancers" do |team|
-      team.dancers.map do |dancer|
-        link_to dancer.name, admin_dancer_path(dancer)
-      end
+    column "Number of Dancers" do |team|
+      team.dancers.length
     end
     actions
   end
@@ -70,6 +68,16 @@ ActiveAdmin.register Team do
         row :practice_time
         row :locked
         row :maximum_picks
+      end
+    end
+    panel "Dancers" do
+      attributes_table_for team do
+        table_for team.dancers.sort_by(&:name) do
+          column :id, max_width: "200px", min_width: "100px"
+          column :name do |dancer|
+            link_to dancer.name, admin_dancer_path(dancer)
+          end
+        end
       end
     end
   end
