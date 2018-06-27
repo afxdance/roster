@@ -73,7 +73,7 @@ ActiveAdmin.register Team do
     panel "Dancers" do
       attributes_table_for team do
         table_for team.dancers.sort_by(&:name) do
-          column :id, max_width: "200px", min_width: "100px"
+          column :id
           column :name do |dancer|
             link_to dancer.name, admin_dancer_path(dancer)
           end
