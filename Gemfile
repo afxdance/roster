@@ -43,6 +43,7 @@ group :production, :development, :test do
   gem "colorize"
   gem "devise"
   gem "haml"
+  gem "csv"
 end
 
 group :production do

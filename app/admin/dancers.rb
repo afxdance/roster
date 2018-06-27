@@ -155,4 +155,21 @@ ActiveAdmin.register Dancer do
       end
     end
   end
+
+  action_item :audition_form, only: :index do
+    link_to "Audition Form", "/audition"
+  end
+
+  collection_action :next_audition_number, method: :get do
+    if !current_user.can_modify_next_dancer_id?
+      flash[:alert] = "You do not have sufficient permissions to do this!"
+    else
+      flash[:notice] = "The next audition number is: #{Dancer.next_id}"
+    end
+    redirect_to "/admin/dancers"
+  end
+
+  action_item :next_audition_number_button, only: :index do
+    link_to "Next Audition Number", "/admin/dancers/next_audition_number"
+  end
 end
