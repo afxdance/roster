@@ -41,9 +41,9 @@ group :production, :development, :test do
 
   gem "activeadmin"
   gem "colorize"
+  gem "csv"
   gem "devise"
   gem "haml"
-  gem "csv"
 end
 
 group :production do
