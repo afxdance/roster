@@ -12,16 +12,17 @@ ActiveAdmin.register Dancer do
   #   permitted
   # end
 
-  permit_params do
-    [
-      :name,
-      :email,
-      :phone,
-      :gender,
-      :year,
-      :experience,
-    ].compact
-  end
+  # Dancer.table_exists? &&
+
+  columns = Dancer.columns.map(&:name).map(&:to_sym)
+  permit_params columns
+  # Dancer.table_exists? && Dancer.columns.each do |column|
+  #   # require 'pry-nav'; binding.pry
+  #   if !["id", "created_at", "updated_at"].include?(column.name)
+  #     puts column.name
+  #     permit_params column.name.to_sym
+  #   end
+  # end
 
   member_action :add_to_team, method: :post do
     dancer_id = params[:id]
@@ -89,25 +90,18 @@ ActiveAdmin.register Dancer do
 
   form do |f|
     f.inputs do
-      f.input :name
-      f.input :email
-      f.input :phone
-      f.input :gender
-      f.input :year
-      f.input :dance_experience
+      current_user.accessible_dancer_fields.each do |field|
+        f.input field
+      end
     end
     f.actions
   end
 
   index do
     selectable_column
-    column :id
-    column :name
-    column :email
-    column :phone
-    column :gender
-    column :year
-    column :dance_experience
+    current_user.accessible_dancer_fields.each do |field|
+      column field
+    end
 
     # Should eventually change the buttons below to support the possiblility of users with multiple teams
     column :add_dancer do |dancer|
@@ -155,12 +149,9 @@ ActiveAdmin.register Dancer do
   show do |dancer|
     panel "Detail" do
       attributes_table_for dancer do
-        row :name
-        row :email
-        row :phone
-        row :gender
-        row :year
-        row :dance_experience
+        current_user.accessible_dancer_fields.each do |field|
+          row field
+        end
       end
     end
   end
