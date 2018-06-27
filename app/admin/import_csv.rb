@@ -10,7 +10,7 @@ ActiveAdmin.register_page "Import Dancers from CSV" do
         hash_strings = row.to_hash
         hash_symbols = {}
         for key in hash_strings.keys
-          hash_symbols[key.tr(' ', '_').downcase.to_sym] = hash_strings[key]
+          hash_symbols[key.tr(" ", "_").downcase.to_sym] = hash_strings[key]
         end
         begin
           Dancer.create!(hash_symbols)
@@ -28,7 +28,7 @@ ActiveAdmin.register_page "Import Dancers from CSV" do
   end
 
   content do
-    form_for :csv, :url => { :action => "update" }, html: { multipart: true } do |f|
+    form_for :csv, url: { action: "update" }, html: { multipart: true } do |f|
       f.file_field :uploaded_file
       f.submit "Submit"
     end
