@@ -51,7 +51,7 @@ ActiveAdmin.register Team do
     column "User" do |team|
       team.users.map do |user|
         link_to user.username, admin_user_path(user)
-      end.join.html_safe
+      end.join(", ").html_safe
     end
     # Allows us to view the Dancers that are connected to the team
     column "Number of Dancers" do |team|
