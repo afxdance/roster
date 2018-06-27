@@ -14,8 +14,11 @@ ActiveAdmin.register Dancer do
 
   # Dancer.table_exists? &&
 
-  columns = Dancer.columns.map(&:name).map(&:to_sym)
-  permit_params columns
+  # Skip during rake db:load:schema, because Dancer.columns isn't available yet
+  if Dancer.table_exists?
+    columns = Dancer.columns.map(&:name).map(&:to_sym)
+    permit_params columns
+  end
   # Dancer.table_exists? && Dancer.columns.each do |column|
   #   # require 'pry-nav'; binding.pry
   #   if !["id", "created_at", "updated_at"].include?(column.name)
