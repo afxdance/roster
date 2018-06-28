@@ -40,6 +40,14 @@ ActiveAdmin.register Dancer do
   end
 
   controller do
+    def action_methods
+      if current_user.can_modify_dancer_fields?
+        super
+      else
+        super - ["edit", "destroy"]
+      end
+    end
+
     def back_url
       request.referrer
     end
@@ -51,22 +59,26 @@ ActiveAdmin.register Dancer do
       if team.nil?
         redirect_to :back, alert: "Team #{team_id} does not exist."
 
+      # Does the user have permission to modify the team?
+      elsif !current_user.teams.include? team
+        redirect_to :back, alert: "You can't modify #{team.name}."
+
       # Is the team locked?
       elsif team.locked?
         redirect_to :back, alert: "#{team.name} is currently locked right now."
 
       # If training team, have project teams finished picking?
       elsif !team.turn_to_add?
-        redirect_to :back, alert: "#{current_user.teams.find(team_id).name} cannot pick right now because project teams are still picking."
+        redirect_to :back, alert: "#{team.name} cannot pick right now because project teams are still picking."
 
       elsif !team.has_space_for? dancer_ids
         # If current_user.team has hit maximum picks...
-        redirect_to :back, alert: "#{current_user.teams.find(team_id).name} has exceeded the maximum number of picks."
+        redirect_to :back, alert: "#{team.name} has exceeded the maximum number of picks."
 
       else
         # If all is ok, add the dancers.
         result = team.add_dancers(dancer_ids)
-        redirect_to :back, alert: "#{result[:added].map(&:name)} has been added to #{current_user.teams.find(team_id).name}."
+        redirect_to :back, alert: "#{result[:added].map(&:name)} has been added to #{team.name}."
 
       end
     end
@@ -77,6 +89,10 @@ ActiveAdmin.register Dancer do
       # Is the team valid?
       if team.nil?
         redirect_to :back, alert: "Team #{team_id} does not exist."
+
+      # Does the user have permission to modify the team?
+      elsif !current_user.teams.include? team
+        redirect_to :back, alert: "You can't modify #{team.name}."
 
       # Is the team locked?
       elsif team.locked?
@@ -102,7 +118,7 @@ ActiveAdmin.register Dancer do
 
   index do
     selectable_column
-    current_user.accessible_dancer_fields.each do |field|
+    current_user.table_visible_dancer_fields.each do |field|
       column field
     end
 

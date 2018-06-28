@@ -41,11 +41,19 @@ class User < ApplicationRecord
   end
 
   def can_modify_dancer_fields?
-    true
+    board_privileges?
   end
 
   def can_view_sensitive_dancer_fields?
     board_privileges?
+  end
+
+  def table_visible_dancer_fields
+    if can_view_sensitive_dancer_fields?
+      [:id] + Dancer::TABLE_VISIBLE_FIELDS
+    else
+      [:id] + (Dancer::TABLE_VISIBLE_FIELDS - Dancer::SENSITIVE_FIELDS)
+    end
   end
 
   def accessible_dancer_fields

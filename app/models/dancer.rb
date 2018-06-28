@@ -49,6 +49,16 @@ class Dancer < ApplicationRecord
     :tech_interest,
     :camp_interest,
   ].freeze
+  TABLE_VISIBLE_FIELDS = [
+    :name,
+    :email,
+    :phone,
+    :year,
+    :dance_experience,
+    SHOW_CAMP_INTEREST ? :camp_interest : nil,
+    SHOW_EXP_INTEREST ? :exp_interest : nil,
+    SHOW_TECH_INTEREST ? :tech_interest : nil,
+  ].compact.freeze
   SENSITIVE_FIELDS = [
     :gender,
   ].freeze
