@@ -70,13 +70,14 @@ ActiveAdmin.register Team do
         row :maximum_picks
       end
     end
+
     panel "Dancers" do
-      attributes_table_for team do
-        table_for team.dancers.sort_by(&:name) do
-          column :id
-          column :name do |dancer|
-            link_to dancer.name, admin_dancer_path(dancer)
-          end
+      table_for team.dancers.sort_by(&:name) do
+        current_user.table_visible_dancer_fields.each do |field|
+          column field
+        end
+        column :actions do |dancer|
+          link_to "View", admin_dancer_path(dancer)
         end
       end
     end

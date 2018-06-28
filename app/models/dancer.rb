@@ -35,8 +35,8 @@ class Dancer < ApplicationRecord
   }.freeze
 
   SHOW_CAMP_INTEREST = true
-  SHOW_EXP_INTEREST = true
-  SHOW_TECH_INTEREST = true
+  SHOW_EXP_INTEREST = false
+  SHOW_TECH_INTEREST = false
 
   REQUIRED_FIELDS = [
     :name,
