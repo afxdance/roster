@@ -117,9 +117,15 @@ ActiveAdmin.register Dancer do
   end
 
   index do
+    para "<style>td {white-space: nowrap</style>".html_safe
+
     selectable_column
     current_user.table_visible_dancer_fields.each do |field|
-      column field
+      if field == :id
+        column("#", sortable: :id) { |dancer| "##{dancer.id}" }
+      else
+        column field
+      end
     end
 
     # Should eventually change the buttons below to support the possiblility of users with multiple teams
