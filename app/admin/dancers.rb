@@ -181,8 +181,34 @@ ActiveAdmin.register Dancer do
     end
   end
 
-  action_item :audition_form, only: :index do
-    link_to "Audition Form", "/audition"
+  collection_action :randomize, method: :get do
+    if !current_user.can_modify_all_teams?
+      flash[:alert] = "You do not have sufficient permissions to do this!"
+    elsif Team.unlocked_teams.any?
+      flash[:alert] = "Lock all teams first."
+    else
+      # What this transaction does:
+      # 1. Run this code, but don't apply any changes to the dancers_teams table.
+      # 2. Apply all the changes all at once.
+      # The benefit: if this code errors, we won't have a partially randomized set of dancers.
+      dancers_with_no_teams = Dancer.dancers_with_no_teams.shuffle
+
+      DancerTeam.transaction do
+        for dancer in dancers_with_no_teams
+          team = Team.teams_with_least_number_of_dancers.first
+
+          # Sanity check -- confirm that team does not have the dancer
+          raise if team.dancers.include? dancer
+
+          # This is like team.dancers.push(dancer)),
+          # but we're also storing a reason with the association.
+          # This makes so that we can see who was picked and who was randomized.
+          DancerTeam.create!(team: team, dancer: dancer, reason: "Randomization")
+        end
+      end
+      flash[:notice] = "#{dancers_with_no_teams.count} dancers have been randomized."
+    end
+    redirect_to "/admin/dancers"
   end
 
   collection_action :next_audition_number, method: :get do
@@ -200,5 +226,9 @@ ActiveAdmin.register Dancer do
 
   action_item :next_audition_number_button, only: :index do
     link_to "Next Audition Number", "/admin/dancers/next_audition_number"
+  end
+
+  action_item :randomize, only: :index do
+    link_to "Randomize", "/admin/dancers/randomize", data: { confirm: "Are you sure?" }
   end
 end

@@ -23,9 +23,13 @@ class User < ApplicationRecord
     false
   end
 
+  def can_modify_all_teams?
+    Set.new(teams) == Set.new(Team.all)
+  end
+
   def board_privileges?
     # Jank but check if they have access to all teams
-    Set.new(teams) == Set.new(Team.all)
+    can_modify_all_teams?
   end
 
   def can_modify_users?

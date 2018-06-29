@@ -11,6 +11,18 @@ class Team < ApplicationRecord
     Team.where("level = ? AND locked = ?", PROJECT, false).any?
   end
 
+  def self.unlocked_teams
+    Team.where("locked = ?", false)
+  end
+
+  def self.teams_with_least_number_of_dancers
+    # https://stackoverflow.com/a/37698764
+    Team
+      .joins(:dancers)
+      .group("dancers_teams.team_id")
+      .order("count(dancers_teams.team_id) asc")
+  end
+
   # Is it this teams's turn to pick dancers?
   # (Training teams can't add unless project teams are done picking.)
   def turn_to_add?

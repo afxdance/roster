@@ -102,4 +102,11 @@ class Dancer < ApplicationRecord
     end
     # rubocop:enable Style/GuardClause
   end
+
+  def self.dancers_with_no_teams
+    # https://stackoverflow.com/a/5570221
+    Dancer
+      .includes(:dancers_teams)
+      .where(dancers_teams: { dancer_id: nil })
+  end
 end
