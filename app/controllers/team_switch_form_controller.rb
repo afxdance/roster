@@ -51,7 +51,8 @@ class TeamSwitchFormController < ApplicationController
       :name,
       :phone,
       :reason,
-      :available_team_ids,
+      # https://stackoverflow.com/a/16555975
+      available_team_ids: [],
     )
   end
 end

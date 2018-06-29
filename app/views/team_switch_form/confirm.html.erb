@@ -1,13 +1,26 @@
 <body id="audition-form-body">
+<div class="audition-form">
 <div class="audnum">
-<h3>
-    Your team switch request has been submitted.
-    <br><br>
-    <span style="font-size: 0.7em">Please keep this team switch request number for reference: <%= @request.id.to_s %></span>
+
+    <h3>
+      Your team switch request has been submitted.
+      Please keep this team switch request number for reference: <%= @request.id.to_s %>
+    </h3>
+
+    <p>Here are the times you indicated you are free:
+    <ul>
+      <% @request.available_teams.each do |team| %>
+        <li> <%= team.practice_time %>
+      <% end %>
+    </ul>
+    <p>If this is incorrect or if your availability changes, feel free to re-submit the form.
+
+    <p>You will receive an email once your team switch or drop request has been successfully processed. Please check your spam in case the email is delivered there. All notices are delivered ONLY from afxdanceviceexecutive@gmail.com. Thank you for your patience!
 </h3>
 
 <br>
 
 <center><%= link_to "BACK", team_switch_form_path, style: "color: white" %></center>
+</div>
 </div>
 </body>
