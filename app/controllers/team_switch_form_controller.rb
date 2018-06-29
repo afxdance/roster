@@ -23,8 +23,10 @@ class TeamSwitchFormController < ApplicationController
       @request.status = "open"
 
       # Reject all previous requests
-      for r in TeamSwitchRequest.where(dancer: @request.dancer)
-        r.update(status: "rejected")
+      for request in TeamSwitchRequest.where(dancer: @request.dancer)
+        next if request.id == @request.id
+
+        request.update(status: "rejected")
       end
 
       render "team_switch_form/confirm"
