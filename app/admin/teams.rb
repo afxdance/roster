@@ -29,7 +29,7 @@ ActiveAdmin.register Team do
     f.inputs do
       f.input :name
       # Creates a drop down that allows you to choose from "Project" and "Training"
-      f.input :level, collection: ["Project", "Training"]
+      f.input :level, collection: ["Project", "Training", "Drop"]
       # Creates a selection menu so the team can be linked to a user
       f.input :users, collection: User.all.map { |user| [user.username, user.id] }
       f.input :practice_time,
