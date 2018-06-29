@@ -40,8 +40,8 @@ class Team < ApplicationRecord
     Team.where("locked = ?", false)
   end
 
-  def self.teams_with_least_number_of_dancers
-    Team.all.sort_by { |team| team.dancers.count }
+  def self.training_teams_with_least_number_of_dancers
+    Team.training_teams.sort_by { |team| team.dancers.count }
     # # https://stackoverflow.com/a/37698764  -- DOESN'T WORK ON HEROKU
     # Team
     #   .joins(:dancers)

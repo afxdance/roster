@@ -195,7 +195,7 @@ ActiveAdmin.register Dancer do
 
       DancerTeam.transaction do
         for dancer in dancers_with_no_teams
-          team = Team.teams_with_least_number_of_dancers.first
+          team = Team.training_teams_with_least_number_of_dancers.first
 
           # Sanity check -- confirm that team does not have the dancer
           raise if team.dancers.include? dancer
