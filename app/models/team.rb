@@ -16,11 +16,12 @@ class Team < ApplicationRecord
   end
 
   def self.teams_with_least_number_of_dancers
-    # https://stackoverflow.com/a/37698764
-    Team
-      .joins(:dancers)
-      .group("dancers_teams.team_id")
-      .order("count(dancers_teams.team_id) asc")
+    Team.all.sort_by { |team| team.dancers.count }
+    # # https://stackoverflow.com/a/37698764  -- DOESN'T WORK ON HEROKU
+    # Team
+    #   .joins(:dancers)
+    #   .group("dancers_teams.team_id")
+    #   .order("count(dancers_teams.team_id) asc")
   end
 
   # Is it this teams's turn to pick dancers?
