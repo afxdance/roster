@@ -7,53 +7,95 @@
 		<% end %>
 	<% end %>
 
-	<div style="text-align: left">
-		<p>Welcome to AFXsi 2018! If you are on this form it means that you are unable to participate on the team that you were initially placed onto due to a time conflict. To drop AFX entirely, select the "Click this to drop AFX"</p>
-		<p>DEADLINE FOR SUBMISSION: Wednesday, July 4th, at 11:59PM.</p>
-    <p>NOTE: This form is ONLY for switching between AFXsi 2018 Project and Training teams or to drop from dancing on an AFXsi 2018 Project or Training team altogether. If you are on AFXsi 2018 Dance Camp, the drop deadline and process is separate and does NOT use this form. We urge you to refer to your syllabus for all procedures and to contact your Dance Camp Captains and Artistics for all personal Dance Camp matters. Thank you!</p>
-		<p>If you have any questions, comments, or concerns, please email afxdanceviceexecutive@gmail.com.</p>
-	</div>
+	<div class="times">
+
+  <p>Welcome to AFXsi 2018, AFX's 2018 Summer Intensive Program!
+  <p>If you are viewing this form, it means that you are unable to participate on the project or training team that you were initially placed onto due to a time conflict. To drop AFX entirely, see the last question.
+
+  <p>[DEADLINE FOR SUBMISSION: INDEPENDENCE DAY - WEDNESDAY, JULY 4TH, 2018  @11:59 PM.]
+  <br>No exceptions.
+
+  <p>***NOTE***: This form is ONLY for switching between AFXsi 2018 Project and Training teams or to drop from dancing on an AFXsi 2018 Project or Training team altogether. If you are on AFXsi 2018 Dance Camp, the drop deadline and process is separate and does NOT use this form. We urge you to refer to your syllabus for all procedures and to contact your Dance Camp Captains and Artistics for all personal Dance Camp matters. Thank you!
+
+  <p>If you have any urgent questions, comments, or concerns, please email afxdanceviceexecutive@gmail.com immediately.
 
 	<%= f.text_field :name, required: true, placeholder: "Name" %><br>
 	<%= f.text_field :email, required: true, placeholder: "Email" %><br>
 	<%= f.text_field :phone, required: true, placeholder: "Phone XXX-XXX-XXXX" %><br>
 
-	<div style="text-align: left">
-	  Check all the times that you will be available, at least 2 times must be checked. Do not check a project team if you are not a project team member (otherwise your request will be denied).
-	</div>
 
-	<div class="times">
-  <%# Janky way to sort practice_times: #%>
-  <% available_teams = Team.all.sort_by {
-    |team| team.practice_time.sub(/monday/i, '1')
-                .sub(/tuesday/i, '2')
-                .sub(/wednesday/i, '3')
-                .sub(/thursday/i, '4')
-                .sub(/friday/i, '5')
-                .sub(/saturday/i, '6')
-                .sub(/sunday/i, '7')
-  } %>
-  <%= f.collection_check_boxes(:available_team_ids, available_teams, :id, :name) do |option| %>
+  <br>
+	<p>PROJECT TEAMS: Please select the practice time you can attend. *NOTE: Fill out the form ASAP. The directors of the project team you are trying to switch into will receive your request and can choose to accept or reject your request to switch into their team. [You may only answer this if you are currently on a project team.]
+
+  <p>If you are currently on a Project team and cannot make either team's practice time but you would like to be a part of one of our Training teams, please check whichever Training team practice team times you can make. However, if you would like to remain on a Project team, please ONLY check the other Project team's time. DO NOT check both Project and Training team time boxes. We process each request separately.
+
+  <%= f.collection_check_boxes(
+        :available_team_ids,
+        Team.project_teams.sort_by(&:practice_time_sort_string),
+        :id,
+        :name
+      ) do |option| %>
     <div><label>
       <%= option.check_box(class: "availability-checkbox") %>
       <span class="availability-display">
         <code class="availability-display-busy">BUSY</code>
         <code class="availability-display-free">FREE</code>
       </span>
-      [<%= option.object.level %>] <%= option.object.practice_time %>
+      <%= option.object.practice_time %>
     </label></div>
   <% end %>
-	</div>
 
-	<div style="text-align: left">
-		<p>Please enter your reason for switching, your request may or may not be approved</p>
-		<%= f.text_area :reason, required: true, placeholder: "Reason" %>
-	</div>
+
+
+  <br>
+	<p>TRAINING TEAMS: Please select ALL practice times you can attend. Please select at least TWO OPTIONS or you risk having your request rejected. [If there are any questions or concerns please send us an email at afxdanceviceexecutive@gmail.com.]
+
+  <%= f.collection_check_boxes(
+        :available_team_ids,
+        Team.training_teams.sort_by(&:practice_time_sort_string),
+        :id,
+        :name
+      ) do |option| %>
+    <div><label>
+      <%= option.check_box(class: "availability-checkbox") %>
+      <span class="availability-display">
+        <code class="availability-display-busy">BUSY</code>
+        <code class="availability-display-free">FREE</code>
+      </span>
+      <%= option.object.practice_time %>
+    </label></div>
+  <% end %>
+
+
+  <br>
+  <p>ONLY ANSWER THIS QUESTION IF YOU WISH TO DROP FROM AFX PROJECT/TRAINING THIS SUMMER.
+  <p>We are sad to see you go, but we would love to have you attend any of our open workshops, our 7th Annual Dance Weekend in July, our Summer Showcase in August, and auditions in the Fall!
+
+  <%= f.collection_check_boxes(
+        :available_team_ids,
+        Team.drop_teams.sort_by(&:practice_time_sort_string),
+        :id,
+        :name
+      ) do |option| %>
+    <div><label>
+      <%= option.check_box(class: "availability-checkbox") %>
+      <%= option.object.practice_time %>
+    </label></div>
+  <% end %>
+
+
+  <p>Please enter your reason for switching.</p>
+  <%= f.text_area :reason, required: true, placeholder: "Reason" %>
+
+
+  <p>We urge you to PLEASE double-check all of your contact information and answers as inputting incorrect information may lead to an unattended request, a rejected request, or a drop from AFX.
+  <p>You will receive an email once your team switch or drop request has been successfully processed. Please check your spam in case the email is delivered there. All notices are delivered ONLY from afxdanceviceexecutive@gmail.com. Thank you for your patience!
+
 
 	<div class = "submit">
     <%= f.submit "Submit team switch request" %>
   </div>
 
-	<br><br>
+	</div>
 <% end %>
 </body>

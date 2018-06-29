@@ -4,6 +4,31 @@ class Team < ApplicationRecord
 
   PROJECT = "Project".freeze
   TRAINING = "Training".freeze
+  DROP = "Drop".freeze
+
+  def practice_time_sort_string
+    practice_time
+      .to_s
+      .sub(/monday/i, '1')
+      .sub(/tuesday/i, '2')
+      .sub(/wednesday/i, '3')
+      .sub(/thursday/i, '4')
+      .sub(/friday/i, '5')
+      .sub(/saturday/i, '6')
+      .sub(/sunday/i, '7')
+  end
+
+  def self.drop_teams
+    Team.where("level = ?", Team::DROP)
+  end
+
+  def self.training_teams
+    Team.where("level = ?", Team::TRAINING)
+  end
+
+  def self.project_teams
+    Team.where("level = ?", Team::PROJECT)
+  end
 
   # Condition above checks if there are any project teams not locked, which means the project teams
   # are not done picking.
