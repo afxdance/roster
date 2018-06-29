@@ -76,6 +76,14 @@ ActiveAdmin.register Team do
         current_user.table_visible_dancer_fields.each do |field|
           column field
         end
+        column :added_on do |dancer|
+          dancer_team = DancerTeam.where(dancer: dancer, team: team).first
+          dancer_team&.created_at
+        end
+        column :added_reason do |dancer|
+          dancer_team = DancerTeam.where(dancer: dancer, team: team).first
+          dancer_team&.reason
+        end
         column :actions do |dancer|
           link_to "View", admin_dancer_path(dancer)
         end
