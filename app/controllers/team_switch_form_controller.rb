@@ -35,7 +35,6 @@ class TeamSwitchFormController < ApplicationController
 
   # Returns a dancer if name and a contact point (phone OR email) has been filled out properly
   def find_dancer(name, phone, email)
-    require 'pry-nav'; binding.pry
     for dancer in Dancer.where("lower(name) = ?", name.downcase)
       if phone == dancer.phone || email == dancer.email
         return dancer
