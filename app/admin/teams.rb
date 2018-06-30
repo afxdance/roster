@@ -72,20 +72,24 @@ ActiveAdmin.register Team do
     end
 
     panel "Dancers" do
-      table_for team.dancers.sort_by(&:name) do
-        current_user.table_visible_dancer_fields.each do |field|
-          column field
-        end
-        column :added_on do |dancer|
-          dancer_team = DancerTeam.where(dancer: dancer, team: team).first
-          dancer_team&.created_at
-        end
-        column :added_reason do |dancer|
-          dancer_team = DancerTeam.where(dancer: dancer, team: team).first
-          dancer_team&.reason
-        end
-        column :actions do |dancer|
-          link_to "View", admin_dancer_path(dancer)
+      tabs do
+        for tab_name, sort_order in [
+          ["Most recently added first", "added_at DESC"],
+          ["Most recently added last", "added_at ASC"],
+          ["Sorted alphabetically", "lower(trim(name))"],
+        ]
+          tab tab_name do
+            table_for team.dancers_with_added_at_added_reason.order(sort_order) do
+              current_user.table_visible_dancer_fields.each do |field|
+                column field
+              end
+              column :added_at
+              column :added_reason
+              column :actions do |dancer|
+                link_to "View", admin_dancer_path(dancer)
+              end
+            end
+          end
         end
       end
     end

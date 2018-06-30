@@ -80,6 +80,16 @@ class Team < ApplicationRecord
   #   update(locked: !locked)
   # end
 
+  def dancers_with_added_at_added_reason
+    dancers
+      .joins(:dancers_teams)
+      .select('
+        dancers.*,
+        dancers_teams.created_at AS added_at,
+        dancers_teams.reason AS added_reason
+      ')
+  end
+
   def add_dancers(dancer_ids)
     added = []
     already_in_this_team = []

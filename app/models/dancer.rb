@@ -109,4 +109,8 @@ class Dancer < ApplicationRecord
       .includes(:dancers_teams)
       .where(dancers_teams: { dancer_id: nil })
   end
+
+  def lowercase_name
+    name.downcase
+  end
 end
