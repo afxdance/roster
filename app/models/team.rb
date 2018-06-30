@@ -124,7 +124,7 @@ class Team < ApplicationRecord
 
     # split all auditionees not hand picked by directors into two groups based
     # on gender
-    teamless = Array.new(9,[])
+    teamless = Array.new(9, [])
 
     # makes our code alot cleaner
     offset = 4
