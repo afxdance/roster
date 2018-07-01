@@ -26,7 +26,7 @@ class TeamSwitchFormController < ApplicationController
       for request in TeamSwitchRequest.where(dancer: @request.dancer)
         next if request.id == @request.id
 
-        request.update(status: "rejected")
+        request.update(status: "Rejected: newer request submitted")
       end
 
       render "team_switch_form/confirm"
