@@ -67,7 +67,7 @@ ActiveAdmin.register TeamSwitchRequest do
       # Is the new team valid?
       new_team = Team.find(team_id)
       if new_team.nil?
-        redirect_to :back, alert: "Team #{neteam_id} does not exist."
+        redirect_to :back, alert: "Team #{team_id} does not exist."
         return
       end
 
