@@ -36,7 +36,7 @@
         :name
       ) do |option| %>
     <div><label>
-      <%= option.check_box(class: "availability-checkbox") %>
+      <%= option.check_box(class: "availability-checkbox availability-checkbox-project") %>
       <span class="availability-display" style="display: none">
         <code class="availability-display-busy">BUSY</code>
         <code class="availability-display-free">FREE</code>
@@ -57,7 +57,7 @@
         :name
       ) do |option| %>
     <div><label>
-      <%= option.check_box(class: "availability-checkbox") %>
+      <%= option.check_box(class: "availability-checkbox availability-checkbox-training") %>
       <span class="availability-display" style="display: none">
         <code class="availability-display-busy">BUSY</code>
         <code class="availability-display-free">FREE</code>
@@ -78,13 +78,16 @@
         :name
       ) do |option| %>
     <div><label>
-      <%= option.check_box(class: "availability-checkbox") %>
+      <%= option.check_box(class: "availability-checkbox availability-checkbox-drop") %>
       <%= option.object.practice_time %>
     </label></div>
   <% end %>
 
+  <br>
+  <br>
+  <br>
 
-  <p>Please enter your reason for switching.</p>
+  <p>What is your current time conflict? Please be as specific as possible in explaining what class, activity, work, etc. makes it so that you are unable to participate on your current team.</p>
   <%= f.text_area :reason, required: true, placeholder: "Reason" %>
 
 
@@ -93,8 +96,49 @@
 
 
 	<div class = "submit">
-    <%= f.submit "Submit team switch request" %>
+    <%= f.submit "Submit team switch request", class: "availability-form-submit" %>
   </div>
+
+  <script>
+  function checkboxesAreValid() {
+    nchecked = {}
+    nchecked.project = $('.availability-checkbox-project:checked').length;
+    nchecked.training = $('.availability-checkbox-training:checked').length;
+    nchecked.drop = $('.availability-checkbox-drop:checked').length;
+    nchecked.team = nchecked.project + nchecked.training;
+    nchecked.total = nchecked.project + nchecked.training + nchecked.drop;
+
+    if (nchecked.total == 0)
+      return false;
+
+    if (nchecked.drop > 0 && nchecked.team > 0)
+      return false;
+
+    // If someone on a project team puts down a project team time and a training team time,
+    // then that's okay.
+    if (nchecked.project == 0 && nchecked.training == 1)
+      return false;
+
+    return true;
+  }
+
+  function verify() {
+    if (checkboxesAreValid()) {
+      $('.availability-form-submit').show();
+    }
+    else {
+      $('.availability-form-submit').hide();
+    }
+  }
+
+  $(() => {
+    verify();
+    $('.availability-checkbox').click(() => {
+      verify();
+    });
+  });
+
+  </script>
 
 	</div>
 <% end %>
