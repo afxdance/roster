@@ -151,11 +151,24 @@ ActiveAdmin.register TeamSwitchRequest do
     end
 
     column :available_teams do |team_switch_request|
+      dancer = team_switch_request&.dancer
       team_switch_request.available_teams.map do |team|
-        content_tag :div do
-          link_to("/admin/team_switch_requests/#{team_switch_request.id}/switch_to_team?" + { team_id: team.id }.to_query, method: :post) do
-            "+ #{team.name} (#{team.dancers.length})"
+        content_tag(:div, style: "white-space: nowrap") do
+          link = link_to("/admin/team_switch_requests/#{team_switch_request.id}/switch_to_team?" + { team_id: team.id }.to_query, method: :post, title: "Switch dancer onto this team") do
+            "+"
           end
+
+          team_size = team.dancers.length
+
+          team_same_gender_size = current_user.can_view_sensitive_dancer_fields? ?
+            team.dancers.where(gender: dancer&.gender).length :
+            0
+          team_same_gender = team_same_gender_size / (team_size + 0.0001) * 100
+
+          team_same_year_size = team.dancers.where(year: dancer&.year).length
+          team_same_year = team_same_year_size / (team_size + 0.0001) * 100
+
+          "[#{link}] #{team.name} (#{team_size} G:#{team_same_gender.to_i}% Y:#{team_same_year.to_i}%)".html_safe
         end
       end.join.html_safe
     end
