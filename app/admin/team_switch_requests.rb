@@ -23,7 +23,7 @@ ActiveAdmin.register TeamSwitchRequest do
       :old_team_id,
       :new_team_id,
       :dancer_id,
-      available_teams: [],
+      available_team_ids: [],
     ].compact
   end
 
@@ -33,14 +33,12 @@ ActiveAdmin.register TeamSwitchRequest do
       f.input :email
       f.input :phone
       f.input :reason
-      f.input :approved_at
+      f.input :approved_at, as: :datetime_picker
       f.input :status
-      f.input :old_team_id
-      f.input :new_team_id
-      f.input :dancer_id
-
-      # Creates a selection menu so the team can be linked to a user
-      f.input :available_teams, collection: Team.all.map { |team| [team.name, team.id] }
+      f.input :old_team
+      f.input :new_team
+      f.input :dancer
+      f.input :available_teams
     end
     f.actions
   end
@@ -52,6 +50,14 @@ ActiveAdmin.register TeamSwitchRequest do
   end
 
   controller do
+    def action_methods
+      if current_user.can_modify_all_teams?
+        super
+      else
+        super - ["edit", "destroy"]
+      end
+    end
+
     def back_url
       request.referrer
     end
