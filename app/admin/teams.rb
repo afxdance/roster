@@ -33,7 +33,11 @@ ActiveAdmin.register Team do
       # Creates a selection menu so the team can be linked to a user
       f.input :users
       f.input :practice_time,
-              label: "Practice time<br>(EX. Thu 7-8:30, Sat 4-5:30)".html_safe
+              label: [
+                "Practice time",
+                "(EX. Thu 7-8:30, Sat 4-5:30)",
+                "If add a space at the beginning or leave this blank, this team will be hidden in the team switch form.",
+              ].join("<br>").html_safe
       f.input :locked
       f.input :maximum_picks
     end

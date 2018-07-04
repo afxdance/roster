@@ -35,6 +35,7 @@
         :id,
         :name
       ) do |option| %>
+    <% next if option.object.practice_time.blank? || option.object.practice_time[0] == " " %>
     <div><label>
       <%= option.check_box(class: "availability-checkbox availability-checkbox-project") %>
       <span class="availability-display" style="display: none">
@@ -56,6 +57,7 @@
         :id,
         :name
       ) do |option| %>
+    <% next if option.object.practice_time.blank? || option.object.practice_time[0] == " " %>
     <div><label>
       <%= option.check_box(class: "availability-checkbox availability-checkbox-training") %>
       <span class="availability-display" style="display: none">
@@ -77,6 +79,7 @@
         :id,
         :name
       ) do |option| %>
+    <% next if option.object.practice_time.blank? || option.object.practice_time[0] == " " %>
     <div><label>
       <%= option.check_box(class: "availability-checkbox availability-checkbox-drop") %>
       <%= option.object.practice_time %>
