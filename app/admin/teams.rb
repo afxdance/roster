@@ -90,12 +90,70 @@ ActiveAdmin.register Team do
               column :added_at
               column :added_reason
               column :actions do |dancer|
-                link_to "View", admin_dancer_path(dancer)
+                [
+                  link_to("View", admin_dancer_path(dancer)),
+                  link_to("/admin/teams/#{team.id}/drop_dancer?" + { dancer_id: dancer.id }.to_query, method: :post, title: "Drop dancer from this team", data: { confirm: "Drop #{dancer.name}?" }) do
+                    "Drop"
+                  end,
+                ].join(" ").html_safe
               end
             end
           end
         end
       end
+    end
+  end
+
+  member_action :drop_dancer, method: :post do
+    team_id = params[:id]
+    dancer_id = params[:dancer_id]
+    drop_dancer_from_team(dancer_id, team_id)
+  end
+
+  controller do
+    def back_url
+      request.referrer
+    end
+
+    def drop_dancer_from_team(dancer_id, team_id)
+      # Is the dancer valid?
+      dancer = Dancer.find(dancer_id)
+      if !dancer_id
+        redirect_to :back, alert: "Dancer #{dancer_id} does not exist."
+        return
+      end
+
+      # Is the team valid?
+      team = Team.find(team_id)
+      if !team_id
+        redirect_to :back, alert: "Team #{team_id} does not exist."
+        return
+      end
+
+      # Does the user have permission to modify the team?
+      if !current_user.teams.include?(team)
+        redirect_to :back, alert: "You don't have permission to modify this team."
+        return
+      end
+
+      drop_team = Team.drop_teams.first
+      TeamSwitchRequest.create!(
+        name: dancer.name,
+        email: dancer.email,
+        phone: dancer.phone,
+        reason: "(Drop button in admin panel)",
+        approved_at: Time.now,
+        status: "Approved",
+        old_team: team,
+        new_team: drop_team,
+        dancer: dancer,
+        available_teams: [drop_team],
+      )
+
+      DancerTeam.where(dancer: dancer, team: team).delete_all
+      DancerTeam.create!(dancer: dancer, team: drop_team, reason: "Dropped")
+
+      redirect_to :back, notice: "#{dancer.name} has been switched into #{drop_team.name}."
     end
   end
 end
