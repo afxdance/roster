@@ -9,13 +9,13 @@ class Team < ApplicationRecord
   def practice_time_sort_string
     practice_time
       .to_s
-      .sub(/monday/i, '1')
-      .sub(/tuesday/i, '2')
-      .sub(/wednesday/i, '3')
-      .sub(/thursday/i, '4')
-      .sub(/friday/i, '5')
-      .sub(/saturday/i, '6')
-      .sub(/sunday/i, '7')
+      .sub(/monday/i, "1")
+      .sub(/tuesday/i, "2")
+      .sub(/wednesday/i, "3")
+      .sub(/thursday/i, "4")
+      .sub(/friday/i, "5")
+      .sub(/saturday/i, "6")
+      .sub(/sunday/i, "7")
   end
 
   def self.drop_teams
