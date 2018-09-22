@@ -47,4 +47,6 @@ Team.create!(name: "AFX Oasis",
              locked: false,
              maximum_picks: 50)
 
+User.find(1).teams = Team.all
+
 Rails.env.development?
