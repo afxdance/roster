@@ -83,6 +83,7 @@ GEM
     colorize (0.7.7)
     concurrent-ruby (1.0.5)
     crass (1.0.3)
+    csv (3.0.0)
     cucumber (3.1.0)
       builder (>= 2.1.2)
       cucumber-core (~> 3.1.0)
@@ -325,6 +326,7 @@ DEPENDENCIES
   capybara (~> 2.13)
   coffee-rails (~> 4.2)
   colorize
+  csv
   cucumber
   cucumber_lint
   debase
