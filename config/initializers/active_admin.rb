@@ -4,7 +4,7 @@ ActiveAdmin.setup do |config|
   # Set the title that is displayed on the main layout
   # for each of the active admin pages.
   #
-  config.site_title = "Roster"
+  config.site_title = "AFX Roster"
 
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.
@@ -133,6 +133,7 @@ ActiveAdmin.setup do |config|
   #
   # You can customize the comment menu:
   # config.comments_menu = { parent: 'Admin', priority: 1 }
+  config.comments_menu = false
 
   # == Batch Actions
   #
@@ -257,6 +258,7 @@ ActiveAdmin.setup do |config|
   # You can control the default per page count for all resources here.
   #
   # config.default_per_page = 30
+  config.default_per_page = [50, 1000, 10_000]
   #
   # You can control the max per page count too.
   #

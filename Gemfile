@@ -1,4 +1,5 @@
 source "https://rubygems.org"
+ruby "2.5.0"
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -9,7 +10,8 @@ group :production, :development, :test do
   # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
   gem "rails", "~> 5.1.5", require: false
   # Use sqlite3 as the database for Active Record
-  gem "sqlite3", require: false
+  # sqlite is disabled here because we want to use it only for development.
+  # gem "sqlite3", require: false
   # Use Puma as the app server
   gem "puma", "~> 3.7", require: false
   # Use SCSS for stylesheets
@@ -38,7 +40,18 @@ group :production, :development, :test do
   ##############################
 
   gem "activeadmin"
+  gem "colorize"
+  gem "csv"
   gem "devise"
+  gem "haml"
+end
+
+group :production do
+  ##############################
+  # Place all added gems below #
+  ##############################
+
+  gem "pg"
 end
 
 group :development, :test do
@@ -53,12 +66,12 @@ group :development, :test do
   ##############################
 
   gem "awesome_print", require: true
-  gem "colorize", require: false
   gem "cucumber", require: false
   gem "cucumber_lint", require: false
   gem "pry-nav", require: true
   gem "pry-rails", require: true
   gem "rubocop", require: false
+  gem "sqlite3", require: false
 end
 
 group :development do
@@ -76,6 +89,7 @@ group :development do
   ##############################
 
   gem "debase", require: false
+  gem "haml_lint", require: false
   gem "mdl", require: false
   gem "rails_db"
   gem "ruby-debug-ide", require: false

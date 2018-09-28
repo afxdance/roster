@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180314023526) do
+ActiveRecord::Schema.define(version: 20180629155626) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -32,7 +32,10 @@ ActiveRecord::Schema.define(version: 20180314023526) do
     t.string "phone"
     t.string "gender"
     t.string "year"
-    t.string "experience"
+    t.string "dance_experience"
+    t.string "exp_interest"
+    t.string "tech_interest"
+    t.string "camp_interest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -42,6 +45,7 @@ ActiveRecord::Schema.define(version: 20180314023526) do
     t.integer "team_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "reason"
     t.index ["dancer_id", "team_id"], name: "index_dancers_teams_on_dancer_id_and_team_id"
     t.index ["team_id", "dancer_id"], name: "index_dancers_teams_on_team_id_and_dancer_id"
   end
@@ -73,18 +77,28 @@ ActiveRecord::Schema.define(version: 20180314023526) do
   end
 
   create_table "teams", force: :cascade do |t|
-    t.string "type"
+    t.string "level"
     t.string "name"
     t.string "practice_time"
     t.boolean "locked"
+    t.integer "maximum_picks"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_teams_on_user_id"
   end
 
+  create_table "teams_users", id: false, force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "team_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id", "user_id"], name: "index_teams_users_on_team_id_and_user_id"
+    t.index ["user_id", "team_id"], name: "index_teams_users_on_user_id_and_team_id"
+  end
+
   create_table "users", force: :cascade do |t|
-    t.string "email", default: "", null: false
+    t.string "username", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -96,8 +110,8 @@ ActiveRecord::Schema.define(version: 20180314023526) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
 end

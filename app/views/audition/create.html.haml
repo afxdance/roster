@@ -1,0 +1,12 @@
+%body#audition-form-body
+  .audition-form
+    .audnum
+      %h3
+        %div
+          %b>= @dancer.name
+        %div
+          your audition number is
+          %b= @dancer.id
+
+  %br/
+  %center= link_to "BACK TO FORM", audition_path, style: "color: white; font-size: 18px;"

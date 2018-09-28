@@ -1,0 +1,113 @@
+- if @dancer.errors.any?
+  %div Please fix the following errors:
+  - @dancer.errors.full_messages.each do |message|
+    %li= message
+
+%table
+  %tr
+    %td
+      Full Name
+    %td
+      - if f
+        = f.text_field(:name, required: true, pattern: Dancer::NAME_PATTERN)
+      - else
+        = @dancer.name
+
+  %tr
+    %td
+      Email
+    %td
+      - if f
+        = f.text_field(:email, required: true, pattern: Dancer::EMAIL_PATTERN)
+      - else
+        = @dancer.email
+
+  %tr
+    %td
+      Phone
+    %td
+      - if f
+        = f.text_field(:phone, required: true, pattern: Dancer::PHONE_PATTERN)
+        %small
+          Must follow this format: ###-###-####
+      - else
+        = @dancer.phone
+
+  %tr
+    %td
+      Gender
+    %td
+      - if f
+        = f.select(:gender, options_for_select(Dancer::GENDER_VALUES.invert, @dancer.gender), {include_blank: ""}, {required: true})
+        %small
+          This information is used to ensure teams are balanced, diverse, and inclusive. The form is processed by an algorithm and your response will not be seen beyond executive board.
+      - else
+        = Dancer::GENDER_VALUES[@dancer.gender]
+
+  %tr
+    %td
+      Year
+    %td
+      - if f
+        = f.select(:year, options_for_select(Dancer::YEAR_VALUES.invert, @dancer.year), {include_blank: ""}, {required: true})
+      - else
+        = Dancer::YEAR_VALUES[@dancer.year]
+
+  %tr
+    %td
+      Prior Dance Experience
+    %td
+      - if f
+        = f.select(:dance_experience, options_for_select(Dancer::DANCE_EXPERIENCE_VALUES.invert, @dancer.dance_experience), {include_blank: ""}, {required: true})
+      - else
+        = Dancer::DANCE_EXPERIENCE_VALUES[@dancer.dance_experience]
+
+  - if Dancer::SHOW_CAMP_INTEREST
+    %tr
+      %td
+        Dance Camp Interest
+      %td
+        - if f
+          = f.select(:camp_interest, options_for_select(Dancer::BOOLEAN_OPTION_VALUES.invert, @dancer.camp_interest), {include_blank: ""}, {required: true})
+          %small
+            Are you interested in AFXsi Dance Camp?
+            %br
+            To apply, you will have to fill out an application that is linked on the audition event page.
+        - else
+          = Dancer::BOOLEAN_OPTION_VALUES[@dancer.camp_interest]
+  - else
+    = f.hidden_field(:camp_interest, value: 'field_hidden') if f
+
+  - if Dancer::SHOW_EXP_INTEREST
+    %tr
+      %td
+        EXP Interest
+      %td
+        - if f
+          = f.select(:exp_interest, options_for_select(Dancer::BOOLEAN_OPTION_VALUES.invert, @dancer.exp_interest), {include_blank: ""}, {required: true})
+          %small
+            Are you interested in EXP? EXP is a dance organization partnered with AFX that focuses on dancer growth and the exploration of movement through fundamentals and freestyle training! Please indicate interest to receive more information via email!
+        - else
+          = Dancer::BOOLEAN_OPTION_VALUES[@dancer.exp_interest]
+  - else
+    = f.hidden_field(:exp_interest, value: 'field_hidden') if f
+
+  - if Dancer::SHOW_TECH_INTEREST
+    %tr
+      %td
+        AFX Tech Interest
+      %td
+        - if f
+          = f.select(:tech_interest, options_for_select(Dancer::BOOLEAN_OPTION_VALUES.invert, @dancer.tech_interest), {include_blank: ""}, {required: true})
+          %small
+            Are you interested in AFX Tech? AFX Tech is a project-based technical organization that contributes to the Berkeley Dance Community through a variety of outlets, from front-end web development/design to back-end algorithmic programming.
+        - else
+          = Dancer::BOOLEAN_OPTION_VALUES[@dancer.tech_interest]
+  - else
+    = f.hidden_field(:tech_interest, value: 'field_hidden') if f
+
+  - if f
+    %tr
+      %td
+      %td
+        = f.submit "I'm ready to audition!"

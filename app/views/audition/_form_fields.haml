@@ -1,0 +1,68 @@
+- if @dancer.errors.any?
+  - @dancer.errors.full_messages.each do |message|
+    %li= message
+%table
+  %tr
+    %td
+      Name
+    %td
+      = f.text_field :name, required: true, placeholder: "Name"
+  %tr
+  %tr
+    %td
+      Phone number
+    %td
+      = f.text_field :email, required: true, placeholder: "Email",                    |
+        pattern: "[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*" |
+  %tr
+= f.text_field :name, required: true, placeholder: "Name"
+%br/
+/ Email regex copied from http://emailregex.com/
+= f.text_field :email, required: true, placeholder: "Email",                    |
+  pattern: "[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*" |
+%br/
+= f.text_field :phone, required: true, placeholder: "Phone Number (###-###-####)", pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}", |
+  id: "phone"                                                                                                             |
+%small     Must follow this format: ###-###-####
+%br/
+%br/
+"This information is used to ensure teams are balanced, diverse, and inclusive. The form is processed by an algorithm and your response will not be seen beyond executive board."
+= f.select :gender, options_for_select([                   |
+    ['Male', 'male'],                                      |
+    ['Female', 'female'],                                  |
+    ['Transgender male', 'trans-male'],                    |
+    ['Transgender female', 'trans-female'],                |
+    ['Genderqueer/gender nonconforming', 'nonconforming'], |
+    ['Decline to answer', 'decline'],                      |
+    ['Other', 'other'],                                    |
+  ], @dancer.gender), {prompt: "Gender"}, required: true   |
+%br/
+= f.select :year, options_for_select([               |
+    ['Freshman or younger', '1'],                    |
+    ['Sophomore', '2'],                              |
+    ['Junior', '3'],                                 |
+    ['Senior or older', '4']                         |
+  ], @dancer.year), {prompt: 'Year'}, required: true |
+%br/
+= f.select :dance_experience, options_for_select([                    |
+    ['No', 'No'],                                                     |
+    ['Yes, and I have been in AFX before', 'YesYesAFX'],              |
+    ['Yes, but I have not been in AFX before', 'YesNoAFX'],           |
+  ]), {prompt: "Do you have prior dance experience?"}, required: true |
+%br/
+= f.select :exp_interest, options_for_select([    |
+    ['Yes', true],                                |
+    ['No', false],                                |
+  ]), {prompt: "Interest in EXP"}, required: true |
+%br/
+= f.select :tech_interest, options_for_select([        |
+    ['Yes', true],                                     |
+    ['No', false],                                     |
+  ]), {prompt: "Interest in AFX Tech"}, required: true |
+%br/
+%br/
+= f.submit "I'm ready to audition!"
+%br/
+%br/
+%small
+  This form was created and is managed by the AFX Tech Commitee. :)

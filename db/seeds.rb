@@ -5,4 +5,49 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-User.create!(email: "admin@example.com", password: "password", password_confirmation: "password") if Rails.env.development?
+
+dancer_extra_fields = { exp_interest: "not important rn",
+                        tech_interest: "not important rn",
+                        camp_interest: "not important rn" }
+
+User.create!(username: "admin",
+             password: "password",
+             password_confirmation: "password")
+
+Dancer.create!(name: "Peter Le",
+               email: "peter@peter.peter",
+               phone: "pet-erp-eter",
+               gender: "peter",
+               year: "1",
+               dance_experience: "peter",
+               **dancer_extra_fields)
+Dancer.create!(name: "Alice Wu",
+               email: "alice@alice.alice",
+               phone: "ali-cea-lice",
+               gender: "alice",
+               year: "1",
+               dance_experience: "alice",
+               **dancer_extra_fields)
+Dancer.create!(name: "Stella Wang",
+               email: "stella@stella.stella",
+               phone: "ste-lla-wang",
+               gender: "stella",
+               year: "2",
+               dance_experience: "stella",
+               **dancer_extra_fields)
+
+Team.create!(name: "AFX Help",
+             level: "Project",
+             practice_time: "all the time",
+             locked: false,
+             maximum_picks: 100)
+Team.create!(name: "AFX Oasis",
+             level: "Project",
+             practice_time: "never",
+             locked: false,
+             maximum_picks: 50)
+
+# give admin access to all seeded teams
+User.find(1).teams = Team.all
+
+Rails.env.development?
