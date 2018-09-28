@@ -86,7 +86,7 @@
         - if f
           = f.select(:exp_interest, options_for_select(Dancer::BOOLEAN_OPTION_VALUES.invert, @dancer.exp_interest), {include_blank: ""}, {required: true})
           %small
-            Are you interested in EXP? [Add longer description here]
+            Are you interested in EXP? EXP is a dance organization partnered with AFX that focuses on dancer growth and the exploration of movement through fundamentals and freestyle training! Please indicate interest to receive more information via email!
         - else
           = Dancer::BOOLEAN_OPTION_VALUES[@dancer.exp_interest]
   - else
@@ -100,7 +100,7 @@
         - if f
           = f.select(:tech_interest, options_for_select(Dancer::BOOLEAN_OPTION_VALUES.invert, @dancer.tech_interest), {include_blank: ""}, {required: true})
           %small
-            Are you interested in AFX Tech? [Add longer description here]
+            Are you interested in AFX Tech? AFX Tech is a project-based technical organization that contributes to the Berkeley Dance Community through a variety of outlets, from front-end web development/design to back-end algorithmic programming.
         - else
           = Dancer::BOOLEAN_OPTION_VALUES[@dancer.tech_interest]
   - else

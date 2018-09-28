@@ -1,6 +1,6 @@
 <body id="audition-form-body">
 <%= form_for :team_switch_request, :url => team_switch_form_path, :html => {:class => "audition-form"} do |f| %>
-	<h2>AFX TEAM SWITCH FORM</h2>
+	<h2>AFX TEAM SWITCH/DROP FORM</h2>
 	<% if @request.errors.any? %>
 		<% @request.errors.full_messages.each do |message| %>
 			<div style="color: red"> <li><%= message %></li>  </div>
@@ -9,30 +9,32 @@
 
 	<div class="times">
 
+	<% if false %>
+
   <p>Welcome to AFXsi 2018, AFX's 2018 Summer Intensive Program!
 
   <p>Thank you for dancing with AFXsi 2018! Our team switch/drop form has now closed. If you have any personal concerns, please discuss with your current team's directors. Otherwise, please email any further questions to afxdanceviceexecutive@gmail.com. We hope you have a great summer!</p>
 
-  <% if false %>
+  <% else %>
+	<p>Welcome to AFX Fall 2018!
 
-  <p>If you are viewing this form, it means that you are unable to participate on the project or training team that you were initially placed onto due to a time conflict. To drop AFX entirely, see the last question.
+  <p>If you are viewing this form, it means that you are UNABLE to participate on the PROJECT or TRAINING team that you were initially placed onto due to a time conflict. You will also be able to DROP from AFX Project/Training this fall using this form.
+	<p>[DEADLINE FOR SUBMISSION: FRIDAY, 9/14/2018  @ 11:59 PM.]
+	<br>No exceptions.
 
-  <p>[DEADLINE FOR SUBMISSION: INDEPENDENCE DAY - WEDNESDAY, JULY 4TH, 2018  @11:59 PM.]
-  <br>No exceptions.
+  <p>***NOTE***: This form is ONLY for switching between AFX Fall 2018 Project and Training teams or to drop from dancing on an AFX Fall 2018 Project or Training team altogether. If you are on the AFX Fall 2018 Competitive Team, the drop deadline and process is separate and does NOT use this form. We urge you to refer to your syllabus for all procedures and to contact your Comp Team representatives for all personal Comp Team matters. Thank you!
+  <p>If you have any urgent questions, comments, or concerns, please email [afxdanceviceexecutive@gmail.com] ASAP! We will do our best to respond within 24 hours of receiving your email.
+  <br>
+	<br>
 
-  <p>***NOTE***: This form is ONLY for switching between AFXsi 2018 Project and Training teams or to drop from dancing on an AFXsi 2018 Project or Training team altogether. If you are on AFXsi 2018 Dance Camp, the drop deadline and process is separate and does NOT use this form. We urge you to refer to your syllabus for all procedures and to contact your Dance Camp Captains and Artistics for all personal Dance Camp matters. Thank you!
-
-  <p>If you have any urgent questions, comments, or concerns, please email afxdanceviceexecutive@gmail.com immediately.
-
-	<%= f.text_field :name, required: true, placeholder: "Name" %><br>
+	<%= f.text_field :name, required: true, placeholder: "Name: FIRST and LAST" %><br>
 	<%= f.text_field :email, required: true, placeholder: "Email" %><br>
-	<%= f.text_field :phone, required: true, placeholder: "Phone XXX-XXX-XXXX" %><br>
-
+	<%= f.text_field :phone, required: true, placeholder: "Phone XXX-XXX-XXXX" %>
 
   <br>
-	<p>PROJECT TEAMS: Please select the practice time you can attend. *NOTE: Fill out the form ASAP. The directors of the project team you are trying to switch into will receive your request and can choose to accept or reject your request to switch into their team. [You may only answer this if you are currently on a project team.]
-
-  <p>If you are currently on a Project team and cannot make either team's practice time but you would like to be a part of one of our Training teams, please check whichever Training team practice team times you can make. However, if you would like to remain on a Project team, please ONLY check the other Project team's time. DO NOT check both Project and Training team time boxes. We process each request separately.
+	<p>PROJECT TEAM SWITCH
+  <p>[You may only answer this if you are currently on a project team.]
+	<p>If you would like to remain on a Project team, please select the other Project team's time here:
 
   <%= f.collection_check_boxes(
         :available_team_ids,
@@ -51,10 +53,14 @@
     </label></div>
   <% end %>
 
-
+	<p>If you would like to LEAVE your project team for a training team, please continue to the Training Team Switch section. However, you may NOT select BOTH a Project time (above) and Training team times (below). We process EACH request separately.
+	<p>If you do not follow this instruction, we will reject your team switch request and ask you to fill out another one.
 
   <br>
-	<p>TRAINING TEAMS: Please select ALL practice times you can attend. Please select at least TWO OPTIONS or you risk having your request rejected. [If there are any questions or concerns please send us an email at afxdanceviceexecutive@gmail.com.]
+	<br>
+	<p>TRAINING TEAM SWITCH
+
+  <p>Please select ALL practice times (AT LEAST TWO) that you can attend. If you do not select at least two, you risk having your request rejected. [If there are any questions or concerns please send us an email at afxdanceviceexecutive@gmail.com.]
 
   <%= f.collection_check_boxes(
         :available_team_ids,
@@ -73,10 +79,14 @@
     </label></div>
   <% end %>
 
-
   <br>
-  <p>ONLY ANSWER THIS QUESTION IF YOU WISH TO DROP FROM AFX PROJECT/TRAINING THIS SUMMER.
-  <p>We are sad to see you go, but we would love to have you attend any of our open workshops, our 7th Annual Dance Weekend in July, our Summer Showcase in August, and auditions in the Fall!
+	<p>REASON
+	<p>What is your current time conflict? Please be as specific as possible in explaining what class, activity, work, etc. makes it so that you are unable to participate on your current team.</p>
+	<%= f.text_area :reason, required: true, placeholder: "Reason" %>
+
+	<br>
+	<p>DROP TEAM
+  <p>ONLY ANSWER THIS QUESTION IF YOU WISH TO DROP FROM AFX PROJECT/TRAINING THIS FALL.
 
   <%= f.collection_check_boxes(
         :available_team_ids,
@@ -90,18 +100,17 @@
       <%= option.object.practice_time %>
     </label></div>
   <% end %>
+	<br>
+	<hr>
+	<br>
+	<p>We urge you to PLEASE double-check all of your contact information and answers as inputting incorrect information may lead to an unattended request, a rejected request, or a drop from AFX. Have you reviewed all of your responses carefully?
 
-  <br>
-  <br>
-  <br>
+	<p>
+		<%= f.check_box(:double_check, {})%>
+		<label>Yes</label>
+	</p>
 
-  <p>What is your current time conflict? Please be as specific as possible in explaining what class, activity, work, etc. makes it so that you are unable to participate on your current team.</p>
-  <%= f.text_area :reason, required: true, placeholder: "Reason" %>
-
-
-  <p>We urge you to PLEASE double-check all of your contact information and answers as inputting incorrect information may lead to an unattended request, a rejected request, or a drop from AFX.
-  <p>You will receive an email once your team switch or drop request has been successfully processed. Please check your spam in case the email is delivered there. All notices are delivered ONLY from afxdanceviceexecutive@gmail.com. Thank you for your patience!
-
+  <p>You will receive an email once your team switch or drop request has been successfully processed. Please check your spam in case the email is delivered there. All notices and results are delivered ONLY from afxdanceviceexecutive@gmail.com. Thank you for your patience!
 
 	<div class = "submit">
     <%= f.submit "Submit team switch request", class: "availability-form-submit" %>
