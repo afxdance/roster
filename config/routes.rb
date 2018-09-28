@@ -14,4 +14,7 @@ Rails.application.routes.draw do
 
   get "/audition/:id/edit", to: "audition#edit"
   put "/audition/:id/edit", to: "audition#update"
+
+  get "/teamswitch", to: "team_switch_form#index"
+  post "/teamswitch", to: "team_switch_form#create_team_switch_request", as: "team_switch_form"
 end

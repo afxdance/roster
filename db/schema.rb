@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180314023526) do
+ActiveRecord::Schema.define(version: 20180629155626) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -27,15 +27,15 @@ ActiveRecord::Schema.define(version: 20180314023526) do
   end
 
   create_table "dancers", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "email", null: false
-    t.string "phone", null: false
-    t.string "gender", null: false
-    t.string "year", null: false
-    t.string "dance_experience", null: false
-    t.string "exp_interest", null: false
-    t.string "tech_interest", null: false
-    t.string "camp_interest", null: false
+    t.string "name"
+    t.string "email"
+    t.string "phone"
+    t.string "gender"
+    t.string "year"
+    t.string "dance_experience"
+    t.string "exp_interest"
+    t.string "tech_interest"
+    t.string "camp_interest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -45,17 +45,18 @@ ActiveRecord::Schema.define(version: 20180314023526) do
     t.integer "team_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "reason"
     t.index ["dancer_id", "team_id"], name: "index_dancers_teams_on_dancer_id_and_team_id"
     t.index ["team_id", "dancer_id"], name: "index_dancers_teams_on_team_id_and_dancer_id"
   end
 
   create_table "team_switch_requests", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "email", null: false
-    t.string "phone", null: false
-    t.text "reason", null: false
-    t.datetime "approved_at", null: false
-    t.string "status", null: false
+    t.string "name"
+    t.string "email"
+    t.string "phone"
+    t.text "reason"
+    t.datetime "approved_at"
+    t.string "status"
     t.integer "old_team_id"
     t.integer "new_team_id"
     t.integer "dancer_id"
@@ -76,10 +77,10 @@ ActiveRecord::Schema.define(version: 20180314023526) do
   end
 
   create_table "teams", force: :cascade do |t|
-    t.string "level", null: false
-    t.string "name", null: false
-    t.string "practice_time", null: false
-    t.boolean "locked", null: false
+    t.string "level"
+    t.string "name"
+    t.string "practice_time"
+    t.boolean "locked"
     t.integer "maximum_picks"
     t.integer "user_id"
     t.datetime "created_at", null: false

@@ -260,3 +260,15 @@ Style/WordArray:
 #
 # Style/YodaCondition:
 #   Enabled: true
+
+
+# Rules we're turning off for now:
+
+Style/MultilineTernaryOperator:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
