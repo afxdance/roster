@@ -104,14 +104,14 @@ ActiveAdmin.register TeamSwitchRequest do
         return
       end
 
-      # and that the team the dancer is on is not drop
-      if dancer.teams.first&.level == Team::DROP
-        redirect_to :back, alert: "Dancer was already dropped. Edit the team switch request manually if you're sure you want to re-add them to AFX."
-        return
-      end
+      # # and that the team the dancer is on is not drop
+      # if dancer.teams.first&.level == Team::DROP
+      #   redirect_to :back, alert: "Dancer was already dropped. Edit the team switch request manually if you're sure you want to re-add them to AFX."
+      #   return
+      # end
 
       # 2. Check that the person's team is still the request's old team
-      if team_switch_request.old_team != dancer.teams.first
+      if team_switch_request.old_team != dancer.teams.first && dancer.teams.first&.level != Team::DROP
         redirect_to :back, alert:
           "The dancer isn't on the team they were on when they submitted that form. " \
           "When they submitted the request, they were on: #{team_switch_request.old_team&.name}. " \
