@@ -119,10 +119,7 @@ ActiveAdmin.register TeamSwitchRequest do
         return
       end
 
-      dropped = dancer.teams.first&.level == Team::DROP
-
       old_team = team_switch_request.old_team
-
 
       # 4. Check that we're not switching a training team dancer into a project team
       if old_team&.level != Team::PROJECT && new_team&.level == Team::PROJECT
@@ -136,7 +133,7 @@ ActiveAdmin.register TeamSwitchRequest do
         DancerTeam.where(dancer: dancer, team: old_team).delete_all
 
         # 3aa. Remove the dancer from the drop team if needed
-        if dropped?
+        if dancer.teams.first&.level == Team::DROP
           DancerTeam.where(dancer: dancer, team: dancer.teams.first).delete_all
         end
 
