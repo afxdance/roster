@@ -116,10 +116,13 @@ ActiveAdmin.register TeamSwitchRequest do
           "The dancer isn't on the team they were on when they submitted that form. " \
           "When they submitted the request, they were on: #{team_switch_request.old_team&.name}. " \
           "Now they are on: #{dancer.teams.first&.name}."
-
         return
       end
+
+      dropped = dancer.teams.first&.level == Team::DROP
+
       old_team = team_switch_request.old_team
+
 
       # 4. Check that we're not switching a training team dancer into a project team
       if old_team&.level != Team::PROJECT && new_team&.level == Team::PROJECT
@@ -131,6 +134,11 @@ ActiveAdmin.register TeamSwitchRequest do
       DancerTeam.transaction do
         # 3a. Remove the dancer from the old team
         DancerTeam.where(dancer: dancer, team: old_team).delete_all
+
+        # 3aa. Remove the dancer from the drop team if needed
+        if dropped?
+          DancerTeam.where(dancer: dancer, team: dancer.teams.first).delete_all
+        end
 
         # 3b. Switch the dancer onto the new team, but do it by making a new DancerTeam with reason "team switch form"
         DancerTeam.create!(dancer: dancer, team: new_team, reason: "Team switch")
