@@ -117,8 +117,6 @@ ActiveAdmin.register Team do
     dancer_id = params[:dancer_id]
     drop_dancer_from_team(dancer_id, team_id)
 
-    display = team.dancers.length < max_size
-
   end
 
   controller do
