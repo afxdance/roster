@@ -16,7 +16,7 @@ ActiveAdmin.register User do
     column "Teams" do |user|
       user.teams.map do |team|
         link_to team.name, admin_team_path(team)
-      end
+      end.join(", ").html_safe
     end
     actions
   end

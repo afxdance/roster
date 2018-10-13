@@ -10,13 +10,6 @@
           Your audition number is still
           %b= @dancer.id
           \.
-    %hr/
-    #audition-form-affirmation
-      %center
-        Here's what we got from you:
-      = render partial: "audition/fields", locals: {f: nil}
 
   %br/
-  %center= link_to "BACK TO FORM", audition_path, style: "color: white"
-  %br/
-  %center= link_to "EDIT INFO", {id: @dancer.id, action: "edit"}, style: "color: white"
+  %center= link_to "BACK TO FORM", audition_path, style: "color: white; font-size: 18px;"
