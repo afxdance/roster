@@ -25,7 +25,6 @@ ActiveAdmin.register Team do
       # Necessary in order to properly link users and teams
       user_ids: [],
 
-
     ].compact
   end
 
@@ -116,7 +115,6 @@ ActiveAdmin.register Team do
     team_id = params[:id]
     dancer_id = params[:dancer_id]
     drop_dancer_from_team(dancer_id, team_id)
-
   end
 
   controller do
