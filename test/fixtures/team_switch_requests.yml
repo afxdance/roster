@@ -1,17 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  email: MyString
-  phone: MyString
-  reason: MyText
-  approved_at: 2018-03-13 19:35:42
-  status: MyString
+  name: one one
+  email: 123@123.com
+  phone: 123-456-7890
+  reason: hella bad
+  approved_at: 2018-10-13 19:35:42
+  status: nil
 
 two:
-  name: MyString
-  email: MyString
-  phone: MyString
-  reason: MyText
-  approved_at: 2018-03-13 19:35:42
-  status: MyString
+  name: two             two
+  email: 123@123.com
+  phone: 123-456-7890
+  reason: hella bad
+  approved_at: 2018-11-13 19:35:42
+  status: nil

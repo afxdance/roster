@@ -1,12 +1,23 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  email: MyString
-  phone: MyString
-  reason: MyString
-  approved_at: MyString
-  status: MyString
-  gender: MyString
-  year: MyString
-  experience: MyString
+  name: one one
+  email: 123@123.com
+  phone: 123-456-7890
+  reason: nil
+  approved_at: nil
+  status: nil
+  gender: nil
+  year: nil
+  experience: nil
+
+two:
+  name: two two
+  email: 123@123.com
+  phone: 123-456-7890
+  reason: nil
+  approved_at: nil
+  status: nil
+  gender: nil
+  year: nil
+  experience: nil
