@@ -9,7 +9,7 @@
       Full Name
     %td
       - if f
-        = f.text_field(:name, required: true, pattern: Dancer::NAME_PATTERN)
+        = f.text_field(:name, required: true, pattern: Dancer::NAME_PATTERN, id: "Full Name")
       - else
         = @dancer.name
 
@@ -18,7 +18,7 @@
       Email
     %td
       - if f
-        = f.text_field(:email, required: true, pattern: Dancer::EMAIL_PATTERN)
+        = f.text_field(:email, required: true, pattern: Dancer::EMAIL_PATTERN, id: "Email")
       - else
         = @dancer.email
 
@@ -27,7 +27,7 @@
       Phone
     %td
       - if f
-        = f.text_field(:phone, required: true, pattern: Dancer::PHONE_PATTERN)
+        = f.text_field(:phone, required: true, pattern: Dancer::PHONE_PATTERN, id: "Phone")
         %small
           Must follow this format: ###-###-####
       - else
@@ -38,7 +38,7 @@
       Gender
     %td
       - if f
-        = f.select(:gender, options_for_select(Dancer::GENDER_VALUES.invert, @dancer.gender), {include_blank: ""}, {required: true})
+        = f.select(:gender, options_for_select(Dancer::GENDER_VALUES.invert, @dancer.gender), {include_blank: ""}, {required: true, id: "Gender"})
         %small
           This information is used to ensure teams are balanced, diverse, and inclusive. The form is processed by an algorithm and your response will not be seen beyond executive board.
       - else
@@ -49,7 +49,7 @@
       Year
     %td
       - if f
-        = f.select(:year, options_for_select(Dancer::YEAR_VALUES.invert, @dancer.year), {include_blank: ""}, {required: true})
+        = f.select(:year, options_for_select(Dancer::YEAR_VALUES.invert, @dancer.year), {include_blank: ""}, {required: true, id: "Year"})
       - else
         = Dancer::YEAR_VALUES[@dancer.year]
 
@@ -58,7 +58,7 @@
       Prior Dance Experience
     %td
       - if f
-        = f.select(:dance_experience, options_for_select(Dancer::DANCE_EXPERIENCE_VALUES.invert, @dancer.dance_experience), {include_blank: ""}, {required: true})
+        = f.select(:dance_experience, options_for_select(Dancer::DANCE_EXPERIENCE_VALUES.invert, @dancer.dance_experience), {include_blank: ""}, {required: true, id: "Prior Dance Experience"})
       - else
         = Dancer::DANCE_EXPERIENCE_VALUES[@dancer.dance_experience]
 
@@ -68,7 +68,7 @@
         Dance Camp Interest
       %td
         - if f
-          = f.select(:camp_interest, options_for_select(Dancer::BOOLEAN_OPTION_VALUES.invert, @dancer.camp_interest), {include_blank: ""}, {required: true})
+          = f.select(:camp_interest, options_for_select(Dancer::BOOLEAN_OPTION_VALUES.invert, @dancer.camp_interest), {include_blank: ""}, {required: true, id: "Dance Camp Interest"})
           %small
             Are you interested in AFXsi Dance Camp?
             %br
@@ -84,7 +84,7 @@
         EXP Interest
       %td
         - if f
-          = f.select(:exp_interest, options_for_select(Dancer::BOOLEAN_OPTION_VALUES.invert, @dancer.exp_interest), {include_blank: ""}, {required: true})
+          = f.select(:exp_interest, options_for_select(Dancer::BOOLEAN_OPTION_VALUES.invert, @dancer.exp_interest), {include_blank: ""}, {required: true, id: "EXP Interest"})
           %small
             Are you interested in EXP? EXP is a dance organization partnered with AFX that focuses on dancer growth and the exploration of movement through fundamentals and freestyle training! Please indicate interest to receive more information via email!
         - else
@@ -98,7 +98,7 @@
         AFX Tech Interest
       %td
         - if f
-          = f.select(:tech_interest, options_for_select(Dancer::BOOLEAN_OPTION_VALUES.invert, @dancer.tech_interest), {include_blank: ""}, {required: true})
+          = f.select(:tech_interest, options_for_select(Dancer::BOOLEAN_OPTION_VALUES.invert, @dancer.tech_interest), {include_blank: ""}, {required: true, id: "AFX Tech Interest"})
           %small
             Are you interested in AFX Tech? AFX Tech is a project-based technical organization that contributes to the Berkeley Dance Community through a variety of outlets, from front-end web development/design to back-end algorithmic programming.
         - else
