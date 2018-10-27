@@ -61,6 +61,7 @@ group :development, :test do
   gem "capybara", "~> 2.13", require: false
   gem "selenium-webdriver", require: false
 
+
   ##############################
   # Place all added gems below #
   ##############################
@@ -72,6 +73,12 @@ group :development, :test do
   gem "pry-rails", require: true
   gem "rubocop", require: false
   gem "sqlite3", require: false
+end
+
+group :test do
+  gem 'cucumber-rails', require: false
+  # database_cleaner is not required, but highly recommended
+  gem 'database_cleaner'
 end
 
 group :development do
