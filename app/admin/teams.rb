@@ -20,8 +20,11 @@ ActiveAdmin.register Team do
       :locked,
       :maximum_picks,
       :level,
+      :display,
+      :max_size,
       # Necessary in order to properly link users and teams
       user_ids: [],
+
     ].compact
   end
 
@@ -40,6 +43,8 @@ ActiveAdmin.register Team do
               ].join("<br>").html_safe
       f.input :locked
       f.input :maximum_picks
+      f.input :display
+      f.input :max_size
     end
     f.actions
   end
@@ -50,6 +55,8 @@ ActiveAdmin.register Team do
     column :level
     column :practice_time
     column :locked
+    column :display
+    column :max_size
     column :maximum_picks
     # Allows us to view the Users that are connected to the team
     column "User" do |team|

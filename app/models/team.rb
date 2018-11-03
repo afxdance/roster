@@ -80,6 +80,10 @@ class Team < ApplicationRecord
   #   update(locked: !locked)
   # end
 
+  # def toggle_display
+  #   update(display: !display)
+  # end
+
   def dancers_with_added_at_added_reason
     dancers
       .joins(:dancers_teams)
@@ -108,6 +112,8 @@ class Team < ApplicationRecord
     # Actually add the dancers to this team
     dancers.push(*added)
 
+    update(display: (dancers.length < max_size))
+
     return {
       added: added,
       already_in_this_team: already_in_this_team,
@@ -129,6 +135,8 @@ class Team < ApplicationRecord
 
     # Actually remove the dancers from this team
     dancers.delete(*removed)
+
+    update(display: (dancers.length < max_size))
 
     return {
       removed: removed,
