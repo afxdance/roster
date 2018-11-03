@@ -1,19 +1,14 @@
 Given(/the following (.*) exist:$/) do |type, table|
+  # For example, dancers => Dancer
+  klass = Object.const_get(type.singularize.camelcase)
   table.hashes.each do |element|
-    if type == "dancers" then Dancer.create!(element)
-    end
-    if type == "admins" then AdminUser.create!(element)
-    end
-    if type == "casting_groups" then CastingGroup.create!(element)
-    end
-    if type == "teams" then Team.create(element)
-    end
+    klass.create!(element)
   end
 end
 
 Given(/^I am logged into the admin panel$/) do
   visit "/admin/login"
-  fill_in "Email", with: "admin"
+  fill_in "Email", with: "admin@example.com"
   fill_in "Password", with: "password"
   click_button "Login"
   if page.respond_to? :should
@@ -23,21 +18,9 @@ Given(/^I am logged into the admin panel$/) do
   end
 end
 
-Given(/I log in as "(.*?)" with password "(.*?)"$/) do |email, pass|
+Given(/I log in as "(.*?)" with password "(.*?)"$/) do |username, pass|
   visit "/admin/login"
-  fill_in "admin_user[email]", with: email
-  fill_in "admin_user[password]", with: pass
+  fill_in "user[username]", with: username
+  fill_in "user[password]", with: pass
   click_button "Login"
-end
-
-Given(/^(?:|I )am on (.+)$/) do |page_name|
-  visit path_to(page_name)
-end
-
-Then("I should see {string}") do |string|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Then("I should be on the Admin Page") do
-  pending # Write code here that turns the phrase above into concrete actions
 end
