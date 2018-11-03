@@ -14,6 +14,11 @@ User.create!(username: "admin",
              password: "password",
              password_confirmation: "password")
 
+User.create!(username: "young cai",
+             password: "password123",
+             password_confirmation: "password123",
+             role: "director")
+
 Dancer.create!(name: "Peter Le",
                email: "peter@peter.peter",
                phone: "pet-erp-eter",

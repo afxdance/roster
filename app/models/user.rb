@@ -34,11 +34,11 @@ class User < ApplicationRecord
   end
 
   def can_modify_users?
-    true
+    board_privileges?
   end
 
   def can_create_dancer?
-    true
+    board_privileges?
   end
 
   def can_modify_next_dancer_id?
@@ -71,5 +71,21 @@ class User < ApplicationRecord
 
   def can_do_randomization?
     true
+  end
+
+  def can_view_team_switch?
+    if director?
+      false
+    else
+      true
+    end
+  end
+
+  def can_view_users?
+    if director?
+      false
+    else
+      true
+    end
   end
 end

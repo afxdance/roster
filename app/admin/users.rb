@@ -1,4 +1,5 @@
 ActiveAdmin.register User do
+  scope_to :current_user, if: proc { current_user.can_view_users? }
   permit_params(
     :username,
     :password,
@@ -10,7 +11,7 @@ ActiveAdmin.register User do
     selectable_column
     id_column
     column :username
-    column :current_sign_in_at
+    column :curent_sign_in_at
     column :sign_in_count
     column :created_at
     column "Teams" do |user|
@@ -18,13 +19,16 @@ ActiveAdmin.register User do
         link_to team.name, admin_team_path(team)
       end.join(", ").html_safe
     end
+    column :role
     actions
+
   end
 
   filter :username
   filter :current_sign_in_at
   filter :sign_in_count
   filter :created_at
+  filter :role
 
   form do |f|
     f.inputs do
