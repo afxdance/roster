@@ -37,7 +37,7 @@ class TeamSwitchFormController < ApplicationController
 
   # Returns a dancer if name and a contact point (phone OR email) has been filled out properly
   def find_dancer(name, phone, email)
-    for dancer in Dancer.where("lower(name) = ?", name.downcase)
+    for dancer in Dancer.where("replace(lower(name), ' ', '') = ?", name.downcase.delete(" "))
       if phone == dancer.phone || email == dancer.email
         return dancer
       end
