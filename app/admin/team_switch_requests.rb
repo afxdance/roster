@@ -104,21 +104,15 @@ ActiveAdmin.register TeamSwitchRequest do
         return
       end
 
-      # and that the team the dancer is on is not drop
-      if dancer.teams.first&.level == Team::DROP
-        redirect_to :back, alert: "Dancer was already dropped. Edit the team switch request manually if you're sure you want to re-add them to AFX."
-        return
-      end
-
       # 2. Check that the person's team is still the request's old team
-      if team_switch_request.old_team != dancer.teams.first
+      if team_switch_request.old_team != dancer.teams.first && dancer.teams.first&.level != Team::DROP
         redirect_to :back, alert:
           "The dancer isn't on the team they were on when they submitted that form. " \
           "When they submitted the request, they were on: #{team_switch_request.old_team&.name}. " \
           "Now they are on: #{dancer.teams.first&.name}."
-
         return
       end
+
       old_team = team_switch_request.old_team
 
       # 4. Check that we're not switching a training team dancer into a project team
@@ -132,10 +126,13 @@ ActiveAdmin.register TeamSwitchRequest do
         # 3a. Remove the dancer from the old team
         DancerTeam.where(dancer: dancer, team: old_team).delete_all
 
-        # 3b. Switch the dancer onto the new team, but do it by making a new DancerTeam with reason "team switch form"
+        # 3b. Remove the dancer from the drop team if needed
+        DancerTeam.where(dancer: dancer, team: dancer.teams.where(level: Team::DROP)).delete_all
+
+        # 3c. Switch the dancer onto the new team, but do it by making a new DancerTeam with reason "team switch form"
         DancerTeam.create!(dancer: dancer, team: new_team, reason: "Team switch")
 
-        # 3c. Set the new team, approved time, and status of the request
+        # 3d. Set the new team, approved time, and status of the request
         team_switch_request.update(
           new_team: new_team,
           approved_at: Time.now,
