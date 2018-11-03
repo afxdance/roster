@@ -4,8 +4,8 @@ ActiveAdmin.register User do
     :username,
     :password,
     :password_confirmation,
+    :role,
     team_ids: [], # Necessary in order to properly link users and teams
-    role: [],
   )
 
   index do
