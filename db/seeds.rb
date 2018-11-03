@@ -12,7 +12,8 @@ dancer_extra_fields = { exp_interest: "not important rn",
 
 User.create!(username: "admin",
              password: "password",
-             password_confirmation: "password")
+             password_confirmation: "password",
+             role: "admin")
 
 User.create!(username: "young cai",
              password: "password123",
