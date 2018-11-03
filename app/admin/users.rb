@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  scope_to :current_user, if: proc { current_user.can_view_users? }
+  scope_to :current_user, unless: proc { current_user.can_view_users? }
   permit_params(
     :username,
     :password,

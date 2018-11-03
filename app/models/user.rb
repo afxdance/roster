@@ -75,17 +75,17 @@ class User < ApplicationRecord
 
   def can_view_team_switch?
     if director?
-      true
-    else
       false
+    else
+      true
     end
   end
 
   def can_view_users?
     if director?
-      true
-    else
       false
+    else
+      true
     end
   end
 end
