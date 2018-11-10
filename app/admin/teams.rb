@@ -11,6 +11,7 @@ ActiveAdmin.register Team do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
+  scope_to: current_user
 
   permit_params do
     [

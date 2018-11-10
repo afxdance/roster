@@ -1,12 +1,34 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  email: MyString
-  phone: MyString
-  reason: MyString
-  approved_at: MyString
-  status: MyString
-  gender: MyString
-  year: MyString
-  experience: MyString
+howard:
+  name: Howard Wang
+  email: howard.wang@berkeley.edu
+  phone: 999999999
+  gender: male
+  year: freshman
+  dance_experience: none
+
+young:
+  name: Young Cai
+  email: youngcai@berkeley.edu
+  phone: 5103889830
+  gender: male
+  year: junior
+  dance_experience: some
+
+
+patricia:
+  name: Patricia Yu
+  email: patriciayu7@berkeley.edu
+  phone: 510-505-4813
+  gender: female
+  year: sophomore
+  dance_experience: much
+
+jeffrey:
+  name: Jeffrey Chen
+  email: jeffreydchen@berkeley.edu
+  phone: 732-640-3705
+  gender: male
+  year: junior
+  dance_experience: two
