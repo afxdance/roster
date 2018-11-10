@@ -22,7 +22,6 @@ ActiveAdmin.register User do
       end.join(", ").html_safe
     end
     actions
-
   end
 
   filter :username
