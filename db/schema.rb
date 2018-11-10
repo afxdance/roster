@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181020191320) do
+ActiveRecord::Schema.define(version: 20181103192805) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -50,6 +50,9 @@ ActiveRecord::Schema.define(version: 20181020191320) do
     t.index ["team_id", "dancer_id"], name: "index_dancers_teams_on_team_id_and_dancer_id"
   end
 
+  create_table "director_users", force: :cascade do |t|
+  end
+
   create_table "team_switch_requests", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -85,6 +88,8 @@ ActiveRecord::Schema.define(version: 20181020191320) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "display", default: true
+    t.integer "max_size", default: 2
     t.index ["user_id"], name: "index_teams_on_user_id"
   end
 
