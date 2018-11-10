@@ -1,7 +1,6 @@
 require "test_helper"
 
 class DancerTest < ActiveSupport::TestCase
-
   test "dancers added" do
     assert_equal 2, Dancer.count
   end
@@ -43,16 +42,16 @@ class DancerTest < ActiveSupport::TestCase
   end
 
   test "Patricia's phone number" do
-    assert_equal '510-505-4813', dancers(:patricia).phone
+    assert_equal "510-505-4813", dancers(:patricia).phone
   end
 
- test "Patricia's email" do
-    email = 'patriciayu7@berkeley.edu'
+  test "Patricia's email" do
+    email = "patriciayu7@berkeley.edu"
     assert_equal email, dancers(:patricia).email
   end
 
   test "Patricia's experience" do
-    #should fail
-    assert_equal 'some', dancers(:patricia).dance_experience
+    # should fail
+    assert_equal "some", dancers(:patricia).dance_experience
   end
 end
