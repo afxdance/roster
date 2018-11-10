@@ -74,7 +74,7 @@ class User < ApplicationRecord
   end
 
   def can_view_team_switch?
-    if director?
+    if admin?
       false
     else
       true
@@ -82,7 +82,7 @@ class User < ApplicationRecord
   end
 
   def can_view_users?
-    if director?
+    if admin?
       false
     else
       true

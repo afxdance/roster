@@ -1,5 +1,5 @@
 ActiveAdmin.register TeamSwitchRequest do
-  scope_to :current_user, if: proc{ current_user.can_view_team_switch? }
+  scope_to :current_user, unless: proc{ current_user.can_view_team_switch? }
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
