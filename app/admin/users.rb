@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  scope_to :current_user, if: proc { current_user.can_view_users? }
+  scope_to :current_user, unless: proc { current_user.can_view_users? }
   permit_params(
     :username,
     :password,
@@ -36,6 +36,7 @@ ActiveAdmin.register User do
       f.input :password
       f.input :password_confirmation
       # Creates the selection menu so the user can choose a team
+
       f.input :teams, collection: Team.all.map { |team| [team.name, team.id] }
     end
     f.actions
