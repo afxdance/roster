@@ -58,10 +58,8 @@ ActiveAdmin.register TeamSwitchRequest do
     process_team_switch_request_into_team(team_switch_request_id, team_id)
   end
 
-
   controller do
-
-    #checks if user can view the team switch requests page
+    # checks if user can view the team switch requests page
     def role_check
       if !current_user.can_view_team_switch?
         redirect_to :back, alert: "You can't view the team switch requests page!!! >:( uwu"
@@ -156,9 +154,6 @@ ActiveAdmin.register TeamSwitchRequest do
   end
 
   index do
-    #if !current_user.can_view_team_switch?
-   #   redirect_to :back, alert: "Not allowed to view this"
-    #end
     selectable_column
     # https://github.com/activeadmin/activeadmin/issues/1995#issuecomment-15846811
     TeamSwitchRequest.content_columns.each { |col| column col.name.to_sym }
