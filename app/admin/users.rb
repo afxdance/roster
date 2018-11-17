@@ -36,7 +36,6 @@ ActiveAdmin.register User do
       f.input :password
       f.input :password_confirmation
       # Creates the selection menu so the user can choose a team
-
       f.input :teams, collection: Team.all.map { |team| [team.name, team.id] }
       f.input :role, as: :select, collection: User.roles.keys, include_blank: false, allow_blank: false
     end
