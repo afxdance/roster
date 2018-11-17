@@ -5,9 +5,13 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
+  id: 1
   role: director
+  username: user1
 # column: value
 #
 two:
+  id: 2
   role: admin
+  username: user2
 # column: value
