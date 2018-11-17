@@ -1,5 +1,6 @@
 ActiveAdmin.register TeamSwitchRequest do
-  scope_to :current_user, unless: proc{ current_user.can_view_team_switch? }
+  #scope_to :current_user, unless: proc{ current_user.can_view_team_switch? }
+  #rescue_from Admin::NoMethodError, with: :deny_access
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
@@ -12,6 +13,8 @@ ActiveAdmin.register TeamSwitchRequest do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
+
+  before_action :role_check
 
   permit_params do
     [
@@ -57,7 +60,16 @@ ActiveAdmin.register TeamSwitchRequest do
     process_team_switch_request_into_team(team_switch_request_id, team_id)
   end
 
+
   controller do
+
+    def role_check
+      if !current_user.can_view_team_switch?
+        redirect_to :back, alert: "You can't view the team switch requests page!!! >:( uwu"
+        return
+      end
+    end
+
     def action_methods
       if current_user.can_modify_all_teams?
         super
@@ -145,6 +157,9 @@ ActiveAdmin.register TeamSwitchRequest do
   end
 
   index do
+    #if !current_user.can_view_team_switch?
+   #   redirect_to :back, alert: "Not allowed to view this"
+    #end
     selectable_column
     # https://github.com/activeadmin/activeadmin/issues/1995#issuecomment-15846811
     TeamSwitchRequest.content_columns.each { |col| column col.name.to_sym }
