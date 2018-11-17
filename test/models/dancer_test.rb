@@ -2,11 +2,11 @@ require "test_helper"
 
 class DancerTest < ActiveSupport::TestCase
   test "dancers added" do
-    assert_equal 2, Dancer.count
+    assert_equal 4, Dancer.count
   end
 
   test "Howard's phone number" do
-    assert_equal "999999999", dancers(:howard).phone
+    assert_equal "999-999-9999", dancers(:howard).phone
   end
 
   test "Howard's year" do
@@ -17,8 +17,8 @@ class DancerTest < ActiveSupport::TestCase
     assert_equal "some", dancers(:howard).dance_experience
   end
 
-  test "are there 5 dancers added" do
-    assert_equal 5, Dancer.count
+  test "are there 4 dancers added" do
+    assert_equal 4, Dancer.count
   end
 
   test "young's gender" do
@@ -38,7 +38,7 @@ class DancerTest < ActiveSupport::TestCase
   end
 
   test "Jeffrey's phone" do
-    assert_equal "7326403705", dancers(:jeffrey).phone
+    assert_equal "732-640-3705", dancers(:jeffrey).phone
   end
 
   test "Patricia's phone number" do

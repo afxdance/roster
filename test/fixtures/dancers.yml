@@ -4,16 +4,16 @@ howard:
   id: 1
   name: Howard Wang
   email: howard.wang@berkeley.edu
-  phone: 999999999
+  phone: 999-999-9999
   gender: male
-  year: freshman
-  dance_experience: none
+  year: sophomore
+  dance_experience: some
 
 young:
   id: 2
   name: Young Cai
   email: youngcai@berkeley.edu
-  phone: 5103889830
+  phone: 510-388-9830
   gender: male
   year: junior
   dance_experience: some
@@ -26,7 +26,7 @@ patricia:
   phone: 510-505-4813
   gender: female
   year: sophomore
-  dance_experience: much
+  dance_experience: some
 
 jeffrey:
   id: 4
