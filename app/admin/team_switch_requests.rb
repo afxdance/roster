@@ -1,6 +1,4 @@
 ActiveAdmin.register TeamSwitchRequest do
-  #scope_to :current_user, unless: proc{ current_user.can_view_team_switch? }
-  #rescue_from Admin::NoMethodError, with: :deny_access
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
@@ -63,6 +61,7 @@ ActiveAdmin.register TeamSwitchRequest do
 
   controller do
 
+    #checks if user can view the team switch requests page
     def role_check
       if !current_user.can_view_team_switch?
         redirect_to :back, alert: "You can't view the team switch requests page!!! >:( uwu"
