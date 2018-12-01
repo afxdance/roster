@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  scope_to :current_user, if: proc { current_user.can_view_users? }
+  before_action :role_check
   permit_params(
     :username,
     :password,
@@ -7,6 +7,16 @@ ActiveAdmin.register User do
     :role,
     team_ids: [], # Necessary in order to properly link users and teams
   )
+
+  controller do
+    # checks if user can view the team switch requests page
+    def role_check
+      if !current_user.can_view_users?
+        redirect_to "/admin", alert: "You can't view the users page!!! >:( uwu"
+        return
+      end
+    end
+  end
 
   index do
     selectable_column
