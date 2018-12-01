@@ -1,7 +1,7 @@
 class TeamSwitchRequest < ApplicationRecord
   # https://blog.bigbinary.com/2016/02/15/rails-5-makes-belong-to-association-required-by-default.html
   ActiveAdmin.register TeamSwitchRequest do
-    menu :if => proc{ current_user.admin? }
+    menu if: proc { current_user.admin? }
   end
 
   belongs_to :dancer, optional: true
