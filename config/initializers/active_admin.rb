@@ -231,6 +231,9 @@ ActiveAdmin.setup do |config|
   #     end
   #   end
 
+
+
+
   # == Download Links
   #
   # You can disable download links on resource listing pages,
@@ -292,4 +295,5 @@ ActiveAdmin.setup do |config|
   # You can inherit it with own class and inject it for all resources
   #
   # config.order_clause = MyOrderClause
+
 end
