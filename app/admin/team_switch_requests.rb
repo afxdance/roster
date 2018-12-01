@@ -151,11 +151,9 @@ ActiveAdmin.register TeamSwitchRequest do
   end
 
   index do
-
     selectable_column
     # https://github.com/activeadmin/activeadmin/issues/1995#issuecomment-15846811
     TeamSwitchRequest.content_columns.each { |col| column col.name.to_sym }
-
     column :old_team
     column :new_team
     column :current_team do |team_switch_request|
