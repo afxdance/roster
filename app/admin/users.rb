@@ -1,6 +1,5 @@
 ActiveAdmin.register User do
   before_action :role_check
-
   permit_params(
     :username,
     :password,
@@ -12,10 +11,7 @@ ActiveAdmin.register User do
   controller do
     # checks if user can view the team switch requests page
     def role_check
-      if !current_user.can_view_users?
-        redirect_to "/admin", alert: "You can't view the users page!!! >:( uwu"
-        return
-      end
+      redirect_to "/admin", alert: "You can't view the users page!!! >:( uwu" unless current_user.can_view_users
     end
   end
 

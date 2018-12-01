@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181103192530) do
+ActiveRecord::Schema.define(version: 20181103192805) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -48,6 +48,9 @@ ActiveRecord::Schema.define(version: 20181103192530) do
     t.string "reason"
     t.index ["dancer_id", "team_id"], name: "index_dancers_teams_on_dancer_id_and_team_id"
     t.index ["team_id", "dancer_id"], name: "index_dancers_teams_on_team_id_and_dancer_id"
+  end
+
+  create_table "director_users", force: :cascade do |t|
   end
 
   create_table "team_switch_requests", force: :cascade do |t|
@@ -110,7 +113,7 @@ ActiveRecord::Schema.define(version: 20181103192530) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "role", null: false
+    t.integer "role"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
