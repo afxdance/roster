@@ -62,7 +62,7 @@ ActiveAdmin.register TeamSwitchRequest do
     # checks if user can view the team switch requests page
     def role_check
       if !current_user.can_view_team_switch?
-        redirect_to :back, alert: "You can't view the team switch requests page!!! >:( uwu"
+        redirect_to "/admin", alert: "You can't view the team switch requests page!!! >:( uwu"
         return
       end
     end
