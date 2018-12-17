@@ -12,6 +12,8 @@ ActiveAdmin.register TeamSwitchRequest do
   #   permitted
   # end
 
+  before_action :role_check
+
   permit_params do
     [
       :name,
@@ -57,6 +59,11 @@ ActiveAdmin.register TeamSwitchRequest do
   end
 
   controller do
+    # checks if user can view the team switch requests page
+    def role_check
+      redirect_to "/admin", alert: "You can't view the team switch requests page!!! >:( uwu" unless current_user.can_view_team_switch?
+    end
+
     def action_methods
       if current_user.can_modify_all_teams?
         super
@@ -147,7 +154,6 @@ ActiveAdmin.register TeamSwitchRequest do
     selectable_column
     # https://github.com/activeadmin/activeadmin/issues/1995#issuecomment-15846811
     TeamSwitchRequest.content_columns.each { |col| column col.name.to_sym }
-
     column :old_team
     column :new_team
     column :current_team do |team_switch_request|

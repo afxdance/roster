@@ -1,5 +1,10 @@
 class User < ApplicationRecord
+  ActiveAdmin.register User do
+    menu if: proc { current_user.admin? }
+  end
+
   has_and_belongs_to_many :teams
+  enum role: [:director, :admin]
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise(
@@ -33,11 +38,11 @@ class User < ApplicationRecord
   end
 
   def can_modify_users?
-    true
+    board_privileges?
   end
 
   def can_create_dancer?
-    true
+    board_privileges?
   end
 
   def can_modify_next_dancer_id?
@@ -70,5 +75,21 @@ class User < ApplicationRecord
 
   def can_do_randomization?
     true
+  end
+
+  def can_view_team_switch?
+    if admin?
+      true
+    else
+      false
+    end
+  end
+
+  def can_view_users?
+    if admin?
+      true
+    else
+      false
+    end
   end
 end
