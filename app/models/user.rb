@@ -1,7 +1,5 @@
 class User < ApplicationRecord
-  ActiveAdmin.register User do
-    menu if: proc { current_user.admin? }
-  end
+
 
   has_and_belongs_to_many :teams
   enum role: [:director, :admin]
