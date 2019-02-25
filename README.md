@@ -76,7 +76,7 @@ You can also use this command later at any time to **irreversibly clear all the 
 
 To edit files, open the entire repo in your editor:
 
-- `cd ~/afxdance/roster`
+- `cd roster`
 - VSCode: `code .`
 - Atom: `atom .`
 - Sublime Text: `subl .`
