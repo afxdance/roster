@@ -1,4 +1,5 @@
 ActiveAdmin.register User do
+  menu if: proc { current_user.admin? }
   before_action :role_check
   permit_params(
     :username,
