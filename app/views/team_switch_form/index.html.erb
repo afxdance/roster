@@ -37,7 +37,7 @@
 
   <%= f.text_field :name, required: true, placeholder: "FIRST AND LAST NAME" %><br>
   <%= f.text_field :email, required: true, placeholder: "EMAIL" %><br>
-  <%= f.text_field :phone, required: true, placeholder: "PHONE: XXX-XXX-XXXX" %>
+  <%= f.text_field :phone, required: true, placeholder: "PHONE: XXX-XXX-XXXX", pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}" %>
 
   <br>
   <br>
@@ -70,11 +70,11 @@
 
   <p><b><u>TO SWITCH INTO AN AFX TRAINING TEAM FROM YOUR AFX PROJECT TEAM:</u></b>
     <br>
-    If you would like to <b>switch into a Training Team</b>, please refer to the “Training Team Switch” portion of this form. 
+    If you would like to <b>switch into a Training Team</b>, please refer to the “Training Team Switch” portion of this form.
 
   <p><b><u>NOTE</u></b>: You may <b>NOT</b> select BOTH Project team time and Training team time preferences. We process each request individually and will not be processing your request to switch into a different Project and Training team simultaneously. </p>
 
-  <p><b>Failure to comply with any instructions will lead to your team switch request being dismissed. 
+  <p><b>Failure to comply with any instructions will lead to your team switch request being dismissed.
 </b></p>
 
 
@@ -111,7 +111,7 @@
   <% end %>
 
 
-    <p><b>Failure to comply with any instructions will lead to your team switch request being dismissed. 
+    <p><b>Failure to comply with any instructions will lead to your team switch request being dismissed.
 </b></p>
 
   <br>
