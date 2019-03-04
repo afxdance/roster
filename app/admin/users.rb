@@ -6,7 +6,6 @@ ActiveAdmin.register User do
     :password,
     :password_confirmation,
     :role,
-    :TRISTAN
     team_ids: [], # Necessary in order to properly link users and teams
   )
 
@@ -25,12 +24,12 @@ ActiveAdmin.register User do
     column :sign_in_count
     column :created_at
     column :role
+    column :TRISTAN
     column "Teams" do |user|
       user.teams.map do |team|
         link_to team.name, admin_team_path(team)
       end.join(", ").html_safe
     end
-    column :TRISTAN
     actions
   end
 
@@ -39,6 +38,7 @@ ActiveAdmin.register User do
   filter :sign_in_count
   filter :created_at
   filter :role
+  filter :TRISTAN
 
   form do |f|
     f.inputs do
