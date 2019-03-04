@@ -1,6 +1,8 @@
 ActiveAdmin.register User do
+
   menu if: proc { current_user.admin? }
   before_action :role_check
+
   permit_params(
     :username,
     :password,
@@ -29,7 +31,9 @@ ActiveAdmin.register User do
         link_to team.name, admin_team_path(team)
       end.join(", ").html_safe
     end
+    column :role
     actions
+
   end
 
   filter :username
