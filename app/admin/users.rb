@@ -6,6 +6,7 @@ ActiveAdmin.register User do
     :password,
     :password_confirmation,
     :role,
+    :TRISTAN
     team_ids: [], # Necessary in order to properly link users and teams
   )
 
@@ -29,6 +30,7 @@ ActiveAdmin.register User do
         link_to team.name, admin_team_path(team)
       end.join(", ").html_safe
     end
+    column :TRISTAN
     actions
   end
 
