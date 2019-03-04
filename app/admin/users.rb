@@ -24,7 +24,10 @@ ActiveAdmin.register User do
     column :sign_in_count
     column :created_at
     column :role
-    column :TRISTAN
+
+    column :rao
+    column :hug
+    column :sahai
     column "Teams" do |user|
       user.teams.map do |team|
         link_to team.name, admin_team_path(team)
@@ -38,7 +41,6 @@ ActiveAdmin.register User do
   filter :sign_in_count
   filter :created_at
   filter :role
-  filter :TRISTAN
 
   form do |f|
     f.inputs do
