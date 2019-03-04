@@ -55,6 +55,9 @@ ActiveAdmin.register Dancer do
     def add_dancers_to_team(dancer_ids, team_id)
       team = Team.find(team_id)
 
+      # Did they type the right password?
+
+
       # Is the team valid?
       if team.nil?
         redirect_to :back, alert: "Team #{team_id} does not exist."

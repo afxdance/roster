@@ -25,9 +25,10 @@ ActiveAdmin.register User do
     column :created_at
     column :role
 
-    column :rao
-    column :hug
-    column :sahai
+    # column :rao
+    # column :hug
+    # column :sahai
+
     column "Teams" do |user|
       user.teams.map do |team|
         link_to team.name, admin_team_path(team)
