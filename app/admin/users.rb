@@ -1,9 +1,7 @@
 ActiveAdmin.register User do
-<<<<<<< HEAD
-  scope_to :current_user, if: proc { current_user.can_view_users? }
-=======
+  menu if: proc { current_user.admin? }
   before_action :role_check
->>>>>>> e9f2fe9f504a7ae433b07a2f7df5109de28b8956
+
   permit_params(
     :username,
     :password,
