@@ -79,10 +79,6 @@ class User < ApplicationRecord
 
   def can_view_team_switch?
     if admin?
-<<<<<<< HEAD
-=======
-
->>>>>>> 103e87c398d51ad9e81cc0b4e5bd89c9b41d9cb5
       true
     else
       false
