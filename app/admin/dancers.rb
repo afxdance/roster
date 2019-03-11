@@ -56,7 +56,8 @@ ActiveAdmin.register Dancer do
       team = Team.find(team_id)
 
       # Did they type the right password?
-
+      dancer = Dancer.find(dancer_ids)
+      password = dancer.password
 
       # Is the team valid?
       if team.nil?
