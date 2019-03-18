@@ -1,4 +1,4 @@
-<body id="audition-form-body">
+<body id="audition-form-body" onload="onload()">
 
 <%= form_for :team_switch_request, :url => team_switch_form_path, :html => {:class => "audition-form"} do |f| %>
   <h2>AFX TEAM SWITCH/DROP FORM</h2>
@@ -9,29 +9,10 @@
   <% end %>
 
   <div class="times">
-
   <% if false %>
-
-  <p>Welcome to AFXsi 2018, AFX's 2018 Summer Intensive Program!
-
-  <p>Thank you for dancing with AFXsi 2018! Our team switch/drop form has now closed. If you have any personal concerns, please discuss with your current team's directors. Otherwise, please email any further questions to afxdanceviceexecutive@gmail.com. We hope you have a great summer!</p>
-
   <% else %>
-  <p><h1><center>Welcome to AFX Dance, Spring 2019!</center></h1></p>
-
-  <p>If you are viewing this form, it means that you are <b>UNABLE</b> to participate in the PROJECT or TRAINING team that you are <b><u>CURRENTLY ON</b></u> on due to a <b>time conflict</b>. Through this form, you will also be able to DROP from AFX Project/Training this semester.
-  <p><b>[DEADLINE FOR SUBMISSION: FRIDAY, 2/15/2019 @ 11:59 PM.] </b>
-  <br><b><u>NO EXCEPTIONS!</u></b>
-
-  <p>***NOTE***: If you are currently on the AFX Competitive Team, the drop deadline and process for AFX Comp is separate and does NOT use this form. We urge you to direct all Comp Team matters to your Captains. Thank you!
-  <p>If you have any urgent questions, comments, or concerns, please email [afxdanceviceexecutive@gmail.com] ASAP! We will do our best to respond within 24 hours of receiving your email.
-  <br>
-  <br>
-
-  <br>
-
-  <p><b>ALL FOLLOWING INFORMATION MUST EXACTLY MATCH THE INFORMATION SUBMITTED ON AUDITION DAY:
-</b></p>
+  <div id="intro" text="<%= @intro%>">
+  </div>
   <br>
 
 
@@ -179,6 +160,10 @@
   </div>
 
   <script>
+  function onload() {
+    var intro = document.getElementById("intro");
+    intro.innerHTML = intro.getAttribute('text');
+  }
   function checkboxesAreValid() {
     nchecked = {}
     nchecked.project = $('.availability-checkbox-project:checked').length;

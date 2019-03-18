@@ -1,6 +1,21 @@
 class TeamSwitchFormController < ApplicationController
   def index
     @request = TeamSwitchRequest.new
+    @intro = "<p><h1><center>ASDF Welcome to AFX Dance, Spring 2019!</center></h1></p>
+
+  <p>If you are viewing this form, it means that you are <b>UNABLE</b> to participate in the PROJECT or TRAINING team that you are <b><u>CURRENTLY ON</b></u> on due to a <b>time conflict</b>. Through this form, you will also be able to DROP from AFX Project/Training this semester.
+  <p><b>[DEADLINE FOR SUBMISSION: FRIDAY, 2/15/2019 @ 11:59 PM.] </b>
+  <br><b><u>NO EXCEPTIONS!</u></b>
+
+  <p>***NOTE***: If you are currently on the AFX Competitive Team, the drop deadline and process for AFX Comp is separate and does NOT use this form. We urge you to direct all Comp Team matters to your Captains. Thank you!
+  <p>If you have any urgent questions, comments, or concerns, please email [afxdanceviceexecutive@gmail.com] ASAP! We will do our best to respond within 24 hours of receiving your email.
+  <br>
+  <br>
+
+  <br>
+
+  <p><b>ALL FOLLOWING INFORMATION MUST EXACTLY MATCH THE INFORMATION SUBMITTED ON AUDITION DAY:
+</b></p>"
     render "team_switch_form/index"
   end
 
