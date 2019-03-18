@@ -26,6 +26,12 @@ ActiveRecord::Schema.define(version: 20181103192805) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
   end
 
+  create_table "calendars", force: :cascade do |t|
+    t.string "event"
+    t.string "time"
+    t.string "location"
+  end
+
   create_table "dancers", force: :cascade do |t|
     t.string "name"
     t.string "email"
