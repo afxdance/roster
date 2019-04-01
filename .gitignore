@@ -28,3 +28,5 @@
 # Ignore files that are commonly globally gitignored
 .DS_Store
 ._*
+
+/config/test_email.yml
