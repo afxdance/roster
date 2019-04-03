@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'calendar/show'
+
   devise_for :users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # For details on the DSL available within this file, see
@@ -14,4 +16,9 @@ Rails.application.routes.draw do
 
   get "/teamswitch", to: "team_switch_form#index"
   post "/teamswitch", to: "team_switch_form#create_team_switch_request", as: "team_switch_form"
+end
+
+CalendarExample::Application.routes.draw do
+  resource :calendar, only: [:show], controller: :calendar
+  root to: "calendar#show"
 end
