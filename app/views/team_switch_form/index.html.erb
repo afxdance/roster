@@ -25,12 +25,8 @@
 
   <b><hr></b>
   <br>
-
-  <p><h3><center><b><u>PROJECT TEAM SWITCH</u></b></center></h3>
-  <b><i>[You may ONLY answer this if you are currently on a Project Team.]</i></b>
-  <p><b><u>TO SWITCH INTO A DIFFERENT AFX PROJECT TEAM:</u></b>
-    <br>
-  If you would like to <b>switch into a different Project Team</b>, please select ALL other Project Teams’ times that you can attend:
+  <div id="projectTS1" text="<%= @projectTS1%>">
+  </div>
 
   <%= f.collection_check_boxes(
         :available_team_ids,
@@ -49,14 +45,8 @@
     </label></div>
   <% end %>
 
-  <p><b><u>TO SWITCH INTO AN AFX TRAINING TEAM FROM YOUR AFX PROJECT TEAM:</u></b>
-    <br>
-    If you would like to <b>switch into a Training Team</b>, please refer to the “Training Team Switch” portion of this form.
-
-  <p><b><u>NOTE</u></b>: You may <b>NOT</b> select BOTH Project team time and Training team time preferences. We process each request individually and will not be processing your request to switch into a different Project and Training team simultaneously. </p>
-
-  <p><b>Failure to comply with any instructions will lead to your team switch request being dismissed.
-</b></p>
+  <div id="projectTS2" text="<%= @projectTS2%>">
+  </div>
 
 
   <br>
@@ -64,15 +54,9 @@
 
   <hr>
   <br>
-  <p><h3><center><b><u>TRAINING TEAM SWITCH
-</u></b></center></h3>
-  <b><i>[This portion is for all members currently placed on a Training Team OR on a Project Team who would like to switch into a Training Team.]
-</i></b>
 
-<p><b><u>TO SWITCH AFX TRAINING TEAMS:</u></b>
-    <br>
-  If you would like to <b>join or switch into a different Training Team</b>, please select ALL Training Teams’ times (AT LEAST <b>TWO</b>) that you can attend:
-
+  <div id="trainingTS1" text="<%= @trainingTS1%>">
+  </div>
 
   <%= f.collection_check_boxes(
         :available_team_ids,
@@ -92,20 +76,16 @@
   <% end %>
 
 
-    <p><b>Failure to comply with any instructions will lead to your team switch request being dismissed.
-</b></p>
+  <div id="trainingTS2" text="<%= @trainingTS2%>">
+  </div>
 
   <br>
   <br>
 
   <hr>
   <br>
-  <p><h3><center><b><u>DROP FROM AFX PROJECT/TRAINING
-
-</u></b></center></h3>
-  <b><i>[ONLY ANSWER THIS QUESTION IF YOU HAVE CHOSEN TO DROP FROM AFX DANCE’S PROJECT AND TRAINING TEAMS THIS SEMESTER.]
-
-</i></b>
+  <div id="drop1" text="<%= @drop1%>">
+  </div>
 
 <br>
 
@@ -121,17 +101,16 @@
       <%= option.object.practice_time %>
     </label></div>
   <% end %>
-  <p>
-    <br><b>Once you select this box, you may not re-join AFX this semester. Please consult with your directors to discuss your circumstances before making this decision. You may also email afxdanceviceexecutive@gmail.com for further questions!
-</b></p>
+  <div id="drop2" text="<%= @drop2%>">
+  </div>
 <br>
 <br>
 
 <hr>
 <br>
 
-  <p><b>What is your reason for switching into a different team or dropping from AFX? Please explain your time conflict and what prevents you from attending your current team’s practices.*
-</b></p>
+  <div id="reason" text="<%= @reason%>">
+  </div>
 
 
   <%= f.text_area :reason, required: true, rows:"10000000", placeholder: "Reason" %>
@@ -143,7 +122,8 @@
   <hr>
   <br>
 
-  <p><b>We urge you to PLEASE double-check all of your contact information and answers as inputting incorrect information may lead to an unattended request, a rejected request, or a drop from AFX. Have you reviewed all of your responses carefully?*</b>
+  <div id="review" text="<%= @review%>">
+  </div>
 
 
   <p>
@@ -151,9 +131,8 @@
     <label>Yes</label>
   </p>
 
-  <p>If you have any further questions, please email afxdanceviceexecutive@gmail.com and we will try to respond within 24 hours. You will receive an email with the results once your team switch or drop request has been successfully processed. Please check your email’s spam folder in case the email is delivered there. All notices and results are delivered ONLY from afxdanceviceexecutive@gmail.com. Thank you for your patience!
-
-    <p><i>All information processed through this form will be confidential and be kept within the Executive Board. We greatly appreciate your cooperation.
+  <div id="final" text="<%= @final%>">
+  </div>
 
   <div class = "submit">
     <%= f.submit "Submit team switch request", class: "availability-form-submit" %>
@@ -163,6 +142,24 @@
   function onload() {
     var intro = document.getElementById("intro");
     intro.innerHTML = intro.getAttribute('text');
+    var projectTS1 = document.getElementById("projectTS1");
+    projectTS1.innerHTML = projectTS1.getAttribute('text');
+    var projectTS2 = document.getElementById("projectTS2");
+    projectTS2.innerHTML = projectTS2.getAttribute('text');
+    var trainingTS1 = document.getElementById("trainingTS1");
+    trainingTS1.innerHTML = trainingTS1.getAttribute('text');
+    var trainingTS2 = document.getElementById("trainingTS2");
+    trainingTS2.innerHTML = trainingTS2.getAttribute('text');
+    var drop1 = document.getElementById("drop1");
+    drop1.innerHTML = drop1.getAttribute('text');
+    var drop2 = document.getElementById("drop2");
+    drop2.innerHTML = drop2.getAttribute('text');
+    var reason = document.getElementById("reason");
+    reason.innerHTML = reason.getAttribute('text');
+    var review = document.getElementById("review");
+    review.innerHTML = review.getAttribute('text');
+    var final = document.getElementById("final");
+    final.innerHTML = final.getAttribute('text');
   }
   function checkboxesAreValid() {
     nchecked = {}
