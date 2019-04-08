@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Hi <%= @user.name %>,</p>
+    <p>
+      Thank you for auditioning! Please double check the info we have from you below.
+    </p>
+
+    <p>
+      Name: <%= @user.name%>
+      <br>
+      Email: <%= @user.email%>
+      <br>
+      Phone: <%=@user.phone%>
+      <br>
+      Gender: <%=@user.gender%>
+      <br>
+      Year: <%=@user.year%>
+      <br>
+      Dance Experience: <% if @user.exp_interest == "no" %> no <% elsif @user.exp_interest == "yes_in_afx" %> Yes, and I have been in AFX before. <% else %> Yes, but I have not been in AFX before. <% end %>
+      <br>
+      Exp Interest: <% if @user.exp_interest == true %> yes <% else %> no <% end %>
+      <br>
+      Tech Interest: <% if @user.tech_interest == true %> yes <% else %> no <% end %>
+    </p>
+
+    <p>
+    You will hear from us soon about your team placement.
+    </p>
+
+    <p>
+    Love,
+    <br> AFX Dance
+    </p>
+  </body>
+</html>

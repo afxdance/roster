@@ -6,7 +6,7 @@ class AuditionController < ApplicationController
   def create
     @dancer = Dancer.new(dancer_params)
     success = @dancer.save
-    UserMailer.example_email.deliver_now
+    UserMailer.audition_email(@dancer).deliver_now
     render "audition/index" unless success
   end
 
