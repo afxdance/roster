@@ -1,6 +1,9 @@
 class Calendar < ApplicationRecord
   # self.table_name = "calendars"
   # belongs_to :calendars
+  TIME_PATTERN = begin
+    "[0-23]+:[0-59]"
+  end.freeze
 
   REQUIRED_FIELDS = [
     :event,
