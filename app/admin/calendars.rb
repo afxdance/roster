@@ -1,6 +1,6 @@
-ActiveAdmin.register Calendar do
-  if Calendar.table_exists?
-    columns = Calendar.columns.map(&:name).map(&:to_sym)
+ActiveAdmin.register Calendar2 do
+  if Calendar2.table_exists?
+    columns = Calendar2.columns.map(&:name).map(&:to_sym)
     permit_params columns
   end
 
