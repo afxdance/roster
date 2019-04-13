@@ -1,19 +1,5 @@
-class Calendar < ApplicationRecord
-  # self.table_name = "calendars"
-  # belongs_to :calendars
-
-  REQUIRED_FIELDS = [
-    :event,
-    :time,
-    :location
-  ].freeze
-  TABLE_VISIBLE_FIELDS = [
-    :event,
-    :time,
-    :location
-  ].compact.freeze
-
-  HEADER = %w[Sunday Monday Tuesday Wednesday Thursday Friday Saturday]
+class Calendar < Struct.new(:view, :date, :callback)
+    HEADER = %w[Sunday Monday Tuesday Wednesday Thursday Friday Saturday]
     START_DAY = :sunday
 
     delegate :content_tag, to: :view
@@ -54,4 +40,4 @@ class Calendar < ApplicationRecord
       last = date.end_of_month.end_of_week(START_DAY)
       (first..last).to_a.in_groups_of(7)
     end
-  end
+end
