@@ -16,7 +16,9 @@ class Calendar < ApplicationRecord
     :location
   ].compact.freeze
 
-  HEADER = %w[Sunday Monday Tuesday Wednesday Thursday Friday Saturday]
+HEADER = %w[Sunday Monday Tuesday Wednesday Thursday Friday Saturday]
+class Calendar < Struct.new(:view, :date, :callback)
+    HEADER = %w[Sunday Monday Tuesday Wednesday Thursday Friday Saturday]
     START_DAY = :sunday
 
     delegate :content_tag, to: :view
