@@ -1,6 +1,4 @@
 class Calendar2 < ApplicationRecord
-  # self.table_name = "calendars"
-  # belongs_to :calendars
 
   REQUIRED_FIELDS = [
     :event,
