@@ -100,6 +100,8 @@ group :development do
   gem "rails_db"
   gem "ruby-debug-ide", require: false
   gem "simple_calendar", "~> 2.0"
+  gem 'fullcalendar-rails'
+  gem 'momentjs-rails'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
