@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :events
   get 'calendar/show'
 
   devise_for :users, ActiveAdmin::Devise.config
@@ -19,6 +20,7 @@ Rails.application.routes.draw do
 end
 
 CalendarExample::Application.routes.draw do
+  resources :events
   resource :calendar, only: [:show], controller: :calendar
   root to: "calendar#show"
 end
