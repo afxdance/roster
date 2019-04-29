@@ -27,6 +27,7 @@ group :production, :development, :test do
   gem "turbolinks", "~> 5", require: true
   # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
   gem 'jbuilder', "~> 2.8"
+  gem 'json'
   # Use Redis adapter to run Action Cable in production
   # gem 'redis', '~> 4.0'
   # Use ActiveModel has_secure_password
@@ -99,12 +100,6 @@ group :development do
   gem "mdl", require: false
   gem "rails_db"
   gem "ruby-debug-ide", require: false
-<<<<<<< HEAD
-=======
-  gem "simple_calendar", "~> 2.0"
-  gem 'fullcalendar-rails'
-  gem 'momentjs-rails'
->>>>>>> 0524d034499e8b311582c367de064f97505d0ffc
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

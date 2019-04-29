@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-<%= form_with(model: event, local: true) do |form| %>
-  <% if event.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
-
-      <ul>
-      <% event.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-=======
 <%= form_for(@event) do |f| %>
   <% if @event.errors.any? %>
     <div id="error_explanation">
@@ -16,36 +6,12 @@
       <ul>
       <% @event.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
->>>>>>> 0524d034499e8b311582c367de064f97505d0ffc
       <% end %>
       </ul>
     </div>
   <% end %>
 
   <div class="field">
-<<<<<<< HEAD
-    <%= form.label :title %>
-    <%= form.text_field :title, id: :event_title %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description, id: :event_description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :start_time %>
-    <%= form.datetime_select :start_time, id: :event_start_time %>
-  </div>
-
-  <div class="field">
-    <%= form.label :end_time %>
-    <%= form.datetime_select :end_time, id: :event_end_time %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-=======
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>
@@ -63,6 +29,5 @@
   </div>
   <div class="actions">
     <%= f.submit %>
->>>>>>> 0524d034499e8b311582c367de064f97505d0ffc
   </div>
 <% end %>

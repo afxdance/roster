@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-class EventsController < InheritedResources::Base
-
-  private
-
-=======
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
@@ -74,7 +68,6 @@ class EventsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
->>>>>>> 0524d034499e8b311582c367de064f97505d0ffc
     def event_params
       params.require(:event).permit(:title, :description, :start_time, :end_time)
     end
