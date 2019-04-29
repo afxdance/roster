@@ -16,6 +16,26 @@
 
 //= require moment
 //= require fullcalendar
+<<<<<<< HEAD
 //= require fullcalendar/locale-all
 
 $('#calendar').fullCalendar({});
+=======
+
+function eventCalendar() {
+  return $('#calendar').fullCalendar({});
+};
+function clearCalendar() {
+  $('#calendar').fullCalendar('delete');
+  $('#calendar').html('');
+};
+
+$(document).on('turbolinks:load', function() {
+  eventCalendar();
+});
+$(document).on('turbolinks:before-cache', clearCalendar());
+
+$('#calendar').fullCalendar({
+  events: '/events.json'
+});
+>>>>>>> 0524d034499e8b311582c367de064f97505d0ffc
