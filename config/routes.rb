@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :event2s
   resources :events
   get 'calendar/show'
 
@@ -20,6 +21,7 @@ Rails.application.routes.draw do
 end
 
 CalendarExample::Application.routes.draw do
+  resources :event2s
   resources :events
   resource :calendar, only: [:show], controller: :calendar
   root to: "calendar#show"
