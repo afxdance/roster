@@ -1,0 +1,40 @@
+<body id="email-form-body">
+
+<%= form_for :email_form, :url => emailform_path, :html => {:class => "audition-form"} do |f| %>
+  <h2>AFX EMAIL FORM</h2>
+  <% if @request.errors.any? %>
+    <% @request.errors.full_messages.each do |message| %>
+      <div style="color: red"> <li><%= message %></li>  </div>
+    <% end %>
+  <% end %>
+
+  <div class="input">
+
+  <p><b>SUBJECT: </b></p>
+
+  <%= f.text_area :subject, required: true, rows:"1", placeholder: "Subject" %>
+  <br>
+  <br>
+
+  <p><b>BODY: </b></p>
+
+  <%= f.text_area :body, required: true, rows:"1000000", placeholder: "Body" %>
+
+
+
+  <hr>
+  <br>
+
+  <div class = "submit">
+    <%= f.submit "Submit email" %>
+  </div>
+
+  <script>
+  </script>
+
+  </div>
+
+
+
+<% end %>
+</body>

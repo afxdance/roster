@@ -1,0 +1,2 @@
+class EmailForm < ApplicationRecord
+end
