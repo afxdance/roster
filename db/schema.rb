@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181103192805) do
+ActiveRecord::Schema.define(version: 20190429031012) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20181103192805) do
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+    t.index [nil], name: "index_active_admin_comments_on_identity"
   end
 
   create_table "dancers", force: :cascade do |t|
@@ -51,6 +52,13 @@ ActiveRecord::Schema.define(version: 20181103192805) do
   end
 
   create_table "director_users", force: :cascade do |t|
+  end
+
+  create_table "form_fields", force: :cascade do |t|
+    t.text "text"
+    t.string "identity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "team_switch_requests", force: :cascade do |t|

@@ -88,4 +88,12 @@ class User < ApplicationRecord
       false
     end
   end
+
+  def can_view_form_fields?
+    if admin?
+      true
+    else
+      false
+    end
+  end
 end

@@ -99,11 +99,10 @@ class TeamSwitchFormController < ApplicationController
     end
   end
 
-
-  #helper to test dynamic_form - delete later
-  def get_text(email)
-    for dancer in Dancer.where("replace(lower(email), ' ', '') = ?", (email + "@gmail.com").downcase.delete(" "))
-      return dancer.name
+  # gets text for dynamic form
+  def get_text(id)
+    for formfield in FormField.where("identity = ?", (id).delete(" "))
+      return formfield.text
     end
     nil
   end
