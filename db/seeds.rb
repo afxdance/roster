@@ -10,8 +10,7 @@ dancer_extra_fields = { exp_interest: "not important rn",
                         tech_interest: "not important rn",
                         camp_interest: "not important rn",
                         reach_workshop_interest: "not important rn",
-                        reach_news_interest: "not important rn"
-                      }
+                        reach_news_interest: "not important rn"}
 
 User.create!(username: "admin",
              password: "password",
