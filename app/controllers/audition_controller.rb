@@ -35,6 +35,8 @@ class AuditionController < ApplicationController
           :exp_interest,
           :tech_interest,
           :camp_interest,
+          :reach_workshop_interest,
+          :reach_news_interest,
         )
     end
 end
