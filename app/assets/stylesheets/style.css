@@ -64,8 +64,9 @@
     height: 45px;
 }
 .audition-form textarea{
+    height: 300px;
     resize:none;
-    overflow: hidden;
+    overflow-y: scroll;
 }
 .audition-form input[type="button"],
 .audition-form input[type="submit"]{
