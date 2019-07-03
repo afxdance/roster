@@ -60,9 +60,19 @@
     ['No', false],                                     |
   ]), {prompt: "Interest in AFX Tech"}, required: true |
 %br/
+= f.select :reach_workshop_interest, options_for_select([        |
+    ['Yes', true],                                     |
+    ['No', false],                                     |
+  ]), {prompt: "Interest in Teaching AFX Reach Workshops"}, required: true |
+%br/
+= f.select :reach_news_interest, options_for_select([        |
+    ['Yes', true],                                     |
+    ['No', false],                                     |
+  ]), {prompt: "Interest in AFX Reach Newsletter"}, required: true |
+%br/
 %br/
 = f.submit "I'm ready to audition!"
 %br/
 %br/
 %small
-  This form was created and is managed by the AFX Tech Commitee. :)
+  This form was created and is managed by the AFX Tech Committee. :)

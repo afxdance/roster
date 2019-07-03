@@ -34,9 +34,10 @@ class Dancer < ApplicationRecord
     "false" => "No",
   }.freeze
 
-  SHOW_CAMP_INTEREST = false
-  SHOW_EXP_INTEREST = true
-  SHOW_TECH_INTEREST = true
+  SHOW_CAMP_INTEREST = true
+  SHOW_EXP_INTEREST = false
+  SHOW_TECH_INTEREST = false
+  SHOW_REACH_INTEREST = true
 
   REQUIRED_FIELDS = [
     :name,
@@ -48,6 +49,8 @@ class Dancer < ApplicationRecord
     :exp_interest,
     :tech_interest,
     :camp_interest,
+    :reach_workshop_interest,
+    :reach_news_interest,
   ].freeze
   TABLE_VISIBLE_FIELDS = [
     :name,
@@ -58,6 +61,8 @@ class Dancer < ApplicationRecord
     SHOW_CAMP_INTEREST ? :camp_interest : nil,
     SHOW_EXP_INTEREST ? :exp_interest : nil,
     SHOW_TECH_INTEREST ? :tech_interest : nil,
+    SHOW_REACH_INTEREST ? :reach_workshop_interest : nil,
+    SHOW_REACH_INTEREST ? :reach_news_interest : nil,
   ].compact.freeze
   SENSITIVE_FIELDS = [
     :gender,
