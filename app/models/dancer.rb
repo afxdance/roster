@@ -34,7 +34,7 @@ class Dancer < ApplicationRecord
     "false" => "No",
   }.freeze
 
-  SHOW_CAMP_INTEREST = true
+  SHOW_CAMP_INTEREST = false
   SHOW_EXP_INTEREST = false
   SHOW_TECH_INTEREST = false
   SHOW_REACH_INTEREST = true
