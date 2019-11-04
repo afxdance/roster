@@ -1,0 +1,8 @@
+
+
+
+<%= form_with(url: "/practice", method: "post") do %>
+  <%= label_tag(:name, "Search for:") %>
+  <%= text_field_tag(:name) %>
+  <%= submit_tag("Search") %>
+<% end %>
