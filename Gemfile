@@ -28,7 +28,13 @@ group :production, :development, :test do
   # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
   gem "jbuilder", "~> 2.5", require: false
   # Use Redis adapter to run Action Cable in production
+<<<<<<< HEAD
   gem 'redis', '~> 4.0'
+=======
+  gem 'redis', '~> 4.1.3'
+  gem 'sidekiq', '~> 6.0.2'
+  #gem 'sidekiq/web'
+>>>>>>> 748ec0bcc5fb08c0e0267eba561c4ca19c344c03
   # Use ActiveModel has_secure_password
   # gem 'bcrypt', '~> 3.1.7'
 

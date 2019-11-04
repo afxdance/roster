@@ -26,7 +26,11 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/cache" />
     </content>
+<<<<<<< HEAD
     <orderEntry type="jdk" jdkName="rbenv: 2.5.0" jdkType="RUBY_SDK" />
+=======
+    <orderEntry type="inheritedJdk" />
+>>>>>>> 748ec0bcc5fb08c0e0267eba561c4ca19c344c03
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="actioncable (v5.1.5, rbenv: 2.5.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="actionmailer (v5.1.5, rbenv: 2.5.0) [gem]" level="application" />
@@ -46,7 +50,11 @@
     <orderEntry type="library" scope="PROVIDED" name="bcrypt (v3.1.11, rbenv: 2.5.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bindex (v0.5.0, rbenv: 2.5.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="builder (v3.2.3, rbenv: 2.5.0) [gem]" level="application" />
+<<<<<<< HEAD
     <orderEntry type="library" scope="PROVIDED" name="bundler (v2.0.2, rbenv: 2.5.0) [gem]" level="application" />
+=======
+    <orderEntry type="library" scope="PROVIDED" name="bundler (v2.0.1, rbenv: 2.5.0) [gem]" level="application" />
+>>>>>>> 748ec0bcc5fb08c0e0267eba561c4ca19c344c03
     <orderEntry type="library" scope="PROVIDED" name="capybara (v2.18.0, rbenv: 2.5.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="childprocess (v0.9.0, rbenv: 2.5.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="codemirror-rails (v5.16.0, rbenv: 2.5.0) [gem]" level="application" />
