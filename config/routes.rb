@@ -17,16 +17,9 @@ Rails.application.routes.draw do
   get "/teamswitch", to: "team_switch_form#index"
   post "/teamswitch", to: "team_switch_form#create_team_switch_request", as: "team_switch_form"
 
-<<<<<<< HEAD
-  get "/blah", to: "blah#index"
-  post "/blah", to: "blah#submit"
-
-  get "/blah/:email", to: "blah#display"
-=======
   get "/confirm_email", to: "confirm_email#index"
   post "/confirm_email/click", to: "confirm_email#click"
 
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
->>>>>>> 748ec0bcc5fb08c0e0267eba561c4ca19c344c03
 end
