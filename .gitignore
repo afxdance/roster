@@ -28,3 +28,6 @@
 # Ignore files that are commonly globally gitignored
 .DS_Store
 ._*
+
+# Ignore the file with the address and password of the sender email
+/config/test_email.yml
