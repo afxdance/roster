@@ -3,7 +3,7 @@ class UserMailer < ApplicationMailer
     @dancer = Dancer.find(dancer_id)
 
     mail(   :to      => @dancer.email,
-            :subject => "Welcome"
+            :subject => "Thanks for auditioning!"
     ) do |format|
       format.text
       format.html

@@ -3,11 +3,31 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Welcome to example.com, <%= @dancer.name %></h1>
+    <h1>Hello, <%= @dancer.name %></h1>
     <p>
-      You have successfully signed up to example.com,
-      your email is: <%= @dancer.email %>.<br/>
+      You have successfully auditioned for AFX.
     </p>
-    <p>Thanks for joining and have a great day!</p>
+
+    <p>
+      Please confirm the following information:
+    </p>
+    <p>
+      name: <%= @dancer.name %>.<br/>
+      email: <%= @dancer.email %>.<br/>
+      phone number: <%= @dancer.phone %>.<br/>
+      gender: <%= @dancer.gender %>.<br/>
+      year: <%= @dancer.year %>.<br/>
+      dance experience: <%= @dancer.dance_experience %>.<br/>
+    </p>
+
+    <p>
+      Please confirm your interests:
+    </p>
+
+    <p>
+      AFX Reach Workshop: <%= @dancer.reach_workshop_interest %>.<br/>
+      AFX Reach News: <%= @dancer.reach_news_interest %>.<br/>
+    </p>
+    <p>Thanks for auditioning and have a great day!</p>
   </body>
 </html>
