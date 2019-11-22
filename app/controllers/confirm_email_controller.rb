@@ -5,16 +5,14 @@ class ConfirmEmailController < ApplicationController
 
   def click
     #SendConfirmationEmailJob.perform_later
-    dancer = Dancer.find(4)
-    puts "Sending email to " + dancer.email
-    mail = UserMailer.welcome_email(dancer.id)
-    mail.deliver_now
-    #mail.deliver_later
-    #mail.deliver_now
-
-
-
-
+    Dancer.where(confirm_email_sent: false).each do |dancer|
+      mail = UserMailer.welcome_email(dancer.id)
+      mail.deliver_now
+      dancer.confirm_email_sent = true
+      dancer.save
+      #mail.deliver_later
+      #mail.deliver_now
+    end
     render "click"
   end
 end
