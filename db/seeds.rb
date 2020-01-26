@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Dancer.delete_all
 
 dancer_extra_fields = { exp_interest: "not important rn",
                         tech_interest: "not important rn",
@@ -22,27 +23,27 @@ User.create!(username: "young cai",
              password_confirmation: "password123",
              role: "director")
 
-Dancer.create!(name: "Peter Le",
-               email: "peter@peter.peter",
-               phone: "pet-erp-eter",
-               gender: "peter",
-               year: "1",
-               dance_experience: "peter",
-               **dancer_extra_fields)
-Dancer.create!(name: "Alice Wu",
-               email: "alice@alice.alice",
-               phone: "ali-cea-lice",
-               gender: "alice",
-               year: "1",
-               dance_experience: "alice",
-               **dancer_extra_fields)
-Dancer.create!(name: "Stella Wang",
-               email: "stella@stella.stella",
-               phone: "ste-lla-wang",
-               gender: "stella",
-               year: "2",
-               dance_experience: "stella",
-               **dancer_extra_fields)
+# Dancer.create!(name: "Peter Le",
+#                email: "peter@peter.peter",
+#                phone: "pet-erp-eter",
+#                gender: "peter",
+#                year: "1",
+#                dance_experience: "peter",
+#                **dancer_extra_fields)
+# Dancer.create!(name: "Alice Wu",
+#                email: "alice@alice.alice",
+#                phone: "ali-cea-lice",
+#                gender: "alice",
+#                year: "1",
+#                dance_experience: "alice",
+#                **dancer_extra_fields)
+# Dancer.create!(name: "Stella Wang",
+#                email: "stella@stella.stella",
+#                phone: "ste-lla-wang",
+#                gender: "stella",
+#                year: "2",
+#                dance_experience: "stella",
+#                **dancer_extra_fields)
 
 Team.create!(name: "AFX Help",
              level: "Project",
