@@ -37,7 +37,7 @@ class Dancer < ApplicationRecord
   SHOW_CAMP_INTEREST = false
   SHOW_EXP_INTEREST = false
   SHOW_TECH_INTEREST = false
-  SHOW_REACH_INTEREST = false
+  SHOW_REACH_INTEREST = true
 
   REQUIRED_FIELDS = [
     :name,
