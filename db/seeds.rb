@@ -6,11 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-dancer_extra_fields = { exp_interest: "not important rn",
-                        tech_interest: "not important rn",
-                        camp_interest: "not important rn",
-                        reach_workshop_interest: "not important rn",
-                        reach_news_interest: "not important rn" }
 Dancer.delete_all
 
 User.create!(username: "admin",
@@ -22,7 +17,11 @@ User.create!(username: "young cai",
              password: "password123",
              password_confirmation: "password123",
              role: "director")
-
+# dancer_extra_fields = { exp_interest: "not important rn",
+#                         tech_interest: "not important rn",
+#                         camp_interest: "not important rn",
+#                         reach_workshop_interest: "not important rn",
+#                         reach_news_interest: "not important rn" }
 # Dancer.create!(name: "Peter Le",
 #                email: "peter@peter.peter",
 #                phone: "pet-erp-eter",
