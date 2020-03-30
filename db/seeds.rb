@@ -43,7 +43,13 @@ User.create!(username: "young cai",
 #                year: "2",
 #                dance_experience: "stella",
 #                **dancer_extra_fields)
-
+Dancer.create!(name: "Evelyn Liu2",
+                email: "peter@peter.peter",
+                phone: "pet-erp-eter",
+                gender: "peter",
+                year: "3",
+                dance_experience: "no",
+                **dancer_extra_fields) )
 Team.create!(name: "AFX Help",
              level: "Project",
              practice_time: "all the time",
