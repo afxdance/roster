@@ -149,6 +149,9 @@ html, body
 }
 </style>
 
+<% @formfields = FormField.getTeamSwitchFields() %>
+<% @updatedAt = FormField.lastUpdated %>
+
 <body id="audition-form-body">
 
 <%= form_for :team_switch_request, :url => team_switch_form_path, :html => {:class => "audition-form"} do |f| %>
@@ -156,12 +159,6 @@ html, body
   <div contenteditable="true", id="fd1">
     <%= @formfields[0] %>
   </div>
-
-  <% if @request.errors.any? %>
-    <% @request.errors.full_messages.each do |message| %>
-      <div style="color: red"> <li><%= message %></li>  </div>
-    <% end %>
-  <% end %>
 
   <div class="times">
 
@@ -300,9 +297,9 @@ html, body
 
   <div contenteditable="true", id="fd16">
     <%= @formfields[15] %>
-  </div> <i>          <!-- THIS <i> IS IMPORTANT FOR SOME REASON DO NOT REMOVE -->
+  </div> <i>          <!-- THIS <i> IS IMPORTANT FOR SOME REASON DO NOT REMOVE (we have no idea why someone help pls) -->
 
-  <p> Last edited: <%= @field17 %> </p>
+  <p> Last edited: <%= @updatedAt %> </p>
 
   </div>
   <% end %>
@@ -311,22 +308,22 @@ html, body
 
 <%= form_with(url: { action: "update" }) do %>
 
-  <input id="fdfd1" name="field1" type="hidden" />
-  <input id="fdfd2" name="field2" type="hidden" />
-  <input id="fdfd3" name="field3" type="hidden" />
-  <input id="fdfd4" name="field4" type="hidden" />
-  <input id="fdfd5" name="field5" type="hidden" />
-  <input id="fdfd6" name="field6" type="hidden" />
-  <input id="fdfd7" name="field7" type="hidden" />
-  <input id="fdfd8" name="field8" type="hidden" />
-  <input id="fdfd9" name="field9" type="hidden" />
-  <input id="fdfd10" name="field10" type="hidden" />
-  <input id="fdfd11" name="field11" type="hidden" />
-  <input id="fdfd12" name="field12" type="hidden" />
-  <input id="fdfd13" name="field13" type="hidden" />
-  <input id="fdfd14" name="field14" type="hidden" />
-  <input id="fdfd15" name="field15" type="hidden" />
-  <input id="fdfd16" name="field16" type="hidden" />
+  <input id="fdfd1" name="1" type="hidden" />
+  <input id="fdfd2" name="2" type="hidden" />
+  <input id="fdfd3" name="3" type="hidden" />
+  <input id="fdfd4" name="4" type="hidden" />
+  <input id="fdfd5" name="5" type="hidden" />
+  <input id="fdfd6" name="6" type="hidden" />
+  <input id="fdfd7" name="7" type="hidden" />
+  <input id="fdfd8" name="8" type="hidden" />
+  <input id="fdfd9" name="9" type="hidden" />
+  <input id="fdfd10" name="10" type="hidden" />
+  <input id="fdfd11" name="11" type="hidden" />
+  <input id="fdfd12" name="12" type="hidden" />
+  <input id="fdfd13" name="13" type="hidden" />
+  <input id="fdfd14" name="14" type="hidden" />
+  <input id="fdfd15" name="15" type="hidden" />
+  <input id="fdfd16" name="16" type="hidden" />
 
   <input type="submit" name="commit" value="Save Changes" data-disable-with="Save Changes" id="submit_button_thing">
 
