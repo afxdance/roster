@@ -149,31 +149,12 @@ html, body
 }
 </style>
 
-<% @request = TeamSwitchRequest.new
-@field1 = FormField.find(1).data.html_safe
-@field2 = FormField.find(2).data.html_safe
-@field3 = FormField.find(3).data.html_safe
-@field4 = FormField.find(4).data.html_safe
-@field5 = FormField.find(5).data.html_safe
-@field6 = FormField.find(6).data.html_safe
-@field7 = FormField.find(7).data.html_safe
-@field8 = FormField.find(8).data.html_safe
-@field9 = FormField.find(9).data.html_safe
-@field10 = FormField.find(10).data.html_safe
-@field11 = FormField.find(11).data.html_safe
-@field12 = FormField.find(12).data.html_safe
-@field13 = FormField.find(13).data.html_safe
-@field14 = FormField.find(14).data.html_safe
-@field15 = FormField.find(15).data.html_safe
-@field16 = FormField.find(16).data.html_safe
-@field17 = FormField.find(17).data.html_safe %>
-
 <body id="audition-form-body">
 
 <%= form_for :team_switch_request, :url => team_switch_form_path, :html => {:class => "audition-form"} do |f| %>
 
   <div contenteditable="true", id="fd1">
-    <%= @field1 %>
+    <%= @formfields[0] %>
   </div>
 
   <% if @request.errors.any? %>
@@ -193,15 +174,15 @@ html, body
   <% else %>
 
   <div contenteditable="true", id="fd2">
-    <%= @field2 %>
+    <%= @formfields[1] %>
   </div>
 
   <div contenteditable="true", id="fd3">
-    <%= @field3 %>
+    <%= @formfields[2] %>
   </div>
 
   <div contenteditable="true", id="fd4">
-    <%= @field4 %>
+    <%= @formfields[3] %>
   </div>
 
   <%= f.text_field :name, required: true, placeholder: "FIRST AND LAST NAME", readonly: true %><br>
@@ -213,11 +194,11 @@ html, body
   <br>
 
   <div contenteditable="true", id="fd5">
-    <%= @field5 %>
+    <%= @formfields[4] %>
   </div>
 
   <div contenteditable="true", id="fd6">
-    <%= @field6 %>
+    <%= @formfields[5] %>
   </div>
 
   <%= f.collection_check_boxes(
@@ -238,18 +219,18 @@ html, body
   <% end %>
 
   <div contenteditable="true", id="fd7">
-    <%= @field7 %>
+    <%= @formfields[6] %>
   </div>
 
   <br><br>
   <hr><br>
 
   <div contenteditable="true", id="fd8">
-   <%= @field8 %>
+   <%= @formfields[7] %>
   </div>
 
   <div contenteditable="true", id="fd9">
-    <%= @field9 %>
+    <%= @formfields[8] %>
   </div>
 
   <%= f.collection_check_boxes(
@@ -270,17 +251,17 @@ html, body
   <% end %>
 
   <div contenteditable="true", id="fd10">
-    <%= @field10 %>
+    <%= @formfields[9] %>
   </div>
 
   <hr><br>
 
   <div contenteditable="true", id="fd11">
-    <%= @field11 %>
+    <%= @formfields[10] %>
   </div>
 
   <div contenteditable="true", id="fd12">
-    <%= @field12 %>
+    <%= @formfields[11] %>
   </div>
 
   <%= f.collection_check_boxes(
@@ -295,13 +276,13 @@ html, body
   <% end %>
 
   <div contenteditable="true", id="fd13">
-    <%= @field13 %>
+    <%= @formfields[12] %>
   </div>
 
   <hr><br>
 
   <div contenteditable="true", id="fd14">
-    <%= @field14 %>
+    <%= @formfields[13] %>
   </div>
 
   <%= f.text_area :reason, required: true, placeholder: "Reason", readonly: true %>
@@ -309,7 +290,7 @@ html, body
   <br><br><hr><br>
 
   <div contenteditable="true", id="fd15">
-    <%= @field15 %>
+    <%= @formfields[14] %>
   </div>
 
   <p>
@@ -318,7 +299,7 @@ html, body
   </p>
 
   <div contenteditable="true", id="fd16">
-    <%= @field16 %>
+    <%= @formfields[15] %>
   </div> <i>          <!-- THIS <i> IS IMPORTANT FOR SOME REASON DO NOT REMOVE -->
 
   <p> Last edited: <%= @field17 %> </p>

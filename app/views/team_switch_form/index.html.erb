@@ -3,7 +3,7 @@
 <%= form_for :team_switch_request, :url => team_switch_form_path, :html => {:class => "audition-form"} do |f| %>
   
   <div contenteditable="false", id="fd1">
-    <%= @field1 %>
+    <%= @formfields[0] %>
   </div>
 
   <% if @request.errors.any? %>
@@ -23,15 +23,15 @@
   <% else %>
 
   <div contenteditable="false", id="fd2">
-    <%= @field2 %>
+    <%= @formfields[1] %>
   </div>
 
   <div contenteditable="false", id="fd3">
-    <%= @field3 %>
+    <%= @formfields[2] %>
   </div>
 
   <div contenteditable="false", id="fd4">
-    <%= @field4 %>
+    <%= @formfields[3] %>
   </div>
 
   <%= f.text_field :name, required: true, placeholder: "FIRST AND LAST NAME" %><br>
@@ -43,11 +43,11 @@
   <br>
 
   <div contenteditable="false", id="fd5">
-    <%= @field5 %>
+    <%= @formfields[4] %>
   </div>
 
   <div contenteditable="false", id="fd6">
-    <%= @field6 %>
+    <%= @formfields[5] %>
   </div>
 
   <%= f.collection_check_boxes(
@@ -68,18 +68,18 @@
   <% end %>
 
   <div contenteditable="false", id="fd7">
-    <%= @field7 %>
+    <%= @formfields[6] %>
   </div>
 
   <br><br>
   <hr><br>
 
   <div contenteditable="false", id="fd8">
-   <%= @field8 %>
+   <%= @formfields[7] %>
   </div>
 
   <div contenteditable="false", id="fd9">
-    <%= @field9 %>
+    <%= @formfields[8] %>
   </div>
 
   <%= f.collection_check_boxes(
@@ -100,17 +100,17 @@
   <% end %>
 
   <div contenteditable="false", id="fd10">
-    <%= @field10 %>
+    <%= @formfields[9] %>
   </div>
 
   <hr><br>
 
   <div contenteditable="false", id="fd11">
-    <%= @field11 %>
+    <%= @formfields[10] %>
   </div>
 
   <div contenteditable="false", id="fd12">
-    <%= @field12 %>
+    <%= @formfields[11] %>
   </div>
 
   <%= f.collection_check_boxes(
@@ -125,13 +125,13 @@
   <% end %>
 
   <div contenteditable="false", id="fd13">
-    <%= @field13 %>
+    <%= @formfields[12] %>
   </div>
 
   <hr><br>
 
   <div contenteditable="false", id="fd14">
-    <%= @field14 %>
+    <%= @formfields[13] %>
   </div>
 
   <%= f.text_area :reason, required: true, placeholder: "Reason" %>
@@ -139,7 +139,7 @@
   <br><br><hr><br>
 
   <div contenteditable="false", id="fd15">
-    <%= @field15 %>
+    <%= @formfields[14] %>
   </div>
 
   <p>
@@ -148,7 +148,7 @@
   </p>
 
   <div contenteditable="false", id="fd16">
-    <%= @field16 %>
+    <%= @formfields[15] %>
   </div>
 
   <div class = "submit">
