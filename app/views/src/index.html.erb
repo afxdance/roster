@@ -144,8 +144,16 @@ AFX encourages its members to respect a survivor's wishes at all times in cases 
   <%= f.text_field :name, required: true, placeholder: "FIRST AND LAST NAME" %><br>
   <%= f.text_field :email, required: true, placeholder: "EMAIL", pattern: " ^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" %><br>
   <%= f.text_field :phone, required: true, placeholder: "PHONE: XXX-XXX-XXXX", pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}" %>
+  
+  <!-- still needs to be styled and add label -->
+  <%= f.collection_select(
+    :available_team_ids,
+    Team.all.sort_by(&:name),
+    :id,
+    :name) %> 
+  
 
-
+  HERE
   <%= f.collection_check_boxes(
         :available_team_ids,
         Team.project_teams.sort_by(&:practice_time_sort_string),
