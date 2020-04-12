@@ -7,6 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Dancer.delete_all
+User.delete_all
+Team.delete_all
 
 User.delete_all
 
