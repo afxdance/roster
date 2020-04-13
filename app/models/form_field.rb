@@ -21,7 +21,7 @@ class FormField < ApplicationRecord
 	end
 
 	def self.lastUpdated
-		return FormField.where().first.updated_at.strftime("%m/%d/%Y")
+		return FormField.first.updated_at.strftime("%m/%d/%Y")
 		# To format time object: https://apidock.com/rails/ActiveSupport/TimeWithZone/strftime
 		# If each formfield becomes updated independently:
 		# return FormField.first(:order => "updated_at desc", :limit => 1).updated_at
