@@ -15,10 +15,5 @@ Rails.application.routes.draw do
   get "/teamswitch", to: "team_switch_form#index"
   post "/teamswitch", to: "team_switch_form#create_team_switch_request", as: "team_switch_form"
 
-  get "/new", to: "new#index"
-
-  post "/new/add", to: "new#add"
-  post "/new/remove", to: "new#remove"
-
   get "/dancer/:email", to: "dancer#getTeam", :constraints => {:email => /[^\/]+/}
 end
