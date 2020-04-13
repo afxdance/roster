@@ -1,0 +1,16 @@
+<div>
+    <ul>
+        <% for dancer in @dancers %>
+            <li><%= dancer.name %></li>
+        <% end %>    
+    </ul>
+    <%= button_to "Add", action: "add" %>
+    <%= button_to "Remove", action: "remove" %>
+
+    <%= form_for :dancer, url: {action: "add"} do |f| %>
+        Name: <%= f.text_field :name %><br />
+        Email : <%= f.text_field :email %><br />
+        Phone Number : <%= f.text_area :phone %><br />
+        <%= f.submit %>
+      <% end %>
+</div>
