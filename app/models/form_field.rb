@@ -49,5 +49,4 @@ class FormField < ApplicationRecord
   def self.teamSwitchbackup
     return FormField.where(id: TEAM_SWITCH_BACKUP_RANGE)
   end
-
 end
