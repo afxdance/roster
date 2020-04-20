@@ -1,9 +1,6 @@
 class FormField < ApplicationRecord
 	TEAM_SWITCH_RANGE = (1..16)
-
-	def self.teamswitch
-		return FormField.where(id: TEAM_SWITCH_RANGE)
-	end
+  TEAM_SWITCH_BACKUP_RANGE = (18..33)
 
 	def self.getTeamSwitchFields
 		return FormField.teamswitch.pluck(:data).map{|data| data.html_safe}
@@ -25,5 +22,32 @@ class FormField < ApplicationRecord
 		# To format time object: https://apidock.com/rails/ActiveSupport/TimeWithZone/strftime
 		# If each formfield becomes updated independently:
 		# return FormField.first(:order => "updated_at desc", :limit => 1).updated_at
-	end
+  end
+
+  def self.setTeamSwitchBackup
+    FormField.teamwwitchbackup.each do |item|
+      updates = FormField.where(id: item.id - 17).data
+      item.update(data: updates)
+    end
+    return "Backup saved"
+  end
+
+  def self.revertTeamSwitchBackup
+    FormField.teamswitch.each do |item|
+      updates = FormField.where(id: item.id + 17).data
+      item.update(data: updates)
+    end
+    return "Reverted to the most recent backup"
+  end
+
+  private
+
+  def self.teamswitch
+		return FormField.where(id: TEAM_SWITCH_RANGE)
+  end
+
+  def self.teamSwitchbackup
+    return FormField.where(id: TEAM_SWITCH_BACKUP_RANGE)
+  end
+
 end
