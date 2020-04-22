@@ -30,7 +30,9 @@
     :available_team_ids,
     Team.all.sort_by(&:name),
     :id,
-    :name) %>
+    :name,
+    {:prompt => "Choose your AFX Team"},
+    {class: "audition-form"}) %>
 
 
 <hr>
@@ -138,13 +140,14 @@ AFX encourages its members to respect a survivor's wishes at all times in cases 
     <label>I am at least 18 years of age and am signing this form for myself.</label>
   </p>
   <p>
-    <%= f.radio_button :pg_release, 'other'  %> Other: <%= f.text_field :pg_other, :style => "display: inline-block; width: 50%" %>
+    <%= f.radio_button :pg_release, 'other'  %> Other: <%= f.text_field :pg_other, :style => "display: inline-block; width: 51%" %>
      <!-- gna need to change the required -->
   </p>
 
 
 
 <hr>
+<div id="parent">
 <p><h3>[IF YOU ARE YOUNGER THAN 18 YEARS OF AGE] </h3></p>
 
 
@@ -159,6 +162,8 @@ AFX encourages its members to respect a survivor's wishes at all times in cases 
     </label>
   </p>
 <hr>
+</div>
+<div id="myself">
 <p><h3>[IF YOU ARE 18 YEARS OF AGE OR OLDER]</h3></p>
 
   <%= f.text_field :m_sign, placeholder: "Your Signature (full legal name)" %><br>
@@ -170,11 +175,11 @@ AFX encourages its members to respect a survivor's wishes at all times in cases 
     </label>
   </p>
   <br>
-
+</div>
 
 
   <div class = "submit">
-    <%= f.submit "Submit team switch request", class: "availability-form-submit" %>
+    <%= f.submit "Submit Safety and Responsibility Contract", class: "availability-form-submit" %>
   </div>
 
   <script>
@@ -229,6 +234,17 @@ AFX encourages its members to respect a survivor's wishes at all times in cases 
 
     return nchecked == 9 && isvalid && infocheck
   }
+
+  $('input[type=radio]').change(function() {
+    $('#parent').css('display', 'none')
+    $('#myself').css('display', 'none')
+    fieldToShow = $(this).val()
+    $('#' + fieldToShow).css('display', 'block')
+    return
+  });
+  // TODO What to show for other option
+
+
   $('#src_form').submit(function() {
      return checkboxesAreValid()
   });
