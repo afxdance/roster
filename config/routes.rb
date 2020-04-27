@@ -16,4 +16,6 @@ Rails.application.routes.draw do
   post "/teamswitch", to: "team_switch_form#create_team_switch_request", as: "team_switch_form"
 
   get "/src", to: "src#index"
+  post "/src", to: "src#submit"
+  get "/src/confirm", to: "src#confirm"
 end

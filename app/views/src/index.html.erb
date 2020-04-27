@@ -1,8 +1,7 @@
 <body id="audition-form-body">
 
-<%= form_for :team_switch_request, :url => team_switch_form_path, :html => {:class => "audition-form"} do |f| %>
+<%= form_with url: "/src", method: "post", :html => {:class => "audition-form", :id => "src_form"} do |f| %>
   <h2>AFX Dance: Spring 2020 Member Safety and Responsibility Contract (SRC)</h2>
-
 
   <div class="times">
 
@@ -17,6 +16,25 @@
   <p>Failure to complete this contract will REVOKE YOUR MEMBERSHIP in AFX Dance for the Spring 2020 Semester WITH NO REFUNDS.</p>
 
   <br>
+
+<p><h6> What is your AFX Team?: </h6></p>
+  <p>If you are on AFX Competitive Team and a Project/Training team, choose one and we will match the records. Directors, please choose the team you are directing.
+  </p>
+
+  <%= f.text_field :name, required: true, placeholder: "FIRST AND LAST NAME" %><br>
+  <%= f.text_field :email, required: true, placeholder: "EMAIL", pattern: " ^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" %><br>
+  <%= f.text_field :phone, required: true, placeholder: "PHONE: XXX-XXX-XXXX", pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}" %>
+
+  <!-- still needs to be styled and add label -->
+  <%= f.collection_select(
+    :available_team_ids,
+    Team.all.sort_by(&:name),
+    :id,
+    :name,
+    {:prompt => "Choose your AFX Team"},
+    {class: "audition-form"}) %>
+
+
 <hr>
   <p><h3><center><b><u>General Behavior and Conduct Policy</u></b></center></h3>
     <p>AFX Dance is an organization that gives those without dance experience an opportunity to experience urban dance. The organization name, [A]spirations, [F]amily, e[X]perience reflects our philosophy of creating a family environment for dancers to build up their confidence and support to reach new heights. Each member in AFX is responsible for upholding these values and at the same time, creating and maintaining a safe and open environment for all. All AFX members are held accountable to all federal and state laws. Even when outside of the organization's dance spaces, AFX holds its members accountable to proper behavior and conduct at all times as a member's actions is a reflection upon the organization. Behaviors such as hate crimes, peer pressure, indecent exposure, and theft are all severely inappropriate conduct and will not be tolerated. Failure to comply will result in expulsion from the org. In cases of misconduct, AFX encourages its members to report violations of our Safety and Responsibility Rules to either the Executive Board and/or campus resources such as PATH to Care.
@@ -78,31 +96,33 @@ AFX encourages its members to respect a survivor's wishes at all times in cases 
 <p>Consent is informed and an affirmative, unambiguous, and conscious decision by each participant to engage in mutually agreed-upon activity. The activity may be physical, verbal, or otherwise. Consent is voluntary, must be ongoing, and can be revoked at any point in time. Consent cannot be given when a person is incapacitated, and the ability to give proper consent may be influenced by substance use and power dynamics.
 </p>
   <p>
-    <%= f.check_box(:TODO, {})%>
+    <%= f.check_box '4', required: true, class: "required_checkboxes" %>
     <label>I understand that consent is revocable, verbal, voluntary, conscious, and enthusiastic.</label>
+
+
   </p>
   <p>
-    <%= f.check_box(:TODO, {})%>
+    <%= f.check_box '5', required: true, class: "required_checkboxes" %>
     <label>I understand that AFX encourages its members to report violations of our Safety and Responsibility Rules to either the Executive Board and/or campus resources.</label>
   </p>
 
   <p>
-    <%= f.check_box(:TODO, {})%>
+    <%= f.check_box '6', required: true, class: "required_checkboxes" %>
     <label>I understand that I will cooperate to the fullest extent with the Executive Board and other members of AFX Dance to maintain a safe environment to fulfill the goals of AFX Dance.</label>
   </p>
 
 <p>
-    <%= f.check_box(:TODO, {})%>
+    <%= f.check_box '7', required: true, class: "required_checkboxes" %>
     <label>I understand and agree to follow all of the safety and responsibility rules set forth in this contract. I acknowledge that I must obey these rules in order to hold active membership in AFX Dance to ensure my own safety, and that of other members.
 </label>
   </p>
   <p>
-    <%= f.check_box(:TODO, {})%>
+    <%= f.check_box '8', required: true, class: "required_checkboxes" %>
     <label>I am aware that any violation of this contract or misbehavior on my part that results in unsafe conduct at events and practices affiliated with AFX Dance or events in the presence of members of the AFX community will result in prohibition of attending future AFX events and revocation of my membership immediately and/or permanently.</label>
   </p>
 
   <p>
-    <%= f.check_box(:TODO, {})%>
+    <%= f.check_box '9', required: true, class: "required_checkboxes" %>
     <label>I acknowledge that I have read this Safety and Responsibility Contract and that I understand the words and language in it. All potential risks and effects of the Safety and Responsibility Contract have been answered to my satisfaction.</label>
   </p>
 
@@ -112,40 +132,46 @@ AFX encourages its members to respect a survivor's wishes at all times in cases 
 
 <p><h3>Parent / Guardian Release</h3></p>
     <p>
-      <%= f.check_box(:TODO, {})%>
+      <%= f.radio_button :pg_release, 'parent' %>
       <label>I understand and agree that if I am signing this Safety and Responsibility Agreement on behalf of my minor child, that I will be giving up the same rights for said minor as I would be giving up if I signed this document on my own behalf.</label>
-    </p>
   </p>
   <p>
-    <%= f.check_box(:TODO, {})%>
+    <%= f.radio_button :pg_release, 'myself' %>
     <label>I am at least 18 years of age and am signing this form for myself.</label>
+  </p>
+  <p>
+    <%= f.radio_button :pg_release, 'other'  %> Other: <%= f.text_field :pg_other, :style => "display: inline-block; width: 51%" %>
+     <!-- gna need to change the required -->
   </p>
 
 
   <%= f.text_area :reason, required: false, placeholder: "Other:" %> <!-- gna need to change the required -->
 
 <hr>
+<div id="parent">
 <p><h3>[IF YOU ARE YOUNGER THAN 18 YEARS OF AGE] </h3></p>
 
 
 
-  <%= f.text_field :name, required: true, placeholder: "Your Full Legal Name" %><br>
-  <%= f.text_field :name, required: true, placeholder: "Parent / Guardian Signature (full legal name)" %><br>
-  <%= f.text_field :name, required: true, placeholder: "Date of signature: MM/DD/YYYY", pattern: "^[0-3][0-9]/[0-3][0-9]/(?:[0-9][0-9])?[0-9][0-9]$" %><br>
+  <%= f.text_field :p_name, placeholder: "Your Full Legal Name" %><br>
+  <%= f.text_field :p_sign, placeholder: "Parent / Guardian Signature (full legal name)" %><br>
+  <%= f.text_field :p_date, placeholder: "Date of signature: MM/DD/YYYY", pattern: "^[0-3][0-9]/[0-3][0-9]/(?:[0-9][0-9])?[0-9][0-9]$" %><br>
 
   <p>
-    <%= f.check_box(:TODO, {})%>
+    <%= f.check_box :p_checkbox %>
     <label>I understand that checking this box constitutes a legal signature confirming that I acknowledge the above Safety and Responsibility Agreement for AFX Dance and am liable to the rules mutually agreed upon between me and the organization.
     </label>
   </p>
 <hr>
+</div>
+<div id="myself">
 <p><h3>[IF YOU ARE 18 YEARS OF AGE OR OLDER]</h3></p>
 
-  <%= f.text_field :name, required: true, placeholder: "Your Signature (full legal name)" %><br>
-  <%= f.text_field :name, required: true, placeholder: "Date of signature: MM/DD/YYYY", pattern: "^[0-3][0-9]/[0-3][0-9]/(?:[0-9][0-9])?[0-9][0-9]$" %><br>
+  <%= f.text_field :m_sign, placeholder: "Your Signature (full legal name)" %><br>
+  <%= f.text_field :m_date, placeholder: "Date of signature: MM/DD/YYYY", pattern: "^[0-3][0-9]/[0-3][0-9]/(?:[0-9][0-9])?[0-9][0-9]$" %><br>
 
   <p>
-    <%= f.check_box(:TODO, {})%>
+    <%= f.check_box :m_checkbox %>
     <label>I understand that checking this box constitutes a legal signature confirming that I acknowledge the above Safety and Responsibility Agreement for AFX Dance and am liable to the rules mutually agreed upon between me and the organization.
     </label>
   </p>
@@ -161,48 +187,75 @@ AFX encourages its members to respect a survivor's wishes at all times in cases 
 
 
   <div class = "submit">
-    <%= f.submit "Submit team switch request", class: "availability-form-submit" %>
+    <%= f.submit "Submit Safety and Responsibility Contract", class: "availability-form-submit" %>
   </div>
 
   <script>
   function checkboxesAreValid() {
-    nchecked = {}
-    nchecked.project = $('.availability-checkbox-project:checked').length;
-    nchecked.training = $('.availability-checkbox-training:checked').length;
-    nchecked.drop = $('.availability-checkbox-drop:checked').length;
-    nchecked.team = nchecked.project + nchecked.training;
-    nchecked.total = nchecked.project + nchecked.training + nchecked.drop;
+    nchecked = $('.required_checkboxes:checked').length;
+    radiocheck = $('input[name="pg_release"]:checked').val();
+    infocheck = false
+    a = $('input[name="name"]').val() != null;
+    b = $('input[name="email"]').val() != null;
+    re = new RegExp("[0-9]{3}-[0-9]{3}-[0-9]{4}")
+    c = re.test($('input[name="phone"]').val());
+    if (a && b && c) {
+      infocheck = true
+    }
+    isvalid = false
 
-    if (nchecked.total == 0)
-      return false;
 
-    if (nchecked.drop > 0 && nchecked.team > 0)
-      return false;
+    switch(radiocheck) {
+      case "parent":
+        a = $('input[name="p_name"]').val() != null;
+        b = $('input[name="p_sign"]').val() != null;
+        re = new RegExp("^[0-3][0-9]/[0-3][0-9]/(?:[0-9][0-9])?[0-9][0-9]$")
+        c = re.test($('input[name="p_date"]').val())
+        d = $('input[name="p_checkbox"]').is(':checked')
+        if (a && b && c && d) {
+          isvalid = true
+        }
+        break;
+      case "myself":
+        a = $('input[name="m_sign"]').val() != null;
+        re = new RegExp("^[0-3][0-9]/[0-3][0-9]/(?:[0-9][0-9])?[0-9][0-9]$")
+        b = re.test($('input[name="m_date"]').val())
+        c = $('input[name="m_checkbox"]').is(':checked');
+        if (a && b && c) {
+          isvalid = true
+        }
+        break;
+      case "other":
+       a = $('input[name="pg_other"]').val() != null;
+       if (a) {
+         isvalid = true
+       }
+       break;
+      default:
 
-    // If someone on a project team puts down a project team time and a training team time,
-    // then that's okay.
-    if (nchecked.project == 0 && nchecked.training == 1)
-      return false;
+    }
+    console.log("nchecked: " + String(nchecked))
+    console.log("isvalid " + String(isvalid))
+    console.log("infocheck " + String(infocheck))
 
-    return true;
+    console.log(nchecked == 9 && isvalid && infocheck)
+
+    return nchecked == 9 && isvalid && infocheck
   }
 
-  function verify() {
-    if (checkboxesAreValid()) {
-      $('.availability-form-submit').show();
-    }
-    else {
-      $('.availability-form-submit').hide();
-    }
-  }
-
-  $(() => {
-    verify();
-    $('.availability-checkbox').click(() => {
-      verify();
-    });
+  $('input[type=radio]').change(function() {
+    $('#parent').css('display', 'none')
+    $('#myself').css('display', 'none')
+    fieldToShow = $(this).val()
+    $('#' + fieldToShow).css('display', 'block')
+    return
   });
+  // TODO What to show for other option
 
+
+  $('#src_form').submit(function() {
+     return checkboxesAreValid()
+  });
   </script>
 
   </div>

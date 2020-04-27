@@ -9,7 +9,7 @@ class TeamSwitchFormController < ApplicationController
     @request.dancer = find_dancer(@request.name, @request.phone, @request.email)
 
     if @request.dancer
-      if @request.dancer.teams.empty?
+      if @requmest.dancer.teams.empty?
         @request.old_team = nil
       elsif @request.dancer.teams.length == 1
         @request.old_team = @request.dancer.teams[0]
