@@ -19,10 +19,10 @@
   <br>
 <hr>
   <p><h3><center><b><u>General Behavior and Conduct Policy</u></b></center></h3>
-    <p>AFX Dance is an organization that gives those without dance experience an opportunity to experience urban dance. The organization name, [A]spirations, [F]amily, e[X]perience reflects our philosophy of creating a family environment for dancers to build up their confidence and support to reach new heights. Each member in AFX is responsible for upholding these values and at the same time, creating and maintaining a safe and open environment for all. All AFX members are held accountable to all federal and state laws. Even when outside of the organization's dance spaces, AFX holds its members accountable to proper behavior and conduct at all times as a member's actions is a reflection upon the organization. Behaviors such as hate crimes, peer pressure, indecent exposure, and theft are all severely inappropriate conduct and will not be tolerated. Failure to comply will result in expulsion from the org. In cases of misconduct, AFX encourages its members to report violations of our Safety and Responsibility Rules to either the Executive Board and/or campus resources such as PATH to Care. 
+    <p>AFX Dance is an organization that gives those without dance experience an opportunity to experience urban dance. The organization name, [A]spirations, [F]amily, e[X]perience reflects our philosophy of creating a family environment for dancers to build up their confidence and support to reach new heights. Each member in AFX is responsible for upholding these values and at the same time, creating and maintaining a safe and open environment for all. All AFX members are held accountable to all federal and state laws. Even when outside of the organization's dance spaces, AFX holds its members accountable to proper behavior and conduct at all times as a member's actions is a reflection upon the organization. Behaviors such as hate crimes, peer pressure, indecent exposure, and theft are all severely inappropriate conduct and will not be tolerated. Failure to comply will result in expulsion from the org. In cases of misconduct, AFX encourages its members to report violations of our Safety and Responsibility Rules to either the Executive Board and/or campus resources such as PATH to Care.
     </p>
   <p><h3><center><b><u>Harassment</u></b></center></h3>
-  <p>Providing a safe environment in AFX Dance is our top priority. AFX Dance has a zero-tolerance policy with regards to harassment. Harassment of any kind may result in a permanent expulsion of membership in AFX Dance. Harassment is governed by state laws, which vary by state, but is generally defined as a course of conduct which annoys, threatens, intimidates, alarms, or puts a person in fear of their safety. Harassment is unwanted, unwelcomed and uninvited behavior that demeans, threatens or offends the recipient and results in a hostile environment for the recipient. 
+  <p>Providing a safe environment in AFX Dance is our top priority. AFX Dance has a zero-tolerance policy with regards to harassment. Harassment of any kind may result in a permanent expulsion of membership in AFX Dance. Harassment is governed by state laws, which vary by state, but is generally defined as a course of conduct which annoys, threatens, intimidates, alarms, or puts a person in fear of their safety. Harassment is unwanted, unwelcomed and uninvited behavior that demeans, threatens or offends the recipient and results in a hostile environment for the recipient.
 <br><br>
   Harassment includes the following categories of behavior:
 <br><br>
@@ -35,11 +35,28 @@
   For University of California policy on sexual violence and sexual harassment, please read through this document: <a href="https://policy.ucop.edu/doc/4000385/SVSH">https://policy.ucop.edu/doc/4000385/SVSH</a>. </p>
     <br>
 
-I understand that AFX Dance is an organization that gives those without dance experience an opportunity to experience urban dance. The organization name, [A]spirations, [F]amily, e[X]perience reflects our philosophy of creating a family environment for dancers to build up their confidence and support to reach new heights.
+</p>
+  <p>
+    <%= f.check_box(:TODO, {})%>
+    <label>I understand that AFX Dance is an organization that gives those without dance experience an opportunity to experience urban dance. The organization name, [A]spirations, [F]amily, e[X]perience reflects our philosophy of creating a family environment for dancers to build up their confidence and support to reach new heights.</label>
+  </p>
+  <p>
+    <%= f.check_box(:TODO, {})%>
+    <label>I understand that AFX is a non-discriminatory organization with a ZERO TOLERANCE POLICY with regards to harassment. Harassment of any kind may result in immediate and/or permanent removal from AFX Dance.</label>
+  </p>
 
-I understand that AFX is a non-discriminatory organization with a ZERO TOLERANCE POLICY with regards to harassment. Harassment of any kind may result in immediate and/or permanent removal from AFX Dance.
+  <p>
+    <%= f.check_box(:TODO, {})%>
+    <label>I will respect all gender identities and use preferred gender pronouns.</label>
+  </p>
 
-I will respect all gender identities and use preferred gender pronouns.
+<p>
+
+
+
+
+
+
 <hr>
   <p><h6> CONTENT WARNING: Mention of sexual harassment and sexual violence </h6></p>
 
@@ -48,11 +65,11 @@ I will respect all gender identities and use preferred gender pronouns.
 <p>
 Sexual harassment refers to any conduct, comment, gesture, or contact of a sexual nature, whether on a one-time basis or a series of incidents, that might reasonably be expected to cause offense or humiliation. Creating an intimidating, hostile, or offensive environment through sexually inappropriate conduct is sexual harassment. Examples of behavior that can constitute sexual harassment include, but are not limited to: sexual assault, unwanted touching, patting or leering, inquiries or comments about a person’s sex life, gender-based insults or jokes causing embarrassment or humiliation, repeated unwanted social or sexual requests or invitations, inappropriate or unwelcome focus/comments on a person’s physical attributes or appearance.
 
-Sexual violence is a physical sexual act engaged without consent. Examples of sexual violence include sexual assault, rape, battery, sexual coercion, dating violence, and stalking. 
+Sexual violence is a physical sexual act engaged without consent. Examples of sexual violence include sexual assault, rape, battery, sexual coercion, dating violence, and stalking.
 
 AFX Dance has a zero-tolerance policy with regards to sexual harassment and sexual violence. A dancer's membership will be at risk for expulsion/suspension in cases where there is doubt. If there is a report, a dancer's membership will be immediately suspended until the case is resolved. Immediate expulsion and blacklisting from the organization will occur if the accused party is found guilty in such cases.
 
-AFX encourages its members to respect a survivor's wishes at all times in cases such as these. 
+AFX encourages its members to respect a survivor's wishes at all times in cases such as these.
 </p>
 
   <p><h3><center><b><u>Consent Clause</u></b></center></h3>
@@ -105,7 +122,7 @@ AFX encourages its members to respect a survivor's wishes at all times in cases 
   </p>
 
 
-  <%= f.text_area :reason, required: true, placeholder: "Other:" %> <!-- gna need to change the required -->
+  <%= f.text_area :reason, required: false, placeholder: "Other:" %> <!-- gna need to change the required -->
 
 <hr>
 <p><h3>[IF YOU ARE YOUNGER THAN 18 YEARS OF AGE] </h3></p>
@@ -132,99 +149,16 @@ AFX encourages its members to respect a survivor's wishes at all times in cases 
     <label>I understand that checking this box constitutes a legal signature confirming that I acknowledge the above Safety and Responsibility Agreement for AFX Dance and am liable to the rules mutually agreed upon between me and the organization.
     </label>
   </p>
-  <br>
-  <h2>everything below this isn't part of the src </h2>
-
-
-
-  <p><h6> What is your AFX Team?: </h6></p>
-  <p>If you are on AFX Competitive Team and a Project/Training team, choose one and we will match the records. Directors, please choose the team you are directing.
-  </p>
-
-  <%= f.text_field :name, required: true, placeholder: "FIRST AND LAST NAME" %><br>
-  <%= f.text_field :email, required: true, placeholder: "EMAIL", pattern: " ^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" %><br>
-  <%= f.text_field :phone, required: true, placeholder: "PHONE: XXX-XXX-XXXX", pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}" %>
-  
-  <!-- still needs to be styled and add label -->
-  <%= f.collection_select(
-    :available_team_ids,
-    Team.all.sort_by(&:name),
-    :id,
-    :name) %> 
-  
-
-  HERE
-  <%= f.collection_check_boxes(
-        :available_team_ids,
-        Team.project_teams.sort_by(&:practice_time_sort_string),
-        :id,
-        :name
-      ) do |option| %>
-    <% next if option.object.practice_time.blank? || option.object.practice_time[0] == " " %>
-    <div><label>
-      <%= option.check_box(class: "availability-checkbox availability-checkbox-project") %>
-      <span class="availability-display" style="display: none">
-        <code class="availability-display-busy">BUSY</code>
-        <code class="availability-display-free">FREE</code>
-      </span>
-      <%= option.object.practice_time %>
-    </label></div>
-  <% end %>
-
-  <%= f.collection_check_boxes(
-        :available_team_ids,
-        Team.training_teams.sort_by(&:practice_time_sort_string),
-        :id,
-        :name
-      ) do |option| %>
-    <% next if option.object.practice_time.blank? || option.object.practice_time[0] == " " %>
-    <div><label>
-      <%= option.check_box(class: "availability-checkbox availability-checkbox-training") %>
-      <span class="availability-display" style="display: none">
-        <code class="availability-display-busy">BUSY</code>
-        <code class="availability-display-free">FREE</code>
-      </span>
-      <%= option.object.practice_time %>
-    </label></div>
-  <% end %>
-
-  <%= f.collection_check_boxes(
-        :available_team_ids,
-        Team.drop_teams.sort_by(&:practice_time_sort_string),
-        :id,
-        :name
-      ) do |option| %>
-
-    <div><label>
-      <%= option.check_box(class: "availability-checkbox availability-checkbox-drop") %> Yes, I would like to withdraw from AFX Spring 2020 Project/Training. I acknowledge that my decision is final and that once I submit the form, I will no longer be able to join any team practice or perform in any AFX set this semester (NO EXCEPTIONS). If I violate these conditions and do not pay AFX dues, I will be charged at any time.
-    </label></div>
-  <% end %>
-
-<br>
-<br>
-
-<hr>
-<br>
-
-  <p><b>What is your reason for switching into a different team or dropping from AFX? Please explain your time conflict and what prevents you from attending your current team’s practices.*
-</b></p>
-
-
-  <%= f.text_area :reason, required: true, placeholder: "Reason" %>
-
-  <br>
-
-  <p><b>We urge you to PLEASE double-check all of your contact information and answers as inputting incorrect information may lead to an unattended request, a rejected request, or a drop from AFX. Have you reviewed all of your responses carefully?*</b>
-
 
   <p>
-    <%= f.check_box(:double_check, {})%>
-    <label>Yes</label>
-  </p>
+    Thank you for submitting the AFX Dance Fall 2019 Member Safety and Responsibility Contract. Your response has been recorded. If you have further questions, please email afxdance@gmail.com.
 
-  <p>Again, if you have any further questions, please email afxdanceswitchdrop@gmail.com and we will try to respond within 24 hours. You will receive an email with the results once your team switch or drop request has been successfully processed. Please check your email’s spam folder in case the email is delivered there. All notices and results are delivered ONLY from afxdanceswitchdrop@gmail.com. Thank you for your patience!
+  <br>
 
-    <p><i>All information processed through this form will be confidential and be kept within the Executive Board. We greatly appreciate your cooperation.
+
+
+
+
 
   <div class = "submit">
     <%= f.submit "Submit team switch request", class: "availability-form-submit" %>
