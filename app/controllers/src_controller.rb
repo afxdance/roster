@@ -20,7 +20,7 @@ class SrcController < ApplicationController
     @c8 = params["h"]
     @c9 = params["i"]
     @pg_release = params["pg_release"]
-    if @pg_release == 'parent':
+    if @pg_release == 'parent'
       @full_name = params["p_name"]
       @signature = params["p_sign"]
       @date = params["p_date"]
