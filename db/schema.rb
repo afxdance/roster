@@ -55,6 +55,12 @@ ActiveRecord::Schema.define(version: 20200422035837) do
   create_table "director_users", force: :cascade do |t|
   end
 
+  create_table "form_fields", force: :cascade do |t|
+    t.text "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "srcs", force: :cascade do |t|
     t.boolean "c1", null: false
     t.boolean "c2", null: false
