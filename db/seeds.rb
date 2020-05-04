@@ -9,6 +9,7 @@
 Dancer.delete_all
 User.delete_all
 Team.delete_all
+Src.delete_all
 
 User.create!(username: "admin",
              password: "password",

@@ -10,6 +10,8 @@ class SrcController < ApplicationController
   def submit
     # save form info to db
     # params["name of form element"] such as p_name, p_sign, etc...
+
+    # TODO, i would reccomend writing all this logic of extracting parameters in the src_params method for cleaner code
     @c1 = params["a"]
     @c2 = params["b"]
     @c3 = params["c"]
@@ -24,19 +26,29 @@ class SrcController < ApplicationController
       @full_name = params["p_name"]
       @signature = params["p_sign"]
       @date = params["p_date"]
-      @acknowledgement = params["p_checkbox"]
+      @acknowledgment = params["p_checkbox"]
     elsif @pg_release == 'myself'
-      @signature = params['m_name']
+      @signature = params['m_sign']
       @date = params['m_date']
-      @acknowledgement = params["m_checkbox"]
+      @acknowledgment = params["m_checkbox"]
     else 
       @other = params["pg_other"]
-  
+    end
 
-    src = Src.new(@c1, @c2, @c3, @c4, @c5, @c6, @c7, @c8, @c9, @pg_release, @other, @full_name, @signature, @date, @acknowledgement)
-    # save stuff to src
-    success = src.save
-    redirect_to "/src/confirm" unless success 
+    dancer = Dancer.where(email: params[:email] )
+    if dancer.empty?
+      # TODO: return dancer not found error message
+      puts "ERROR DANCER NOT FOUND" # delete this later, i used it for debugging - joe
+    else
+      src = Src.new(c1: @c1, c2: @c2, c3: @c3, c4: @c4, c5: @c5, c6: @c6, c7: @c7, c8: @c8, c9: @c9, pg_release: @pg_release, other: @other, full_name: @full_name, signature: @signature, date: @date, acknowledgment: @acknowledgment)
+      # save stuff to src
+      src.dancer = dancer.first
+      success = src.save
+      puts success
+      # dancer.first.srcs will give a collection of srcs, should only have one but can be multiple bc of has_many
+      redirect_to "/src/confirm" if success 
+    end
+    
   end
 
   private
@@ -59,7 +71,7 @@ class SrcController < ApplicationController
           :full_name,
           :signature,
           :date,
-          :acknowledgement,
+          :acknowledgment,
         )
     end
 end

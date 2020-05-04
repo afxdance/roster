@@ -1,4 +1,4 @@
 class Src < ApplicationRecord
-  belongs_to :dancers
+  belongs_to :dancer
 
 end
