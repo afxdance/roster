@@ -1,6 +1,6 @@
 class FormField < ApplicationRecord
 	TEAM_SWITCH_RANGE = (1..16)
-  TEAM_SWITCH_BACKUP_RANGE = (18..33)
+  TEAM_SWITCH_BACKUP_RANGE = (17..32)
 
 	def self.getTeamSwitchFields
 		return FormField.teamswitch.pluck(:data).map{|data| data.html_safe}
@@ -25,8 +25,13 @@ class FormField < ApplicationRecord
   end
 
   def self.setTeamSwitchBackup
+<<<<<<< HEAD
     FormField.teamSwitchbackup.each do |item|
       updates = FormField.find(item.id - 17).data
+=======
+    FormField.teamwwitchbackup.each do |item|
+      updates = FormField.where(id: item.id - 16).data
+>>>>>>> b03c772f15fb4ad19805d3277025d012449b38ae
       item.update(data: updates)
     end
     return "New changes and backup saved"
@@ -34,7 +39,11 @@ class FormField < ApplicationRecord
 
   def self.revertTeamSwitchBackup
     FormField.teamswitch.each do |item|
+<<<<<<< HEAD
       updates = FormField.find(item.id + 17).data
+=======
+      updates = FormField.where(id: item.id + 16).data
+>>>>>>> b03c772f15fb4ad19805d3277025d012449b38ae
       item.update(data: updates)
     end
     return "Reverted to the most recent backup"
