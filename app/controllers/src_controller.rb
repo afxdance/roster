@@ -34,7 +34,6 @@ class SrcController < ApplicationController
     else 
       @other = params["pg_other"]
     end
-
     dancer = Dancer.where(email: params[:email] )
     if dancer.empty?
       # TODO: return dancer not found error message
