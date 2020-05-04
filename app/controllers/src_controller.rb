@@ -33,9 +33,9 @@ class SrcController < ApplicationController
       @other = params["pg_other"]
   
 
-    src = Src.new(@c1, @c2, @c3, @c4, @c5, @c6, @c7, @c8, @c9, @pg_release, @other, @full_name, @signature, @date, @acknowledgement)
+    @src = Src.new(@c1, @c2, @c3, @c4, @c5, @c6, @c7, @c8, @c9, @pg_release, @other, @full_name, @signature, @date, @acknowledgement)
     # save stuff to src
-    success = src.save
+    success = @src.save
     redirect_to "/src/confirm" unless success 
   end
 
