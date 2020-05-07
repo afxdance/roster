@@ -25,13 +25,8 @@ class FormField < ApplicationRecord
   end
 
   def self.setTeamSwitchBackup
-<<<<<<< HEAD
     FormField.teamSwitchbackup.each do |item|
-      updates = FormField.find(item.id - 17).data
-=======
-    FormField.teamwwitchbackup.each do |item|
-      updates = FormField.where(id: item.id - 16).data
->>>>>>> b03c772f15fb4ad19805d3277025d012449b38ae
+      updates = FormField.find(item.id - 16).data
       item.update(data: updates)
     end
     return "New changes and backup saved"
@@ -39,11 +34,7 @@ class FormField < ApplicationRecord
 
   def self.revertTeamSwitchBackup
     FormField.teamswitch.each do |item|
-<<<<<<< HEAD
-      updates = FormField.find(item.id + 17).data
-=======
-      updates = FormField.where(id: item.id + 16).data
->>>>>>> b03c772f15fb4ad19805d3277025d012449b38ae
+      updates = FormField.find(item.id + 16).data
       item.update(data: updates)
     end
     return "Reverted to the most recent backup"
