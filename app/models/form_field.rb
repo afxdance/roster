@@ -17,15 +17,19 @@ class FormField < ApplicationRecord
 		end
 	end
 
-	def self.lastUpdated
-		return FormField.first.updated_at.strftime("%m/%d/%Y")
+	def self.lastUpdatedTeamSwitch
+		return FormField.teamswitch.first.updated_at.strftime("%m/%d/%Y")
 		# To format time object: https://apidock.com/rails/ActiveSupport/TimeWithZone/strftime
 		# If each formfield becomes updated independently:
 		# return FormField.first(:order => "updated_at desc", :limit => 1).updated_at
   end
 
+  def self.lastBackupTeamSwitch
+    return FormField.teamswitchbackup.first.updated_at.strftime("%m/%d/%Y")
+  end
+
   def self.setTeamSwitchBackup
-    FormField.teamSwitchbackup.each do |item|
+    FormField.teamswitchbackup.each do |item|
       updates = FormField.find(item.id - 16).data
       item.update(data: updates)
     end
@@ -46,7 +50,7 @@ class FormField < ApplicationRecord
 		return FormField.where(id: TEAM_SWITCH_RANGE)
   end
 
-  def self.teamSwitchbackup
+  def self.teamswitchbackup
     return FormField.where(id: TEAM_SWITCH_BACKUP_RANGE)
   end
 end
