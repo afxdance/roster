@@ -49,7 +49,7 @@ Dancer.create!(name: "Evelyn Liu2",
                 gender: "peter",
                 year: "3",
                 dance_experience: "no",
-                **dancer_extra_fields) )
+                **dancer_extra_fields)
 Team.create!(name: "AFX Help",
              level: "Project",
              practice_time: "all the time",
