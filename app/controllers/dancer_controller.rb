@@ -3,7 +3,7 @@ class DancerController < ApplicationController
     email = params[:email]
     puts(email)
     if (Dancer.exists?(email: email))
-      teams = Dancer.find_by(email: email).teams.map{|team| team.name}
+      teams = Dancer.find_by(email: email).teams.map{ |team| team.name }
     else
       teams = "Dancer not found"
     end
