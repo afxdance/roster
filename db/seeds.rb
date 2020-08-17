@@ -17,11 +17,11 @@ User.create!(username: "young cai",
              password: "password123",
              password_confirmation: "password123",
              role: "director")
-# dancer_extra_fields = { exp_interest: "not important rn",
-#                         tech_interest: "not important rn",
-#                         camp_interest: "not important rn",
-#                         reach_workshop_interest: "not important rn",
-#                         reach_news_interest: "not important rn" }
+dancer_extra_fields = { exp_interest: "not important rn",
+                        tech_interest: "not important rn",
+                        camp_interest: "not important rn",
+                        reach_workshop_interest: "not important rn",
+                        reach_news_interest: "not important rn" }
 # Dancer.create!(name: "Peter Le",
 #                email: "peter@peter.peter",
 #                phone: "pet-erp-eter",
