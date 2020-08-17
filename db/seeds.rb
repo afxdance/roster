@@ -44,7 +44,7 @@ dancer_extra_fields = { exp_interest: "not important rn",
 #                dance_experience: "stella",
 #                **dancer_extra_fields)
 Dancer.create!(name: "Evelyn Liu2",
-               mail: "peter@peter.peter",
+               email: "peter@peter.peter",
                phone: "pet-erp-eter",
                gender: "peter",
                year: "3",
