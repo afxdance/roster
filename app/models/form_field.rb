@@ -7,8 +7,9 @@ class FormField < ApplicationRecord
   end
 
   def self.set_team_switch_fields(fields)
-    FormField.teamswitch.each_with_index do |item, index|
-      item.update(data: fields[index])
+    begin
+      FormField.teamswitch.each_with_index do |item, index|
+        item.update(data: fields[index])
     end
     return "Successfully saved changes"
     rescue Error # change this to something useful

@@ -151,9 +151,9 @@ div.editable:hover {
 }
 </style>
 
-<% @formfields = FormField.getTeamSwitchFields() %>
-<% @updatedAt = FormField.lastUpdatedTeamSwitch %>
-<% @backupAt = FormField.lastBackupTeamSwitch %>
+<% @formfields = FormField.get_team_switch_fields %>
+<% @updatedAt = FormField.last_updated_team_switch %>
+<% @backupAt = FormField.last_backup_team_switch %>
 
 <body id="audition-form-body">
 
