@@ -7,14 +7,12 @@ class FormField < ApplicationRecord
   end
 
   def self.update_team_switch_fields(fields)
-    begin
-      FormField.teamswitch.each_with_index do |item, index|
-        item.update(data: fields[index])
-      end
-      return "Successfully saved changes"
-    rescue Exception # change this to something useful
-      return "Error"
+    FormField.teamswitch.each_with_index do |item, index|
+      item.update(data: fields[index])
     end
+    return "Successfully saved changes"
+  rescue StandardError # change this to something useful
+      return "Error"
   end
 
   # To format time object: https://apidock.com/rails/ActiveSupport/TimeWithZone/strftime
