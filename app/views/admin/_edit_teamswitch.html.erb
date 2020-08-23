@@ -146,16 +146,20 @@ html, body
 {
   overflow: auto;
 }
+div.editable:hover {
+  background-color: #f0f0f0;
+}
 </style>
 
 <% @formfields = FormField.getTeamSwitchFields() %>
-<% @updatedAt = FormField.lastUpdated %>
+<% @updatedAt = FormField.lastUpdatedTeamSwitch %>
+<% @backupAt = FormField.lastBackupTeamSwitch %>
 
 <body id="audition-form-body">
 
 <%= form_for :team_switch_request, :url => team_switch_form_path, :html => {:class => "audition-form"} do |f| %>
 
-  <div contenteditable="true", id="fd1">
+  <div class="editable" contenteditable="true", id="fd1">
     <%= @formfields[0] %>
   </div>
 
@@ -169,15 +173,15 @@ html, body
 
   <% else %>
 
-  <div contenteditable="true", id="fd2">
+  <div class="editable" contenteditable="true", id="fd2">
     <%= @formfields[1] %>
   </div>
 
-  <div contenteditable="true", id="fd3">
+  <div class="editable" contenteditable="true", id="fd3">
     <%= @formfields[2] %>
   </div>
 
-  <div contenteditable="true", id="fd4">
+  <div class="editable" contenteditable="true", id="fd4">
     <%= @formfields[3] %>
   </div>
 
@@ -189,11 +193,11 @@ html, body
   <b><hr></b>
   <br>
 
-  <div contenteditable="true", id="fd5">
+  <div class="editable" contenteditable="true", id="fd5">
     <%= @formfields[4] %>
   </div>
 
-  <div contenteditable="true", id="fd6">
+  <div class="editable" contenteditable="true", id="fd6">
     <%= @formfields[5] %>
   </div>
 
@@ -214,18 +218,18 @@ html, body
     </label></div>
   <% end %>
 
-  <div contenteditable="true", id="fd7">
+  <div class="editable" contenteditable="true", id="fd7">
     <%= @formfields[6] %>
   </div>
 
   <br><br>
   <hr><br>
 
-  <div contenteditable="true", id="fd8">
+  <div class="editable" contenteditable="true", id="fd8">
    <%= @formfields[7] %>
   </div>
 
-  <div contenteditable="true", id="fd9">
+  <div class="editable" contenteditable="true", id="fd9">
     <%= @formfields[8] %>
   </div>
 
@@ -246,17 +250,17 @@ html, body
     </label></div>
   <% end %>
 
-  <div contenteditable="true", id="fd10">
+  <div class="editable" contenteditable="true", id="fd10">
     <%= @formfields[9] %>
   </div>
 
   <hr><br>
 
-  <div contenteditable="true", id="fd11">
+  <div class="editable" contenteditable="true", id="fd11">
     <%= @formfields[10] %>
   </div>
 
-  <div contenteditable="true", id="fd12">
+  <div class="editable" contenteditable="true", id="fd12">
     <%= @formfields[11] %>
   </div>
 
@@ -271,13 +275,13 @@ html, body
     </label></div>
   <% end %>
 
-  <div contenteditable="true", id="fd13">
+  <div class="editable" contenteditable="true", id="fd13">
     <%= @formfields[12] %>
   </div>
 
   <hr><br>
 
-  <div contenteditable="true", id="fd14">
+  <div class="editable" contenteditable="true", id="fd14">
     <%= @formfields[13] %>
   </div>
 
@@ -285,7 +289,7 @@ html, body
 
   <br><br><hr><br>
 
-  <div contenteditable="true", id="fd15">
+  <div class="editable" contenteditable="true", id="fd15">
     <%= @formfields[14] %>
   </div>
 
@@ -294,11 +298,15 @@ html, body
     <label>Yes</label>
   </p>
 
-  <div contenteditable="true", id="fd16">
+  <div class="editable" contenteditable="true", id="fd16">
     <%= @formfields[15] %>
-  </div> <i>          <!-- THIS <i> IS IMPORTANT FOR SOME REASON DO NOT REMOVE (we have no idea why someone help pls) -->
+  </div> 
+
+
+  <div>          <!-- THIS <i> or <div> IS IMPORTANT FOR SOME REASON DO NOT REMOVE (we have no idea why someone help pls) -->
 
   <p> Last edited: <%= @updatedAt %> </p>
+  <p> Last backup: <%= @backupAt %> </p>
 
   </div>
   <% end %>
