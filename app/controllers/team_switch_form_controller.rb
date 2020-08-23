@@ -1,15 +1,14 @@
 class TeamSwitchFormController < ApplicationController
   def index
     @request = TeamSwitchRequest.new
-    @formfields = FormField.getTeamSwitchFields()
+    @formfields = FormField.getTeamSwitchFields
     render "team_switch_form/index"
   end
 
   def create_team_switch_request
     @request = TeamSwitchRequest.new(request_params)
     @request.dancer = find_dancer(@request.name, @request.phone, @request.email)
-    @formfields = FormField.getTeamSwitchFields()
-
+    @formfields = FormField.getTeamSwitchFields
 
     if @request.dancer
       if @request.dancer.teams.empty?
