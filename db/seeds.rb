@@ -5,12 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
-dancer_extra_fields = { exp_interest: "not important rn",
-                        tech_interest: "not important rn",
-                        camp_interest: "not important rn",
-                        reach_workshop_interest: "not important rn",
-                        reach_news_interest: "not important rn" }
 User.delete_all
 Dancer.delete_all
 Team.delete_all
