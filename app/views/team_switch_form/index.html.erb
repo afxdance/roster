@@ -1,7 +1,7 @@
 <body id="audition-form-body">
 
 <%= form_for :team_switch_request, :url => team_switch_form_path, :html => {:class => "audition-form"} do |f| %>
-  
+
   <div contenteditable="false", id="fd1">
     <%= @formfields[0] %>
   </div>
@@ -14,13 +14,24 @@
 
   <div class="times">
 
-  <% if false %>
+  <% if true %>
 
-  # <p>Welcome to AFXsi 2018, AFX's 2018 Summer Intensive Program!
+  <p><h1><center>Welcome to AFX Dance, Spring 2020!</center></h1></p>
 
-  # <p>Thank you for dancing with AFXsi 2018! Our team switch/drop form has now closed. If you have any personal concerns, please discuss with your current team's directors. Otherwise, please email any further questions to afxdanceviceexecutive@gmail.com. We hope you have a great summer!</p>
+  <p>Thank you for dancing with AFX! Our team switch/drop form has now closed. If you have any personal concerns, please discuss with your current team's directors. Otherwise, please email any further questions to afxdanceswitchdrop@gmail.com. We hope you have a great semester!</p>
 
   <% else %>
+  <p><h1><center>Welcome to AFX Dance, Spring 2020!</center></h1></p>
+
+  <p>If you are viewing this form, it means that you are <b>UNABLE</b> to participate in the PROJECT or TRAINING team that you are <b><u>CURRENTLY ON</b></u> on due to a <b>time conflict</b>. Through this form, you will also be able to DROP from AFX Project/Training this semester.
+  <p><b>[DEADLINE FOR SUBMISSION: FRIDAY, 2/14/2020 @ 11:59 PM.] </b>
+  <br><b><u>NO EXCEPTIONS!</u></b>
+
+  <p>***NOTE***: If you are currently on AFX Competitive Team, the drop deadline and process is separate and does NOT use this form. We urge you to direct all AFX Comp matters to your Captains. Thank you!
+
+  <p>If you have any urgent questions, comments, or concerns, please email [afxdanceswitchdrop@gmail.com] ASAP! We will do our best to respond within 24 hours of receiving your email.
+  <br>
+  <br>
 
   <div contenteditable="false", id="fd2">
     <%= @formfields[1] %>
@@ -38,7 +49,10 @@
   <%= f.text_field :email, required: true, placeholder: "EMAIL" %><br>
   <%= f.text_field :phone, required: true, placeholder: "PHONE: XXX-XXX-XXXX", pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}" %>
 
-  <br><br>
+  <p><b>Incorrect contact information, missing fields, and/or not selecting at least two teams for training team switches will prevent you from submitting the form.</b></p>
+  <br>
+  <br>
+
   <b><hr></b>
   <br>
 
@@ -120,7 +134,7 @@
         :name
       ) do |option| %>
     <div><label>
-      <%= option.check_box(class: "availability-checkbox availability-checkbox-drop") %> Yes, I would like to withdraw from AFX Fall 2019 Project/Training. I acknowledge that my decision is final and that once I submit the form, I will no longer be able to join any team practice or perform in any AFX set this semester (NO EXCEPTIONS). If I violate these conditions and do not pay AFX dues, I will be charged at any time.
+      <%= option.check_box(class: "availability-checkbox availability-checkbox-drop") %> Yes, I would like to withdraw from AFX Spring 2020 Project/Training. I acknowledge that my decision is final and that once I submit the form, I will no longer be able to join any team practice or perform in any AFX set this semester (NO EXCEPTIONS). If I violate these conditions and do not pay AFX dues, I will be charged at any time.
     </label></div>
   <% end %>
 
