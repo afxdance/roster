@@ -6,29 +6,29 @@ class FormField < ApplicationRecord
     return FormField.teamswitch.pluck(:data).map(&:html_safe)
   end
 
-  def self.set_team_switch_fields(fields)
+  def self.update_team_switch_fields(fields)
     begin
       FormField.teamswitch.each_with_index do |item, index|
         item.update(data: fields[index])
       end
       return "Successfully saved changes"
-    rescue Error # change this to something useful
+    rescue Exception # change this to something useful
       return "Error"
-	  end
+    end
   end
 
   # To format time object: https://apidock.com/rails/ActiveSupport/TimeWithZone/strftime
   # If each formfield becomes updated independently:
   # return FormField.first(:order => "updated_at desc", :limit => 1).updated_at
   def self.last_updated_team_switch
-	  return FormField.teamswitch.first.updated_at.strftime("%m/%d/%Y")
+    return FormField.teamswitch.first.updated_at.strftime("%m/%d/%Y")
   end
 
   def self.last_backup_team_switch
     return FormField.teamswitchbackup.first.updated_at.strftime("%m/%d/%Y")
   end
 
-  def self.set_team_switch_backup
+  def self.update_team_switch_backup
     FormField.teamswitchbackup.each do |item|
       updates = FormField.find(item.id - 16).data
       item.update(data: updates)
@@ -47,7 +47,7 @@ class FormField < ApplicationRecord
   private_class_method
 
   def self.teamswitch
-		return FormField.where(id: TEAM_SWITCH_RANGE)
+	  return FormField.where(id: TEAM_SWITCH_RANGE)
   end
 
   def self.teamswitchbackup

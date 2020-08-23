@@ -9,7 +9,6 @@ class TeamSwitchFormController < ApplicationController
     @request = TeamSwitchRequest.new(request_params)
     @request.dancer = find_dancer(@request.name, @request.phone, @request.email)
     @formfields = FormField.getTeamSwitchFields
-
     if @request.dancer
       if @request.dancer.teams.empty?
         @request.old_team = nil

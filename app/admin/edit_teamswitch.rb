@@ -8,7 +8,7 @@ ActiveAdmin.register_page "Edit Team Switch Form" do
     for i in 1..16
       formfields << params[i.to_s]
     end
-    notice = FormField.set_team_switch_fields(formfields)
+    notice = FormField.update_team_switch_fields(formfields)
     redirect_to admin_edit_team_switch_form_path, notice: notice
   end
 
@@ -17,8 +17,8 @@ ActiveAdmin.register_page "Edit Team Switch Form" do
     for i in 1..16
       formfields << params[i.to_s]
     end
-    FormField.set_team_switch_fields(formfields)
-    notice = FormField.set_team_switch_backup
+    FormField.update_team_switch_fields(formfields)
+    notice = FormField.update_team_switch_backup
     redirect_to admin_edit_team_switch_form_path, notice: notice
   end
 
