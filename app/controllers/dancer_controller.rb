@@ -1,11 +1,10 @@
 class DancerController < ApplicationController
-  def getTeam
+  def find_team
     email = params[:email]
-    puts(email)
-    if (Dancer.exists?(email: email))
-      teams = Dancer.find_by(email: email).teams.map{|team| team.name}
+    teams = if Dancer.exists?(email: email)
+      Dancer.find_by(email: email).teams.map(&:name)
     else
-      teams = "Dancer not found"
+      "Dancer not found"
     end
     render json: teams.to_json
   end
