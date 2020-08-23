@@ -151,7 +151,7 @@ div.editable:hover {
 }
 </style>
 
-<% @formfields = FormField.get_team_switch_fields %>
+<% @formfields = FormField.find_team_switch_fields %>
 <% @updatedAt = FormField.last_updated_team_switch %>
 <% @backupAt = FormField.last_backup_team_switch %>
 
