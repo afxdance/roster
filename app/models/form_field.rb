@@ -12,7 +12,7 @@ class FormField < ApplicationRecord
     end
     return "Successfully saved changes"
   rescue StandardError # change this to something useful
-      return "Error"
+    return "Error"
   end
 
   # To format time object: https://apidock.com/rails/ActiveSupport/TimeWithZone/strftime
@@ -45,7 +45,7 @@ class FormField < ApplicationRecord
   private_class_method
 
   def self.teamswitch
-	  return FormField.where(id: TEAM_SWITCH_RANGE)
+    return FormField.where(id: TEAM_SWITCH_RANGE)
   end
 
   def self.teamswitchbackup
