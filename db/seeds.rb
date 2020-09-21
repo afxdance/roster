@@ -46,18 +46,18 @@ dancer_extra_fields = { exp_interest: "not important rn",
 #                dance_experience: "stella",
 #                **dancer_extra_fields)
 Dancer.create_with(phone: "pet-erp-eter",
-               gender: "peter",
-               year: "3",
-               dance_experience: "no",
-               **dancer_extra_fields).find_or_create_by(name: "Evelyn Liu", email: "peter@peter.peter")
+  gender: "peter",
+  year: "3",
+  dance_experience: "no",
+  **dancer_extra_fields).find_or_create_by(name: "Evelyn Liu", email: "peter@peter.peter")
 Team.create_with(level: "Project",
-             practice_time: "all the time",
-             locked: false,
-             maximum_picks: 100).find_or_create_by(name: "AFX Help")
+  practice_time: "all the time",
+  locked: false,
+  maximum_picks: 100).find_or_create_by(name: "AFX Help")
 Team.create_with(level: "Project",
-             practice_time: "never",
-             locked: false,
-             maximum_picks: 50).find_or_create_by(name:"AFX Oasis")
+  practice_time: "never",
+  locked: false,
+  maximum_picks: 50).find_or_create_by(name: "AFX Oasis")
 # Team.create(name: "AFX Help",
 #              level: "Project",
 #              practice_time: "all the time",
@@ -68,7 +68,6 @@ Team.create_with(level: "Project",
 #              practice_time: "never",
 #              locked: false,
 #              maximum_picks: 50)
-
 
 # give admin access to all seeded teams
 User.find(1).teams = Team.all
