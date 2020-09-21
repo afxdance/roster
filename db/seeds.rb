@@ -10,20 +10,26 @@
 # Dancer.delete_all
 # Team.delete_all
 
-User.create_with(username: "admin",
+User.create_with(
+  username: "admin",
   password: "password",
   password_confirmation: "password",
-  role: "admin").find_or_create_by(id: 1)
+  role: "admin"
+  ).find_or_create_by(id: 1)
 
-User.create_with(username: "young cai",
+User.create_with(
+  username: "young cai",
   password: "password123",
   password_confirmation: "password123",
-  role: "director").find_or_create_by(id: 2)
-dancer_extra_fields = { exp_interest: "not important rn",
-                        tech_interest: "not important rn",
-                        camp_interest: "not important rn",
-                        reach_workshop_interest: "not important rn",
-                        reach_news_interest: "not important rn" }
+  role: "director"
+  ).find_or_create_by(id: 2)
+dancer_extra_fields = {
+  exp_interest: "not important rn",
+  tech_interest: "not important rn",
+  camp_interest: "not important rn",
+  reach_workshop_interest: "not important rn",
+  reach_news_interest: "not important rn"
+}
 # Dancer.create!(name: "Peter Le",
 #                email: "peter@peter.peter",
 #                phone: "pet-erp-eter",
@@ -45,19 +51,25 @@ dancer_extra_fields = { exp_interest: "not important rn",
 #                year: "2",
 #                dance_experience: "stella",
 #                **dancer_extra_fields)
-Dancer.create_with(phone: "pet-erp-eter",
+Dancer.create_with(
+  phone: "pet-erp-eter",
   gender: "peter",
   year: "3",
   dance_experience: "no",
-  **dancer_extra_fields).find_or_create_by(name: "Evelyn Liu", email: "peter@peter.peter")
-Team.create_with(level: "Project",
+  **dancer_extra_fields
+  ).find_or_create_by(name: "Evelyn Liu", email: "peter@peter.peter")
+Team.create_with(
+  level: "Project",
   practice_time: "all the time",
   locked: false,
-  maximum_picks: 100).find_or_create_by(name: "AFX Help")
-Team.create_with(level: "Project",
+  maximum_picks: 100
+  ).find_or_create_by(name: "AFX Help")
+Team.create_with(
+  level: "Project",
   practice_time: "never",
   locked: false,
-  maximum_picks: 50).find_or_create_by(name: "AFX Oasis")
+  maximum_picks: 50
+  ).find_or_create_by(name: "AFX Oasis")
 # Team.create(name: "AFX Help",
 #              level: "Project",
 #              practice_time: "all the time",
