@@ -14,21 +14,21 @@ User.create_with(
   username: "admin",
   password: "password",
   password_confirmation: "password",
-  role: "admin"
-  ).find_or_create_by(id: 1)
+  role: "admin",
+).find_or_create_by(id: 1)
 
 User.create_with(
   username: "young cai",
   password: "password123",
   password_confirmation: "password123",
-  role: "director"
-  ).find_or_create_by(id: 2)
+  role: "director",
+).find_or_create_by(id: 2)
 dancer_extra_fields = {
   exp_interest: "not important rn",
   tech_interest: "not important rn",
   camp_interest: "not important rn",
   reach_workshop_interest: "not important rn",
-  reach_news_interest: "not important rn"
+  reach_news_interest: "not important rn",
 }
 # Dancer.create!(name: "Peter Le",
 #                email: "peter@peter.peter",
@@ -56,20 +56,20 @@ Dancer.create_with(
   gender: "peter",
   year: "3",
   dance_experience: "no",
-  **dancer_extra_fields
-  ).find_or_create_by(name: "Evelyn Liu", email: "peter@peter.peter")
+  **dancer_extra_fields,
+).find_or_create_by(name: "Evelyn Liu", email: "peter@peter.peter")
 Team.create_with(
   level: "Project",
   practice_time: "all the time",
   locked: false,
-  maximum_picks: 100
-  ).find_or_create_by(name: "AFX Help")
+  maximum_picks: 100,
+).find_or_create_by(name: "AFX Help")
 Team.create_with(
   level: "Project",
   practice_time: "never",
   locked: false,
-  maximum_picks: 50
-  ).find_or_create_by(name: "AFX Oasis")
+  maximum_picks: 50,
+).find_or_create_by(name: "AFX Oasis")
 # Team.create(name: "AFX Help",
 #              level: "Project",
 #              practice_time: "all the time",
