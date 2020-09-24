@@ -9,7 +9,7 @@ FormField.create_with(data: "<p>If you are viewing this form, it means that you 
 
 <p>***NOTE***: If you are currently on AFX Competitive Team, the drop deadline and process is separate and does NOT use this form. We urge you to direct all Dance Camp matters to your Captains. Thank you!
 
-<p>If you have any urgent questions, comments, or concerns, please email [afxdanceviceexecutive@gmail.com] ASAP! We will do our best to respond within 24 hours of receiving your email.
+<p>If you have any urgent questions, comments, or concerns, please email [afxdanceswitchdrop@gmail.com] ASAP! We will do our best to respond within 24 hours of receiving your email.
 <br>
 <br>
 <br>").find_or_create_by(id: 3)
@@ -39,10 +39,10 @@ FormField.create_with(data: "<b><i>[This portion is for all members currently pl
 FormField.create_with(data: "<p><b>Failure to comply with any instructions will lead to your team switch request being dismissed.</b></p><br><br>").find_or_create_by(id: 10)
 FormField.create_with(data: "<p><h3><center><b><u>DROP FROM AFX PROJECT/TRAINING</u></b></center></h3>").find_or_create_by(id: 11)
 FormField.create_with(data: "<b><i>[ONLY ANSWER THIS QUESTION IF YOU HAVE CHOSEN TO DROP FROM AFX DANCE’S PROJECT AND TRAINING TEAMS THIS SEMESTER.]</i></b><br>").find_or_create_by(id: 12)
-FormField.create_with(data: "<p><br><b>Once you select this box, you may not re-join AFX this semester. Please consult with your directors to discuss your circumstances before making this decision. You may also email afxdanceviceexecutive@gmail.com for further questions!</b></p><br><br>").find_or_create_by(id: 13)
+FormField.create_with(data: "<p><br><b>Once you select this box, you may not re-join AFX this semester. Please consult with your directors to discuss your circumstances before making this decision. You may also email afxdanceswitchdrop@gmail.com for further questions!</b></p><br><br>").find_or_create_by(id: 13)
 FormField.create_with(data: "<p><b>What is your reason for switching into a different team or dropping from AFX? Please explain your time conflict and what prevents you from attending your current team’s practices.*  </b></p>").find_or_create_by(id: 14)
 FormField.create_with(data: "<p><b>We urge you to PLEASE double-check all of your contact information and answers as inputting incorrect information may lead to an unattended request, a rejected request, or a drop from AFX. Have you reviewed all of your responses carefully?*</b></p>").find_or_create_by(id: 15)
-FormField.create_with(data: "<p>Again, if you have any further questions, please email afxdanceviceexecutive@gmail.com and we will try to respond within 24 hours. You will receive an email with the results once your team switch or drop request has been successfully processed. Please check your email’s spam folder in case the email is delivered there. All notices and results are delivered ONLY from afxdanceviceexecutive@gmail.com. Thank you for your patience!</p>
+FormField.create_with(data: "<p>Again, if you have any further questions, please email afxdanceswitchdrop@gmail.com and we will try to respond within 24 hours. You will receive an email with the results once your team switch or drop request has been successfully processed. Please check your email’s spam folder in case the email is delivered there. All notices and results are delivered ONLY from afxdanceswitchdrop@gmail.com. Thank you for your patience!</p>
     <p><i>All information processed through this form will be confidential and be kept within the Executive Board. We greatly appreciate your cooperation.</i></p>").find_or_create_by(id: 16)
 
 # Backup fields
@@ -54,7 +54,7 @@ FormField.create_with(data: "<p>If you are viewing this form, it means that you 
 
 <p>***NOTE***: If you are currently on AFX Competitive Team, the drop deadline and process is separate and does NOT use this form. We urge you to direct all Dance Camp matters to your Captains. Thank you!
 
-<p>If you have any urgent questions, comments, or concerns, please email [afxdanceviceexecutive@gmail.com] ASAP! We will do our best to respond within 24 hours of receiving your email.
+<p>If you have any urgent questions, comments, or concerns, please email [afxdanceswitchdrop@gmail.com] ASAP! We will do our best to respond within 24 hours of receiving your email.
 <br>
 <br>
 <br>").find_or_create_by(id: 19)
@@ -84,8 +84,8 @@ FormField.create_with(data: "<b><i>[This portion is for all members currently pl
 FormField.create_with(data: "<p><b>Failure to comply with any instructions will lead to your team switch request being dismissed.</b></p><br><br>").find_or_create_by(id: 26)
 FormField.create_with(data: "<p><h3><center><b><u>DROP FROM AFX PROJECT/TRAINING</u></b></center></h3>").find_or_create_by(id: 27)
 FormField.create_with(data: "<b><i>[ONLY ANSWER THIS QUESTION IF YOU HAVE CHOSEN TO DROP FROM AFX DANCE’S PROJECT AND TRAINING TEAMS THIS SEMESTER.]</i></b><br>").find_or_create_by(id: 28)
-FormField.create_with(data: "<p><br><b>Once you select this box, you may not re-join AFX this semester. Please consult with your directors to discuss your circumstances before making this decision. You may also email afxdanceviceexecutive@gmail.com for further questions!</b></p><br><br>").find_or_create_by(id: 29)
+FormField.create_with(data: "<p><br><b>Once you select this box, you may not re-join AFX this semester. Please consult with your directors to discuss your circumstances before making this decision. You may also email afxdanceswitchdrop@gmail.com for further questions!</b></p><br><br>").find_or_create_by(id: 29)
 FormField.create_with(data: "<p><b>What is your reason for switching into a different team or dropping from AFX? Please explain your time conflict and what prevents you from attending your current team’s practices.*  </b></p>").find_or_create_by(id: 30)
 FormField.create_with(data: "<p><b>We urge you to PLEASE double-check all of your contact information and answers as inputting incorrect information may lead to an unattended request, a rejected request, or a drop from AFX. Have you reviewed all of your responses carefully?*</b></p>").find_or_create_by(id: 31)
-FormField.create_with(data: "<p>Again, if you have any further questions, please email afxdanceviceexecutive@gmail.com and we will try to respond within 24 hours. You will receive an email with the results once your team switch or drop request has been successfully processed. Please check your email’s spam folder in case the email is delivered there. All notices and results are delivered ONLY from afxdanceviceexecutive@gmail.com. Thank you for your patience!</p>
+FormField.create_with(data: "<p>Again, if you have any further questions, please email afxdanceswitchdrop@gmail.com and we will try to respond within 24 hours. You will receive an email with the results once your team switch or drop request has been successfully processed. Please check your email’s spam folder in case the email is delivered there. All notices and results are delivered ONLY from afxdanceswitchdrop@gmail.com. Thank you for your patience!</p>
     <p><i>All information processed through this form will be confidential and be kept within the Executive Board. We greatly appreciate your cooperation.</i></p>").find_or_create_by(id: 32)
