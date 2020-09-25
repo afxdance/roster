@@ -1,4 +1,5 @@
 ActiveAdmin.register_page "Edit Team Switch Form" do
+  menu if: proc { current_user.admin? }
   content do
     render "admin/edit_teamswitch"
   end
