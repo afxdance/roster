@@ -1,6 +1,5 @@
 ActiveAdmin.register_page "Edit Team Switch Form" do
   menu if: proc { current_user.admin? }
-
   content do
     render "admin/edit_teamswitch"
   end
@@ -28,5 +27,4 @@ ActiveAdmin.register_page "Edit Team Switch Form" do
     notice = FormField.revert_team_switch_backup
     redirect_to admin_edit_team_switch_form_path, notice: notice
   end
-
 end
