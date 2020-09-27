@@ -6,28 +6,30 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-dancer_extra_fields = { exp_interest: "not important rn",
-                        tech_interest: "not important rn",
-                        camp_interest: "not important rn",
-                        reach_workshop_interest: "not important rn",
-                        reach_news_interest: "not important rn" }
-User.delete_all
-Dancer.delete_all
-Team.delete_all
-User.create!(username: "admin",
-             password: "password",
-             password_confirmation: "password",
-             role: "admin")
+# User.delete_all
+# Dancer.delete_all
+# Team.delete_all
 
-User.create!(username: "young cai",
-             password: "password123",
-             password_confirmation: "password123",
-             role: "director")
-dancer_extra_fields = { exp_interest: "not important rn",
-                        tech_interest: "not important rn",
-                        camp_interest: "not important rn",
-                        reach_workshop_interest: "not important rn",
-                        reach_news_interest: "not important rn" }
+User.create_with(id: 1,
+  username: "admin",
+  password: "password",
+  password_confirmation: "password",
+  role: "admin",
+).find_or_create_by(id: 1)
+
+User.create_with(id: 2,
+  username: "young cai",
+  password: "password123",
+  password_confirmation: "password123",
+  role: "director",
+).find_or_create_by(id: 2)
+dancer_extra_fields = {
+  exp_interest: "not important rn",
+  tech_interest: "not important rn",
+  camp_interest: "not important rn",
+  reach_workshop_interest: "not important rn",
+  reach_news_interest: "not important rn",
+}
 # Dancer.create!(name: "Peter Le",
 #                email: "peter@peter.peter",
 #                phone: "pet-erp-eter",
@@ -49,23 +51,35 @@ dancer_extra_fields = { exp_interest: "not important rn",
 #                year: "2",
 #                dance_experience: "stella",
 #                **dancer_extra_fields)
-Dancer.create!(name: "Evelyn Liu2",
-               email: "peter@peter.peter",
-               phone: "pet-erp-eter",
-               gender: "peter",
-               year: "3",
-               dance_experience: "no",
-               **dancer_extra_fields)
-Team.create!(name: "AFX Help",
-             level: "Project",
-             practice_time: "all the time",
-             locked: false,
-             maximum_picks: 100)
-Team.create!(name: "AFX Oasis",
-             level: "Project",
-             practice_time: "never",
-             locked: false,
-             maximum_picks: 50)
+Dancer.create_with(
+  phone: "pet-erp-eter",
+  gender: "peter",
+  year: "3",
+  dance_experience: "no",
+  **dancer_extra_fields,
+).find_or_create_by(name: "Evelyn Liu", email: "peter@peter.peter")
+Team.create_with(
+  level: "Project",
+  practice_time: "all the time",
+  locked: false,
+  maximum_picks: 100,
+).find_or_create_by(name: "AFX Help")
+Team.create_with(
+  level: "Project",
+  practice_time: "never",
+  locked: false,
+  maximum_picks: 50,
+).find_or_create_by(name: "AFX Oasis")
+# Team.create(name: "AFX Help",
+#              level: "Project",
+#              practice_time: "all the time",
+#              locked: false,
+#              maximum_picks: 100)
+# Team.create(name: "AFX Oasis",
+#              level: "Project",
+#              practice_time: "never",
+#              locked: false,
+#              maximum_picks: 50)
 
 # Form Fields
 FormField.delete_all
