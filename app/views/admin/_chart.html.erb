@@ -22,11 +22,11 @@
   <script>
     document.addEventListener("DOMContentLoaded", function(event) {
 
-      let variable = '<%= @dancers.to_json %>';
-      variable = variable.replace(/&quot;/g, '"');
-      console.log(variable);
-      let dancers = JSON.parse(variable);
-      console.log(dancers);
+      let rawDancers = '<%= @dancers.to_json %>';
+      rawDancers = rawDancers.replace(/&quot;/g, '"');
+      // console.log(rawDancers);
+      let dancers = JSON.parse(rawDancers);
+      // console.log(dancers);
 
       //Pulled these from the backend
       const GENDER_VALUES = {
@@ -76,9 +76,9 @@
         experience[dancer.dance_experience] += 1;
       }
 
-      console.log("years", years);
-      console.log("genders", genders);
-      console.log("experience", experience);
+      // console.log("years", years);
+      // console.log("genders", genders);
+      // console.log("experience", experience);
 
       // Create year chart
       const yearData = {
