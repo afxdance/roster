@@ -3,6 +3,6 @@ ActiveAdmin.register_page "Demographics" do
 
   menu if: proc { current_user.admin? }
   content do
-    render "admin/chart"
+    render "admin/demographics"
   end
 end
