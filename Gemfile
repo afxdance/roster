@@ -45,6 +45,7 @@ group :production, :development, :test do
   gem "devise"
   gem "haml"
   gem "seedbank"
+  gem "chartkick"
 end
 
 group :production do
