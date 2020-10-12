@@ -9,10 +9,10 @@
 <body>
   <%= javascript_include_tag "application" %>
 
-  <%= pie_chart Dancer.group(:gender).count %>
+  <%= pie_chart Dancer.group(:gender).count, title: "Gender"%><br><br><br>
 
-  <%= pie_chart Dancer.group(:year).count %>
+  <%= pie_chart Dancer.group(:year).count, title: "Year"%><br><br><br>
 
-  <%= pie_chart Dancer.group(:dance_experience).count %>
+  <%= pie_chart Dancer.group(:dance_experience).count, title: "Experience" %>
 
 </body>
