@@ -18,4 +18,6 @@ Rails.application.routes.draw do
   get "/src", to: "src#index"
   post "/src", to: "src#submit"
   get "/src/confirm", to: "src#confirm"
+  get "/dancer/:email", to: "dancer#find_team",
+                        constraints: { email: %r{[^\/]+} }
 end

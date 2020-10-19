@@ -128,6 +128,8 @@ ActiveAdmin.register Dancer do
       end
     end
 
+    column("SRC") {|dancer| status_tag(dancer.src_ids.length != 0) }
+
     # Should eventually change the buttons below to support the possiblility of users with multiple teams
     column :add_dancer do |dancer|
       # If the dancer is already on a team, hide the "Add to team" button.

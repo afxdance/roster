@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200422035837) do
+ActiveRecord::Schema.define(version: 20191118043008) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20200422035837) do
     t.datetime "updated_at", null: false
   end
 
+<<<<<<< HEAD
   create_table "srcs", force: :cascade do |t|
     t.boolean "c1", null: false
     t.boolean "c2", null: false
@@ -83,6 +84,8 @@ ActiveRecord::Schema.define(version: 20200422035837) do
     t.index ["dancer_id"], name: "index_srcs_on_dancer_id"
   end
 
+=======
+>>>>>>> 87733973129c8d258046b4970dfff670ff46b12d
   create_table "team_switch_requests", force: :cascade do |t|
     t.string "name"
     t.string "email"

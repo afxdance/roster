@@ -44,6 +44,7 @@ group :production, :development, :test do
   gem "csv"
   gem "devise"
   gem "haml"
+  gem "seedbank"
 end
 
 group :production do
