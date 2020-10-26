@@ -2,7 +2,7 @@ class SrcController < ApplicationController
   def index
     @src = Src.new
     # sees if redirect to index from submit happened
-    if flash[:redirect] == 'true'
+    if flash[:redirect] == "true"
       # adds to errors displayed in index
       @src.valid?
     end
@@ -21,8 +21,6 @@ class SrcController < ApplicationController
 
     # TODO, i would reccomend writing all this logic of extracting parameters in the src_params method for cleaner code
 
-    #@src = Src.new(request_params)
-
     @c1 = params["a"]
     @c2 = params["b"]
     @c3 = params["c"]
@@ -33,14 +31,14 @@ class SrcController < ApplicationController
     @c8 = params["h"]
     @c9 = params["i"]
     @pg_release = params["pg_release"]
-    if @pg_release == 'parent'
+    if @pg_release == "parent"
       @full_name = params["p_name"]
       @signature = params["p_sign"]
       @date = params["p_date"]
       @acknowledgment = params["p_checkbox"]
-    elsif @pg_release == 'myself'
-      @signature = params['m_sign']
-      @date = params['m_date']
+    elsif @pg_release == "myself"
+      @signature = params["m_sign"]
+      @date = params["m_date"]
       @acknowledgment = params["m_checkbox"]
     else
       @other = params["pg_other"]
@@ -49,8 +47,8 @@ class SrcController < ApplicationController
     dancer = Dancer.where(email: params[:email])
     if dancer.empty?
       # sets redirect to true when dancer doesn't exist
-      flash[:redirect] = 'true'
-      redirect_to '/src'
+      flash[:redirect] = "true"
+      redirect_to "/src"
     else
       @src = Src.new(c1: @c1, c2: @c2, c3: @c3, c4: @c4, c5: @c5, c6: @c6, c7: @c7, c8: @c8, c9: @c9, pg_release: @pg_release, other: @other, full_name: @full_name, signature: @signature, date: @date, acknowledgment: @acknowledgment)
       # save stuff to src
@@ -60,7 +58,6 @@ class SrcController < ApplicationController
       # dancer.first.srcs will give a collection of srcs, should only have one but can be multiple bc of has_many
       redirect_to "/src/confirm" if success
     end
-
   end
 
   private
@@ -83,7 +80,7 @@ class SrcController < ApplicationController
           :full_name,
           :signature,
           :date,
-          :acknowledgment
+          :acknowledgment,
         )
     end
 end
