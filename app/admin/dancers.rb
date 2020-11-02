@@ -153,10 +153,10 @@ ActiveAdmin.register Dancer do
     end
 
     column :srcs do |dancer|
-      if dancer.srcs != []
-        columns("DONE")
+      if dancer.srcs.empty?
+        columns("INCOMPLETE")
       else
-        columns("NOT DONE")
+        columns("COMPLETE")
       end
     end
 
