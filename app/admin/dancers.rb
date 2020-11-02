@@ -162,7 +162,7 @@ ActiveAdmin.register Dancer do
 
     actions
   end
-  
+
   preserve_default_filters!
 
   filter :srcs_id_not_null, label: "Src present?", as: :boolean

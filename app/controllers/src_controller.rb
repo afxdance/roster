@@ -22,19 +22,19 @@ class SrcController < ApplicationController
     @c8 = params["h"]
     @c9 = params["i"]
     @pg_release = params["pg_release"]
-    if @pg_release == 'parent'
+    if @pg_release == "parent"
       @full_name = params["p_name"]
       @signature = params["p_sign"]
       @date = params["p_date"]
       @acknowledgment = params["p_checkbox"]
-    elsif @pg_release == 'myself'
-      @signature = params['m_sign']
-      @date = params['m_date']
+    elsif @pg_release == "myself"
+      @signature = params["m_sign"]
+      @date = params["m_date"]
       @acknowledgment = params["m_checkbox"]
-    else 
+    else
       @other = params["pg_other"]
     end
-    dancer = Dancer.where(email: params[:email] )
+    dancer = Dancer.where(email: params[:email])
     if dancer.empty?
       # TODO: return dancer not found error message
       puts "ERROR DANCER NOT FOUND" # delete this later, i used it for debugging - joe
@@ -45,9 +45,8 @@ class SrcController < ApplicationController
       success = src.save
       puts success
       # dancer.first.srcs will give a collection of srcs, should only have one but can be multiple bc of has_many
-      redirect_to "/src/confirm" if success 
+      redirect_to "/src/confirm" if success
     end
-    
   end
 
   private

@@ -30,7 +30,7 @@ group :production, :development, :test do
   # Use Redis adapter to run Action Cable in production
   # gem 'redis', '~> 4.0'
   # Use ActiveModel has_secure_password
-  gem 'bcrypt', '~> 3.1.11'
+  gem "bcrypt", "~> 3.1.11"
 
   # Use Capistrano for deployment
   # gem 'capistrano-rails', group: :development
@@ -71,7 +71,7 @@ group :development, :test do
   gem "cucumber_lint", require: false
   gem "pry-nav", require: true
   gem "pry-rails", require: true
-  gem "rubocop", require: false
+  gem "rubocop", "~> 0.54.0", require: false
   gem "sqlite3", require: false
 end
 
