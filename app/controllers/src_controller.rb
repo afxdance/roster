@@ -43,7 +43,6 @@ class SrcController < ApplicationController
     else
       @other = params["pg_other"]
     end
-
     dancer = Dancer.where(email: params[:email])
     if dancer.empty?
       # sets redirect to true when dancer doesn't exist
