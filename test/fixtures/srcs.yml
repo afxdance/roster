@@ -4,8 +4,14 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+howard:
+  c1: true
+  c2: true
+  c3: true
+  c4: true
+  c5: true
+  c6: true
+  c7: true
+  c8: true
+  c9: true
+  pg_release: true

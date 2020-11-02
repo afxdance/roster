@@ -3,6 +3,12 @@
 <%= form_with url: "/src", method: "post", :html => {:class => "audition-form", :id => "src_form"} do |f| %>
   <h2>AFX Dance: Spring 2020 Member Safety and Responsibility Contract (SRC)</h2>
 
+  <% if @src.errors.any? %>
+      <% @src.errors.full_messages.each do |message| %>
+        <div style="color: red"> <li><%= message %></li>  </div>
+      <% end %>
+  <% end %>
+
   <div class="times">
 
   <% if false %>

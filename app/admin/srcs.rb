@@ -10,5 +10,5 @@ ActiveAdmin.register Src do
   #   permitted = [:permitted, :attributes]
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
-  # end
+  #   end
 end
