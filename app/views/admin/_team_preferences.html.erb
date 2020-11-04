@@ -1,0 +1,45 @@
+<style>
+table, td, th {
+  width: 50%;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+</style>
+
+<%
+  @teams = Team.all
+  preferences = TeamPreference.all
+  @team_submitted_preferences = Hash.new
+
+  for t in @teams
+    @team_submitted_preferences[t.id] = false
+  end
+
+  for pref in preferences
+    @team_submitted_preferences[pref.team_id] = true
+  end
+%>
+
+<div>
+  <table>
+    <tr>
+      <td>
+        Team
+      </td>
+      <td>
+        Preferences Submitted
+      </td>
+    </tr>
+    <% for team in @teams %>
+    <tr>
+      <td>
+        <%= team.name %>
+      </td>
+      <td>
+        <%= @team_submitted_preferences[team.id] %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+  <button>Create Teams</button>
+</div>
