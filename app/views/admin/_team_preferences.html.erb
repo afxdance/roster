@@ -1,12 +1,13 @@
 <style>
-table, td, th {
+.content-container {
   width: 50%;
+}
+
+table, td, th {
   border: 1px solid black;
   border-collapse: collapse;
 }
-form {
-  width: 50%;
-}
+
 form input {
   margin: 4px 0px;
 }
@@ -26,7 +27,7 @@ form input {
   end
 %>
 
-<div>
+<div class="content-container">
   <table>
     <tr>
       <td>
@@ -52,5 +53,42 @@ form input {
     <p>Max Team Size<p>
     <%= number_field_tag "team_size", nil, min: 1, step: 1 %>
     <%= submit_tag 'Create Teams' %>
+  <% end %>
+
+  <%= params[:errors] %>
+
+  <% if params[:teams] %>
+    <%
+      result_teams = params[:teams]
+      lengths = []
+      puts result_teams
+      for value in result_teams.values
+        lengths.push(value.length())
+      end
+      maxLength = lengths.max()
+    %>
+    <table>
+      <tr>
+        <% for key in result_teams.keys %>
+          <td>
+            <%= Team.find(key).name %>
+          </td>
+        <% end %>
+      </tr>
+      <% for index in 0..maxLength-1 %>
+        <tr>
+        <% for val in result_teams.values %>
+          <% if index < val.length() %>
+            <td>
+              <%= val[index] %>
+            </td>
+          <% else %>
+            <td>
+            </td>
+          <% end %>
+        <% end %>
+        </tr>
+      <% end %>
+    </table>
   <% end %>
 </div>
