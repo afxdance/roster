@@ -17,4 +17,6 @@ Rails.application.routes.draw do
 
   get "/dancer/:email", to: "dancer#find_team",
                         constraints: { email: %r{[^\/]+} }
+
+  post "/createteams", to: "team_preferences#create_teams"
 end

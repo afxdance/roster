@@ -2,12 +2,19 @@ require 'set'
 require 'json'
 
 class TeamPreference < ApplicationRecord
-  def generateTeams(maximum_size)
+  def self.generateTeams(maximum_size)
+
+    result = {
+      errors: "",
+      teams: []
+    }
+
     allTeams = Team.all
     allPreferences = TeamPreference.all
 
     if allTeams.length() != allPreferences.length()
-      return ""
+      result[:errors] = "Not all teams have entered their preferences"
+      return result
     end
 
     teamIds = [] # team id's
@@ -16,7 +23,7 @@ class TeamPreference < ApplicationRecord
     teamPicks = [] # the list of each team while being picked
     teamDone = [] # boolean if the team has reached the end of their preferences
     for row in allPreferences
-      teamIds = row.team_id
+      teamIds.push(row.team_id)
       teamPreferences.push(JSON.parse(row.preferences))
       teamPreferencesIndex.push(0)
       teamPicks.push([])
@@ -38,6 +45,7 @@ class TeamPreference < ApplicationRecord
         # While the team is not done with their preferences list and we haven't found a dancer this picking round for them
         found = false
         while current_index < current_preferences.length() && !found
+          dancer = current_preferences[current_index]
           # If the dancer's id has not already been selected, add them to the current team and exit
           if !selected.include?(dancer)
             selected.add(dancer)
@@ -62,19 +70,20 @@ class TeamPreference < ApplicationRecord
         nextPicker = -1
       elsif nextPicker == -1 && picking == 0
         nextPicker = 1
+      else
+        # sets who gets to pick next
+        picking += nextPicker
       end
-
-      # sets who gets to pick next
-      picking += nextPicker
     end
 
-    finalTeams = Hash.new
+    finalTeams = {}
 
     teamIds.each_with_index do |id, index|
       finalTeams[id] = teamPicks[index]
     end
 
-    return finalTeams
+    result[:teams] = finalTeams
+    return result
 
   end
 end

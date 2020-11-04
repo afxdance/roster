@@ -9,8 +9,5 @@ ActiveAdmin.register_page "Team Preferences" do
 
   content do
     render "admin/team_preferences"
-    # form_for url: { action: "update" } do |f|
-    #   f.submit "Create Teams"
-    # end
   end
 end
