@@ -10,4 +10,9 @@ class TeamPreferencesController < ApplicationController
       redirect_to admin_team_preferences_path(:teams => result[:teams])
     end
   end
+
+  def delete_teams
+    ActiveRecord::Base.connection.execute("DELETE from 'dancers_teams'")
+    redirect_to admin_team_preferences_path(:message => "All teams have been cleared")
+  end
 end

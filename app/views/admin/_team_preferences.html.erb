@@ -55,7 +55,7 @@ form input {
     <%= submit_tag 'Create Teams' %>
   <% end %>
 
-  <%= params[:errors] %>
+  <p><%= params[:errors] %></p>
 
   <% if params[:teams] %>
     <%
@@ -91,4 +91,8 @@ form input {
       <% end %>
     </table>
   <% end %>
+
+  <h3>Button below clears existing created teams (Use with caution)</h3>
+  <%= button_to 'CLEAR TEAMS', "/deleteteams", method: :post %>
+  <p><%= params[:message] %></p>
 </div>

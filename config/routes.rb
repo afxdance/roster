@@ -19,4 +19,5 @@ Rails.application.routes.draw do
                         constraints: { email: %r{[^\/]+} }
 
   post "/createteams", to: "team_preferences#create_teams"
+  post "/deleteteams", to: "team_preferences#delete_teams"
 end
