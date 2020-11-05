@@ -1,9 +1,28 @@
 <body>
   <%= javascript_include_tag "application" %>
 
-  <%= pie_chart Dancer.group(:gender).count, title: "Gender"%><br><br><br>
+  <% if current_user.admin? %>
+    <%= pie_chart Dancer.group(:gender).count, title: "Gender"%><br><br><br>
 
-  <%= pie_chart Dancer.group(:year).count, title: "Year"%><br><br><br>
+    <%= pie_chart Dancer.group(:year).count, title: "Year"%><br><br><br>
 
-  <%= pie_chart Dancer.group(:dance_experience).count, title: "Experience" %>
+    <%= pie_chart Dancer.group(:dance_experience).count, title: "Experience" %>
+  <% else %>
+    <%
+      teams = Team.all
+      myTeamId = nil
+      for team in teams
+        for user in team.users
+          if user.id == current_user.id
+            myTeamId = team.id
+          end
+        end
+      end
+    %>
+    <%= pie_chart Dancer.joins("inner join dancers_teams on dancers.id = dancers_teams.dancer_id").where("dancers_teams.team_id = #{myTeamId}").group(:gender).count, title: "Gender"%><br><br><br>
+
+    <%= pie_chart Dancer.joins("inner join dancers_teams on dancers.id = dancers_teams.dancer_id").where("dancers_teams.team_id = #{myTeamId}").group(:year).count, title: "Year"%><br><br><br>
+
+    <%= pie_chart Dancer.joins("inner join dancers_teams on dancers.id = dancers_teams.dancer_id").where("dancers_teams.team_id = #{myTeamId}").group(:dance_experience).count, title: "Experience" %>
+  <% end %>
 </body>
