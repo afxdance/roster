@@ -21,16 +21,13 @@ ActiveAdmin.register_page "Import Preferences" do
         dancer_id = row.to_hash['dancer_id']
         dancer_preferences.push(dancer_id)
       end
-      puts dancer_preferences
 
       pref = TeamPreference.find_by(team_id: myTeamId)
-      puts pref
       if pref
         pref.update(team_id: myTeamId, preferences: dancer_preferences)
       else
         TeamPreference.create(team_id: myTeamId, preferences: dancer_preferences)
       end
-      puts TeamPreference.all.inspect
       redirect_to admin_import_preferences_path, notice: "Successfully imported preferences"
     end
   end
