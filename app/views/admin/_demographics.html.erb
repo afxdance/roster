@@ -1,14 +1,26 @@
-<body>
-  <%= javascript_include_tag "application" %>
-
-  <% if current_user.admin? %>
-    <%= pie_chart Dancer.group(:gender).count, title: "Gender"%><br><br><br>
-
-    <%= pie_chart Dancer.group(:year).count, title: "Year"%><br><br><br>
-
-    <%= pie_chart Dancer.group(:dance_experience).count, title: "Experience" %>
+<div>
+<!--   <%= javascript_include_tag "application" %>
+ -->
+  <% if team_id == nil %>
+    <div style="display:flex">
+      <div style="flex-grow:1; height:300px">
+        <div style="width:300px; margin:auto">
+          <%= pie_chart Dancer.group(:gender).count, title: "Gender", width: "300px", margin: "auto"%>
+        </div>
+      </div>
+      <div style="flex-grow:1; height:300px">
+        <div style="width:300px; margin:auto">
+          <%= pie_chart Dancer.group(:year).count, title: "Year", width: "300px", margin: "auto"%>
+        </div>
+      </div>
+      <div style="flex-grow:1; height:300px">
+        <div style="width:300px; margin:auto">
+          <%= pie_chart Dancer.group(:dance_experience).count, title: "Experience", width: "300px", margin: "auto"%>
+        </div>
+      </div>
+    </div>
   <% else %>
-    <%
+<!--     <%
       teams = Team.all
       myTeamId = nil
       for team in teams
@@ -18,11 +30,24 @@
           end
         end
       end
-    %>
-    <%= pie_chart Dancer.joins("inner join dancers_teams on dancers.id = dancers_teams.dancer_id").where("dancers_teams.team_id = #{myTeamId}").group(:gender).count, title: "Gender"%><br><br><br>
-
-    <%= pie_chart Dancer.joins("inner join dancers_teams on dancers.id = dancers_teams.dancer_id").where("dancers_teams.team_id = #{myTeamId}").group(:year).count, title: "Year"%><br><br><br>
-
-    <%= pie_chart Dancer.joins("inner join dancers_teams on dancers.id = dancers_teams.dancer_id").where("dancers_teams.team_id = #{myTeamId}").group(:dance_experience).count, title: "Experience" %>
+    %> -->
+    <div style="display:flex">
+      <div style="flex-grow:1; height:300px">
+        <div style="width:300px; margin:auto">
+          <%= pie_chart Dancer.joins("inner join dancers_teams on dancers.id = dancers_teams.dancer_id").where("dancers_teams.team_id = #{team_id}").group(:gender).count, title: "Gender", width: "300px"%>
+        </div>
+      </div>
+      <div style="flex-grow:1; height:300px">
+        <div style="width:300px; margin:auto">
+          <%= pie_chart Dancer.joins("inner join dancers_teams on dancers.id = dancers_teams.dancer_id").where("dancers_teams.team_id = #{team_id}").group(:year).count, title: "Year", width: "300px"%>
+        </div>
+      </div>
+      <div style="flex-grow:1; height:300px">
+        <div style="width:300px; margin:auto">
+          <%= pie_chart Dancer.joins("inner join dancers_teams on dancers.id = dancers_teams.dancer_id").where("dancers_teams.team_id = #{team_id}").group(:dance_experience).count, title: "Experience", width: "300px"%>
+        </div>
+      </div>
+    </div>
+    
   <% end %>
-</body>
+</div>
