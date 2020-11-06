@@ -1,6 +1,4 @@
 <div>
-<!--   <%= javascript_include_tag "application" %>
- -->
   <% if team_id == nil %>
     <div style="display:flex">
       <div style="flex-grow:1; height:300px">
@@ -20,17 +18,6 @@
       </div>
     </div>
   <% else %>
-<!--     <%
-      teams = Team.all
-      myTeamId = nil
-      for team in teams
-        for user in team.users
-          if user.id == current_user.id
-            myTeamId = team.id
-          end
-        end
-      end
-    %> -->
     <div style="display:flex">
       <div style="flex-grow:1; height:300px">
         <div style="width:300px; margin:auto">
