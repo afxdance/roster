@@ -49,7 +49,7 @@ form input {
     <% end %>
   </table>
 
-  <%= form_tag "/createteams", method: :post do %>
+  <%= form_tag action: "create_teams", method: :post do %>
     <p>Max Team Size<p>
     <%= number_field_tag "team_size", nil, min: 1, step: 1, required: true %>
     <%= submit_tag 'Create Teams' %>
@@ -92,7 +92,9 @@ form input {
     </table>
   <% end %>
 
+  <p><%= params[:extras] %></p>
+
   <h3>Button below clears existing created teams (Use with caution)</h3>
-  <%= button_to 'CLEAR TEAMS', "/deleteteams", method: :post %>
+  <%= button_to 'CLEAR TEAMS', { action: "delete_teams" }, method: :post, data: { confirm: "You are about to delete all teams in the database. Are you sure you want to do this?" } %>
   <p><%= params[:message] %></p>
 </div>

@@ -108,8 +108,10 @@ ActiveAdmin.register Dancer do
   end
 
   form do |f|
+    puts current_user.accessible_dancer_fields
     f.inputs do
       current_user.accessible_dancer_fields.each do |field|
+        puts field
         f.input field
       end
     end

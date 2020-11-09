@@ -6,7 +6,8 @@ class TeamPreference < ApplicationRecord
 
     result = {
       errors: "",
-      teams: []
+      teams: [],
+      extras: []
     }
 
     allTeams = Team.all
@@ -75,6 +76,14 @@ class TeamPreference < ApplicationRecord
         picking += nextPicker
       end
     end
+
+    # Keeps track of the dancers that were on preferences that were not selected
+    dancersInLimbo = Set.new
+    teamPreferences.each_with_index do |preferences, index|
+      leftovers = preferences[teamPreferencesIndex[index]..-1]
+      dancersInLimbo.merge(leftovers)
+    end
+    result[:extras] = dancersInLimbo.to_a
 
     finalTeams = {}
 
