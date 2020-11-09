@@ -1,98 +1,96 @@
-require 'set'
-require 'json'
+require "set"
+require "json"
 
 class TeamPreference < ApplicationRecord
-  def self.generateTeams(maximum_size)
-
+  def self.generate_teams(maximum_size)
     result = {
       errors: "",
       teams: [],
-      extras: []
+      extras: [],
     }
 
-    allTeams = Team.all
-    allPreferences = TeamPreference.all
+    all_teams = Team.all
+    all_preferences = TeamPreference.all
 
-    if allTeams.length() != allPreferences.length()
+    if all_teams.length != all_preferences.length
       result[:errors] = "Not all teams have entered their preferences"
       return result
     end
 
-    teamIds = [] # team id's
-    teamPreferences = [] # each team's preferences
-    teamPreferencesIndex = [] # where each team is on their preferences list
-    teamPicks = [] # the list of each team while being picked
-    teamDone = [] # boolean if the team has reached the end of their preferences
-    for row in allPreferences
-      teamIds.push(row.team_id)
-      teamPreferences.push(JSON.parse(row.preferences))
-      teamPreferencesIndex.push(0)
-      teamPicks.push([])
-      teamDone.push(false)
+    team_ids = [] # team id's
+    team_preferences = [] # each team's preferences
+    team_preferences_index = [] # where each team is on their preferences list
+    team_picks = [] # the list of each team while being picked
+    team_done = [] # boolean if the team has reached the end of their preferences
+    for row in all_preferences
+      team_ids.push(row.team_id)
+      team_preferences.push(JSON.parse(row.preferences))
+      team_preferences_index.push(0)
+      team_picks.push([])
+      team_done.push(false)
     end
 
     selected = Set.new # list of dancers who have already been selected
-    picking = 0 # index of who is picking
-    nextPicker = 1 # modifier of who relatively gets to pick next
+    picking = 0 # inde_i of who is picking
+    next_picker = 1 # modifier of who relatively gets to pick next
 
-    while teamDone.any? { |done| done == false }
-      current_team = teamPicks[picking]
-      current_preferences = teamPreferences[picking]
-      current_index = teamPreferencesIndex[picking]
-      current_done = teamDone[picking]
+    while team_done.any? { |done| done == false }
+      current_team = team_picks[picking]
+      current_preferences = team_preferences[picking]
+      current_index = team_preferences_index[picking]
+      current_done = team_done[picking]
 
       # If the team is not done picking
       if !current_done
         # While the team is not done with their preferences list and we haven't found a dancer this picking round for them
         found = false
-        while current_index < current_preferences.length() && !found
+        while current_index < current_preferences.length && !found
           dancer = current_preferences[current_index]
           # If the dancer's id has not already been selected, add them to the current team and exit
           if !selected.include?(dancer)
             selected.add(dancer)
             current_team.push(dancer)
-            if current_team.length() == maximum_size
-              teamDone[picking] = true;
+            if current_team.length == maximum_size
+              team_done[picking] = true
             end
             found = true
           end
           current_index += 1
         end
-        teamPreferencesIndex[picking] = current_index
+        team_preferences_index[picking] = current_index
       end
 
       # If the team reaches the end of their preferences list, then they are done, otherwise, we increase their preferences index by 1
-      if current_index >= current_preferences.length()
-        teamDone[picking] = true;
+      if current_index >= current_preferences.length
+        team_done[picking] = true
       end
 
       # Handles the snaking of picking
-      if nextPicker == 1 && picking == teamPicks.length()-1
-        nextPicker = -1
-      elsif nextPicker == -1 && picking == 0
-        nextPicker = 1
+      if next_picker == 1 && picking == team_picks.length - 1
+        next_picker = -1
+      elsif next_picker == -1 && picking == 0
+        next_picker = 1
       else
         # sets who gets to pick next
-        picking += nextPicker
+        picking += next_picker
       end
     end
 
     # Keeps track of the dancers that were on preferences that were not selected
-    dancersInLimbo = Set.new
-    teamPreferences.each_with_index do |preferences, index|
-      leftovers = preferences[teamPreferencesIndex[index]..-1]
-      dancersInLimbo.merge(leftovers)
+    dancers_in_limbo = Set.new
+    team_preferences.each_with_index do |preferences, index|
+      leftovers = preferences[team_preferences_index[index]..-1]
+      dancers_in_limbo.merge(leftovers)
     end
-    result[:extras] = dancersInLimbo.to_a
+    result[:extras] = dancers_in_limbo.to_a
 
-    finalTeams = {}
+    final_teams = {}
 
-    teamIds.each_with_index do |id, index|
-      finalTeams[id] = teamPicks[index]
+    team_ids.each_with_index do |id, index|
+      final_teams[id] = team_picks[index]
     end
 
-    result[:teams] = finalTeams
+    result[:teams] = final_teams
     return result
-
   end
 end
