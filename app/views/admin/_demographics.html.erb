@@ -21,17 +21,17 @@
     <div style="display:flex">
       <div style="flex-grow:1; height:300px">
         <div style="width:300px; margin:auto">
-          <%= pie_chart Dancer.joins("inner join dancers_teams on dancers.id = dancers_teams.dancer_id").where("dancers_teams.team_id = #{team_id}").group(:gender).count, title: "Gender", width: "300px"%>
+          <%= pie_chart Dancer.joins(:dancers_teams).where(dancers_teams: {team_id: team_id}).group(:gender).count, title: "Gender", width: "300px"%>
         </div>
       </div>
       <div style="flex-grow:1; height:300px">
         <div style="width:300px; margin:auto">
-          <%= pie_chart Dancer.joins("inner join dancers_teams on dancers.id = dancers_teams.dancer_id").where("dancers_teams.team_id = #{team_id}").group(:year).count, title: "Year", width: "300px"%>
+          <%= pie_chart Dancer.joins(:dancers_teams).where(dancers_teams: {team_id: team_id}).group(:year).count, title: "Year", width: "300px"%>
         </div>
       </div>
       <div style="flex-grow:1; height:300px">
         <div style="width:300px; margin:auto">
-          <%= pie_chart Dancer.joins("inner join dancers_teams on dancers.id = dancers_teams.dancer_id").where("dancers_teams.team_id = #{team_id}").group(:dance_experience).count, title: "Experience", width: "300px"%>
+          <%= pie_chart Dancer.joins(:dancers_teams).where(dancers_teams: {team_id: team_id}).group(:dance_experience).count, title: "Experience", width: "300px"%>
         </div>
       </div>
     </div>
