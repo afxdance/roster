@@ -40,6 +40,7 @@ group :production, :development, :test do
   ##############################
 
   gem "activeadmin"
+  gem "chartkick"
   gem "colorize"
   gem "csv"
   gem "devise"
@@ -71,7 +72,7 @@ group :development, :test do
   gem "cucumber_lint", require: false
   gem "pry-nav", require: true
   gem "pry-rails", require: true
-  gem "rubocop", require: false
+  gem "rubocop", "~> 0.54.0", require: false
   gem "sqlite3", require: false
 end
 
