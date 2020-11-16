@@ -152,8 +152,8 @@ ActiveAdmin.register Dancer do
       end.join.html_safe
     end
 
-    column :srcs do |dancer|
-      if dancer.srcs.empty?
+    column :src do |dancer|
+      if dancer.src.nil?
         columns("INCOMPLETE")
       else
         columns("COMPLETE")
@@ -165,7 +165,7 @@ ActiveAdmin.register Dancer do
 
   preserve_default_filters!
 
-  filter :srcs_id_not_null, label: "Src present?", as: :boolean
+  filter :src_id_not_null, label: "Src present?", as: :boolean
 
   current_user_teams_lambda = lambda do
     {
