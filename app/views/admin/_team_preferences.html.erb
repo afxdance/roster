@@ -58,6 +58,7 @@ form input {
   <p><%= params[:errors] %></p>
 
   <% if params[:teams] %>
+    <h2>Results:</h2>
     <%
       result_teams = params[:teams]
       lengths = []
@@ -90,9 +91,20 @@ form input {
         </tr>
       <% end %>
     </table>
+    <h2>Dancers in Limbo:</h2>
+    <%
+      limbo = params[:limbo]
+    %>
+    <table>
+      <% for index in 0..limbo.length()-1 %>
+        <tr>
+            <td>
+              <%= limbo[index] %>
+            </td>
+        </tr>
+      <% end %>
+    </table>
   <% end %>
-
-  <p><%= params[:extras] %></p>
 
   <h3>Button below clears existing created teams (Use with caution)</h3>
   <%= button_to 'CLEAR TEAMS', { action: "delete_teams" }, method: :post, data: { confirm: "You are about to delete all teams in the database. Are you sure you want to do this?" } %>

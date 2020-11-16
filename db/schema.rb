@@ -62,11 +62,12 @@ ActiveRecord::Schema.define(version: 20201103170547) do
   end
 
   create_table "team_preferences", force: :cascade do |t|
-    t.integer "team_id"
     t.text "preferences"
     t.text "initial_team"
+    t.integer "team_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_team_preferences_on_team_id"
   end
 
   create_table "team_switch_requests", force: :cascade do |t|

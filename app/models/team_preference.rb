@@ -2,6 +2,8 @@ require "set"
 require "json"
 
 class TeamPreference < ApplicationRecord
+  belongs_to :team
+
   def self.generate_teams(maximum_size)
     result = {
       errors: "",
@@ -22,12 +24,15 @@ class TeamPreference < ApplicationRecord
     team_preferences_index = [] # where each team is on their preferences list
     team_picks = [] # the list of each team while being picked
     team_done = [] # boolean if the team has reached the end of their preferences
+    all_preferenced_dancers = Set.new # all unique dancers in atleast one team's preferences
     for row in all_preferences
+      dancers_in_preferences = JSON.parse(row.preferences)
       team_ids.push(row.team_id)
-      team_preferences.push(JSON.parse(row.preferences))
+      team_preferences.push(dancers_in_preferences)
       team_preferences_index.push(0)
       team_picks.push([])
       team_done.push(false)
+      all_preferenced_dancers.merge(dancers_in_preferences)
     end
 
     selected = Set.new # list of dancers who have already been selected
@@ -76,13 +81,9 @@ class TeamPreference < ApplicationRecord
       end
     end
 
-    # Keeps track of the dancers that were on preferences that were not selected
-    dancers_in_limbo = Set.new
-    team_preferences.each_with_index do |preferences, index|
-      leftovers = preferences[team_preferences_index[index]..-1]
-      dancers_in_limbo.merge(leftovers)
-    end
-    result[:extras] = dancers_in_limbo.to_a
+    # dancers that were on preferences that were not selected
+    dancers_in_limbo = all_preferenced_dancers - selected
+    result[:limbo] = dancers_in_limbo.to_a
 
     final_teams = {}
 

@@ -8,9 +8,7 @@ ActiveAdmin.register_page "Team Preferences" do
     if !result[:errors].empty?
       redirect_to admin_team_preferences_path(errors: result[:errors])
     else
-      # couldn't get this to work?
-      # render partial: "admin/team_preferences", locals: { teams: result[:teams] }
-      redirect_to admin_team_preferences_path(teams: result[:teams], extras: result[:extras])
+      redirect_to admin_team_preferences_path(teams: result[:teams], limbo: result[:limbo])
     end
   end
 
