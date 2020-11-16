@@ -55,7 +55,6 @@ class SrcController < ApplicationController
       @src.dancer = dancer.first
       success = @src.save
       puts success
-      # dancer.first.srcs will give a collection of srcs, should only have one but can be multiple bc of has_many
       redirect_to "/src/confirm" if success
     end
   end
