@@ -8,10 +8,19 @@ ActiveAdmin.register_page "Team Preferences" do
     if !result[:errors].empty?
       redirect_to admin_team_preferences_path(errors: result[:errors])
     else
+      # clears out dancers_teams table
+      ActiveRecord::Base.connection.execute("DELETE from 'dancers_teams'")
 
+      # populates "initial_team" column in team_preferences table
       preferences = TeamPreference.all
       for pref in preferences
-        pref.update(initial_team: result[:teams][pref.team_id])
+        team_id = pref.team_id
+        pref.update(initial_team: result[:teams][team_id])
+
+        # populates the dancers_teams table
+        for dancer in result[:teams][team_id]
+          ActiveRecord::Base.connection.execute("INSERT INTO 'dancers_teams' (dancer_id, team_id, created_at, updated_at) VALUES (#{dancer}, #{team_id}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)")
+        end
       end
 
       redirect_to admin_team_preferences_path(teams: result[:teams], limbo: result[:limbo])
@@ -19,7 +28,7 @@ ActiveAdmin.register_page "Team Preferences" do
   end
 
   page_action :delete_teams, method: :post do
-    # clears our dancer_teams table
+    # clears out dancers_teams table
     ActiveRecord::Base.connection.execute("DELETE from 'dancers_teams'")
     # clears our "initial_team" column in team_preferences table
     preferences = TeamPreference.all
