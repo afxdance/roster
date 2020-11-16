@@ -5,21 +5,39 @@ ActiveAdmin.register_page "Import Preferences" do
   page_action :update, method: :post do
     csv = CSV.read(params[:csv][:uploaded_file].tempfile, headers: true, encoding: "bom|utf-8")
     ActiveRecord::Base.transaction do
-      dancer_preferences = []
       director = current_user.id # Gets the currently logged in user
-      teams = Team.all
+
+      results = ActiveRecord::Base.connection.execute("SELECT team_id from 'teams_users' WHERE user_id=#{director} LIMIT 1")
+
+      # Makes assumption that a user can only be the director of 1 team at a time
       my_team_id = nil
-      for team in teams
-        for user in team.users
-          if user.id == director
-            my_team_id = team.id
-          end
-        end
+      for result_row in results
+        my_team_id = result_row["team_id"]
       end
+
+      # creates set of all valid dancer id's
+      dancers = Dancer.all
+      all_dancers = Set.new
+      for dancer in dancers
+        all_dancers.add(dancer.id.to_s)
+      end
+
+      dancer_preferences = Set.new
       csv.each do |row|
         dancer_id = row.to_hash["dancer_id"]
-        dancer_preferences.push(dancer_id)
+        # checks that dancer_id is a valid dancer id or if they have duplicate dancer id's on their preferences
+        if !all_dancers.include?(dancer_id)
+          redirect_to admin_import_preferences_path, notice: "Invalid dancer id: #{dancer_id}"
+          raise ActiveRecord::Rollback
+        elsif dancer_preferences.include?(dancer_id)
+          redirect_to admin_import_preferences_path, notice: "Duplicate dancer id on your preferences: #{dancer_id}"
+          raise ActiveRecord::Rollback
+        else
+          dancer_preferences.add(dancer_id)
+        end
       end
+
+      dancer_preferences = dancer_preferences.to_a
 
       pref = TeamPreference.find_by(team_id: my_team_id)
       if pref

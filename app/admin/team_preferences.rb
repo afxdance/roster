@@ -40,7 +40,7 @@ ActiveAdmin.register_page "Team Preferences" do
   end
 
   content do
-    # render "admin/team_preferences"
+    # checks to see if teams have changed from initial creation and if so, disables the "Create Teams" button
     preferences = TeamPreference.all
     disable = false
     for pref in preferences
@@ -51,7 +51,7 @@ ActiveAdmin.register_page "Team Preferences" do
       for row in results
         current_team.add(row["dancer_id"].to_s)
       end
-      if (initial_team != current_team)
+      if initial_team != current_team
         disable = true
         break
       end
