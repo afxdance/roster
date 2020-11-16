@@ -40,6 +40,22 @@ ActiveAdmin.register_page "Team Preferences" do
   end
 
   content do
-    render "admin/team_preferences"
+    # render "admin/team_preferences"
+    preferences = TeamPreference.all
+    disable = false
+    for pref in preferences
+      initial_team = Set.new(JSON.parse(pref.initial_team))
+      team_id = pref.team_id
+      current_team = Set.new
+      results = ActiveRecord::Base.connection.execute("SELECT dancer_id from 'dancers_teams' WHERE team_id=#{team_id}")
+      for row in results
+        current_team.add(row["dancer_id"].to_s)
+      end
+      if (initial_team != current_team)
+        disable = true
+        break
+      end
+    end
+    render partial: "admin/team_preferences", locals: { disable_button: disable }
   end
 end

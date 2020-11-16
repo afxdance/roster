@@ -49,10 +49,14 @@ form input {
     <% end %>
   </table>
 
+  <% if disable_button %>
+    <h3 style="color: #BD2100">Create Teams button is disabled because team rosters have changed since initial creation</h3>
+  <% end %>
+
   <%= form_tag action: "create_teams", method: :post do %>
     <p>Max Team Size<p>
     <%= number_field_tag "team_size", nil, min: 1, step: 1, required: true %>
-    <%= submit_tag 'Create Teams' %>
+    <%= submit_tag 'Create Teams', disabled: disable_button %>
   <% end %>
 
   <p><%= params[:errors] %></p>
