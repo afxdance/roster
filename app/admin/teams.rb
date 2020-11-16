@@ -103,8 +103,29 @@ ActiveAdmin.register Team do
         end
       end
     end
-  end
 
+    panel "Team Switch Requests" do
+      tabs do
+        for tab_name, sort_order in [
+          ["Most recently added first", "added_at DESC"],
+          ["Most recently added last", "added_at ASC"],
+          ["Sorted alphabetically", "lower(trim(name))"],
+        ]
+          tab tab_name do
+            table_for TeamSwitchRequest.get_processed_team_switch_requests(team.id) do
+              TeamSwitchRequest::TABLE_VISIBLE_FIELDS.each do |field|
+                column field
+              end
+                  # name, email, phone, approved at, old team, new team,
+              # Dynamic column added or dropped
+            end
+          end
+        end
+      end
+    end
+
+
+  end
   member_action :drop_dancer, method: :post do
     team_id = params[:id]
     dancer_id = params[:dancer_id]
