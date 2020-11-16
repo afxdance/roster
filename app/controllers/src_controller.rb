@@ -51,10 +51,10 @@ class SrcController < ApplicationController
     else
       @src = Src.new(c1: @c1, c2: @c2, c3: @c3, c4: @c4, c5: @c5, c6: @c6, c7: @c7, c8: @c8, c9: @c9, pg_release: @pg_release, other: @other, full_name: @full_name, signature: @signature, date: @date, acknowledgment: @acknowledgment)
       # save stuff to src
+      dancer.first&.src&.destroy
       @src.dancer = dancer.first
       success = @src.save
       puts success
-      # dancer.first.srcs will give a collection of srcs, should only have one but can be multiple bc of has_many
       redirect_to "/src/confirm" if success
     end
   end

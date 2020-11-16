@@ -202,19 +202,33 @@
 
   <script>
 
-  function dancerIsValid() {
+  async function dancerIsValid() {
     <!-- how to make a query to DB?, also display error -->
-    a = $('input[name="name"]').val() != null;
-    b = $('input[name="email"]').val() != null;
-    re = new RegExp("[0-9]{3}-[0-9]{3}-[0-9]{4}")
-    c = re.test($('input[name="phone"]').val());
-    console.log("name: " + String(a));
-    infocheck = false
-    if (a && b && c) {
-      infocheck = true
-    }
-    return infocheck
+    name = $('input[name="name"]').val();
+    email = $('input[name="email"]').val();
+    phone = $('input[name="phone"]').val();
 
+    var formData = new FormData();
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('phone', phone);
+
+    var init = { method: 'POST',
+    body: formData,
+    // CSRF token must be verified for post requests. https://stackoverflow.com/questions/27098239/post-422-unprocessable-entity-in-rails-due-to-the-routes-or-the-controller
+    headers: {
+      'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      }
+    };
+    //https://stackoverflow.com/questions/54164874/javascript-use-fetch-on-localhost-with-url-parameters
+
+    const url = new URL("http://localhost:3000/dancer");
+    var myRequest = new Request(url, init); //need to pass in global path to the request
+
+    return await fetch(myRequest)
+       .then(response => {
+         return response.json();
+        })
   }
 
   function checkboxesAreValid() {
@@ -269,6 +283,17 @@
     return nchecked == 9 && isvalid && infocheck
   }
 
+  function dancerFieldsAreValid() {
+    <!-- how to make a query to DB?, also display error -->
+    re = new RegExp("[0-9]{3}-[0-9]{3}-[0-9]{4}")
+    if ($('input[name="name"]').val() == null) {
+    }
+    if ($('input[name="email"]').val() == null) {
+    }
+    if (re.test($('input[name="phone"]').val())) {
+    } //alert ('') or somehow refresh the page & display new errors.
+  }
+
   $('input[type=radio]').change(function() {
     $('#parent').css('display', 'none')
     $('#myself').css('display', 'none')
@@ -281,13 +306,27 @@
   $('#src_form').submit(function() {
      return checkboxesAreValid()
   });
-
+//Dancer.srcs is null
+  //searches the src_form form for the button that is clicked.
   $('#src_form').on('click', '#partOneButton', function() {
-    if (dancerIsValid()) {
+    dancer = null;
+    src_exists = null;
+    // https://flaviocopes.com/how-to-return-result-asynchronous-function/
+    dancerIsValid().then(async (data) => {
+      console.log(data);
+      json_response = await data; //????why is it object object. need toString for dancer?
+      dancer = json_response['dancer'];
+      src_exists = json_response['src_exists']
+      console.log(dancer + "one");
+    });
+    console.log(dancer);
+
+    if (dancer) {
+      console.log("valid");
       $('#partTwoForm').toggle();
       $('#partOneButton').hide();
     } else {
-      return dancerIsValid();
+      dancerFieldsAreValid(); //how to validate fields after submit.
     }
   });
 
