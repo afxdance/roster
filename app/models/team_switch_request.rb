@@ -11,7 +11,6 @@ class TeamSwitchRequest < ApplicationRecord
 
   validates :dancer, presence: { message: ": You are not in our directory, please revise your information" }
 
-  #TODO better name
   TABLE_VISIBLE_FIELDS = [
     :dancer,
     :name,
@@ -23,8 +22,7 @@ class TeamSwitchRequest < ApplicationRecord
   ].freeze
 
   def self.get_processed_team_switch_requests(team_id)
-    #TeamSwitchRequest.all
     TeamSwitchRequest.where.not(new_team_id: nil).where(new_team_id: team_id)
-      .or(TeamSwitchRequest.where.not(new_team_id: nil).where(TeamSwitchRequest.where(old_team_id: team_id)))
+      .or(TeamSwitchRequest.where.not(new_team_id: nil).where(old_team_id: team_id))
   end
 end
