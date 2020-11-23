@@ -27,11 +27,11 @@ ActiveAdmin.register_page "Import Preferences" do
         dancer_id = row.to_hash["dancer_id"]
         # checks that dancer_id is a valid dancer id or if they have duplicate dancer id's on their preferences
         if !all_dancers.include?(dancer_id)
-          redirect_to admin_import_preferences_path, notice: "Invalid dancer id: #{dancer_id}"
-          raise ActiveRecord::Rollback
+          redirect_to admin_import_preferences_path, alert: "Invalid dancer id: #{dancer_id}"
+          return
         elsif dancer_preferences.include?(dancer_id)
-          redirect_to admin_import_preferences_path, notice: "Duplicate dancer id on your preferences: #{dancer_id}"
-          raise ActiveRecord::Rollback
+          redirect_to admin_import_preferences_path, alert: "Duplicate dancer id on your preferences: #{dancer_id}"
+          return
         else
           dancer_preferences.add(dancer_id)
         end

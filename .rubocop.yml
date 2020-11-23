@@ -151,6 +151,9 @@ Layout/EndAlignment:
 Lint/RequireParentheses:
   Enabled: true
 
+Lint/NonLocalExitFromIterator:
+  Enabled: false
+
 Style/RedundantReturn:
   Enabled: false
   AllowMultipleReturnValues: true
