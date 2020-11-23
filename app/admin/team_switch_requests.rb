@@ -55,8 +55,9 @@ ActiveAdmin.register TeamSwitchRequest do
   preserve_default_filters!
 
   scope :all, :default => true
-  scope("Approved") { |scope| scope.where("status LIKE ?", "%Approved%") }
+  scope("Accepted") { |scope| scope.where("status LIKE ?", "%Accepted%") }
   scope("Rejected") { |scope| scope.where("status LIKE ?",  "%Rejected%") }
+  scope("Unprocessed") { |scope| scope.where("status IS NULL") }
 
 
   member_action :switch_to_team, method: :post do
