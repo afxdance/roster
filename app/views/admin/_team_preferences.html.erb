@@ -99,6 +99,7 @@ form input {
     <%
       limbo = params[:limbo]
     %>
+    <% if limbo %>
     <table>
       <% for index in 0..limbo.length()-1 %>
         <tr>
@@ -108,6 +109,9 @@ form input {
         </tr>
       <% end %>
     </table>
+    <% else %>
+    <p>(None)<p>
+    <% end %>
   <% end %>
 
   <h3>Button below clears existing created teams (Use with caution)</h3>
