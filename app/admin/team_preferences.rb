@@ -44,7 +44,7 @@ ActiveAdmin.register_page "Team Preferences" do
     preferences = TeamPreference.all
     disable = false
     for pref in preferences
-      if (pref.initial_team)
+      if pref.initial_team
         initial_team = Set.new(JSON.parse(pref.initial_team))
         team_id = pref.team_id
         current_team = Set.new

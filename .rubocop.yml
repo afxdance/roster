@@ -162,6 +162,9 @@ Style/Semicolon:
   Enabled: true
   AllowAsExpressionSeparator: true
 
+Style/Next:
+  Enabled: false
+
 # Prefer Foo.method over Foo::method
 Style/ColonMethodCall:
   Enabled: true
