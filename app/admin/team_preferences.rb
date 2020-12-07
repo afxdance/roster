@@ -51,7 +51,7 @@ ActiveAdmin.register_page "Team Preferences" do
       for row in results
         current_team.add(row["dancer_id"].to_s)
       end
-      if initial_team != current_team
+      if !current_team.empty? && initial_team != current_team
         disable = true
         break
       end
