@@ -11,7 +11,7 @@ class TeamPreference < ApplicationRecord
       extras: [],
     }
 
-    all_teams = Team.all
+    all_teams = Team.where(level: "Project")
     all_preferences = TeamPreference.all
 
     if all_teams.length != all_preferences.length

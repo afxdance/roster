@@ -14,7 +14,7 @@ form input {
 </style>
 
 <%
-  @teams = Team.all
+  @teams = Team.where(level: "Project")
   preferences = TeamPreference.all
   @team_submitted_preferences = Hash.new
 
