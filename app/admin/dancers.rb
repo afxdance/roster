@@ -210,19 +210,19 @@ ActiveAdmin.register Dancer do
       max_starting_number_of_dancers = dancers_started_with.max
 
       # Ensures that all teams start out with the same number of dancers
-      team_ids.each_with_index do |team_id, index|
-        while (dancers_started_with[index] + created_teams[index].length < max_starting_number_of_dancers)
+      team_ids.each_with_index do |_, index|
+        while dancers_started_with[index] + created_teams[index].length < max_starting_number_of_dancers
           dancer_to_be_added = dancers_with_no_teams.pop
           created_teams[index].push(dancer_to_be_added.id)
         end
       end
 
       # Takes turns adding dancers to teams until the no more dancers left
-      index = 0
-      while dancers_with_no_teams.length > 0
+      team_index = 0
+      until dancers_with_no_teams.empty?
         dancer_to_be_added = dancers_with_no_teams.pop
-        created_teams[index].push(dancer_to_be_added.id)
-        index = (index + 1) % team_ids.length
+        created_teams[team_index].push(dancer_to_be_added.id)
+        team_index = (team_index + 1) % team_ids.length
       end
 
       team_ids.each_with_index do |team_id, index|
