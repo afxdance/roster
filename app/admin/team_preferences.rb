@@ -1,9 +1,9 @@
 ActiveAdmin.register_page "Team Preferences" do
   menu label: "Team Preferences", parent: :dancers, if: proc { current_user.admin? }
 
-  page_action :create_teams, method: :post do
+  page_action :create_project_teams, method: :post do
     team_size = params["team_size"].to_i
-    result = TeamPreference.generate_teams(team_size)
+    result = TeamPreference.generate_project_teams(team_size)
 
     if !result[:errors].empty?
       redirect_to admin_team_preferences_path(errors: result[:errors])
@@ -36,7 +36,7 @@ ActiveAdmin.register_page "Team Preferences" do
       pref.update(initial_team: nil)
     end
 
-    redirect_to admin_team_preferences_path(message: "All teams have been cleared")
+    redirect_to admin_team_preferences_path(delete_teams_message: "All teams have been cleared")
   end
 
   content do

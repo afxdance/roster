@@ -4,14 +4,14 @@ require "json"
 class TeamPreference < ApplicationRecord
   belongs_to :team
 
-  def self.generate_teams(maximum_size)
+  def self.generate_project_teams(maximum_size)
     result = {
       errors: "",
       teams: [],
       extras: [],
     }
 
-    all_teams = Team.where(level: "Project")
+    all_teams = Team.project_teams
     all_preferences = TeamPreference.all
 
     if all_teams.length != all_preferences.length
