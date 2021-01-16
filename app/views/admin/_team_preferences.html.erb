@@ -1,0 +1,120 @@
+<style>
+.content-container {
+  width: 50%;
+}
+
+table, td, th {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+form input {
+  margin: 4px 0px;
+}
+</style>
+
+<%
+  @teams = Team.project_teams
+  preferences = TeamPreference.all
+  @team_submitted_preferences = Hash.new
+
+  for t in @teams
+    @team_submitted_preferences[t.id] = false
+  end
+
+  for pref in preferences
+    @team_submitted_preferences[pref.team_id] = true
+  end
+%>
+
+<div class="content-container">
+  <table>
+    <tr>
+      <td>
+        Team
+      </td>
+      <td>
+        Preferences Submitted
+      </td>
+    </tr>
+    <% for team in @teams %>
+    <tr>
+      <td>
+        <%= team.name %>
+      </td>
+      <td>
+        <%= @team_submitted_preferences[team.id] %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+
+  <% if disable_button %>
+    <h3 style="color: #BD2100">Create Teams button is disabled because team rosters have changed since initial creation</h3>
+  <% end %>
+
+  <%= form_tag action: "create_project_teams", method: :post do %>
+    <p>Max Team Size<p>
+    <%= number_field_tag "team_size", nil, min: 1, step: 1, required: true %>
+    <%= submit_tag 'Create Project Teams', disabled: disable_button %>
+  <% end %>
+
+  <p><%= params[:errors] %></p>
+
+  <% if params[:teams] %>
+    <h2>Results:</h2>
+    <%
+      result_teams = params[:teams]
+      lengths = []
+      puts result_teams
+      for value in result_teams.values
+        lengths.push(value.length())
+      end
+      maxLength = lengths.max()
+    %>
+    <table>
+      <tr>
+        <% for key in result_teams.keys %>
+          <td>
+            <%= Team.find(key).name %>
+          </td>
+        <% end %>
+      </tr>
+      <% for index in 0..maxLength-1 %>
+        <tr>
+        <% for val in result_teams.values %>
+          <% if index < val.length() %>
+            <td>
+              <%= val[index] %>
+            </td>
+          <% else %>
+            <td>
+            </td>
+          <% end %>
+        <% end %>
+        </tr>
+      <% end %>
+    </table>
+    <h2>Dancers in Limbo:</h2>
+    <%
+      limbo = params[:limbo]
+    %>
+    <% if limbo %>
+    <table>
+      <% for index in 0..limbo.length()-1 %>
+        <tr>
+            <td>
+              <%= limbo[index] %>
+            </td>
+        </tr>
+      <% end %>
+    </table>
+    <% else %>
+    <p>(None)<p>
+    <% end %>
+  <% end %>
+
+  <h3>Button below clears existing created teams (Use with caution)</h3>
+  <%= button_to 'CLEAR TEAMS', { action: "delete_teams" }, method: :post, data: { confirm: "You are about to delete all teams in the database. Are you sure you want to do this?" } %>
+  <p><%= params[:delete_teams_message] %></p>
+</div>

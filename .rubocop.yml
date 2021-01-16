@@ -151,6 +151,9 @@ Layout/EndAlignment:
 Lint/RequireParentheses:
   Enabled: true
 
+Lint/NonLocalExitFromIterator:
+  Enabled: false
+
 Style/RedundantReturn:
   Enabled: false
   AllowMultipleReturnValues: true
@@ -158,6 +161,9 @@ Style/RedundantReturn:
 Style/Semicolon:
   Enabled: true
   AllowAsExpressionSeparator: true
+
+Style/Next:
+  Enabled: false
 
 # Prefer Foo.method over Foo::method
 Style/ColonMethodCall:
@@ -175,6 +181,9 @@ Metrics/AbcSize:
   Enabled: false
 
 Metrics/BlockLength:
+  Enabled: false
+
+Metrics/BlockNesting:
   Enabled: false
 
 Metrics/ClassLength:
