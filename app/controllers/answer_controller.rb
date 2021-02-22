@@ -7,7 +7,7 @@ class AnswerController < ApplicationController
   def new
     source = ("a".."z").to_a + ("A".."Z").to_a
     rand_name = ""
-    rand(10).times{ rand_name += source[rand(source.size)].to_s }
+    rand(2..10).times{ rand_name += source[rand(source.size)].to_s }
     rand_email = rand_name + "@berkeley.edu"
     rand_phone = rand(10 ** 10)
     dancer = Dancer.create!(name: rand_name,
