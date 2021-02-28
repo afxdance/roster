@@ -27,9 +27,9 @@
   <p>If you are on AFX Competitive Team and a Project/Training team, choose one and we will match the records. Directors, please choose the team you are directing.
   </p>
 
-  <%= f.text_field :name, required: true, placeholder: "FIRST AND LAST NAME" %><br>
-  <%= f.text_field :email, required: true, placeholder: "EMAIL", pattern: " ^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" %><br>
-  <%= f.text_field :phone, required: true, placeholder: "PHONE: XXX-XXX-XXXX", pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}" %>
+  <%= f.text_field :name, required: true, placeholder: "FIRST AND LAST NAME"%><br>
+  <%= f.text_field :email, required: true, placeholder: "EMAIL", pattern: " ^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$", title: "Please input a valid email" %><br>
+  <%= f.text_field :phone, required: true, placeholder: "PHONE: XXX-XXX-XXXX", pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}", title: "Please match the requested format XXX-XXX-XXXX" %>
 
   <!-- still needs to be styled and add label -->
   <%= f.collection_select(
@@ -38,8 +38,9 @@
     :id,
     :name,
     {:prompt => "Choose your AFX Team"},
-    {class: "audition-form"}) %>
-<input type="button" id="partOneButton" value="validate dancer">
+    {class: "audition-form", required: true}) %>
+    <input type="button" id="part_one_button" value="validate dancer">
+
 
 <!-- PART ONE ENDS HERE -->
 
@@ -64,16 +65,16 @@
 
   </p>
     <p>
-      <%= f.check_box :a, required:true, class: "required_checkboxes"%>
+      <%= f.check_box :a, required:false, class: "required_checkboxes"%>
       <label>I understand that AFX Dance is an organization that gives those without dance experience an opportunity to experience urban dance. The organization name, [A]spirations, [F]amily, e[X]perience reflects our philosophy of creating a family environment for dancers to build up their confidence and support to reach new heights.</label>
     </p>
     <p>
-      <%= f.check_box :b, required:true, class: "required_checkboxes"%>
+      <%= f.check_box :b, required:false, class: "required_checkboxes"%>
       <label>I understand that AFX is a non-discriminatory organization with a ZERO TOLERANCE POLICY with regards to harassment. Harassment of any kind may result in immediate and/or permanent removal from AFX Dance.</label>
     </p>
 
     <p>
-      <%= f.check_box :c, required:true, class: "required_checkboxes"%>
+      <%= f.check_box :c, required:false, class: "required_checkboxes"%>
       <label>I will respect all gender identities and use preferred gender pronouns.</label>
     </p>
 
@@ -105,33 +106,33 @@
   <p>Consent is informed and an affirmative, unambiguous, and conscious decision by each participant to engage in mutually agreed-upon activity. The activity may be physical, verbal, or otherwise. Consent is voluntary, must be ongoing, and can be revoked at any point in time. Consent cannot be given when a person is incapacitated, and the ability to give proper consent may be influenced by substance use and power dynamics.
   </p>
     <p>
-      <%= f.check_box :d, required: true, class: "required_checkboxes" %>
+      <%= f.check_box :d, required: false, class: "required_checkboxes" %>
       <label>I understand that consent is revocable, verbal, voluntary, conscious, and enthusiastic.</label>
 
 
     </p>
     <p>
-      <%= f.check_box :e, required: true, class: "required_checkboxes" %>
+      <%= f.check_box :e, required: false, class: "required_checkboxes" %>
       <label>I understand that AFX encourages its members to report violations of our Safety and Responsibility Rules to either the Executive Board and/or campus resources.</label>
     </p>
 
     <p>
-      <%= f.check_box :f, required: true, class: "required_checkboxes" %>
+      <%= f.check_box :f, required: false, class: "required_checkboxes" %>
       <label>I understand that I will cooperate to the fullest extent with the Executive Board and other members of AFX Dance to maintain a safe environment to fulfill the goals of AFX Dance.</label>
     </p>
 
   <p>
-      <%= f.check_box :g, required: true, class: "required_checkboxes" %>
+      <%= f.check_box :g, required: false, class: "required_checkboxes" %>
       <label>I understand and agree to follow all of the safety and responsibility rules set forth in this contract. I acknowledge that I must obey these rules in order to hold active membership in AFX Dance to ensure my own safety, and that of other members.
   </label>
     </p>
     <p>
-      <%= f.check_box :h, required: true, class: "required_checkboxes" %>
+      <%= f.check_box :h, required: false, class: "required_checkboxes" %>
       <label>I am aware that any violation of this contract or misbehavior on my part that results in unsafe conduct at events and practices affiliated with AFX Dance or events in the presence of members of the AFX community will result in prohibition of attending future AFX events and revocation of my membership immediately and/or permanently.</label>
     </p>
 
     <p>
-      <%= f.check_box :i, required: true, class: "required_checkboxes" %>
+      <%= f.check_box :i, required: false, class: "required_checkboxes" %>
       <label>I acknowledge that I have read this Safety and Responsibility Contract and that I understand the words and language in it. All potential risks and effects of the Safety and Responsibility Contract have been answered to my satisfaction.</label>
     </p>
 
@@ -190,7 +191,7 @@
 
     <br>
 
-
+    </div>
 
 
 
@@ -303,31 +304,42 @@
   });
   // TODO What to show for other option
 
-  $('#src_form').submit(function() {
+  $('#src_form').submit(function() { //src_form.submit, function()
      return checkboxesAreValid()
   });
 //Dancer.srcs is null
   //searches the src_form form for the button that is clicked.
-  $('#src_form').on('click', '#partOneButton', function() {
-    dancer = null;
+  $('#src_form').on('click', '#part_one_button', function() {
+    dancer_exists = null;
     src_exists = null;
+    console.log("hello");
     // https://flaviocopes.com/how-to-return-result-asynchronous-function/
     dancerIsValid().then(async (data) => {
       console.log(data);
-      json_response = await data; //????why is it object object. need toString for dancer?
-      dancer = json_response['dancer'];
+      json_response = await data;
+      dancer_exists = json_response['dancer_exists'];
       src_exists = json_response['src_exists']
-      console.log(dancer + "one");
-    });
-    console.log(dancer);
+      console.log("dancer exists: " + dancer_exists);
+      console.log("src exists: " + src_exists);
 
-    if (dancer) {
-      console.log("valid");
-      $('#partTwoForm').toggle();
-      $('#partOneButton').hide();
-    } else {
-      dancerFieldsAreValid(); //how to validate fields after submit.
-    }
+      if (dancer_exists) {
+        console.log("valid");
+        //When submitting the first part of the form, to get the form validator to pop up, I must set the required fields to be false first, then toggle required to be true the required fields in the second part of the form: https://stackoverflow.com/questions/7168645/invalid-form-control-only-in-google-chrome/7264966#7264966
+        if (src_exists) {
+          alert("you've already submitted an SRC form! only submit again if you want to update information!")
+        }
+        $('.required_checkboxes').toggleClass('required', true);
+        $('#partTwoForm').toggle();
+        $('#part_one_button').hide();
+
+      } else {
+        console.log("dancer invalid")
+        alert("please check your information, you don't exist in our database!")
+        //checkboxesAreValid();
+        //dancerFieldsAreValid(); //how to validate fields after submit.
+      }
+    });
+
   });
 
   </script>

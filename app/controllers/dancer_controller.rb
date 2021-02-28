@@ -16,12 +16,14 @@ class DancerController < ApplicationController
 
     dancer = Dancer.where(name:name, email: email, phone: phone)
     src_exists = false # default
+    dancer_exists = false
     if dancer.exists?
+      dancer_exists = true
       src_exists = dancer.first.src ? true : false;
     end
 
     respond_to do |format| # respond_to
-      format.json  { render :json => {:dancer => dancer,
+      format.json  { render :json => {:dancer_exists => dancer_exists,
                                       :src_exists => src_exists}
       }
     end
