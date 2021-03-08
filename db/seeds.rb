@@ -6,9 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# User.delete_all
-# Dancer.delete_all
-# Team.delete_all
+Dancer.delete_all
+User.delete_all
+Team.delete_all
+Src.delete_all
 
 User.create_with(
   username: "admin",
@@ -82,6 +83,6 @@ Team.create_with(
 #              maximum_picks: 50)
 
 # give admin access to all seeded teams
-User.find(1).teams = Team.all
+User.first.teams = Team.all
 
 Rails.env.development?
