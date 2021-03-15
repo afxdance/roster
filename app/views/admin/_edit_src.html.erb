@@ -1,3 +1,29 @@
+<% @src = SrcFormField.find_src_form_fields %>
+
 <div>
-  <p>Hello world</p>
+  <p>Before </p>
+  <div class="editable" contenteditable="true", id="fd1">
+    <%= @src[0] %>
+  </div>
+   <p>After </p>
+
+   <%= form_with(url: { action: "update" }) do %>
+
+    <input id="fdfd1" name="1" type="hidden" />
+
+    <input style="margin-bottom: 8px" type="submit" name="commit" value="Save Changes" data-disable-with="Save Changes" id="submit_button_thing">
+
+  <% end %>
+  <script>
+
+    function fill_fields() {
+      for (i = 1; i < 2; i++) {
+        var first = document.getElementById('fd' + i), second = document.getElementById('fdfd' + i);
+        second.value = first.innerHTML;
+      }
+    }
+
+    document.getElementById("submit_button_thing").addEventListener("click", fill_fields);
+
+  </script>
 </div>

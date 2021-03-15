@@ -8,10 +8,13 @@ ActiveAdmin.register_page "Edit SRC" do
 
   page_action :update, method: :post do
     formfields = []
+    puts "PUTS PUTS PUTS"
+    puts params[1.to_s]
+    puts "END PUTS PUTS PUTS"
     for i in 1..2  # Just trying to make the title editable for now
       formfields << params[i.to_s]
     end
-    notice = SrcFormField.update_src_fields(formfields)
+    notice = SrcFormField.update_src_form_fields(formfields)
     redirect_to admin_edit_src_path, notice: notice
   end
 
