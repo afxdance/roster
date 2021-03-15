@@ -45,7 +45,6 @@ ActiveAdmin.register TeamSwitchRequest do
     f.actions
   end
 
-
   # https://activeadmin.info/3-index-pages.html
   # https://stackoverflow.com/a/27778755
   # This allows execs to find team switch requests that haven't been processed yet.
@@ -54,11 +53,10 @@ ActiveAdmin.register TeamSwitchRequest do
   filter :status, as: :select
   preserve_default_filters!
 
-  scope :all, :default => true
+  scope :all, default: true
   scope("Accepted") { |scope| scope.where("status LIKE ?", "%Accepted%") }
   scope("Rejected") { |scope| scope.where("status LIKE ?",  "%Rejected%") }
   scope("Unprocessed") { |scope| scope.where("status IS NULL") }
-
 
   member_action :switch_to_team, method: :post do
     team_switch_request_id = params[:id]
