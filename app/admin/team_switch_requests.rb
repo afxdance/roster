@@ -145,6 +145,10 @@ ActiveAdmin.register TeamSwitchRequest do
           approved_at: Time.now,
           status: "Accepted",
         )
+
+        # Sending automated email of switch
+        UserMailer.team_switch_email(dancer, old_team.name, new_team.name).deliver_now
+
         redirect_to :back, notice: "#{dancer.name} has been switched into #{new_team.name}."
       end
     end
