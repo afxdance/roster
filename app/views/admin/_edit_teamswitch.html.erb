@@ -157,8 +157,8 @@ div.editable:hover {
 
 <body id="audition-form-body">
 
-<%= form_for :team_switch_request, :url => team_switch_form_path, :html => {:class => "audition-form"} do |f| %>
-
+<%# <%= form_for :team_switch_request, :url => team_switch_form_path, :html => {:class => "audition-form"} do |f| %> %>
+<%= form_with url: "/src", method: "post", :html => {:class => "audition-form"}, :id => "src_form" do |f| %>
   <div class="editable" contenteditable="true", id="fd1">
     <%= @formfields[0] %>
   </div>
@@ -305,10 +305,12 @@ div.editable:hover {
 
   <div>          <!-- THIS <i> or <div> IS IMPORTANT FOR SOME REASON DO NOT REMOVE (we have no idea why someone help pls) -->
 
+  <%# This div is important because without it, the div with class="times" doesn't include the buttons at the end of the form and the CSS is messed up -  %>
+
   <p> Last edited: <%= @updatedAt %> </p>
   <p> Last backup: <%= @backupAt %> </p>
 
-  </div>
+  </div> <!-- This div closes the times div if the div above is not included-->
   <% end %>
 
 <% end %>

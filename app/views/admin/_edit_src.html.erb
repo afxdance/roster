@@ -3,7 +3,7 @@
     background: url('/assets/blurred-bg.jpg') no-repeat center center fixed;
     vertical-align: middle;
     text-align: left;
-    padding: 50px 0;
+    /* padding: 50px 0; */
 }
 
 .audition-form{
@@ -18,6 +18,7 @@
     -webkit-box-shadow:  0px 0px 30px rgba(0, 0, 0, 0.22);
 
 }
+
 .audition-form h2{
     background: #4D4D4D;
     text-transform: uppercase;
@@ -70,7 +71,7 @@
     overflow-y: scroll;
 }
 .audition-form input[type="button"],
-.audition-form input[type="submit"]{
+.audition-form input[type="submit"] {
     -moz-box-shadow: inset 0px 1px 0px 0px #45D6D6;
     background-color: #000000 !important;
     opacity: 0.8;
@@ -152,9 +153,15 @@ html, body {
 
 
 <% @src = SrcFormField.find_src_form_fields %>
+
+
+
 <body id="audition-form-body">
 
-<%= form_with url: "/src", method: "post", :html => {:class => "audition-form"}, :id => "src_form" do |f| %>
+<%# No clue if closing bracket } goes after "audition-for" or "src_form"%>
+<%# <%= form_with url: "/src", method: "post", :html => {:class => "audition-form"}, :id => "src_form" do |f| %>
+
+<%= form_for :src, :url => src_path, :html => {:class => "audition-form"} do |f| %>
 
     <div class="times">
         <div class="editable" contenteditable="true", id="fd1">
@@ -164,29 +171,25 @@ html, body {
         <div class="editable" contenteditable="true", id="fd2">
             <%= @src[1] %>
         </div>
+
+    <div>
     </div>
 <% end %>
+
 
 <%= form_with(url: { action: "update" }) do %>
     <input id="fdfd1" name="1" type="hidden" />
     <input id="fdfd2" name="2" type="hidden" />
-    <input id="fdfd3" name="3" type="hidden" />
-    <input id="fdfd4" name="4" type="hidden" />
-    <input id="fdfd5" name="5" type="hidden" />
-    <input id="fdfd6" name="6" type="hidden" />
-    <input id="fdfd7" name="7" type="hidden" />
-    <input id="fdfd8" name="8" type="hidden" />
-    <input id="fdfd9" name="9" type="hidden" />
-    <input id="fdfd10" name="10" type="hidden" />
-    <input id="fdfd11" name="11" type="hidden" />
+
     <input style="margin-bottom: 8px" type="submit" name="commit" value="Save Changes" data-disable-with="Save Changes" id="submit_button_thing">
 <% end %>
 
-
+</div>
+</body>
 <script>
 
     function fill_fields() {
-        for (i = 1; i < 5; i++) {
+        for (i = 1; i < 3; i++) {
         var first = document.getElementById('fd' + i), second = document.getElementById('fdfd' + i);
         second.value = first.innerHTML;
         }
@@ -195,4 +198,3 @@ html, body {
     document.getElementById("submit_button_thing").addEventListener("click", fill_fields);
 
 </script>
-</body>
