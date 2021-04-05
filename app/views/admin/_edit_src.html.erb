@@ -4,7 +4,7 @@
     vertical-align: middle;
     text-align: left;
     padding: 50px 0;
-
+}
 
 .audition-form{
     font-family: 'Open Sans Condensed', arial, sans;
@@ -150,39 +150,49 @@ html, body {
 }
 </style>
 
+
 <% @src = SrcFormField.find_src_form_fields %>
-
-<%= form_with url: "/src", method: "post", :html => {:class => "audition-form", :id => "src_form"} do |f| %>
-
 <body id="audition-form-body">
-<div class="times">
-  <div class="editable" contenteditable="true", id="fd1">
-      <%= @src[0] %>
-  </div>
 
-  <div class="editable" contenteditable="true", id="fd2">
-      <%= @src[1] %>
-  </div>
+<%= form_with url: "/src", method: "post", :html => {:class => "audition-form"}, :id => "src_form" do |f| %>
 
+    <div class="times">
+        <div class="editable" contenteditable="true", id="fd1">
+            <%= @src[0] %>
+        </div>
 
-   <%= form_with(url: { action: "update" }) do %>
+        <div class="editable" contenteditable="true", id="fd2">
+            <%= @src[1] %>
+        </div>
+    </div>
+<% end %>
+
+<%= form_with(url: { action: "update" }) do %>
     <input id="fdfd1" name="1" type="hidden" />
+    <input id="fdfd2" name="2" type="hidden" />
+    <input id="fdfd3" name="3" type="hidden" />
+    <input id="fdfd4" name="4" type="hidden" />
+    <input id="fdfd5" name="5" type="hidden" />
+    <input id="fdfd6" name="6" type="hidden" />
+    <input id="fdfd7" name="7" type="hidden" />
+    <input id="fdfd8" name="8" type="hidden" />
+    <input id="fdfd9" name="9" type="hidden" />
+    <input id="fdfd10" name="10" type="hidden" />
+    <input id="fdfd11" name="11" type="hidden" />
     <input style="margin-bottom: 8px" type="submit" name="commit" value="Save Changes" data-disable-with="Save Changes" id="submit_button_thing">
-  <% end %>
+<% end %>
 
 
-  <script>
+<script>
 
     function fill_fields() {
-      for (i = 1; i < 2; i++) {
+        for (i = 1; i < 5; i++) {
         var first = document.getElementById('fd' + i), second = document.getElementById('fdfd' + i);
         second.value = first.innerHTML;
-      }
+        }
     }
 
     document.getElementById("submit_button_thing").addEventListener("click", fill_fields);
 
-  </script>
-<% end %>
-</div>
+</script>
 </body>

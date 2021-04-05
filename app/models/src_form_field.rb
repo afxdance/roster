@@ -2,6 +2,7 @@ class SrcFormField < ApplicationRecord
   SRC_RANGE = (1..4)
   SRC_BACKUP_RANGE = (4..8)
 
+
   def self.find_src_form_fields
     return SrcFormField.src.pluck(:data).map(&:html_safe)
   end
@@ -28,8 +29,6 @@ class SrcFormField < ApplicationRecord
   rescue StandardError
     return "Error"
   end
-
-  # SrcFormField.create(id: "1", data: "testing", created_at: "Sun, 14 Mar 2021 20:16:10 PDT -07:00", updated_at: "Sun, 14 Mar 2021 20:16:10 PDT -07:00")
 
   def self.update_src_backup(fields)
     SrcFormField.srcbackup.seach_with_index do |item, index|
