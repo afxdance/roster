@@ -157,8 +157,8 @@ div.editable:hover {
 
 <body id="audition-form-body">
 
-<%# <%= form_for :team_switch_request, :url => team_switch_form_path, :html => {:class => "audition-form"} do |f| %> %>
-<%= form_with url: "/src", method: "post", :html => {:class => "audition-form"}, :id => "src_form" do |f| %>
+<%= form_for :team_switch_request, :url => team_switch_form_path, :html => {:class => "audition-form"} do |f| %>
+
   <div class="editable" contenteditable="true", id="fd1">
     <%= @formfields[0] %>
   </div>

@@ -153,33 +153,215 @@ html, body {
 
 
 <% @src = SrcFormField.find_src_form_fields %>
-
-
+<% @updatedAt = SrcFormField.last_updated_src %>
 
 <body id="audition-form-body">
 
 <%# No clue if closing bracket } goes after "audition-for" or "src_form"%>
-<%# <%= form_with url: "/src", method: "post", :html => {:class => "audition-form"}, :id => "src_form" do |f| %>
+ <%= form_with url: "/src",  :html => {:class => "audition-form"}, :id => "src_form" do |f| %>
 
-<%= form_for :src, :url => src_path, :html => {:class => "audition-form"} do |f| %>
 
     <div class="times">
+
         <div class="editable" contenteditable="true", id="fd1">
-            <%= @src[0] %>
+          <%= @src[0] %>
         </div>
 
         <div class="editable" contenteditable="true", id="fd2">
             <%= @src[1] %>
         </div>
+        <div class="editable" contenteditable="true", id="fd3">
+            <%= @src[2] %>
+            <%= f.text_field :name, required: true, placeholder: "FIRST AND LAST NAME" %><br>
+            <%= f.text_field :email, required: true, placeholder: "EMAIL", pattern: " ^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" %><br>
+            <%= f.text_field :phone, required: true, placeholder: "PHONE: XXX-XXX-XXXX", pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}" %>
+
+            <!-- still needs to be styled and add label -->
+            <%= f.collection_select(
+              :available_team_ids,
+              Team.all.sort_by(&:name),
+              :id,
+              :name,
+              {:prompt => "Choose your AFX Team"},
+              {class: "audition-form"}) %>
+
+        </div>
+        <hr>
+        <div class="editable" contenteditable="true", id="fd4">
+            <%= @src[3] %>
+        </div>
+        <div class="editable" contenteditable="true", id="fd5">
+            <%= @src[4] %>
+        </div>
+        <div class="editable" contenteditable="true", id="fd6">
+            <%= @src[5] %>
+        </div>
+        <div class="editable" contenteditable="true", id="fd7">
+          <%= @src[6] %>
+        </div>
+        </p>
+  <p>
+    <%= f.check_box :a, required:true, class: "required_checkboxes"%>
+    <div class="editable" contenteditable="true", id="fd15">
+      <%= @src[14] %>
+    </div>
+  </p>
+  <p>
+    <%= f.check_box :b, required:true, class: "required_checkboxes"%>
+    <div class="editable" contenteditable="true", id="fd16">
+      <%= @src[15] %>
+    </div>
+  </p>
+
+  <p>
+    <%= f.check_box :c, required:true, class: "required_checkboxes"%>
+    <div class="editable inline" contenteditable="true", id="fd17">
+     <%= @src[16] %>
+    </div>
+  </p>
+<hr>
+
+  <p>
+      <div class="editable" contenteditable="true", id="fd8">
+          <%= @src[7] %>
+      </div>
+      <div class="editable" contenteditable="true", id="fd9">
+          <%= @src[8] %>
+      </div>
+      <div class="editable" contenteditable="true", id="fd10">
+          <%= @src[9] %>
+      </div>
+      <div class="editable" contenteditable="true", id="fd11">
+          <%= @src[10] %>
+      </div>
+      <div class="editable" contenteditable="true", id="fd12">
+          <%= @src[11] %>
+      </div>
+
+  <p>
+    <%= f.check_box :d, required: true, class: "required_checkboxes" %>
+    <label>I understand that consent is revocable, verbal, voluntary, conscious, and enthusiastic.</label>
+  </p>
+  <p>
+    <%= f.check_box :e, required: true, class: "required_checkboxes" %>
+    <label>I understand that AFX encourages its members to report violations of our Safety and Responsibility Rules to either the Executive Board and/or campus resources.</label>
+  </p>
+
+  <p>
+    <%= f.check_box :f, required: true, class: "required_checkboxes" %>
+    <label>I understand that I will cooperate to the fullest extent with the Executive Board and other members of AFX Dance to maintain a safe environment to fulfill the goals of AFX Dance.</label>
+  </p>
+
+  <p>
+    <%= f.check_box :g, required: true, class: "required_checkboxes" %>
+    <label>I understand and agree to follow all of the safety and responsibility rules set forth in this contract. I acknowledge that I must obey these rules in order to hold active membership in AFX Dance to ensure my own safety, and that of other members.
+  </label>
+  </p>
+  <p>
+    <%= f.check_box :h, required: true, class: "required_checkboxes" %>
+    <label>I am aware that any violation of this contract or misbehavior on my part that results in unsafe conduct at events and practices affiliated with AFX Dance or events in the presence of members of the AFX community will result in prohibition of attending future AFX events and revocation of my membership immediately and/or permanently.</label>
+  </p>
+
+  <p>
+    <%= f.check_box :i, required: true, class: "required_checkboxes" %>
+    <label>I acknowledge that I have read this Safety and Responsibility Contract and that I understand the words and language in it. All potential risks and effects of the Safety and Responsibility Contract have been answered to my satisfaction.</label>
+  </p>
+
+<hr>
+      <div class="editable" contenteditable="true", id="fd13">
+          <%= @src[12] %>
+      </div>
+
+  <p>
+      <%= f.radio_button :pg_release, 'parent' %>
+      <label>I understand and agree that if I am signing this Safety and Responsibility Agreement on behalf of my minor child, that I will be giving up the same rights for said minor as I would be giving up if I signed this document on my own behalf.</label>
+  </p>
+  <p>
+    <%= f.radio_button :pg_release, 'myself' %>
+    <label>I am at least 18 years of age and am signing this form for myself.</label>
+  </p>
+  <p>
+    <%= f.radio_button :pg_release, 'other'  %> Other: <%= f.text_field :pg_other, :style => "display: inline-block; width: 51%" %>
+     <!-- gna need to change the required -->
+  </p>
+
+
+  <%= f.text_area :reason, required: false, placeholder: "Other:" %> <!-- gna need to change the required -->
+
+<hr>
+<div id="parent">
+<p><h3>[IF YOU ARE YOUNGER THAN 18 YEARS OF AGE] </h3></p>
+
+
+
+  <%= f.text_field :p_name, placeholder: "Your Full Legal Name" %><br>
+  <%= f.text_field :p_sign, placeholder: "Parent / Guardian Signature (full legal name)" %><br>
+  <%= f.text_field :p_date, placeholder: "Date of signature: MM/DD/YYYY", pattern: "^[0-3][0-9]/[0-3][0-9]/(?:[0-9][0-9])?[0-9][0-9]$" %><br>
+
+  <p>
+    <%= f.check_box :p_checkbox %>
+    <label>I understand that checking this box constitutes a legal signature confirming that I acknowledge the above Safety and Responsibility Agreement for AFX Dance and am liable to the rules mutually agreed upon between me and the organization.
+    </label>
+  </p>
+<hr>
+</div>
+<div id="myself">
+<p><h3>[IF YOU ARE 18 YEARS OF AGE OR OLDER]</h3></p>
+
+  <%= f.text_field :m_sign, placeholder: "Your Signature (full legal name)" %><br>
+  <%= f.text_field :m_date, placeholder: "Date of signature: MM/DD/YYYY", pattern: "^[0-3][0-9]/[0-3][0-9]/(?:[0-9][0-9])?[0-9][0-9]$" %><br>
+
+  <p>
+    <%= f.check_box :m_checkbox %>
+    <label>I understand that checking this box constitutes a legal signature confirming that I acknowledge the above Safety and Responsibility Agreement for AFX Dance and am liable to the rules mutually agreed upon between me and the organization.
+    </label>
+  </p>
+
+  <p>
+    Thank you for submitting the AFX Dance Fall 2019 Member Safety and Responsibility Contract. Your response has been recorded. If you have further questions, please email afxdance@gmail.com.
+
+  <br>
+
+
+
+
+
+  <div class = "submit">
+    <%= f.submit "Submit Safety and Responsibility Contract", class: "availability-form-submit" %>
+  </div>
+
+</div>
 
     <div>
+        <p> Last edited: <%= @updatedAt %> </p>
+        <p> Last backup: <%= @backupAt %> </p>
     </div>
+
 <% end %>
 
 
 <%= form_with(url: { action: "update" }) do %>
     <input id="fdfd1" name="1" type="hidden" />
     <input id="fdfd2" name="2" type="hidden" />
+    <input id="fdfd3" name="3" type="hidden" />
+    <input id="fdfd4" name="4" type="hidden" />
+    <input id="fdfd5" name="5" type="hidden" />
+    <input id="fdfd6" name="6" type="hidden" />
+    <input id="fdfd7" name="7" type="hidden" />
+    <input id="fdfd8" name="8" type="hidden" />
+    <input id="fdfd9" name="9" type="hidden" />
+    <input id="fdfd10" name="10" type="hidden" />
+    <input id="fdfd11" name="11" type="hidden" />
+    <input id="fdfd12" name="12" type="hidden" />
+    <input id="fdfd13" name="13" type="hidden" />
+    <input id="fdfd14" name="14" type="hidden" />
+    <input id="fdfd15" name="15" type="hidden" />
+    <input id="fdfd16" name="16" type="hidden" />
+    <input id="fdfd17" name="17" type="hidden" />
+    <input id="fdfd18" name="18" type="hidden" />
+    <input id="fdfd19" name="19" type="hidden" />
+    <input id="fdfd20" name="20" type="hidden" />
+
 
     <input style="margin-bottom: 8px" type="submit" name="commit" value="Save Changes" data-disable-with="Save Changes" id="submit_button_thing">
 <% end %>
@@ -189,12 +371,78 @@ html, body {
 <script>
 
     function fill_fields() {
-        for (i = 1; i < 3; i++) {
+        for (i = 1; i < 18; i++) {
         var first = document.getElementById('fd' + i), second = document.getElementById('fdfd' + i);
         second.value = first.innerHTML;
         }
     }
 
     document.getElementById("submit_button_thing").addEventListener("click", fill_fields);
+
+    function checkboxesAreValid() {
+    nchecked = $('.required_checkboxes:checked').length;
+    radiocheck = $('input[name="pg_release"]:checked').val();
+    infocheck = false
+    a = $('input[name="name"]').val() != null;
+    b = $('input[name="email"]').val() != null;
+    re = new RegExp("[0-9]{3}-[0-9]{3}-[0-9]{4}")
+    c = re.test($('input[name="phone"]').val());
+    if (a && b && c) {
+      infocheck = true
+    }
+    isvalid = false
+
+
+    switch(radiocheck) {
+      case "parent":
+        a = $('input[name="p_name"]').val() != null;
+        b = $('input[name="p_sign"]').val() != null;
+        re = new RegExp("^[0-3][0-9]/[0-3][0-9]/(?:[0-9][0-9])?[0-9][0-9]$")
+        c = re.test($('input[name="p_date"]').val())
+        d = $('input[name="p_checkbox"]').is(':checked')
+        if (a && b && c && d) {
+          isvalid = true
+        }
+        break;
+      case "myself":
+        a = $('input[name="m_sign"]').val() != null;
+        re = new RegExp("^[0-3][0-9]/[0-3][0-9]/(?:[0-9][0-9])?[0-9][0-9]$")
+        b = re.test($('input[name="m_date"]').val())
+        c = $('input[name="m_checkbox"]').is(':checked');
+        if (a && b && c) {
+          isvalid = true
+        }
+        break;
+      case "other":
+       a = $('input[name="pg_other"]').val() != null;
+       if (a) {
+         isvalid = true
+       }
+       break;
+      default:
+
+    }
+    console.log("nchecked: " + String(nchecked))
+    console.log("isvalid " + String(isvalid))
+    console.log("infocheck " + String(infocheck))
+
+    console.log(nchecked == 9 && isvalid && infocheck)
+
+    return nchecked == 9 && isvalid && infocheck
+  }
+
+  $('input[type=radio]').change(function() {
+    $('#parent').css('display', 'none')
+    $('#myself').css('display', 'none')
+    fieldToShow = $(this).val()
+    $('#' + fieldToShow).css('display', 'block')
+    return
+  });
+  // TODO What to show for other option
+
+
+  $('#src_form').submit(function() {
+     return checkboxesAreValid()
+  });
 
 </script>

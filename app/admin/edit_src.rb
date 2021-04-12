@@ -11,7 +11,7 @@ ActiveAdmin.register_page "Edit SRC" do
     puts "PUTS PUTS PUTS"
     # puts params[1.to_s]
     # puts "END PUTS PUTS PUTS"
-    for i in 1..3  # Just trying to make the title editable for now
+    for i in 1..18  # Just trying to make the title editable for now
       formfields << params[i.to_s] # << is the append operator
     end
     # puts "var formfields start"
@@ -24,7 +24,7 @@ ActiveAdmin.register_page "Edit SRC" do
   page_action :set, method: :post do
     puts "PUTS PUTS PUTS SET"
     formfields = []
-    for i in 1..3  # Just trying to make the title editable for now
+    for i in 1..18 # Just trying to make the title editable for now
       formfields << params[i.to_s]
     end
     SrcFormField.update_src_fields(formfields)
