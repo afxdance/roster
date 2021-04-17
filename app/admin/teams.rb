@@ -18,6 +18,7 @@ ActiveAdmin.register Team do
       :name,
       :project,
       :practice_time,
+      :practice_location,
       :locked,
       :maximum_picks,
       :level,
@@ -39,6 +40,7 @@ ActiveAdmin.register Team do
                 "(EX. Thu 7-8:30, Sat 4-5:30)",
                 "If add a space at the beginning or leave this blank, this team will be hidden in the team switch form.",
               ].join("<br>").html_safe
+      f.input :practice_location
       f.input :locked
       f.input :maximum_picks
     end
@@ -50,6 +52,7 @@ ActiveAdmin.register Team do
     column :name
     column :level
     column :practice_time
+    column :practice_location
     column :locked
     column :maximum_picks
     # Allows us to view the Users that are connected to the team

@@ -4,14 +4,21 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <p>Hi <%= @dancer.name %>,</p>
-    <br>
-    <p>Your team switch request has been approved and you have switched from <%=@old_team_name %> to <%= @new_team_name %>!
-    </p>
-    <br>
+    <p>Hello,</p>
+    <p>Your request to switch teams for AFX <Semester, Year> has been successfully processed.</p>
+    <p>You have been placed onto <%= @new_team.name %>, which has practices on: </p>
+
+
+    <ul>
+      <%= [].append(@new_team.practice_time).zip([].append(@new_team.practice_location)) do |a1, a2| %>
+        <li><%= a1%>, <%= a2 %></li>
+      <% end %>
+    </ul>
+    <p>Your new director(s), <%= @directors.to_sentence %>, will be contacting you shortly with more information.</p>
+    <p>In the meantime, if you have any questions, comments, or concerns, please email us as soon as possible.</p>
+    <p>Be sure to <a href="https://www.facebook.com/AFXdance/">LIKE our Facebook page</a> to be in the know about all of our upcoming events!</p>
+    <p>Thank you for your patience! We wish you a wonderful <Semester> with AFX!</p>
     <p>With AFX Love,</p>
-
-    <p>AFX Executive Board</p>
-
+    <p>AFX Dance</p>
   </body>
 </html>

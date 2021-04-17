@@ -4,6 +4,7 @@ ActiveAdmin.register User do
 
   permit_params(
     :username,
+    :director_name,
     :password,
     :password_confirmation,
     :role,
@@ -21,6 +22,7 @@ ActiveAdmin.register User do
     selectable_column
     id_column
     column :username
+    column :director_name
     column :current_sign_in_at
     column :sign_in_count
     column :created_at
@@ -42,6 +44,7 @@ ActiveAdmin.register User do
   form do |f|
     f.inputs do
       f.input :username
+      f.input :director_name
       f.input :password
       f.input :password_confirmation
       # Creates the selection menu so the user can choose a team

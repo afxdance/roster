@@ -135,4 +135,18 @@ class Team < ApplicationRecord
       not_in_this_team: not_in_this_team,
     }
   end
+
+  def get_directors()
+    directors = []
+    self.user_ids.each do |user_id|
+      #if role is director
+      user = User.where(Id: user_id).first #.first['username']
+      if user['role'] == 'director'
+        directors.push(user['director_name']) #change to user name when migrated
+      end
+      #puts "HELOOOOOO"
+      #puts directors
+    end
+    return directors
+  end
 end

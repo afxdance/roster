@@ -25,6 +25,7 @@ ActiveAdmin.register TeamSwitchRequest do
       :old_team_id,
       :new_team_id,
       :dancer_id,
+      :rejection_reason,
       available_team_ids: [],
     ].compact
   end
@@ -37,6 +38,7 @@ ActiveAdmin.register TeamSwitchRequest do
       f.input :reason
       f.input :approved_at, as: :datetime_picker
       f.input :status
+      f.input :rejection_reason
       f.input :old_team
       f.input :new_team
       f.input :dancer
@@ -111,6 +113,10 @@ ActiveAdmin.register TeamSwitchRequest do
         return
       end
 
+      # Rejection check
+      #if !team_switch_request.rejection_reason.nil?
+        #UserMailer.rejection_email
+
       # 2. Check that the person's team is still the request's old team
       if team_switch_request.old_team != dancer.teams.first && dancer.teams.first&.level != Team::DROP
         redirect_to :back, alert:
@@ -147,7 +153,17 @@ ActiveAdmin.register TeamSwitchRequest do
         )
 
         # Sending automated email of switch
-        UserMailer.team_switch_email(dancer, old_team.name, new_team.name).deliver_now
+        directors = new_team.get_directors
+        #puts directors
+        #to_sentence
+        #new_team.user_ids.each do |user_id|
+        # new_team.user_ids[1..-1].each do |user_id|
+        #   #if role is director
+        #   directors.push(User.where(Id: user_id).first['username'])
+        #   puts directors
+        # end
+
+        UserMailer.team_switch_email(dancer, old_team.name, new_team, directors).deliver_now
 
         redirect_to :back, notice: "#{dancer.name} has been switched into #{new_team.name}."
       end
@@ -166,25 +182,24 @@ ActiveAdmin.register TeamSwitchRequest do
 
     column :available_teams do |team_switch_request|
       dancer = team_switch_request&.dancer
-      team_switch_request.available_teams.map do |team|
-        content_tag(:div, style: "white-space: nowrap") do
-          link = link_to("/admin/team_switch_requests/#{team_switch_request.id}/switch_to_team?" + { team_id: team.id }.to_query, method: :post, title: "Switch dancer onto this team") do
-            "+"
-          end
-
-          team_size = team.dancers.length
-
-          team_same_gender_size = current_user.can_view_sensitive_dancer_fields? ?
-            team.dancers.where(gender: dancer&.gender).length :
-            0
-          team_same_gender = team_same_gender_size / (team_size + 0.0001) * 100
-
-          team_same_year_size = team.dancers.where(year: dancer&.year).length
-          team_same_year = team_same_year_size / (team_size + 0.0001) * 100
-
-          "[#{link}] #{team.name} (#{team_size} G:#{team_same_gender.to_i}% Y:#{team_same_year.to_i}%)".html_safe
+      content_tag(:div, style: "white-space: nowrap") do
+        team_switch_request.available_teams.each do |team|
+        link = link_to("/admin/team_switch_requests/#{team_switch_request.id}/switch_to_team?" + { team_id: team.id }.to_query, method: :post, title: "Switch dancer onto this team") do
+          "+"
         end
-      end.join.html_safe
+        team_size = team.dancers.length
+        team_same_gender_size = current_user.can_view_sensitive_dancer_fields? ?
+          team.dancers.where(gender: dancer&.gender).length :
+          0
+        team_same_gender = team_same_gender_size / (team_size + 0.0001) * 100
+        team_same_year_size = team.dancers.where(year: dancer&.year).length
+        team_same_year = team_same_year_size / (team_size + 0.0001) * 100
+        concat content_tag(:div,
+          "[#{link}] #{team.name} (#{team_size} G:#{team_same_gender.to_i}% Y:#{team_same_year.to_i}%)".html_safe)
+        end
+        reject = link_to("/admin/team_switch_requests/#{team_switch_request.id}/edit") do "Reject" end
+        concat content_tag(:div, "#{reject}".html_safe)
+      end
     end
 
     actions
