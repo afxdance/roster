@@ -172,6 +172,8 @@ html, body {
         </div>
         <div class="editable" contenteditable="true", id="fd3">
             <%= @src[2] %>
+        </div>
+        <div>
             <%= f.text_field :name, required: true, placeholder: "FIRST AND LAST NAME" %><br>
             <%= f.text_field :email, required: true, placeholder: "EMAIL", pattern: " ^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" %><br>
             <%= f.text_field :phone, required: true, placeholder: "PHONE: XXX-XXX-XXXX", pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}" %>
@@ -187,16 +189,16 @@ html, body {
 
         </div>
         <hr>
-        <div class="editable" contenteditable="true", id="fd4">
+        <div class="editable" contenteditable="true" id="fd4">
             <%= @src[3] %>
         </div>
-        <div class="editable" contenteditable="true", id="fd5">
+        <div class="editable" contenteditable="true" id="fd5">
             <%= @src[4] %>
         </div>
-        <div class="editable" contenteditable="true", id="fd6">
+        <div class="editable" contenteditable="true" id="fd6">
             <%= @src[5] %>
         </div>
-        <div class="editable" contenteditable="true", id="fd7">
+        <div class="editable" contenteditable="true" id="fd7">
           <%= @src[6] %>
         </div>
         </p>
@@ -208,16 +210,16 @@ html, body {
   </p>
   <p>
     <%= f.check_box :b, required:true, class: "required_checkboxes"%>
-    <div class="editable" contenteditable="true", id="fd16">
+    <label class="editable" contenteditable="true", id="fd16">
       <%= @src[15] %>
-    </div>
+    </label>
   </p>
 
   <p>
     <%= f.check_box :c, required:true, class: "required_checkboxes"%>
-    <div class="editable inline" contenteditable="true", id="fd17">
+    <label class="editable" contenteditable="true", id="fd17">
      <%= @src[16] %>
-    </div>
+    </label>
   </p>
 <hr>
 
@@ -240,31 +242,42 @@ html, body {
 
   <p>
     <%= f.check_box :d, required: true, class: "required_checkboxes" %>
-    <label>I understand that consent is revocable, verbal, voluntary, conscious, and enthusiastic.</label>
+    <label class="editable" contenteditable="true" id="fd18">
+      <%= @src[17]%>
+    </label>
   </p>
   <p>
     <%= f.check_box :e, required: true, class: "required_checkboxes" %>
-    <label>I understand that AFX encourages its members to report violations of our Safety and Responsibility Rules to either the Executive Board and/or campus resources.</label>
+    <label class="editable" contenteditable="true", id="fd19">
+     <%= @src[18] %>
+    </label>
   </p>
 
   <p>
     <%= f.check_box :f, required: true, class: "required_checkboxes" %>
-    <label>I understand that I will cooperate to the fullest extent with the Executive Board and other members of AFX Dance to maintain a safe environment to fulfill the goals of AFX Dance.</label>
+    <label class="editable" contenteditable="true", id="fd20">
+     <%= @src[19] %>
+    </label>
   </p>
 
   <p>
     <%= f.check_box :g, required: true, class: "required_checkboxes" %>
-    <label>I understand and agree to follow all of the safety and responsibility rules set forth in this contract. I acknowledge that I must obey these rules in order to hold active membership in AFX Dance to ensure my own safety, and that of other members.
-  </label>
+    <label class="editable" contenteditable="true", id="fd21">
+     <%= @src[20] %>
+    </label>
   </p>
   <p>
     <%= f.check_box :h, required: true, class: "required_checkboxes" %>
-    <label>I am aware that any violation of this contract or misbehavior on my part that results in unsafe conduct at events and practices affiliated with AFX Dance or events in the presence of members of the AFX community will result in prohibition of attending future AFX events and revocation of my membership immediately and/or permanently.</label>
+    <label class="editable" contenteditable="true", id="fd22">
+     <%= @src[21] %>
+    </label>
   </p>
 
   <p>
     <%= f.check_box :i, required: true, class: "required_checkboxes" %>
-    <label>I acknowledge that I have read this Safety and Responsibility Contract and that I understand the words and language in it. All potential risks and effects of the Safety and Responsibility Contract have been answered to my satisfaction.</label>
+    <label class="editable" contenteditable="true", id="fd23">
+     <%= @src[22] %>
+    </label>
   </p>
 
 <hr>
@@ -274,11 +287,15 @@ html, body {
 
   <p>
       <%= f.radio_button :pg_release, 'parent' %>
-      <label>I understand and agree that if I am signing this Safety and Responsibility Agreement on behalf of my minor child, that I will be giving up the same rights for said minor as I would be giving up if I signed this document on my own behalf.</label>
+      <label class="editable" contenteditable="true", id="fd24">
+        <%= @src[23] %>
+      </label>
   </p>
   <p>
     <%= f.radio_button :pg_release, 'myself' %>
-    <label>I am at least 18 years of age and am signing this form for myself.</label>
+    <label class="editable" contenteditable="true", id="fd25">
+      <%= @src[24] %>
+    </label>
   </p>
   <p>
     <%= f.radio_button :pg_release, 'other'  %> Other: <%= f.text_field :pg_other, :style => "display: inline-block; width: 51%" %>
@@ -300,7 +317,8 @@ html, body {
 
   <p>
     <%= f.check_box :p_checkbox %>
-    <label>I understand that checking this box constitutes a legal signature confirming that I acknowledge the above Safety and Responsibility Agreement for AFX Dance and am liable to the rules mutually agreed upon between me and the organization.
+    <label class="editable" contenteditable="true", id="fd26">
+      <%= @src[25] %>
     </label>
   </p>
 <hr>
@@ -313,29 +331,30 @@ html, body {
 
   <p>
     <%= f.check_box :m_checkbox %>
-    <label>I understand that checking this box constitutes a legal signature confirming that I acknowledge the above Safety and Responsibility Agreement for AFX Dance and am liable to the rules mutually agreed upon between me and the organization.
+    <label class="editable" contenteditable="true", id="fd27">
+      <%= @src[26] %>
     </label>
   </p>
+  <hr>
+</div>
 
   <p>
-    Thank you for submitting the AFX Dance Fall 2019 Member Safety and Responsibility Contract. Your response has been recorded. If you have further questions, please email afxdance@gmail.com.
-
+    <div class="editable" contenteditable="true" id="fd28">
+      <%= @src[27] %>
+    </div>
+  </p>
   <br>
-
-
-
-
 
   <div class = "submit">
     <%= f.submit "Submit Safety and Responsibility Contract", class: "availability-form-submit" %>
   </div>
 
-</div>
-
     <div>
         <p> Last edited: <%= @updatedAt %> </p>
         <p> Last backup: <%= @backupAt %> </p>
     </div>
+
+  <div id="fd14"> </div>
 
 <% end %>
 
@@ -361,6 +380,14 @@ html, body {
     <input id="fdfd18" name="18" type="hidden" />
     <input id="fdfd19" name="19" type="hidden" />
     <input id="fdfd20" name="20" type="hidden" />
+    <input id="fdfd21" name="21" type="hidden" />
+    <input id="fdfd22" name="22" type="hidden" />
+    <input id="fdfd23" name="23" type="hidden" />
+    <input id="fdfd24" name="24" type="hidden" />
+    <input id="fdfd25" name="25" type="hidden" />
+    <input id="fdfd26" name="26" type="hidden" />
+    <input id="fdfd27" name="27" type="hidden" />
+    <input id="fdfd28" name="28" type="hidden" />
 
 
     <input style="margin-bottom: 8px" type="submit" name="commit" value="Save Changes" data-disable-with="Save Changes" id="submit_button_thing">
@@ -371,7 +398,8 @@ html, body {
 <script>
 
     function fill_fields() {
-        for (i = 1; i < 18; i++) {
+        for (i = 1; i < 29; i++) {
+          // console.log(i);
         var first = document.getElementById('fd' + i), second = document.getElementById('fdfd' + i);
         second.value = first.innerHTML;
         }

@@ -1,6 +1,6 @@
 class SrcFormField < ApplicationRecord
-  SRC_RANGE = (1..18)
-  SRC_BACKUP_RANGE = (19..30)
+  SRC_RANGE = (1..31)
+  SRC_BACKUP_RANGE = (31..60)
 
   def self.find_src_form_fields
     return SrcFormField.src.where.not(data: nil).pluck(:data).map(&:html_safe)

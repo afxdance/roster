@@ -50,13 +50,21 @@ SrcFormField.create_with(data: "<p><h3>Parent / Guardian Release</h3></p>").find
 
 SrcFormField.create_with(data: "nothing rn idk").find_or_create_by(id: 14)
 
+SrcFormField.create_with(data: "I understand that AFX Dance is an organization that gives those without dance experience an opportunity to experience urban dance. The organization name, [A]spirations, [F]amily, e[X]perience reflects our philosophy of creating a family environment for dancers to build up their confidence and support to reach new heights.").find_or_create_by(id: 15)
 
-SrcFormField.create_with(data: "<label>I understand that AFX Dance is an organization that gives those without dance experience an opportunity to experience urban dance. The organization name, [A]spirations, [F]amily, e[X]perience reflects our philosophy of creating a family environment for dancers to build up their confidence and support to reach new heights.</label>").find_or_create_by(id: 15)
+SrcFormField.create_with(data: "I understand that AFX is a non-discriminatory organization with a ZERO TOLERANCE POLICY with regards to harassment. Harassment of any kind may result in immediate and/or permanent removal from AFX Dance.").find_or_create_by(id: 16)
 
+SrcFormField.create_with(data: "I will respect all gender identities and use preferred gender pronouns.").find_or_create_by(id: 17)
 
+SrcFormField.create_with(data: "I understand that consent is revocable, verbal, voluntary, conscious, and enthusiastic.").find_or_create_by(id: 18)
 
-SrcFormField.create_with(data: "<label>I understand that AFX is a non-discriminatory organization with a ZERO TOLERANCE POLICY with regards to harassment. Harassment of any kind may result in immediate and/or permanent removal from AFX Dance.</label>").find_or_create_by(id: 16)
-
-
-
-SrcFormField.create_with(data: "<label>I will respect all gender identities and use preferred gender pronouns.</label>").find_or_create_by(id: 17)
+SrcFormField.create_with(data: "I understand that AFX encourages its members to report violations of our Safety and Responsibility Rules to either the Executive Board and/or campus resources.").find_or_create_by(id: 19)
+SrcFormField.create_with(data: "I understand that I will cooperate to the fullest extent with the Executive Board and other members of AFX Dance to maintain a safe environment to fulfill the goals of AFX Dance.").find_or_create_by(id: 20)
+SrcFormField.create_with(data: "I understand and agree to follow all of the safety and responsibility rules set forth in this contract. I acknowledge that I must obey these rules in order to hold active membership in AFX Dance to ensure my own safety, and that of other members.").find_or_create_by(id: 21)
+SrcFormField.create_with(data: "I am aware that any violation of this contract or misbehavior on my part that results in unsafe conduct at events and practices affiliated with AFX Dance or events in the presence of members of the AFX community will result in prohibition of attending future AFX events and revocation of my membership immediately and/or permanently.").find_or_create_by(id: 22)
+SrcFormField.create_with(data: "I acknowledge that I have read this Safety and Responsibility Contract and that I understand the words and language in it. All potential risks and effects of the Safety and Responsibility Contract have been answered to my satisfaction.").find_or_create_by(id: 23)
+SrcFormField.create_with(data: "I understand and agree that if I am signing this Safety and Responsibility Agreement on behalf of my minor child, that I will be giving up the same rights for said minor as I would be giving up if I signed this document on my own behalf.").find_or_create_by(id: 24)
+SrcFormField.create_with(data: "I am at least 18 years of age and am signing this form for myself.").find_or_create_by(id: 25)
+SrcFormField.create_with(data: "I understand that checking this box constitutes a legal signature confirming that I acknowledge the above Safety and Responsibility Agreement for AFX Dance and am liable to the rules mutually agreed upon between me and the organization.").find_or_create_by(id: 26)
+SrcFormField.create_with(data: "I understand that checking this box constitutes a legal signature confirming that I acknowledge the above Safety and Responsibility Agreement for AFX Dance and am liable to the rules mutually agreed upon between me and the organization.").find_or_create_by(id: 27)
+SrcFormField.create_with(data: "Thank you for submitting the AFX Dance Fall 2019 Member Safety and Responsibility Contract. Your response has been recorded. If you have further questions, please email afxdance@gmail.com.").find_or_create_by(id: 28)
