@@ -204,97 +204,97 @@ html, body {
         </p>
   <p>
     <%= f.check_box :a, required:true, class: "required_checkboxes"%>
-    <div class="editable" contenteditable="true", id="fd15">
-      <%= @src[14] %>
-    </div>
+    <label class="editable" contenteditable="true", id="fd8">
+      <%= @src[7] %>
+    </label>
   </p>
   <p>
     <%= f.check_box :b, required:true, class: "required_checkboxes"%>
-    <label class="editable" contenteditable="true", id="fd16">
-      <%= @src[15] %>
+    <label class="editable" contenteditable="true", id="fd9">
+      <%= @src[8] %>
     </label>
   </p>
 
   <p>
     <%= f.check_box :c, required:true, class: "required_checkboxes"%>
-    <label class="editable" contenteditable="true", id="fd17">
-     <%= @src[16] %>
+    <label class="editable" contenteditable="true", id="fd10">
+     <%= @src[9] %>
     </label>
   </p>
 <hr>
 
   <p>
-      <div class="editable" contenteditable="true", id="fd8">
-          <%= @src[7] %>
-      </div>
-      <div class="editable" contenteditable="true", id="fd9">
-          <%= @src[8] %>
-      </div>
-      <div class="editable" contenteditable="true", id="fd10">
-          <%= @src[9] %>
-      </div>
       <div class="editable" contenteditable="true", id="fd11">
           <%= @src[10] %>
       </div>
       <div class="editable" contenteditable="true", id="fd12">
           <%= @src[11] %>
       </div>
+      <div class="editable" contenteditable="true", id="fd13">
+          <%= @src[12] %>
+      </div>
+      <div class="editable" contenteditable="true", id="fd14">
+          <%= @src[13] %>
+      </div>
+      <div class="editable" contenteditable="true", id="fd15">
+          <%= @src[14] %>
+      </div>
 
   <p>
     <%= f.check_box :d, required: true, class: "required_checkboxes" %>
-    <label class="editable" contenteditable="true" id="fd18">
-      <%= @src[17]%>
+    <label class="editable" contenteditable="true" id="fd16">
+      <%= @src[15]%>
     </label>
   </p>
   <p>
     <%= f.check_box :e, required: true, class: "required_checkboxes" %>
-    <label class="editable" contenteditable="true", id="fd19">
-     <%= @src[18] %>
+    <label class="editable" contenteditable="true", id="fd17">
+     <%= @src[16] %>
     </label>
   </p>
 
   <p>
     <%= f.check_box :f, required: true, class: "required_checkboxes" %>
+    <label class="editable" contenteditable="true", id="fd18">
+     <%= @src[17] %>
+    </label>
+  </p>
+
+  <p>
+    <%= f.check_box :g, required: true, class: "required_checkboxes" %>
+    <label class="editable" contenteditable="true", id="fd19">
+     <%= @src[18] %>
+    </label>
+  </p>
+  <p>
+    <%= f.check_box :h, required: true, class: "required_checkboxes" %>
     <label class="editable" contenteditable="true", id="fd20">
      <%= @src[19] %>
     </label>
   </p>
 
   <p>
-    <%= f.check_box :g, required: true, class: "required_checkboxes" %>
+    <%= f.check_box :i, required: true, class: "required_checkboxes" %>
     <label class="editable" contenteditable="true", id="fd21">
      <%= @src[20] %>
     </label>
   </p>
-  <p>
-    <%= f.check_box :h, required: true, class: "required_checkboxes" %>
-    <label class="editable" contenteditable="true", id="fd22">
-     <%= @src[21] %>
-    </label>
-  </p>
-
-  <p>
-    <%= f.check_box :i, required: true, class: "required_checkboxes" %>
-    <label class="editable" contenteditable="true", id="fd23">
-     <%= @src[22] %>
-    </label>
-  </p>
 
 <hr>
-      <div class="editable" contenteditable="true", id="fd13">
-          <%= @src[12] %>
+      <div class="editable" contenteditable="true", id="fd22">
+          <%= @src[21] %>
       </div>
 
   <p>
       <%= f.radio_button :pg_release, 'parent' %>
-      <label class="editable" contenteditable="true", id="fd24">
-        <%= @src[23] %>
+      <label class="editable" contenteditable="true", id="fd23">
+        <%= @src[22] %>
       </label>
   </p>
   <p>
     <%= f.radio_button :pg_release, 'myself' %>
-    <label class="editable" contenteditable="true", id="fd25">
-      <%= @src[24] %>
+    <label class="editable" contenteditable="true", id="fd24">
+      <%= @src[23] %>
     </label>
   </p>
   <p>
@@ -317,8 +317,8 @@ html, body {
 
   <p>
     <%= f.check_box :p_checkbox %>
-    <label class="editable" contenteditable="true", id="fd26">
-      <%= @src[25] %>
+    <label class="editable" contenteditable="true", id="fd25">
+      <%= @src[24] %>
     </label>
   </p>
 <hr>
@@ -331,16 +331,16 @@ html, body {
 
   <p>
     <%= f.check_box :m_checkbox %>
-    <label class="editable" contenteditable="true", id="fd27">
-      <%= @src[26] %>
+    <label class="editable" contenteditable="true", id="fd26">
+      <%= @src[25] %>
     </label>
   </p>
   <hr>
 </div>
 
   <p>
-    <div class="editable" contenteditable="true" id="fd28">
-      <%= @src[27] %>
+    <div class="editable" contenteditable="true" id="fd27">
+      <%= @src[26] %>
     </div>
   </p>
   <br>
@@ -387,25 +387,75 @@ html, body {
     <input id="fdfd25" name="25" type="hidden" />
     <input id="fdfd26" name="26" type="hidden" />
     <input id="fdfd27" name="27" type="hidden" />
-    <input id="fdfd28" name="28" type="hidden" />
+    <%# <input id="fdfd28" name="28" type="hidden" /> %>
 
 
     <input style="margin-bottom: 8px" type="submit" name="commit" value="Save Changes" data-disable-with="Save Changes" id="submit_button_thing">
 <% end %>
 
+<%= form_with(url: { action: "set" }) do %>
+
+  <input id="ab1" name="1" type="hidden" />
+  <input id="ab2" name="2" type="hidden" />
+  <input id="ab3" name="3" type="hidden" />
+  <input id="ab4" name="4" type="hidden" />
+  <input id="ab5" name="5" type="hidden" />
+  <input id="ab6" name="6" type="hidden" />
+  <input id="ab7" name="7" type="hidden" />
+  <input id="ab8" name="8" type="hidden" />
+  <input id="ab9" name="9" type="hidden" />
+  <input id="ab10" name="10" type="hidden" />
+  <input id="ab11" name="11" type="hidden" />
+  <input id="ab12" name="12" type="hidden" />
+  <input id="ab13" name="13" type="hidden" />
+  <input id="ab14" name="14" type="hidden" />
+  <input id="ab15" name="15" type="hidden" />
+  <input id="ab16" name="16" type="hidden" />
+  <input id="ab17" name="17" type="hidden" />
+  <input id="ab18" name="18" type="hidden" />
+  <input id="ab19" name="19" type="hidden" />
+  <input id="ab20" name="20" type="hidden" />
+  <input id="ab21" name="21" type="hidden" />
+  <input id="ab22" name="22" type="hidden" />
+  <input id="ab23" name="23" type="hidden" />
+  <input id="ab24" name="24" type="hidden" />
+  <input id="ab25" name="25" type="hidden" />
+  <input id="ab26" name="26" type="hidden" />
+  <input id="ab27" name="27" type="hidden" />
+
+  <input style="margin-bottom: 8px" type="submit" name="commit" value="Save Changes and Set as Backup" data-disable-with="Save Changes and Set as Backup" id="set_and_save">
+
+<% end%>
+
+<%= form_with(url: { action: "revert" }) do %>
+  <input type="submit" name="commit" value="Revert to Backup" data-disable-with="Revert to Backup" id="set_and_save">
+<% end%>
+
 </div>
 </body>
 <script>
 
+    const SRC_FIELDS = 28
+
     function fill_fields() {
-        for (i = 1; i < 29; i++) {
+        for (i = 1; i < SRC_FIELDS; i++) {
           // console.log(i);
-        var first = document.getElementById('fd' + i), second = document.getElementById('fdfd' + i);
-        second.value = first.innerHTML;
+          var first = document.getElementById('fd' + i);
+          var second = document.getElementById('fdfd' + i);
+          second.value = first.innerHTML;
+        }
+    }
+    function fill_and_set() {
+        for (i = 1; i < SRC_FIELDS; i++) {
+          // console.log(i);
+          var first = document.getElementById('fd' + i);
+          var second = document.getElementById('ab' + i);
+          second.value = first.innerHTML;
         }
     }
 
     document.getElementById("submit_button_thing").addEventListener("click", fill_fields);
+    document.getElementById("set_and_save").addEventListener("click", fill_and_set);
 
     function checkboxesAreValid() {
     nchecked = $('.required_checkboxes:checked').length;
