@@ -75,3 +75,37 @@ SrcFormField.create_with(data: "I understand that checking this box constitutes 
 SrcFormField.create_with(data: "I understand that checking this box constitutes a legal signature confirming that I acknowledge the above Safety and Responsibility Agreement for AFX Dance and am liable to the rules mutually agreed upon between me and the organization.").find_or_create_by(id: 26)
 
 SrcFormField.create_with(data: "Thank you for submitting the AFX Dance Fall 2019 Member Safety and Responsibility Contract. Your response has been recorded. If you have further questions, please email afxdance@gmail.com.").find_or_create_by(id: 27)
+
+# Backup data
+I think we need to initialize the backup fields
+yup
+alrighhht thats it
+
+
+SrcFormField.create_with(data: "").find_or_create_by(id: 28)
+SrcFormField.create_with(data: "").find_or_create_by(id: 29)
+SrcFormField.create_with(data: "").find_or_create_by(id: 30)
+SrcFormField.create_with(data: "").find_or_create_by(id: 31)
+SrcFormField.create_with(data: "").find_or_create_by(id: 32)
+SrcFormField.create_with(data: "").find_or_create_by(id: 33)
+SrcFormField.create_with(data: "").find_or_create_by(id: 34)
+SrcFormField.create_with(data: "").find_or_create_by(id: 35)
+SrcFormField.create_with(data: "").find_or_create_by(id: 36)
+SrcFormField.create_with(data: "").find_or_create_by(id: 37)
+SrcFormField.create_with(data: "").find_or_create_by(id: 38)
+SrcFormField.create_with(data: "").find_or_create_by(id: 39)
+SrcFormField.create_with(data: "").find_or_create_by(id: 40)
+SrcFormField.create_with(data: "").find_or_create_by(id: 41)
+SrcFormField.create_with(data: "").find_or_create_by(id: 42)
+SrcFormField.create_with(data: "").find_or_create_by(id: 43)
+SrcFormField.create_with(data: "").find_or_create_by(id: 44)
+SrcFormField.create_with(data: "").find_or_create_by(id: 45)
+SrcFormField.create_with(data: "").find_or_create_by(id: 46)
+SrcFormField.create_with(data: "").find_or_create_by(id: 47)
+SrcFormField.create_with(data: "").find_or_create_by(id: 48)
+SrcFormField.create_with(data: "").find_or_create_by(id: 49)
+SrcFormField.create_with(data: "").find_or_create_by(id: 50)
+SrcFormField.create_with(data: "").find_or_create_by(id: 51)
+SrcFormField.create_with(data: "").find_or_create_by(id: 52)
+SrcFormField.create_with(data: "").find_or_create_by(id: 53)
+SrcFormField.create_with(data: "").find_or_create_by(id: 54)

@@ -35,9 +35,9 @@ class SrcFormField < ApplicationRecord
     return SrcFormField.src.first.updated_at.strftime("%m/%d/%Y")
   end
 
-  # def self.last_backup_src
-  #   return SrcFormField.srcbackup.first.updated_at.strftime("%m/%d/%Y")
-  # end
+  def self.last_backup_src
+    return SrcFormField.srcbackup.first.updated_at.strftime("%m/%d/%Y")
+  end
 
   def self.revert_src_backup
     SrcFormField.src.each do |item|
