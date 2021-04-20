@@ -12,7 +12,6 @@ class TeamSwitchRequest < ApplicationRecord
   validates :dancer, presence: { message: ": You are not in our directory, please revise your information" }
 
   TABLE_VISIBLE_FIELDS = [
-    :dancer,
     :name,
     :email,
     :phone,
