@@ -27,7 +27,7 @@ ActiveAdmin.register_page "Edit SRC" do
     for i in 1..28 # Just trying to make the title editable for now
       formfields << params[i.to_s]
     end
-    SrcFormField.update_src_fields(formfields)
+    SrcFormField.update_src_form_fields(formfields)
     notice = SrcFormField.update_src_backup
     redirect_to admin_edit_src_path, notice: notice
   end

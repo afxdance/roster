@@ -154,12 +154,17 @@ html, body {
 
 <% @src = SrcFormField.find_src_form_fields %>
 <% @updatedAt = SrcFormField.last_updated_src %>
+<% @backupAt = SrcFormField.last_backup_src %>
 
 <body id="audition-form-body">
 
 <%# No clue if closing bracket } goes after "audition-for" or "src_form"%>
  <%= form_with url: "/src",  :html => {:class => "audition-form"}, :id => "src_form" do |f| %>
-
+    <h2>
+      <div class="editable" contenteditable="true", id="fd28">
+          <%= @src[27] %>
+      </div>
+    </h2>
 
     <div class="times">
 
@@ -343,11 +348,6 @@ html, body {
       <%= @src[26] %>
     </div>
   </p>
-  <br>
-
-  <div class = "submit">
-    <%= f.submit "Submit Safety and Responsibility Contract", class: "availability-form-submit" %>
-  </div>
 
     <div>
         <p> Last edited: <%= @updatedAt %> </p>
@@ -387,7 +387,7 @@ html, body {
     <input id="fdfd25" name="25" type="hidden" />
     <input id="fdfd26" name="26" type="hidden" />
     <input id="fdfd27" name="27" type="hidden" />
-    <%# <input id="fdfd28" name="28" type="hidden" /> %>
+    <input id="fdfd28" name="28" type="hidden" />
 
 
     <input style="margin-bottom: 8px" type="submit" name="commit" value="Save Changes" data-disable-with="Save Changes" id="submit_button_thing">
@@ -422,6 +422,7 @@ html, body {
   <input id="ab25" name="25" type="hidden" />
   <input id="ab26" name="26" type="hidden" />
   <input id="ab27" name="27" type="hidden" />
+  <input id="ab28" name="28" type="hidden" />
 
   <input style="margin-bottom: 8px" type="submit" name="commit" value="Save Changes and Set as Backup" data-disable-with="Save Changes and Set as Backup" id="set_and_save">
 
@@ -438,7 +439,7 @@ html, body {
     const SRC_FIELDS = 28
 
     function fill_fields() {
-        for (i = 1; i < SRC_FIELDS; i++) {
+        for (i = 1; i <= SRC_FIELDS; i++) {
           // console.log(i);
           var first = document.getElementById('fd' + i);
           var second = document.getElementById('fdfd' + i);
@@ -446,7 +447,7 @@ html, body {
         }
     }
     function fill_and_set() {
-        for (i = 1; i < SRC_FIELDS; i++) {
+        for (i = 1; i <= SRC_FIELDS; i++) {
           // console.log(i);
           var first = document.getElementById('fd' + i);
           var second = document.getElementById('ab' + i);

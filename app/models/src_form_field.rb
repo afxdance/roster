@@ -1,6 +1,6 @@
 class SrcFormField < ApplicationRecord
-  SRC_RANGE = (1..27)
-  SRC_BACKUP_RANGE = (28..54)
+  SRC_RANGE = (1..28)
+  SRC_BACKUP_RANGE = (29..56)
 
   def self.find_src_form_fields
     return SrcFormField.src.where.not(data: nil).pluck(:data).map(&:html_safe)
@@ -22,7 +22,7 @@ class SrcFormField < ApplicationRecord
 
   def self.update_src_backup
     SrcFormField.srcbackup.each do |item|
-      updates = FormField.find(item.id - 27).data # might be -28
+      updates = SrcFormField.find(item.id - 28).data # might be -28
       item.update(data: updates)
     end
     return "Successfully reverted to most recent backup"
@@ -41,7 +41,7 @@ class SrcFormField < ApplicationRecord
 
   def self.revert_src_backup
     SrcFormField.src.each do |item|
-      updates = SrcFormField.find(item.id + 16).data
+      updates = SrcFormField.find(item.id + 28).data
       item.update(data: updates)
     end
     return "Reverted to the most recent backup"
@@ -54,7 +54,7 @@ class SrcFormField < ApplicationRecord
     return SrcFormField.where(id: SRC_RANGE)
   end
 
-  # def self.srcbackup
-  #   return SrcFormField.where(id: SRC_BACKUP_RANGE)
-  # end
+  def self.srcbackup
+    return SrcFormField.where(id: SRC_BACKUP_RANGE)
+  end
 end

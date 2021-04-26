@@ -1,7 +1,7 @@
 <body id="audition-form-body">
 
 <%= form_with url: "/src", method: "post", :html => {:class => "audition-form", :id => "src_form"} do |f| %>
-  <h2>AFX Dance: Spring 2020 Member Safety and Responsibility Contract (SRC)</h2>
+  <h2><%= @srcformfields[27] %></h2>
 
   <% if @src.errors.any? %>
       <% @src.errors.full_messages.each do |message| %>
