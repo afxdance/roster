@@ -1,4 +1,4 @@
-ActiveAdmin.register Dancer, :as => 'Finances' do
+ActiveAdmin.register Dancer, as: "Finances" do
   if Dancer.table_exists?
     columns = Dancer.columns.map(&:name).map(&:to_sym)
     permit_params columns
