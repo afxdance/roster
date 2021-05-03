@@ -113,10 +113,6 @@ ActiveAdmin.register TeamSwitchRequest do
         return
       end
 
-      # Rejection check
-      #if !team_switch_request.rejection_reason.nil?
-        #UserMailer.rejection_email
-
       # 2. Check that the person's team is still the request's old team
       if team_switch_request.old_team != dancer.teams.first && dancer.teams.first&.level != Team::DROP
         redirect_to :back, alert:
@@ -163,7 +159,7 @@ ActiveAdmin.register TeamSwitchRequest do
         #   puts directors
         # end
 
-        UserMailer.team_switch_email(dancer, old_team.name, new_team, directors).deliver_now
+        UserMailer.success_team_switch_email(dancer, old_team.name, new_team, directors).deliver_now
 
         redirect_to :back, notice: "#{dancer.name} has been switched into #{new_team.name}."
       end
