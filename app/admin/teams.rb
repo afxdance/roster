@@ -11,6 +11,8 @@ ActiveAdmin.register Team do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
+
+  # If the current user can't view the teams (just finance for now), don't let the page show up in the top bar
   menu if: proc { current_user.can_view_teams? }
   before_action :role_check
   scope_to :current_user

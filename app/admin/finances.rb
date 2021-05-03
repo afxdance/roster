@@ -42,6 +42,7 @@ ActiveAdmin.register Dancer, :as => 'Finances' do
       request.referrer
     end
 
+    # Modifying certain dancer fields, also tracks when modified and modified by who
     def dancer_has_paid_dues(dancer_id)
       dancer = Dancer.find(dancer_id)
       dancer.has_paid_dues = "yes"
@@ -82,6 +83,7 @@ ActiveAdmin.register Dancer, :as => 'Finances' do
   index do
     para "<style>td {white-space: nowrap</style>".html_safe
 
+    # Columns from the Dancer table that should be shown in the finance page
     show_fields = [
       :name,
       :has_paid_dues,
@@ -89,8 +91,10 @@ ActiveAdmin.register Dancer, :as => 'Finances' do
       :dues_changed_at,
       :dues_approved_by,
       :tickets_changed_at,
-      :tickets_approved_by]
+      :tickets_approved_by,
+    ]
 
+    # The column name for each field on the page is the same as the column name from the Dancers table except for dues and tickets because the table was getting too fat
     show_fields.each do |field|
       if field == :has_paid_dues
         column("Dues", sortable: :has_paid_dues, &:has_paid_dues)
@@ -101,6 +105,7 @@ ActiveAdmin.register Dancer, :as => 'Finances' do
       end
     end
 
+    # Create column for editing dues
     column :edit_dues do |dancer|
       if dancer.has_paid_dues == "yes"
         content_tag :div do
@@ -117,6 +122,7 @@ ActiveAdmin.register Dancer, :as => 'Finances' do
       end
     end
 
+    # Create column for editing tickets
     column :edit_tickets do |dancer|
       if dancer.has_bought_tickets == "yes"
         content_tag :div do

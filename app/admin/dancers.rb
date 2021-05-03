@@ -15,6 +15,8 @@ ActiveAdmin.register Dancer do
   # end
 
   # Dancer.table_exists? &&
+
+  # If the current user can't view the dancers (just finance for now), don't let the dancers page show up in the top bar
   menu if: proc { current_user.can_view_dancers? }
   before_action :role_check
 
