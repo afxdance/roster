@@ -88,4 +88,20 @@ class User < ApplicationRecord
       false
     end
   end
+
+  def can_view_dancers?
+    if finance?
+      false
+    else
+      true
+    end
+  end
+
+  def can_view_teams?
+    if finance?
+      false
+    else
+      true
+    end
+  end
 end

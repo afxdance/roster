@@ -11,6 +11,8 @@ ActiveAdmin.register Team do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
+  menu if: proc { current_user.can_view_teams? }
+  before_action :role_check
   scope_to :current_user
 
   permit_params do
@@ -114,6 +116,10 @@ ActiveAdmin.register Team do
   controller do
     def back_url
       request.referrer
+    end
+
+    def role_check
+      redirect_to "/admin", alert: "You can't view the dancers page!!! >:( uwu" unless current_user.can_view_teams?
     end
 
     def drop_dancer_from_team(dancer_id, team_id)

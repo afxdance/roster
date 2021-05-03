@@ -15,6 +15,8 @@ ActiveAdmin.register Dancer do
   # end
 
   # Dancer.table_exists? &&
+  menu if: proc { current_user.can_view_dancers? }
+  before_action :role_check
 
   # Skip during rake db:load:schema, because Dancer.columns isn't available yet
   if Dancer.table_exists?
@@ -42,6 +44,10 @@ ActiveAdmin.register Dancer do
   end
 
   controller do
+    def role_check
+      redirect_to "/admin", alert: "You can't view the dancers page!!! >:( uwu" unless current_user.can_view_dancers?
+    end
+
     def action_methods
       if current_user.can_modify_dancer_fields?
         super
