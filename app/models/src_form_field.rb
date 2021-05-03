@@ -9,10 +9,6 @@ class SrcFormField < ApplicationRecord
   def self.update_src_form_fields(fields)
 
     SrcFormField.src.each_with_index do |item, index|
-      # puts "item, index"
-      # puts item
-      # puts index
-      # puts "item, index end"
       item.update(data: fields[index])
     end
     return "Successfully saved changes"

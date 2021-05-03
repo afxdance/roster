@@ -440,7 +440,6 @@ html, body {
 
     function fill_fields() {
         for (i = 1; i <= SRC_FIELDS; i++) {
-          // console.log(i);
           var first = document.getElementById('fd' + i);
           var second = document.getElementById('fdfd' + i);
           second.value = first.innerHTML;
@@ -448,7 +447,6 @@ html, body {
     }
     function fill_and_set() {
         for (i = 1; i <= SRC_FIELDS; i++) {
-          // console.log(i);
           var first = document.getElementById('fd' + i);
           var second = document.getElementById('ab' + i);
           second.value = first.innerHTML;
@@ -501,11 +499,6 @@ html, body {
       default:
 
     }
-    console.log("nchecked: " + String(nchecked))
-    console.log("isvalid " + String(isvalid))
-    console.log("infocheck " + String(infocheck))
-
-    console.log(nchecked == 9 && isvalid && infocheck)
 
     return nchecked == 9 && isvalid && infocheck
   }
@@ -517,7 +510,6 @@ html, body {
     $('#' + fieldToShow).css('display', 'block')
     return
   });
-  // TODO What to show for other option
 
 
   $('#src_form').submit(function() {
