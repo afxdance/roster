@@ -23,12 +23,26 @@ User.create_with(
   password_confirmation: "password123",
   role: "director",
 ).find_or_create_by(id: 2)
+
+User.create_with(
+  username: "finance",
+  password: "123password",
+  password_confirmation: "123password",
+  role: "finance",
+).find_or_create_by(id: 3)
+
 dancer_extra_fields = {
   exp_interest: "not important rn",
   tech_interest: "not important rn",
   camp_interest: "not important rn",
   reach_workshop_interest: "not important rn",
   reach_news_interest: "not important rn",
+  has_paid_dues: "no",
+  has_bought_tickets: "no",
+  dues_changed_at: Time.new(2000),
+  tickets_changed_at: Time.new(2000),
+  dues_approved_by: "none",
+  tickets_approved_by: "none",
 }
 # Dancer.create!(name: "Peter Le",
 #                email: "peter@peter.peter",

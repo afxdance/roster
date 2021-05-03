@@ -34,10 +34,17 @@ class Dancer < ApplicationRecord
     "false" => "No",
   }.freeze
 
+  FINANCE_VALUES = {
+    "yes" => "Has paid",
+    "no" => "Has not paid",
+    "other" => "Other",
+  }.freeze
   SHOW_CAMP_INTEREST = false
   SHOW_EXP_INTEREST = false
   SHOW_TECH_INTEREST = false
   SHOW_REACH_INTEREST = false
+  SHOW_DUES_PAID = false
+  SHOW_TICKETS_BOUGHT = false
 
   REQUIRED_FIELDS = [
     :name,
@@ -51,6 +58,8 @@ class Dancer < ApplicationRecord
     :camp_interest,
     :reach_workshop_interest,
     :reach_news_interest,
+    :has_paid_dues,
+    :has_bought_tickets,
   ].freeze
   TABLE_VISIBLE_FIELDS = [
     :name,
@@ -63,6 +72,8 @@ class Dancer < ApplicationRecord
     SHOW_TECH_INTEREST ? :tech_interest : nil,
     SHOW_REACH_INTEREST ? :reach_workshop_interest : nil,
     SHOW_REACH_INTEREST ? :reach_news_interest : nil,
+    SHOW_DUES_PAID ? :has_paid_dues : nil,
+    SHOW_TICKETS_BOUGHT ? :has_bought_tickets : nil,
   ].compact.freeze
   SENSITIVE_FIELDS = [
     :gender,
