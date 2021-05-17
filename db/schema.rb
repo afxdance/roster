@@ -61,6 +61,12 @@ ActiveRecord::Schema.define(version: 20210426025618) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "src_form_fields", force: :cascade do |t|
+    t.text "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "srcs", force: :cascade do |t|
     t.boolean "c1", null: false
     t.boolean "c2", null: false
@@ -81,6 +87,15 @@ ActiveRecord::Schema.define(version: 20210426025618) do
     t.datetime "updated_at", null: false
     t.integer "dancer_id"
     t.index ["dancer_id"], name: "index_srcs_on_dancer_id"
+  end
+
+  create_table "team_preferences", force: :cascade do |t|
+    t.text "preferences"
+    t.text "initial_team"
+    t.integer "team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_team_preferences_on_team_id"
   end
 
   create_table "team_switch_requests", force: :cascade do |t|

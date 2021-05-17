@@ -1,6 +1,7 @@
 class Team < ApplicationRecord
   has_and_belongs_to_many :users
   has_and_belongs_to_many :dancers
+  has_one :team_preference
 
   PROJECT = "Project".freeze
   TRAINING = "Training".freeze
