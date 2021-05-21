@@ -199,8 +199,6 @@ ActiveAdmin.register TeamSwitchRequest do
         concat content_tag(:div,
           "[#{link}] #{team.name} (#{team_size} G:#{team_same_gender.to_i}% Y:#{team_same_year.to_i}%)".html_safe)
         end
-        reject = link_to("/admin/team_switch_requests/#{team_switch_request.id}/edit") do "Reject" end
-        concat content_tag(:div, "#{reject}".html_safe)
       end
     end
 
