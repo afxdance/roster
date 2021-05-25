@@ -5,10 +5,8 @@
   </head>
   <body>
     <p>Hello,</p>
-    <p>Your request to switch teams for AFX <%= ENV["semester"] + " " + ENV["year"] %> has been successfully processed.</p>
+    <p>Your request to switch teams for AFX <%= @year %> has been successfully processed.</p>
     <p>You have been placed onto <%= @new_team.name %>, which has practices on: </p>
-
-
     <ul>
       <% [].append(@new_team.practice_time).zip([].append(@new_team.practice_location)) do |a1, a2| %>
         <li><%= a1%>, <%= a2 %></li>
