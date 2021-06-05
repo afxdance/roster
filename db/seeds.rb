@@ -11,17 +11,18 @@
 # Team.delete_all
 
 User.create_with(id: 1,
-  username: "admin",
-  password: "password",
-  password_confirmation: "password",
-  role: "admin",
+                 username: "admin",
+                 password: "password",
+                 password_confirmation: "password",
+                 role: "admin",
 ).find_or_create_by(id: 1)
 
 User.create_with(id: 2,
-  username: "young cai",
-  password: "password123",
-  password_confirmation: "password123",
-  role: "director",
+                 username: "young cai",
+                 password: "p",
+                 password_confirmation: "password123",
+                 role: "director",
+                 name: "Young Cai",
 ).find_or_create_by(id: 2)
 dancer_extra_fields = {
   exp_interest: "not important rn",
@@ -60,15 +61,17 @@ Dancer.create_with(
 ).find_or_create_by(name: "Evelyn Liu", email: "peter@peter.peter")
 Team.create_with(
   level: "Project",
-  practice_time: "all the time",
+  practice_time: "Tuesday,Thursday",
   locked: false,
   maximum_picks: 100,
+  practice_location: "Underhill,Hass",
 ).find_or_create_by(name: "AFX Help")
 Team.create_with(
   level: "Project",
-  practice_time: "never",
+  practice_time: "Wednesday",
   locked: false,
   maximum_picks: 50,
+  practice_location: "Sproul",
 ).find_or_create_by(name: "AFX Oasis")
 # Team.create(name: "AFX Help",
 #              level: "Project",
@@ -178,5 +181,7 @@ FormField.create!(id: 32, data: "<p>Again, if you have any further questions, pl
 
 # give admin access to all seeded teams
 User.find(1).teams = Team.all
+# young cai is the director of AFX Help
+User.find(2).teams = Team.first
 
 Rails.env.development?

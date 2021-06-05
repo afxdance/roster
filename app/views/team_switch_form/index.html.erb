@@ -2,7 +2,7 @@
 
 <%= form_for :team_switch_request, :url => team_switch_form_path, :html => {:class => "audition-form"} do |f| %>
 
-  <div contenteditable="false", id="fd1">
+  <div contenteditable="false" id="fd1">
     <%= @formfields[0] %>
   </div>
 
@@ -14,205 +14,193 @@
 
   <div class="times">
 
-  <% if false %>
+    <% if false %>
 
-  <p><h1><cexnter>Welcome to AFX Dance, Spring 2020!</center></h1></p>
+      <p><h1 style="align-content: center">Welcome to AFX Dance, Spring 2020!</h1></p>
 
-  <p>Thank you for dancing with AFX! Our team switch/drop form has now closed. If you have any personal concerns, please discuss with your current team's directors. Otherwise, please email any further questions to afxdanceswitchdrop@gmail.com. We hope you have a great semester!</p>
+      <p>Thank you for dancing with AFX! Our team switch/drop form has now closed. If you have any personal concerns, please discuss with your current team's directors. Otherwise, please email any further questions to afxdanceswitchdrop@gmail.com. We hope you have a great semester!</p>
 
-  <% else %>
-  <p><h1><center>Welcome to AFX Dance, Spring 2020!</center></h1></p>
+    <% else %>
+      <div contenteditable="false" id="fd2">
+        <%= @formfields[1] %>
+      </div>
 
-  <p>If you are viewing this form, it means that you are <b>UNABLE</b> to participate in the PROJECT or TRAINING team that you are <b><u>CURRENTLY ON</b></u> on due to a <b>time conflict</b>. Through this form, you will also be able to DROP from AFX Project/Training this semester.
-  <p><b>[DEADLINE FOR SUBMISSION: FRIDAY, 2/14/2020 @ 11:59 PM.] </b>
-  <br><b><u>NO EXCEPTIONS!</u></b>
+      <div contenteditable="false" id="fd3">
+        <%= @formfields[2] %>
+      </div>
 
-  <p>***NOTE***: If you are currently on AFX Competitive Team, the drop deadline and process is separate and does NOT use this form. We urge you to direct all AFX Comp matters to your Captains. Thank you!
+      <div contenteditable="false" id="fd4">
+        <%= @formfields[3] %>
+      </div>
 
-  <p>If you have any urgent questions, comments, or concerns, please email [afxdanceswitchdrop@gmail.com] ASAP! We will do our best to respond within 24 hours of receiving your email.
-  <br>
-  <br>
+      <%= f.text_field :name, required: true, placeholder: "FIRST AND LAST NAME" %><br>
+      <%= f.text_field :email, required: true, placeholder: "EMAIL" %><br>
+      <%= f.text_field :phone, required: true, placeholder: "PHONE: XXX-XXX-XXXX", pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}" %>
 
-  <div contenteditable="false", id="fd2">
-    <%= @formfields[1] %>
-  </div>
+      <p><b>Incorrect contact information, missing fields, and/or not selecting at least two teams for training team switches will prevent you from submitting the form.</b></p>
+      <br>
+      <br>
 
-  <div contenteditable="false", id="fd3">
-    <%= @formfields[2] %>
-  </div>
+      <b><hr></b>
+      <br>
 
-  <div contenteditable="false", id="fd4">
-    <%= @formfields[3] %>
-  </div>
+      <div contenteditable="false" id="fd5">
+        <%= @formfields[4] %>
+      </div>
 
-  <%= f.text_field :name, required: true, placeholder: "FIRST AND LAST NAME" %><br>
-  <%= f.text_field :email, required: true, placeholder: "EMAIL" %><br>
-  <%= f.text_field :phone, required: true, placeholder: "PHONE: XXX-XXX-XXXX", pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}" %>
+      <div contenteditable="false" id="fd6">
+        <%= @formfields[5] %>
+      </div>
 
-  <p><b>Incorrect contact information, missing fields, and/or not selecting at least two teams for training team switches will prevent you from submitting the form.</b></p>
-  <br>
-  <br>
-
-  <b><hr></b>
-  <br>
-
-  <div contenteditable="false", id="fd5">
-    <%= @formfields[4] %>
-  </div>
-
-  <div contenteditable="false", id="fd6">
-    <%= @formfields[5] %>
-  </div>
-
-  <%= f.collection_check_boxes(
+      <%= f.collection_check_boxes(
         :available_team_ids,
         Team.project_teams.sort_by(&:practice_time_sort_string),
         :id,
         :name
       ) do |option| %>
-    <% next if option.object.practice_time.blank? || option.object.practice_time[0] == " " %>
-    <div><label>
-      <%= option.check_box(class: "availability-checkbox availability-checkbox-project") %>
-      <span class="availability-display" style="display: none">
+        <% next if option.object.practice_time.blank? || option.object.practice_time[0] == " " %>
+        <div><label>
+          <%= option.check_box(class: "availability-checkbox availability-checkbox-project") %>
+          <span class="availability-display" style="display: none">
         <code class="availability-display-busy">BUSY</code>
         <code class="availability-display-free">FREE</code>
       </span>
-      <%= option.object.practice_time %>
-    </label></div>
-  <% end %>
+          <%= option.object.practice_time %>
+        </label></div>
+      <% end %>
 
-  <div contenteditable="false", id="fd7">
-    <%= @formfields[6] %>
-  </div>
+      <div contenteditable="false" id="fd7">
+        <%= @formfields[6] %>
+      </div>
 
-  <br><br>
-  <hr><br>
+      <br><br>
+      <hr><br>
 
-  <div contenteditable="false", id="fd8">
-   <%= @formfields[7] %>
-  </div>
+      <div contenteditable="false" id="fd8">
+        <%= @formfields[7] %>
+      </div>
 
-  <div contenteditable="false", id="fd9">
-    <%= @formfields[8] %>
-  </div>
+      <div contenteditable="false" id="fd9">
+        <%= @formfields[8] %>
+      </div>
 
-  <%= f.collection_check_boxes(
+      <%= f.collection_check_boxes(
         :available_team_ids,
         Team.training_teams.sort_by(&:practice_time_sort_string),
         :id,
         :name
       ) do |option| %>
-    <% next if option.object.practice_time.blank? || option.object.practice_time[0] == " " %>
-    <div><label>
-      <%= option.check_box(class: "availability-checkbox availability-checkbox-training") %>
-      <span class="availability-display" style="display: none">
+        <% next if option.object.practice_time.blank? || option.object.practice_time[0] == " " %>
+        <div><label>
+          <%= option.check_box(class: "availability-checkbox availability-checkbox-training") %>
+          <span class="availability-display" style="display: none">
         <code class="availability-display-busy">BUSY</code>
         <code class="availability-display-free">FREE</code>
       </span>
-      <%= option.object.practice_time %>
-    </label></div>
-  <% end %>
+          <%= option.object.practice_time %>
+        </label></div>
+      <% end %>
 
-  <div contenteditable="false", id="fd10">
-    <%= @formfields[9] %>
-  </div>
+      <div contenteditable="false" id="fd10">
+        <%= @formfields[9] %>
+      </div>
 
-  <hr><br>
+      <hr><br>
 
-  <div contenteditable="false", id="fd11">
-    <%= @formfields[10] %>
-  </div>
+      <div contenteditable="false" id="fd11">
+        <%= @formfields[10] %>
+      </div>
 
-  <div contenteditable="false", id="fd12">
-    <%= @formfields[11] %>
-  </div>
+      <div contenteditable="false" id="fd12">
+        <%= @formfields[11] %>
+      </div>
 
-  <%= f.collection_check_boxes(
+      <%= f.collection_check_boxes(
         :available_team_ids,
         Team.drop_teams.sort_by(&:practice_time_sort_string),
         :id,
         :name
       ) do |option| %>
-    <div><label>
-      <%= option.check_box(class: "availability-checkbox availability-checkbox-drop") %> Yes, I would like to withdraw from AFX Spring 2020 Project/Training. I acknowledge that my decision is final and that once I submit the form, I will no longer be able to join any team practice or perform in any AFX set this semester (NO EXCEPTIONS). If I violate these conditions and do not pay AFX dues, I will be charged at any time.
-    </label></div>
-  <% end %>
+        <div><label>
+          <%= option.check_box(class: "availability-checkbox availability-checkbox-drop") %> Yes, I would like to withdraw from AFX Spring 2020 Project/Training. I acknowledge that my decision is final and that once I submit the form, I will no longer be able to join any team practice or perform in any AFX set this semester (NO EXCEPTIONS). If I violate these conditions and do not pay AFX dues, I will be charged at any time.
+        </label></div>
+      <% end %>
 
-  <div contenteditable="false", id="fd13">
-    <%= @formfields[12] %>
-  </div>
+      <div contenteditable="false" id="fd13">
+        <%= @formfields[12] %>
+      </div>
 
-  <hr><br>
+      <hr><br>
 
-  <div contenteditable="false", id="fd14">
-    <%= @formfields[13] %>
-  </div>
+      <div contenteditable="false" id="fd14">
+        <%= @formfields[13] %>
+      </div>
 
-  <%= f.text_area :reason, required: true, placeholder: "Reason" %>
+      <%= f.text_area :reason, required: true, placeholder: "Reason" %>
 
-  <br><br><hr><br>
+      <br><br><hr><br>
 
-  <div contenteditable="false", id="fd15">
-    <%= @formfields[14] %>
-  </div>
+      <div contenteditable="false" id="fd15">
+        <%= @formfields[14] %>
+      </div>
 
-  <p>
-    <%= f.check_box(:double_check, {})%>
-    <label>Yes</label>
-  </p>
+      <p>
+        <%= f.check_box(:double_check, {})%>
+        <label>Yes</label>
+      </p>
 
-  <div contenteditable="false", id="fd16">
-    <%= @formfields[15] %>
-  </div>
+      <div contenteditable="false" id="fd16">
+        <%= @formfields[15] %>
+      </div>
 
-  <div class = "submit">
-    <%= f.submit "Submit team switch request", class: "availability-form-submit" %>
-  </div>
+      <div class = "submit">
+        <%= f.submit "Submit team switch request", class: "availability-form-submit" %>
+      </div>
 
-  <script>
-  function checkboxesAreValid() {
-    nchecked = {}
-    nchecked.project = $('.availability-checkbox-project:checked').length;
-    nchecked.training = $('.availability-checkbox-training:checked').length;
-    nchecked.drop = $('.availability-checkbox-drop:checked').length;
-    nchecked.team = nchecked.project + nchecked.training;
-    nchecked.total = nchecked.project + nchecked.training + nchecked.drop;
+      <script>
+          function checkboxesAreValid() {
+              nchecked = {}
+              nchecked.project = $('.availability-checkbox-project:checked').length;
+              nchecked.training = $('.availability-checkbox-training:checked').length;
+              nchecked.drop = $('.availability-checkbox-drop:checked').length;
+              nchecked.team = nchecked.project + nchecked.training;
+              nchecked.total = nchecked.project + nchecked.training + nchecked.drop;
 
-    if (nchecked.total == 0)
-      return false;
+              if (nchecked.total == 0)
+                  return false;
 
-    if (nchecked.drop > 0 && nchecked.team > 0)
-      return false;
+              if (nchecked.drop > 0 && nchecked.team > 0)
+                  return false;
 
-    // If someone on a project team puts down a project team time and a training team time,
-    // then that's okay.
-    if (nchecked.project == 0 && nchecked.training == 1)
-      return false;
+              // If someone on a project team puts down a project team time and a training team time,
+              // then that's okay.
+              if (nchecked.project == 0 && nchecked.training == 1)
+                  return false;
 
-    return true;
-  }
+              return true;
+          }
 
-  function verify() {
-    if (checkboxesAreValid()) {
-      $('.availability-form-submit').show();
-    }
-    else {
-      $('.availability-form-submit').hide();
-    }
-  }
+          function verify() {
+              if (checkboxesAreValid()) {
+                  $('.availability-form-submit').show();
+              }
+              else {
+                  $('.availability-form-submit').hide();
+              }
+          }
 
-  $(() => {
-    verify();
-    $('.availability-checkbox').click(() => {
-      verify();
-    });
-  });
+          $(() => {
+              verify();
+              $('.availability-checkbox').click(() => {
+                  verify();
+              });
+          });
 
-  </script>
+      </script>
 
-  </div>
+      </div>
 
-  <% end %>
+    <% end %>
 
 <% end %>
 </body>

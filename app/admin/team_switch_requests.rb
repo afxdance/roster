@@ -154,18 +154,7 @@ ActiveAdmin.register TeamSwitchRequest do
           status: "Accepted",
         )
 
-        # Sending automated email of switch
-        directors = new_team.get_directors
-        #puts directors
-        #to_sentence
-        #new_team.user_ids.each do |user_id|
-        # new_team.user_ids[1..-1].each do |user_id|
-        #   #if role is director
-        #   directors.push(User.where(Id: user_id).first['username'])
-        #   puts directors
-        # end
-
-        UserMailer.success_team_switch_email(dancer, old_team.name, new_team, directors).deliver_now
+        UserMailer.success_team_switch_email(dancer, old_team.name, new_team).deliver_now
 
         redirect_to :back, notice: "#{dancer.name} has been switched into #{new_team.name}."
       end

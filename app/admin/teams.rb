@@ -74,6 +74,7 @@ ActiveAdmin.register Team do
         row :name
         row :level
         row :practice_time
+        row :practice_location
         row :locked
         row :maximum_picks
       end

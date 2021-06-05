@@ -137,17 +137,29 @@ class Team < ApplicationRecord
     }
   end
 
-  def get_directors()
+  def get_directors
     directors = []
-    self.user_ids.each do |user_id|
-      #if role is director
-      user = User.where(Id: user_id).first #.first['username']
-      if user['role'] == 'director'
-        directors.push(user['director_name']) #change to user name when migrated
+    users.each do |user|
+      if user.role == "admin"
+        next
       end
-      #puts "HELOOOOOO"
-      #puts directors
+
+      if user.name.nil?
+        directors.push(user.username)
+      else
+        directors.push(user.name) # change to user name when migrated
+      end
     end
-    return directors
+    directors
+  end
+
+  def concat_time_and_loc
+    result = []
+    prac_time = practice_time.split(",")
+    loc = practice_location.split(",")
+    prac_time.each_with_index do |t, i|
+      result.append([t, loc[i]])
+    end
+    result
   end
 end

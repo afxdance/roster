@@ -31,3 +31,6 @@
 
 # Ignore gmail configurations for security
 /config/local_env.yml
+
+# Ignore idea configurations
+.idea
