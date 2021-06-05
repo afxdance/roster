@@ -151,9 +151,9 @@
     }
 </style>
 
-<% @formfields = FormField.find_team_switch_fields %>
-<% @updatedAt = FormField.last_updated_team_switch %>
-<% @backupAt = FormField.last_backup_team_switch %>
+<% @formfields = FormField.getTeamSwitchFields() %>
+<% @updatedAt = FormField.lastUpdatedTeamSwitch %>
+<% @backupAt = FormField.lastBackupTeamSwitch %>
 
 <body id="audition-form-body">
 
@@ -388,4 +388,5 @@
   <input type="submit" name="commit" value="Revert to Backup" data-disable-with="Revert to Backup" id="set_and_save">
 
 <% end%>
+</div>
 </body>
