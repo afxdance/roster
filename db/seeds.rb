@@ -19,8 +19,8 @@ User.create_with(id: 1,
 
 User.create_with(id: 2,
                  username: "young cai",
-                 password: "p",
-                 password_confirmation: "password123",
+                 password: "password",
+                 password_confirmation: "password",
                  role: "director",
                  name: "Young Cai",
 ).find_or_create_by(id: 2)
@@ -182,6 +182,6 @@ FormField.create!(id: 32, data: "<p>Again, if you have any further questions, pl
 # give admin access to all seeded teams
 User.find(1).teams = Team.all
 # young cai is the director of AFX Help
-User.find(2).teams = Team.first
+User.find(2).teams = [Team.first]
 
 Rails.env.development?
