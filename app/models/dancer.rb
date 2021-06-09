@@ -1,13 +1,13 @@
 class Dancer < ApplicationRecord
   NAME_PATTERN = begin
-    ".* .*"
-  end.freeze
+                   ".* .*"
+                 end.freeze
   EMAIL_PATTERN = begin
-    "[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*"
-  end.freeze
+                    "[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*"
+                  end.freeze
   PHONE_PATTERN = begin
-    "[0-9]{3}-[0-9]{3}-[0-9]{4}"
-  end.freeze
+                    "[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                  end.freeze
   GENDER_VALUES = {
     "male" => "Male",
     "female" => "Female",
@@ -92,20 +92,42 @@ class Dancer < ApplicationRecord
     # require 'pry'; binding.pry
 
     # rubocop:disable Style/GuardClause
+    puts("before if", target_max_id, max_id, target_next_id)
     if target_max_id < max_id
       raise "There are dancer ids that are greater or equal to the given id."
     elsif target_max_id == max_id
-      # Do nothing
+      if target_max_id == 0
+        temp = Dancer.new
+        temp.id = target_max_id
+        temp.save!(validate: false)
+        reset_id
+        temp.delete
+      else
+        reset_id
+      end
     elsif target_max_id > max_id
       temp = Dancer.new
       temp.id = target_max_id
       temp.save!(validate: false)
-      Dancer.reset_sequence_name
-      # temp.delete
+      reset_id
+      temp.delete
     else
       raise "Invalid given id: #{target_next_id}"
     end
     # rubocop:enable Style/GuardClause
+  end
+
+  def self.reset_id
+    case ActiveRecord::Base.connection.adapter_name
+    when "SQLite"
+      new_max = Dancer.maximum(:id) || 0
+      update_seq_sql = "update sqlite_sequence set seq = #{new_max} where name = '#{"dancers"}';"
+      ActiveRecord::Base.connection.execute(update_seq_sql)
+    when "PostgreSQL"
+      ActiveRecord::Base.connection.reset_pk_sequence!(table_name)
+    else
+      raise "Task not implemented for this DB adapter"
+    end
   end
 
   def self.dancers_with_no_teams
