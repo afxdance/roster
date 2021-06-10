@@ -47,10 +47,10 @@ class FormField < ApplicationRecord
   private
 
   def self.teamswitch
-		return FormField.where(id: TEAM_SWITCH_RANGE)
+		return FormField.where(id: TEAM_SWITCH_RANGE).order("id ASC")
   end
 
   def self.teamswitchbackup
-    return FormField.where(id: TEAM_SWITCH_BACKUP_RANGE)
+    return FormField.where(id: TEAM_SWITCH_BACKUP_RANGE).order("id ASC")
   end
 end
