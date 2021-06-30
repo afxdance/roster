@@ -3,6 +3,16 @@ class Team < ApplicationRecord
   has_and_belongs_to_many :dancers
   has_one :team_preference
 
+  validate :practice_time_location_length_check
+
+  def practice_time_location_length_check
+    time = practice_time.split(",")
+    loc = practice_location.split(",")
+    if time.length != loc.length
+      errors.add(:practice_location, "practice_time(%d) must match practice_location(%d) length" % [time.length, loc.length])
+    end
+  end
+
   PROJECT = "Project".freeze
   TRAINING = "Training".freeze
   DROP = "Drop".freeze
