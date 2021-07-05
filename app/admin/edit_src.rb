@@ -1,5 +1,4 @@
 ActiveAdmin.register_page "Edit SRC" do
-
   menu if: proc { current_user.admin? }
 
   content do
@@ -9,7 +8,7 @@ ActiveAdmin.register_page "Edit SRC" do
   # Responsible for saving the fields in the database
   page_action :update, method: :post do
     formfields = []
-    for i in 1..28  # Just trying to make the title editable for now
+    (1..28).each do |i| # Just trying to make the title editable for now
       formfields << params[i.to_s] # << is the append operator
     end
     notice = SrcFormField.update_src_form_fields(formfields)
@@ -19,7 +18,7 @@ ActiveAdmin.register_page "Edit SRC" do
   # Handles functionality for saving the current fields and setting as backup
   page_action :set, method: :post do
     formfields = []
-    for i in 1..28 # Just trying to make the title editable for now
+    (1..28).each do |i| # Just trying to make the title editable for now
       formfields << params[i.to_s]
     end
     SrcFormField.update_src_form_fields(formfields)

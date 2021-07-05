@@ -1,5 +1,4 @@
 class Src < ApplicationRecord
-
   ActiveAdmin.register Src do
     menu if: proc { current_user.admin? }
   end

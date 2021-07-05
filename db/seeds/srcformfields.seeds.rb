@@ -7,13 +7,12 @@ SrcFormField.create_with(data: "<p><h6> What is your AFX Team?: </h6></p>
   <p>If you are on AFX Competitive Team and a Project/Training team, choose one and we will match the records. Directors, please choose the team you are directing.
   </p>").find_or_create_by(id: 3)
 
-
 SrcFormField.create_with(data: "<p><h3><center><b><u>General Behavior and Conduct Policy</u></b></center></h3>").find_or_create_by(id: 4)
 
 SrcFormField.create_with(data: "<p>AFX Dance is an organization that gives those without dance experience an opportunity to experience urban dance. The organization name, [A]spirations, [F]amily, e[X]perience reflects our philosophy of creating a family environment for dancers to build up their confidence and support to reach new heights. Each member in AFX is responsible for upholding these values and at the same time, creating and maintaining a safe and open environment for all. All AFX members are held accountable to all federal and state laws. Even when outside of the organization's dance spaces, AFX holds its members accountable to proper behavior and conduct at all times as a member's actions is a reflection upon the organization. Behaviors such as hate crimes, peer pressure, indecent exposure, and theft are all severely inappropriate conduct and will not be tolerated. Failure to comply will result in expulsion from the org. In cases of misconduct, AFX encourages its members to report violations of our Safety and Responsibility Rules to either the Executive Board and/or campus resources such as PATH to Care.
     </p>").find_or_create_by(id: 5)
 
-SrcFormField.create_with(data: '<p><h3><center><b><u>Harassment</u></b></center></h3>').find_or_create_by(id: 6)
+SrcFormField.create_with(data: "<p><h3><center><b><u>Harassment</u></b></center></h3>").find_or_create_by(id: 6)
 
 SrcFormField.create_with(data: '<p>Providing a safe environment in AFX Dance is our top priority. AFX Dance has a zero-tolerance policy with regards to harassment. Harassment of any kind may result in a permanent expulsion of membership in AFX Dance. Harassment is governed by state laws, which vary by state, but is generally defined as a course of conduct which annoys, threatens, intimidates, alarms, or puts a person in fear of their safety. Harassment is unwanted, unwelcomed and uninvited behavior that demeans, threatens or offends the recipient and results in a hostile environment for the recipient.
   <br><br>
@@ -78,10 +77,7 @@ SrcFormField.create_with(data: "Thank you for submitting the AFX Dance Fall 2019
 
 SrcFormField.create_with(data: "AFX Dance: Spring 2020 Member Safety and Responsibility Contract (SRC)").find_or_create_by(id: 28)
 
-
-
 # -- Backup Data --
-
 SrcFormField.create_with(data: "<p><h1><center>Welcome to AFX Dance, Spring 2020!</center></h1></p>").find_or_create_by(id: 29)
 
 SrcFormField.create_with(data: "<p>The Safety & Responsibility Contract is a <b>MANDATORY</b> and legally binding form that all members of AFX Dance must complete and sign in order to maintain their status as an active member of the organization. The Contract lists the guidelines to which all members of the community will be personally held accountable for and sets the expectations of the values and behaviors that all members must uphold. Each member is expected to do their personal best in creating and maintaining a safe and open environment in all AFX spaces. Failure to sign and complete the Safety & Responsibility Contract by the following deadline will result in immediate removal from the organization.
@@ -91,13 +87,12 @@ SrcFormField.create_with(data: "<p><h6> What is your AFX Team?: </h6></p>
   <p>If you are on AFX Competitive Team and a Project/Training team, choose one and we will match the records. Directors, please choose the team you are directing.
   </p>").find_or_create_by(id: 31)
 
-
 SrcFormField.create_with(data: "<p><h3><center><b><u>General Behavior and Conduct Policy</u></b></center></h3>").find_or_create_by(id: 32)
 
 SrcFormField.create_with(data: "<p>AFX Dance is an organization that gives those without dance experience an opportunity to experience urban dance. The organization name, [A]spirations, [F]amily, e[X]perience reflects our philosophy of creating a family environment for dancers to build up their confidence and support to reach new heights. Each member in AFX is responsible for upholding these values and at the same time, creating and maintaining a safe and open environment for all. All AFX members are held accountable to all federal and state laws. Even when outside of the organization's dance spaces, AFX holds its members accountable to proper behavior and conduct at all times as a member's actions is a reflection upon the organization. Behaviors such as hate crimes, peer pressure, indecent exposure, and theft are all severely inappropriate conduct and will not be tolerated. Failure to comply will result in expulsion from the org. In cases of misconduct, AFX encourages its members to report violations of our Safety and Responsibility Rules to either the Executive Board and/or campus resources such as PATH to Care.
     </p>").find_or_create_by(id: 33)
 
-SrcFormField.create_with(data: '<p><h3><center><b><u>Harassment</u></b></center></h3>').find_or_create_by(id: 34)
+SrcFormField.create_with(data: "<p><h3><center><b><u>Harassment</u></b></center></h3>").find_or_create_by(id: 34)
 
 SrcFormField.create_with(data: '<p>Providing a safe environment in AFX Dance is our top priority. AFX Dance has a zero-tolerance policy with regards to harassment. Harassment of any kind may result in a permanent expulsion of membership in AFX Dance. Harassment is governed by state laws, which vary by state, but is generally defined as a course of conduct which annoys, threatens, intimidates, alarms, or puts a person in fear of their safety. Harassment is unwanted, unwelcomed and uninvited behavior that demeans, threatens or offends the recipient and results in a hostile environment for the recipient.
   <br><br>
@@ -161,9 +156,6 @@ SrcFormField.create_with(data: "I understand that checking this box constitutes 
 SrcFormField.create_with(data: "Thank you for submitting the AFX Dance Fall 2019 Member Safety and Responsibility Contract. Your response has been recorded. If you have further questions, please email afxdance@gmail.com.").find_or_create_by(id: 55)
 
 SrcFormField.create_with(data: "AFX Dance: Spring 2020 Member Safety and Responsibility Contract (SRC)").find_or_create_by(id: 56)
-
-
-
 
 # # Test Backup data
 # SrcFormField.create_with(data: "").find_or_create_by(id: 29)

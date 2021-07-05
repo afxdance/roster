@@ -7,7 +7,6 @@ class SrcFormField < ApplicationRecord
   end
 
   def self.update_src_form_fields(fields)
-
     SrcFormField.src.each_with_index do |item, index|
       item.update(data: fields[index])
     end
@@ -42,7 +41,6 @@ class SrcFormField < ApplicationRecord
     end
     return "Reverted to the most recent backup"
   end
-
 
   private_class_method
 
