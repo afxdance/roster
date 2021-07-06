@@ -18,5 +18,4 @@ class UserMailer < ApplicationMailer
     @rejection_reason = rejection_reason
     mail(to: dancer.email, subject: "AFX Team Switch")
   end
-
 end
