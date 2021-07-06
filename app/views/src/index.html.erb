@@ -223,7 +223,7 @@
     };
     //https://stackoverflow.com/questions/54164874/javascript-use-fetch-on-localhost-with-url-parameters
 
-    const url = new URL("http://localhost:3000/dancer");
+    const url = new URL("http://localhost:3000/dancer_src");
     var myRequest = new Request(url, init); //need to pass in global path to the request
 
     return await fetch(myRequest)
@@ -273,14 +273,7 @@
        }
        break;
       default:
-
     }
-    console.log("nchecked: " + String(nchecked))
-    console.log("isvalid " + String(isvalid))
-    console.log("infocheck " + String(infocheck))
-
-    console.log(nchecked == 9 && isvalid && infocheck)
-
     return nchecked == 9 && isvalid && infocheck
   }
 
@@ -312,19 +305,16 @@
   $('#src_form').on('click', '#part_one_button', function() {
     dancer_exists = null;
     src_exists = null;
-    console.log("hello");
     // https://flaviocopes.com/how-to-return-result-asynchronous-function/
     dancerIsValid().then(async (data) => {
-      console.log(data);
       json_response = await data;
       dancer_exists = json_response['dancer_exists'];
       src_exists = json_response['src_exists']
-      console.log("dancer exists: " + dancer_exists);
-      console.log("src exists: " + src_exists);
 
       if (dancer_exists) {
-        console.log("valid");
-        //When submitting the first part of the form, to get the form validator to pop up, I must set the required fields to be false first, then toggle required to be true the required fields in the second part of the form: https://stackoverflow.com/questions/7168645/invalid-form-control-only-in-google-chrome/7264966#7264966
+        // The 'required' fields of all checkboxes in the second part of the form are set to be false first.
+        // After submitting first part of the form, to get the form validator to pop up, the 'required' fields
+        // are toggled to be true: https://stackoverflow.com/questions/7168645/invalid-form-control-only-in-google-chrome/7264966#7264966
         if (src_exists) {
           alert("you've already submitted an SRC form! only submit again if you want to update information!")
         }
@@ -333,13 +323,11 @@
         $('#part_one_button').hide();
 
       } else {
-        console.log("dancer invalid")
         alert("please check your information, you don't exist in our database!")
         //checkboxesAreValid();
         //dancerFieldsAreValid(); //how to validate fields after submit.
       }
     });
-
   });
 
   </script>

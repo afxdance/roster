@@ -20,5 +20,5 @@ Rails.application.routes.draw do
   get "/src/confirm", to: "src#confirm"
   get "/dancer/:email", to: "dancer#find_team",
                         constraints: { email: %r{[^\/]+} }
-  post "/dancer", to: "dancer#check_dancer_and_src"
+  post "/dancer_src", to: "dancer#check_dancer_and_src"
 end
