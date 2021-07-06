@@ -1,4 +1,6 @@
 ActiveAdmin.register Dancer do
+  preserve_default_filters!
+  filter :id
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
@@ -108,8 +110,10 @@ ActiveAdmin.register Dancer do
   end
 
   form do |f|
+    puts current_user.accessible_dancer_fields
     f.inputs do
       current_user.accessible_dancer_fields.each do |field|
+        puts field
         f.input field
       end
     end
@@ -193,32 +197,53 @@ ActiveAdmin.register Dancer do
     end
   end
 
-  collection_action :randomize, method: :get do
+  collection_action :create_training_teams, method: :get do
     if !current_user.can_modify_all_teams?
       flash[:alert] = "You do not have sufficient permissions to do this!"
     elsif Team.unlocked_teams.any?
       flash[:alert] = "Lock all teams first."
     else
-      # What this transaction does:
-      # 1. Run this code, but don't apply any changes to the dancers_teams table.
-      # 2. Apply all the changes all at once.
-      # The benefit: if this code errors, we won't have a partially randomized set of dancers.
       dancers_with_no_teams = Dancer.dancers_with_no_teams.shuffle
+      dancers_with_no_teams_count = dancers_with_no_teams.count
+      training_teams = Team.training_teams
 
-      DancerTeam.transaction do
-        for dancer in dancers_with_no_teams
-          team = Team.training_teams_with_least_number_of_dancers.first
+      team_ids = []
+      created_teams = []
+      dancers_started_with = []
 
-          # Sanity check -- confirm that team does not have the dancer
-          raise if team.dancers.include? dancer
+      for team in training_teams
+        dancers_on_team = ActiveRecord::Base.connection.execute("SELECT dancer_id from 'dancers_teams' WHERE team_id=#{team.id}")
 
-          # This is like team.dancers.push(dancer)),
-          # but we're also storing a reason with the association.
-          # This makes so that we can see who was picked and who was randomized.
-          DancerTeam.create!(team: team, dancer: dancer, reason: "Randomization")
+        team_ids.push(team.id)
+        created_teams.push([])
+        dancers_started_with.push(dancers_on_team.length)
+      end
+
+      max_starting_number_of_dancers = dancers_started_with.max
+
+      # Ensures that all teams start out with the same number of dancers
+      team_ids.each_with_index do |_, index|
+        while dancers_started_with[index] + created_teams[index].length < max_starting_number_of_dancers
+          dancer_to_be_added = dancers_with_no_teams.pop
+          created_teams[index].push(dancer_to_be_added.id)
         end
       end
-      flash[:notice] = "#{dancers_with_no_teams.count} dancers have been randomized."
+
+      # Takes turns adding dancers to teams until the no more dancers left
+      team_index = 0
+      until dancers_with_no_teams.empty?
+        dancer_to_be_added = dancers_with_no_teams.pop
+        created_teams[team_index].push(dancer_to_be_added.id)
+        team_index = (team_index + 1) % team_ids.length
+      end
+
+      team_ids.each_with_index do |team_id, index|
+        for dancer in created_teams[index]
+          ActiveRecord::Base.connection.execute("INSERT INTO 'dancers_teams' (dancer_id, team_id, created_at, updated_at) VALUES (#{dancer}, #{team_id}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)")
+        end
+      end
+
+      flash[:notice] = "#{dancers_with_no_teams_count} dancers have been randomized."
     end
     redirect_to "/admin/dancers"
   end
@@ -240,7 +265,7 @@ ActiveAdmin.register Dancer do
     link_to "Next Audition Number", "/admin/dancers/next_audition_number"
   end
 
-  action_item :randomize, only: :index do
-    link_to "Randomize", "/admin/dancers/randomize", data: { confirm: "Are you sure?" }
+  action_item :create_training_teams, only: :index do
+    link_to "Create Training Teams", "/admin/dancers/create_training_teams", data: { confirm: "Are you sure?" }
   end
 end

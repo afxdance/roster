@@ -40,6 +40,7 @@ group :production, :development, :test do
   ##############################
 
   gem "activeadmin"
+  gem "chartkick"
   gem "colorize"
   gem "csv"
   gem "devise"

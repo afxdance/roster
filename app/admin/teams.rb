@@ -103,6 +103,24 @@ ActiveAdmin.register Team do
         end
       end
     end
+
+    panel "Team Switch Requests" do
+      tabs do
+        for tab_name, sort_order in [
+          ["Most recently processed", "approved_at DESC"],
+          ["Sorted alphabetically", "lower(trim(name)), approved_at DESC"],
+        ]
+          tab tab_name do
+            table_for TeamSwitchRequest.get_processed_team_switch_requests(team.id).order(sort_order) do
+              TeamSwitchRequest::TABLE_VISIBLE_FIELDS.each do |field|
+                column field
+              end
+              column(:status) { |request| team.id == request.new_team_id ? "Joined" : "Left" }
+            end
+          end
+        end
+      end
+    end
   end
 
   member_action :drop_dancer, method: :post do
