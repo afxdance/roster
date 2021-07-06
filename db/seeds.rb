@@ -14,16 +14,14 @@ User.create_with(id: 1,
                  username: "admin",
                  password: "password",
                  password_confirmation: "password",
-                 role: "admin",
-).find_or_create_by(id: 1)
+                 role: "admin").find_or_create_by(id: 1)
 
 User.create_with(id: 2,
                  username: "young cai",
                  password: "password",
                  password_confirmation: "password",
                  role: "director",
-                 name: "Young Cai",
-).find_or_create_by(id: 2)
+                 name: "Young Cai").find_or_create_by(id: 2)
 dancer_extra_fields = {
   exp_interest: "not important rn",
   tech_interest: "not important rn",

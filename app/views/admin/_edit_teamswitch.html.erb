@@ -151,9 +151,9 @@
     }
 </style>
 
-<% @formfields = FormField.getTeamSwitchFields() %>
-<% @updatedAt = FormField.lastUpdatedTeamSwitch %>
-<% @backupAt = FormField.lastBackupTeamSwitch %>
+<% @formfields = FormField.find_team_switch_fields %>
+<% @updatedAt = FormField.last_updated_team_switch %>
+<% @backupAt = FormField.last_backup_team_switch %>
 
 <body id="audition-form-body">
 
@@ -338,12 +338,12 @@
 
 <script>
 
-    function fill_fields() {
-        for (i = 1; i < 17; i++) {
-            var first = document.getElementById('fd' + i), second = document.getElementById('fdfd' + i);
-            second.value = first.innerHTML;
-        }
+  function fill_fields() {
+    for (i = 1; i < 17; i++) {
+      var first = document.getElementById('fd' + i), second = document.getElementById('fdfd' + i);
+      second.value = first.innerHTML;
     }
+  }
 
     document.getElementById("submit_button_thing").addEventListener("click", fill_fields);
 

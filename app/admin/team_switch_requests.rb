@@ -57,7 +57,7 @@ ActiveAdmin.register TeamSwitchRequest do
 
   scope :all, default: true
   scope("Accepted") { |scope| scope.where("status LIKE ?", "%Accepted%") }
-  scope("Rejected") { |scope| scope.where("status LIKE ?",  "%Rejected%") }
+  scope("Rejected") { |scope| scope.where("status LIKE ?", "%Rejected%") }
   scope("Unprocessed") { |scope| scope.where("status IS NULL") }
 
   member_action :switch_to_team, method: :post do
@@ -175,18 +175,18 @@ ActiveAdmin.register TeamSwitchRequest do
       dancer = team_switch_request&.dancer
       content_tag(:div, style: "white-space: nowrap") do
         team_switch_request.available_teams.each do |team|
-        link = link_to("/admin/team_switch_requests/#{team_switch_request.id}/switch_to_team?" + { team_id: team.id }.to_query, method: :post, title: "Switch dancer onto this team") do
-          "+"
-        end
-        team_size = team.dancers.length
-        team_same_gender_size = current_user.can_view_sensitive_dancer_fields? ?
-          team.dancers.where(gender: dancer&.gender).length :
-          0
-        team_same_gender = team_same_gender_size / (team_size + 0.0001) * 100
-        team_same_year_size = team.dancers.where(year: dancer&.year).length
-        team_same_year = team_same_year_size / (team_size + 0.0001) * 100
-        concat content_tag(:div,
-          "[#{link}] #{team.name} (#{team_size} G:#{team_same_gender.to_i}% Y:#{team_same_year.to_i}%)".html_safe)
+          link = link_to("/admin/team_switch_requests/#{team_switch_request.id}/switch_to_team?" + { team_id: team.id }.to_query, method: :post, title: "Switch dancer onto this team") do
+            "+"
+          end
+          team_size = team.dancers.length
+          team_same_gender_size = current_user.can_view_sensitive_dancer_fields? ?
+                                    team.dancers.where(gender: dancer&.gender).length :
+                                    0
+          team_same_gender = team_same_gender_size / (team_size + 0.0001) * 100
+          team_same_year_size = team.dancers.where(year: dancer&.year).length
+          team_same_year = team_same_year_size / (team_size + 0.0001) * 100
+          concat content_tag(:div,
+                             "[#{link}] #{team.name} (#{team_size} G:#{team_same_gender.to_i}% Y:#{team_same_year.to_i}%)".html_safe)
         end
       end
     end

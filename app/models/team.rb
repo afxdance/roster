@@ -8,9 +8,7 @@ class Team < ApplicationRecord
   def practice_time_location_length_check
     time = practice_time.split(",")
     loc = practice_location.split(",")
-    if time.length != loc.length
-      errors.add(:practice_location, "practice_time(%d) must match practice_location(%d) length" % [time.length, loc.length])
-    end
+    errors.add(:practice_location, format("practice_time(%<time_len>d) must match practice_location(%<loc_len>d) length", time_len: time.length, loc_len: loc.length)) if time.length != loc.length
   end
 
   PROJECT = "Project".freeze
@@ -147,7 +145,7 @@ class Team < ApplicationRecord
     }
   end
 
-  def get_directors
+  def filter_directors
     directors = []
     users.each do |user|
       if user.role == "admin"

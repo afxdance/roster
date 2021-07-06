@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class UserMailerTest < ActionMailer::TestCase
   # test "the truth" do
@@ -11,7 +11,6 @@ class UserMailerTest < ActionMailer::TestCase
     dancer = Dancer.where(name: request["name"], email: request["email"])
     email = UserMailer.with(dancer: dancer, new_team_name: "new_team_name", old_team_name: "old_team_name")
 
-
     # Check if the email is sent
     assert_emails 1 do
       email.deliver_now
@@ -22,11 +21,9 @@ class UserMailerTest < ActionMailer::TestCase
     assert_equal "clu@berkeley.edu", email.to
     assert_equal "Team Switch onto new_team_name", email.subject
 
-
     # dancer, "Old AFX team", "New AFX team"
     # assert_match order.name, email.html_part.body.encoded
     # assert_match order.name, email.text_part.body.encoded
     # assert_match order.email, email.html_part.body.encoded
-
   end
 end

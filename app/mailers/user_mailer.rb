@@ -5,7 +5,7 @@ class UserMailer < ApplicationMailer
     @dancer = dancer
     @new_team = new_team # saved as instance variable, accessible in view
     @old_team_name = old_team_name # saved as instance variable, accessible in view
-    @directors = new_team.get_directors
+    @directors = new_team.filter_directors
     @year = ENV["YEAR"]
     mail(to: dancer.email, subject: "Team Switch onto " + new_team.name)
   end

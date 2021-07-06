@@ -7,7 +7,7 @@ class UserMailerPreview < ActionMailer::Preview
     user1 = User.create(id: 1, role: "director", name: "Evelyn Liu")
     user2 = User.create(id: 2, role: "director", name: "Dustin Luong")
     team = Team.create(id: 100, name: "new team", practice_time: "Tuesday,Thursday", locked: "no",
-                    practice_location: "Underhill,Hass", users: [user1, user2])
+                       practice_location: "Underhill,Hass", users: [user1, user2])
     UserMailer.success_team_switch_email(dancer, "Old AFX team", team)
   end
 
