@@ -142,3 +142,8 @@ form p {
 html, body {
     overflow: auto;
 }
+#parent,
+#myself
+{
+  display: none;
+}

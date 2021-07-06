@@ -379,6 +379,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin
   awesome_print
+  bcrypt (~> 3.1.11)
   capybara (~> 2.13)
   chartkick
   coffee-rails (~> 4.2)
