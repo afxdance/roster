@@ -47,7 +47,7 @@ class SrcController < ApplicationController
     email = params["email"]
     phone = params["phone"]
 
-    dancer = Dancer.where(name:name, email: email, phone: phone)
+    dancer = Dancer.where(name: name, email: email, phone: phone)
     if dancer.empty?
       # sets redirect to true when dancer doesn't exist
       flash[:redirect] = "true"
