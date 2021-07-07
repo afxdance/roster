@@ -14,7 +14,8 @@ User.create_with(id: 1,
                  username: "admin",
                  password: "password",
                  password_confirmation: "password",
-                 role: "admin").find_or_create_by(id: 1)
+                 role: "admin",
+                 name: "Admin").find_or_create_by(id: 1)
 
 User.create_with(id: 2,
                  username: "young cai",
