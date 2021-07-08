@@ -18,6 +18,7 @@ ActiveAdmin.register Team do
       :name,
       :project,
       :practice_time,
+      :practice_location,
       :locked,
       :maximum_picks,
       :level,
@@ -32,13 +33,14 @@ ActiveAdmin.register Team do
       # Creates a drop down that allows you to choose from "Project" and "Training"
       f.input :level, collection: [Team::PROJECT, Team::TRAINING, Team::DROP]
       # Creates a selection menu so the team can be linked to a user
-      f.input :users
+      f.input :users, collection: User.all.map { |user| [user.name] }
       f.input :practice_time,
               label: [
                 "Practice time",
                 "(EX. Thu 7-8:30, Sat 4-5:30)",
                 "If add a space at the beginning or leave this blank, this team will be hidden in the team switch form.",
               ].join("<br>").html_safe
+      f.input :practice_location
       f.input :locked
       f.input :maximum_picks
     end
@@ -50,6 +52,7 @@ ActiveAdmin.register Team do
     column :name
     column :level
     column :practice_time
+    column :practice_location
     column :locked
     column :maximum_picks
     # Allows us to view the Users that are connected to the team
@@ -71,6 +74,7 @@ ActiveAdmin.register Team do
         row :name
         row :level
         row :practice_time
+        row :practice_location
         row :locked
         row :maximum_picks
       end
