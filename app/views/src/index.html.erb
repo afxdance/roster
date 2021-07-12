@@ -265,7 +265,11 @@
   // TODO What to show for other option
 
   $('#src_form').submit(function() { //src_form.submit, function()
-     return checkboxesAreValid()
+     var valid = checkboxesAreValid();
+     if (!valid) {
+         alert("Please make sure to check all the checkboxes");
+      }
+     return valid;
   });
 //Dancer.srcs is null
   //searches the src_form form for the button that is clicked.
