@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210315030340) do
+ActiveRecord::Schema.define(version: 20210426025618) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -110,6 +110,7 @@ ActiveRecord::Schema.define(version: 20210315030340) do
     t.integer "dancer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "rejection_reason"
     t.index ["dancer_id"], name: "index_team_switch_requests_on_dancer_id"
     t.index ["new_team_id"], name: "index_team_switch_requests_on_new_team_id"
     t.index ["old_team_id"], name: "index_team_switch_requests_on_old_team_id"
@@ -133,6 +134,7 @@ ActiveRecord::Schema.define(version: 20210315030340) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "practice_location"
     t.index ["user_id"], name: "index_teams_on_user_id"
   end
 
@@ -159,6 +161,7 @@ ActiveRecord::Schema.define(version: 20210315030340) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "role", null: false
+    t.string "name"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end

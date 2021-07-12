@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Hello,</p>
+    <p>Thank you for submitting a team switch request for AFX <%= ENV["YEAR"] %>. We regret to inform you that your request was rejected.</p>
+    <p><%= @rejection_reason %></p>
+    <p>Because your switch request was rejected please read carefully to be aware of the next steps you may take: </p>
+
+    <ul>
+        <li>Staying as a dancer on your current team</li>
+        <li>If you absolutely cannot make your current team's practice times, <a href="http://roster.afx.dance/teamswitch">please fill out another switch request</a></li>
+        <li>If you must drop AFX this semester, <a href="http://roster.afx.dance/teamswitch">please fill out a drop request</a></li>
+    </ul>
+    <p>Thank you for your cooperation!</p>
+    <p>With AFX Love,</p>
+    <p>AFX Dance</p>
+  </body>
+</html>

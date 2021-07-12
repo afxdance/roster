@@ -96,17 +96,39 @@ class Dancer < ApplicationRecord
     if target_max_id < max_id
       raise "There are dancer ids that are greater or equal to the given id."
     elsif target_max_id == max_id
-      # Do nothing
+      if target_max_id == 0
+        temp = Dancer.new
+        temp.id = target_max_id
+        temp.save!(validate: false)
+        reset_id
+        temp.delete
+      else
+        reset_id
+      end
     elsif target_max_id > max_id
       temp = Dancer.new
       temp.id = target_max_id
       temp.save!(validate: false)
-      Dancer.reset_sequence_name
-      # temp.delete
+      reset_id
+      temp.delete
     else
       raise "Invalid given id: #{target_next_id}"
     end
     # rubocop:enable Style/GuardClause
+  end
+
+  def self.reset_id
+    case ActiveRecord::Base.connection.adapter_name
+      # reset id based on database: https://stackoverflow.com/questions/2097052/rails-way-to-reset-seed-on-id-field
+    when "SQLite"
+      new_max = Dancer.maximum(:id) || 0
+      update_seq_sql = "update sqlite_sequence set seq = #{new_max} where name = 'dancers';"
+      ActiveRecord::Base.connection.execute(update_seq_sql)
+    when "PostgreSQL"
+      ActiveRecord::Base.connection.reset_pk_sequence!("dancers")
+    else
+      raise "Task not implemented for this DB adapter"
+    end
   end
 
   def self.dancers_with_no_teams

@@ -34,75 +34,76 @@
     :id,
     :name,
     {:prompt => "Choose your AFX Team"},
-    {class: "audition-form"}) %>
+    {class: "audition-form", required: true}) %>
+      <input type="button" id="part_one_button" value="validate dancer">
 
+<!-- PART ONE ENDS HERE -->
 
-<hr>
-  <%= @srcformfields[3] %>
-  <%= @srcformfields[4] %>
-  <%= @srcformfields[5] %>
-  <%= @srcformfields[6] %>
-    <br>
+<div id="partTwoForm" style="display: none">
+  <hr>
+    <%= @srcformfields[3] %>
+    <%= @srcformfields[4] %>
+    <%= @srcformfields[5] %>
+    <%= @srcformfields[6] %>
+      <br>
 
-</p>
-  <p>
-    <%= f.check_box :a, required:true, class: "required_checkboxes"%>
-    <label><%=@srcformfields[7]%></label>
   </p>
-  <p>
-    <%= f.check_box :b, required:true, class: "required_checkboxes"%>
-    <label><%= @srcformfields[8]%></label>
-  </p>
+    <p>
+      <%= f.check_box :a, required:false, class: "required_checkboxes"%>
+      <label><%=@srcformfields[7]%></label>
+    </p>
+    <p>
+      <%= f.check_box :b, required:false, class: "required_checkboxes"%>
+      <label><%= @srcformfields[8]%></label>
+    </p>
+
+    <p>
+      <%= f.check_box :c, required:false, class: "required_checkboxes"%>
+      <label><%= @srcformfields[9]%></label>
+    </p>
 
   <p>
-    <%= f.check_box :c, required:true, class: "required_checkboxes"%>
-    <label><%= @srcformfields[9]%></label>
-  </p>
-
-<p>
 
 
-<hr>
+  <hr>
+    <p>
+      <%=@srcformfields[10]%>
 
-<p>
-  <%=@srcformfields[10]%>
+      <%=@srcformfields[11]%>
 
-  <%=@srcformfields[11]%>
+      <%=@srcformfields[12]%>
 
-  <%=@srcformfields[12]%>
+      <%=@srcformfields[13]%>
 
-  <%=@srcformfields[13]%>
-
-  <%= @srcformfields[14]%>
-</p>
+      <%= @srcformfields[14]%>
+    </p>
 
   <p>
-    <%= f.check_box :d, required: true, class: "required_checkboxes" %>
+    <%= f.check_box :d, required: false, class: "required_checkboxes" %>
     <label><%=@srcformfields[15]%></label>
 
-
   </p>
   <p>
-    <%= f.check_box :e, required: true, class: "required_checkboxes" %>
+    <%= f.check_box :e, required: false, class: "required_checkboxes" %>
      <label><%=@srcformfields[16]%></label>
   </p>
 
   <p>
-    <%= f.check_box :f, required: true, class: "required_checkboxes" %>
+    <%= f.check_box :f, required: false, class: "required_checkboxes" %>
      <label><%=@srcformfields[17]%></label>
   </p>
 
 <p>
-    <%= f.check_box :g, required: true, class: "required_checkboxes" %>
+    <%= f.check_box :g, required: false, class: "required_checkboxes" %>
      <label><%=@srcformfields[18]%></label>
   </p>
   <p>
-    <%= f.check_box :h, required: true, class: "required_checkboxes" %>
+    <%= f.check_box :h, required: false, class: "required_checkboxes" %>
      <label><%=@srcformfields[19]%></label>
   </p>
 
   <p>
-    <%= f.check_box :i, required: true, class: "required_checkboxes" %>
+    <%= f.check_box :i, required: false, class: "required_checkboxes" %>
      <label><%=@srcformfields[20]%></label>
   </p>
 
@@ -126,34 +127,34 @@
 
   <%= f.text_area :reason, required: false, placeholder: "Other:" %> <!-- gna need to change the required -->
 
-<hr>
-<div id="parent">
-<p><h3>[IF YOU ARE YOUNGER THAN 18 YEARS OF AGE] </h3></p>
+  <hr>
+  <div id="parent">
+  <p><h3>[IF YOU ARE YOUNGER THAN 18 YEARS OF AGE] </h3></p>
 
 
 
-  <%= f.text_field :p_name, placeholder: "Your Full Legal Name" %><br>
-  <%= f.text_field :p_sign, placeholder: "Parent / Guardian Signature (full legal name)" %><br>
-  <%= f.text_field :p_date, placeholder: "Date of signature: MM/DD/YYYY", pattern: "^[0-3][0-9]/[0-3][0-9]/(?:[0-9][0-9])?[0-9][0-9]$" %><br>
+    <%= f.text_field :p_name, placeholder: "Your Full Legal Name" %><br>
+    <%= f.text_field :p_sign, placeholder: "Parent / Guardian Signature (full legal name)" %><br>
+    <%= f.text_field :p_date, placeholder: "Date of signature: MM/DD/YYYY", pattern: "^[0-3][0-9]/[0-3][0-9]/(?:[0-9][0-9])?[0-9][0-9]$" %><br>
 
-  <p>
-    <%= f.check_box :p_checkbox %>
-    <label><%=@srcformfields[24]%></label>
-  </p>
-<hr>
-</div>
-<div id="myself">
-<p><h3>[IF YOU ARE 18 YEARS OF AGE OR OLDER]</h3></p>
+    <p>
+      <%= f.check_box :p_checkbox %>
+      <label><%=@srcformfields[24]%></label>
+    </p>
+  <hr>
+  </div>
+  <div id="myself">
+  <p><h3>[IF YOU ARE 18 YEARS OF AGE OR OLDER]</h3></p>
 
-  <%= f.text_field :m_sign, placeholder: "Your Signature (full legal name)" %><br>
-  <%= f.text_field :m_date, placeholder: "Date of signature: MM/DD/YYYY", pattern: "^[0-3][0-9]/[0-3][0-9]/(?:[0-9][0-9])?[0-9][0-9]$" %><br>
+    <%= f.text_field :m_sign, placeholder: "Your Signature (full legal name)" %><br>
+    <%= f.text_field :m_date, placeholder: "Date of signature: MM/DD/YYYY", pattern: "^[0-3][0-9]/[0-3][0-9]/(?:[0-9][0-9])?[0-9][0-9]$" %><br>
 
-  <p>
-    <%= f.check_box :m_checkbox %>
-    <label><%=@srcformfields[25]%></label>
-  </p>
-<hr>
-</div>
+    <p>
+      <%= f.check_box :m_checkbox %>
+      <label><%=@srcformfields[25]%></label>
+    </p>
+  <hr>
+  </div>
 
   <p>
     <%=@srcformfields[26]%>
@@ -165,8 +166,39 @@
   <div class = "submit">
     <%= f.submit "Submit Safety and Responsibility Contract", class: "availability-form-submit" %>
   </div>
+</div>
 
   <script>
+      async function dancerIsValid() {
+          <!-- how to make a query to DB?, also display error -->
+          name = $('input[name="name"]').val();
+          email = $('input[name="email"]').val();
+          phone = $('input[name="phone"]').val();
+
+          var formData = new FormData();
+          formData.append('name', name);
+          formData.append('email', email);
+          formData.append('phone', phone);
+
+          var init = {
+              method: 'POST',
+              body: formData,
+              // CSRF token must be verified for post requests. https://stackoverflow.com/questions/27098239/post-422-unprocessable-entity-in-rails-due-to-the-routes-or-the-controller
+              headers: {
+                  'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+              }
+          };
+          //https://stackoverflow.com/questions/54164874/javascript-use-fetch-on-localhost-with-url-parameters
+
+          const url = new URL("http://localhost:3000/dancer_src");
+          var myRequest = new Request(url, init); //need to pass in global path to the request
+
+          return await fetch(myRequest)
+              .then(response => {
+                  return response.json();
+              })
+      }
+
   function checkboxesAreValid() {
     nchecked = $('.required_checkboxes:checked').length;
     radiocheck = $('input[name="pg_release"]:checked').val();
@@ -208,15 +240,19 @@
        }
        break;
       default:
-
     }
-    console.log("nchecked: " + String(nchecked))
-    console.log("isvalid " + String(isvalid))
-    console.log("infocheck " + String(infocheck))
-
-    console.log(nchecked == 9 && isvalid && infocheck)
-
     return nchecked == 9 && isvalid && infocheck
+  }
+
+  function dancerFieldsAreValid() {
+    <!-- how to make a query to DB?, also display error -->
+    re = new RegExp("[0-9]{3}-[0-9]{3}-[0-9]{4}")
+    if ($('input[name="name"]').val() == null) {
+    }
+    if ($('input[name="email"]').val() == null) {
+    }
+    if (re.test($('input[name="phone"]').val())) {
+    } //alert ('') or somehow refresh the page & display new errors.
   }
 
   $('input[type=radio]').change(function() {
@@ -228,10 +264,39 @@
   });
   // TODO What to show for other option
 
-
-  $('#src_form').submit(function() {
+  $('#src_form').submit(function() { //src_form.submit, function()
      return checkboxesAreValid()
   });
+//Dancer.srcs is null
+  //searches the src_form form for the button that is clicked.
+  $('#src_form').on('click', '#part_one_button', function() {
+    dancer_exists = null;
+    src_exists = null;
+    // https://flaviocopes.com/how-to-return-result-asynchronous-function/
+    dancerIsValid().then(async (data) => {
+      json_response = await data;
+      dancer_exists = json_response['dancer_exists'];
+      src_exists = json_response['src_exists']
+
+      if (dancer_exists) {
+        // The 'required' fields of all checkboxes in the second part of the form are set to be false first.
+        // After submitting first part of the form, to get the form validator to pop up, the 'required' fields
+        // are toggled to be true: https://stackoverflow.com/questions/7168645/invalid-form-control-only-in-google-chrome/7264966#7264966
+        if (src_exists) {
+          alert("you've already submitted an SRC form! only submit again if you want to update information!")
+        }
+        $('.required_checkboxes').toggleClass('required', true);
+        $('#partTwoForm').toggle();
+        $('#part_one_button').hide();
+
+      } else {
+        alert("please check your information, you don't exist in our database!")
+        //checkboxesAreValid();
+        //dancerFieldsAreValid(); //how to validate fields after submit.
+      }
+    });
+  });
+
   </script>
 
   </div>

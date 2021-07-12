@@ -3,6 +3,14 @@ class Team < ApplicationRecord
   has_and_belongs_to_many :dancers
   has_one :team_preference
 
+  validate :practice_time_location_length_check
+
+  def practice_time_location_length_check
+    time = practice_time.split(",")
+    loc = practice_location.split(",")
+    errors.add(:practice_location, format("practice_time(%<time_len>d) must match practice_location(%<loc_len>d) length", time_len: time.length, loc_len: loc.length)) if time.length != loc.length
+  end
+
   PROJECT = "Project".freeze
   TRAINING = "Training".freeze
   DROP = "Drop".freeze
@@ -135,5 +143,31 @@ class Team < ApplicationRecord
       removed: removed,
       not_in_this_team: not_in_this_team,
     }
+  end
+
+  def filter_directors
+    directors = []
+    users.each do |user|
+      if user.role == "admin"
+        next
+      end
+
+      if user.name.nil?
+        directors.push(user.username)
+      else
+        directors.push(user.name) # change to user name when migrated
+      end
+    end
+    directors
+  end
+
+  def concat_time_and_loc
+    result = []
+    prac_time = practice_time.split(",")
+    loc = practice_location.split(",")
+    prac_time.each_with_index do |t, i|
+      result.append([t, loc[i]])
+    end
+    result
   end
 end
