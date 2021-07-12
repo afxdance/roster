@@ -190,7 +190,7 @@
           };
           //https://stackoverflow.com/questions/54164874/javascript-use-fetch-on-localhost-with-url-parameters
 
-          const url = new URL("http://localhost:3000/dancer_src");
+          const url = new URL("<%= ENV["URL"] %>" + "/dancer_src");
           var myRequest = new Request(url, init); //need to pass in global path to the request
 
           return await fetch(myRequest)
