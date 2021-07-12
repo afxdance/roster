@@ -24,8 +24,8 @@
 <%= @srcformfields[2] %>
 
   <%= f.text_field :name, required: true, placeholder: "FIRST AND LAST NAME" %><br>
-  <%= f.text_field :email, required: true, placeholder: "EMAIL", pattern: " ^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" %><br>
-  <%= f.text_field :phone, required: true, placeholder: "PHONE: XXX-XXX-XXXX", pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}" %>
+  <%= f.text_field :email, required: true, placeholder: "EMAIL", pattern: " ^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$", title: "Please input a valid email" %><br>
+  <%= f.text_field :phone, required: true, placeholder: "PHONE: XXX-XXX-XXXX", pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}", title: "Please match the requested format XXX-XXX-XXXX" %>
 
   <!-- still needs to be styled and add label -->
   <%= f.collection_select(
@@ -35,7 +35,7 @@
     :name,
     {:prompt => "Choose your AFX Team"},
     {class: "audition-form", required: true}) %>
-      <input type="button" id="part_one_button" value="validate dancer">
+    <input type="button" id="part_one_button" value="validate dancer">
 
 <!-- PART ONE ENDS HERE -->
 

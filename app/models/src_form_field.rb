@@ -45,10 +45,10 @@ class SrcFormField < ApplicationRecord
   private_class_method
 
   def self.src
-    return SrcFormField.where(id: SRC_RANGE)
+    return SrcFormField.where(id: SRC_RANGE).order("id ASC")
   end
 
   def self.srcbackup
-    return SrcFormField.where(id: SRC_BACKUP_RANGE)
+    return SrcFormField.where(id: SRC_BACKUP_RANGE).order("id ASC")
   end
 end
