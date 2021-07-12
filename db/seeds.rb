@@ -182,6 +182,5 @@ FormField.create!(id: 32, data: "<p>Again, if you have any further questions, pl
 User.find(1).teams = Team.all
 # young cai is the director of AFX Help
 User.find(2).teams = [Team.first]
-User.first.teams = Team.all
 
 Rails.env.development?

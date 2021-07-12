@@ -5,7 +5,7 @@ FormField.create_with(data: "<h2>AFX TEAM SWITCH/DROP FORM</h2>").find_or_create
 FormField.create_with(data: "<p><h1><center>Welcome to AFX Dance, Fall 2077!</center></h1></p>").find_or_create_by(id: 2)
 FormField.create_with(data: "<p>If you are viewing this form, it means that you are <b>UNABLE</b> to participate in the PROJECT or TRAINING team that you are <b><u>CURRENTLY ON</b></u> on due to a <b>time conflict</b>. Through this form, you will also be able to DROP from AFX Project/Training this semester.
 <p><b>[DEADLINE FOR SUBMISSION: SATURDAY, 9/21/2019 @ 11:59 PM.] </b>
-<br><b><u>NO EXCEPTIONS !</u></b>
+<br><b><u>NO EXCEPTIONS!</u></b>
 
 <p>***NOTE***: If you are currently on AFX Competitive Team, the drop deadline and process is separate and does NOT use this form. We urge you to direct all Dance Camp matters to your Captains. Thank you!
 
