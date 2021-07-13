@@ -35,7 +35,7 @@
     :name,
     {:prompt => "Choose your AFX Team"},
     {class: "audition-form", required: true}) %>
-    <input type="button" id="part_one_button" value="validate dancer">
+    <input type="button" id="part_one_button" value="validate my information">
 
 <!-- PART ONE ENDS HERE -->
 
@@ -189,7 +189,6 @@
               }
           };
           //https://stackoverflow.com/questions/54164874/javascript-use-fetch-on-localhost-with-url-parameters
-          console.log("<%= ENV["URL"] %>")
           const url = new URL("<%= ENV["URL"] %>" + "/dancer_src");
           var myRequest = new Request(url, init); //need to pass in global path to the request
 
