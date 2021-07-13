@@ -102,10 +102,13 @@ class Team < ApplicationRecord
   def add_dancers(dancer_ids)
     added = []
     already_in_this_team = []
+    already_in_another_team = []
 
     Dancer.find(dancer_ids).each do |dancer|
       if dancer.teams.include? self
         already_in_this_team << dancer
+      elsif dancer.teams.any?
+        already_in_another_team << dancer
       else
         added << dancer
       end
@@ -117,6 +120,7 @@ class Team < ApplicationRecord
     return {
       added: added,
       already_in_this_team: already_in_this_team,
+      already_in_another_team: already_in_another_team,
     }
   end
 
