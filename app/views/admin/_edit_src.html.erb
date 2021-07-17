@@ -1,0 +1,519 @@
+<style>
+#audition-form-body {
+    background: url('/assets/blurred-bg.jpg') no-repeat center center fixed;
+    vertical-align: middle;
+    text-align: left;
+    /* padding: 50px 0; */
+}
+
+.audition-form{
+    font-family: 'Open Sans Condensed', arial, sans;
+    width: 600px;
+    padding: 30px;
+    background: #fff;
+    opacity: 0.7;
+    margin: 0 auto;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.22);
+    -moz-box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.22);
+    -webkit-box-shadow:  0px 0px 30px rgba(0, 0, 0, 0.22);
+
+}
+
+.audition-form h2{
+    background: #4D4D4D;
+    text-transform: uppercase;
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: #FFF;
+    font-size: 34px;
+    text-align: center;
+    font-weight: bold;
+    padding: 20px;
+    margin: -30px -30px 30px -30px;
+}
+
+.audition-form td:first-child
+{
+    vertical-align: middle;
+    font-size: 1.2em;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.audition-form input[type="text"],
+.audition-form input[type="date"],
+.audition-form input[type="datetime"],
+.audition-form input[type="email"],
+.audition-form input[type="number"],
+.audition-form input[type="search"],
+.audition-form input[type="time"],
+.audition-form input[type="url"],
+.audition-form input[type="password"],
+.audition-form textarea,
+.audition-form select
+{
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    outline: none;
+    display: block;
+    width: 100%;
+    padding: 7px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    background: transparent;
+    margin-bottom: 10px;
+    font: 16px Arial, Helvetica, sans-serif;
+    height: 45px;
+}
+.audition-form textarea{
+    height: 300px;
+    resize:none;
+    overflow-y: scroll;
+}
+.audition-form input[type="button"],
+.audition-form input[type="submit"] {
+    -moz-box-shadow: inset 0px 1px 0px 0px #45D6D6;
+    background-color: #000000 !important;
+    opacity: 0.8;
+    border: 1px solid #808080;
+    border-radius: 0px;
+    display: inline-block;
+    cursor: pointer;
+    color: #FFFFFF;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 14px;
+    padding: 8px 18px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.audition-form input[type="button"]:hover,
+.audition-form input[type="submit"]:hover {
+    background:linear-gradient(to bottom, #34CACA 5%, #30C9C9 100%);
+    background-color:#34CACA;
+}
+
+.audnum h3 {
+    background: #4D4D4D;
+    width: 500px;
+    opacity: 0.7;
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: #fff;
+    font-size: 32px;
+    padding: 30px;
+    margin: 50px auto;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.22);
+    -moz-box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.22);
+    -webkit-box-shadow:  0px 0px 30px rgba(0, 0, 0, 0.22);
+}
+
+.audition-form label {
+    -webkit-user-select: none;
+}
+/*.audition-form .availability-checkbox {
+    display: none;
+}*/
+.availability-display-free {
+    color: green;
+}
+.audition-form .availability-checkbox + .availability-display .availability-display-free {
+    display: none;
+}
+
+.audition-form .availability-checkbox:checked + .availability-display .availability-display-free {
+    display: inline;
+}
+
+.audition-form .availability-checkbox:checked + .availability-display .availability-display-busy {
+    display: none;
+}
+
+.times {
+    font-size: 16px;
+    text-align: left
+}
+
+form p {
+  margin: 1em 0;
+}
+
+.submit {
+    text-align: center;
+
+}
+
+html, body {
+    overflow: auto;
+}
+#parent,
+#myself
+{
+  display: none;
+}
+</style>
+
+
+<% @src = SrcFormField.find_src_form_fields %>
+<% @updatedAt = SrcFormField.last_updated_src %>
+<% @backupAt = SrcFormField.last_backup_src %>
+
+<body id="audition-form-body">
+
+<%# No clue if closing bracket } goes after "audition-for" or "src_form"%>
+ <%= form_with url: "/src",  :html => {:class => "audition-form"}, :id => "src_form" do |f| %>
+    <h2>
+      <div class="editable" contenteditable="true", id="fd28">
+          <%= @src[27] %>
+      </div>
+    </h2>
+
+    <div class="times">
+
+        <div class="editable" contenteditable="true", id="fd1">
+          <%= @src[0] %>
+        </div>
+
+        <div class="editable" contenteditable="true", id="fd2">
+            <%= @src[1] %>
+        </div>
+        <div class="editable" contenteditable="true", id="fd3">
+            <%= @src[2] %>
+        </div>
+        <div>
+            <%= f.text_field :name, required: true, placeholder: "FIRST AND LAST NAME" %><br>
+            <%= f.text_field :email, required: true, placeholder: "EMAIL", pattern: " ^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" %><br>
+            <%= f.text_field :phone, required: true, placeholder: "PHONE: XXX-XXX-XXXX", pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}" %>
+
+            <!-- still needs to be styled and add label -->
+            <%= f.collection_select(
+              :available_team_ids,
+              Team.all.sort_by(&:name),
+              :id,
+              :name,
+              {:prompt => "Choose your AFX Team"},
+              {class: "audition-form"}) %>
+
+        </div>
+        <hr>
+        <div class="editable" contenteditable="true" id="fd4">
+            <%= @src[3] %>
+        </div>
+        <div class="editable" contenteditable="true" id="fd5">
+            <%= @src[4] %>
+        </div>
+        <div class="editable" contenteditable="true" id="fd6">
+            <%= @src[5] %>
+        </div>
+        <div class="editable" contenteditable="true" id="fd7">
+          <%= @src[6] %>
+        </div>
+        </p>
+  <p>
+    <%= f.check_box :a, required:true, class: "required_checkboxes"%>
+    <label class="editable" contenteditable="true", id="fd8">
+      <%= @src[7] %>
+    </label>
+  </p>
+  <p>
+    <%= f.check_box :b, required:true, class: "required_checkboxes"%>
+    <label class="editable" contenteditable="true", id="fd9">
+      <%= @src[8] %>
+    </label>
+  </p>
+
+  <p>
+    <%= f.check_box :c, required:true, class: "required_checkboxes"%>
+    <label class="editable" contenteditable="true", id="fd10">
+     <%= @src[9] %>
+    </label>
+  </p>
+<hr>
+
+  <p>
+      <div class="editable" contenteditable="true", id="fd11">
+          <%= @src[10] %>
+      </div>
+      <div class="editable" contenteditable="true", id="fd12">
+          <%= @src[11] %>
+      </div>
+      <div class="editable" contenteditable="true", id="fd13">
+          <%= @src[12] %>
+      </div>
+      <div class="editable" contenteditable="true", id="fd14">
+          <%= @src[13] %>
+      </div>
+      <div class="editable" contenteditable="true", id="fd15">
+          <%= @src[14] %>
+      </div>
+
+  <p>
+    <%= f.check_box :d, required: true, class: "required_checkboxes" %>
+    <label class="editable" contenteditable="true" id="fd16">
+      <%= @src[15]%>
+    </label>
+  </p>
+  <p>
+    <%= f.check_box :e, required: true, class: "required_checkboxes" %>
+    <label class="editable" contenteditable="true", id="fd17">
+     <%= @src[16] %>
+    </label>
+  </p>
+
+  <p>
+    <%= f.check_box :f, required: true, class: "required_checkboxes" %>
+    <label class="editable" contenteditable="true", id="fd18">
+     <%= @src[17] %>
+    </label>
+  </p>
+
+  <p>
+    <%= f.check_box :g, required: true, class: "required_checkboxes" %>
+    <label class="editable" contenteditable="true", id="fd19">
+     <%= @src[18] %>
+    </label>
+  </p>
+  <p>
+    <%= f.check_box :h, required: true, class: "required_checkboxes" %>
+    <label class="editable" contenteditable="true", id="fd20">
+     <%= @src[19] %>
+    </label>
+  </p>
+
+  <p>
+    <%= f.check_box :i, required: true, class: "required_checkboxes" %>
+    <label class="editable" contenteditable="true", id="fd21">
+     <%= @src[20] %>
+    </label>
+  </p>
+
+<hr>
+      <div class="editable" contenteditable="true", id="fd22">
+          <%= @src[21] %>
+      </div>
+
+  <p>
+      <%= f.radio_button :pg_release, 'parent' %>
+      <label class="editable" contenteditable="true", id="fd23">
+        <%= @src[22] %>
+      </label>
+  </p>
+  <p>
+    <%= f.radio_button :pg_release, 'myself' %>
+    <label class="editable" contenteditable="true", id="fd24">
+      <%= @src[23] %>
+    </label>
+  </p>
+  <p>
+    <%= f.radio_button :pg_release, 'other'  %> Other: <%= f.text_field :pg_other, :style => "display: inline-block; width: 51%" %>
+     <!-- gna need to change the required -->
+  </p>
+
+
+  <%= f.text_area :reason, required: false, placeholder: "Other:" %> <!-- gna need to change the required -->
+
+<hr>
+<div id="parent">
+<p><h3>[IF YOU ARE YOUNGER THAN 18 YEARS OF AGE] </h3></p>
+
+
+
+  <%= f.text_field :p_name, placeholder: "Your Full Legal Name" %><br>
+  <%= f.text_field :p_sign, placeholder: "Parent / Guardian Signature (full legal name)" %><br>
+  <%= f.text_field :p_date, placeholder: "Date of signature: MM/DD/YYYY", pattern: "^[0-3][0-9]/[0-3][0-9]/(?:[0-9][0-9])?[0-9][0-9]$" %><br>
+
+  <p>
+    <%= f.check_box :p_checkbox %>
+    <label class="editable" contenteditable="true", id="fd25">
+      <%= @src[24] %>
+    </label>
+  </p>
+<hr>
+</div>
+<div id="myself">
+<p><h3>[IF YOU ARE 18 YEARS OF AGE OR OLDER]</h3></p>
+
+  <%= f.text_field :m_sign, placeholder: "Your Signature (full legal name)" %><br>
+  <%= f.text_field :m_date, placeholder: "Date of signature: MM/DD/YYYY", pattern: "^[0-3][0-9]/[0-3][0-9]/(?:[0-9][0-9])?[0-9][0-9]$" %><br>
+
+  <p>
+    <%= f.check_box :m_checkbox %>
+    <label class="editable" contenteditable="true", id="fd26">
+      <%= @src[25] %>
+    </label>
+  </p>
+  <hr>
+</div>
+
+  <p>
+    <div class="editable" contenteditable="true" id="fd27">
+      <%= @src[26] %>
+    </div>
+  </p>
+
+    <div>
+        <p> Last edited: <%= @updatedAt %> </p>
+        <p> Last backup: <%= @backupAt %> </p>
+    </div>
+
+  <div id="fd14"> </div>
+
+<% end %>
+
+
+<%= form_with(url: { action: "update" }) do %>
+    <input id="fdfd1" name="1" type="hidden" />
+    <input id="fdfd2" name="2" type="hidden" />
+    <input id="fdfd3" name="3" type="hidden" />
+    <input id="fdfd4" name="4" type="hidden" />
+    <input id="fdfd5" name="5" type="hidden" />
+    <input id="fdfd6" name="6" type="hidden" />
+    <input id="fdfd7" name="7" type="hidden" />
+    <input id="fdfd8" name="8" type="hidden" />
+    <input id="fdfd9" name="9" type="hidden" />
+    <input id="fdfd10" name="10" type="hidden" />
+    <input id="fdfd11" name="11" type="hidden" />
+    <input id="fdfd12" name="12" type="hidden" />
+    <input id="fdfd13" name="13" type="hidden" />
+    <input id="fdfd14" name="14" type="hidden" />
+    <input id="fdfd15" name="15" type="hidden" />
+    <input id="fdfd16" name="16" type="hidden" />
+    <input id="fdfd17" name="17" type="hidden" />
+    <input id="fdfd18" name="18" type="hidden" />
+    <input id="fdfd19" name="19" type="hidden" />
+    <input id="fdfd20" name="20" type="hidden" />
+    <input id="fdfd21" name="21" type="hidden" />
+    <input id="fdfd22" name="22" type="hidden" />
+    <input id="fdfd23" name="23" type="hidden" />
+    <input id="fdfd24" name="24" type="hidden" />
+    <input id="fdfd25" name="25" type="hidden" />
+    <input id="fdfd26" name="26" type="hidden" />
+    <input id="fdfd27" name="27" type="hidden" />
+    <input id="fdfd28" name="28" type="hidden" />
+
+
+    <input style="margin-bottom: 8px" type="submit" name="commit" value="Save Changes" data-disable-with="Save Changes" id="submit_button_thing">
+<% end %>
+
+<%= form_with(url: { action: "set" }) do %>
+
+  <input id="ab1" name="1" type="hidden" />
+  <input id="ab2" name="2" type="hidden" />
+  <input id="ab3" name="3" type="hidden" />
+  <input id="ab4" name="4" type="hidden" />
+  <input id="ab5" name="5" type="hidden" />
+  <input id="ab6" name="6" type="hidden" />
+  <input id="ab7" name="7" type="hidden" />
+  <input id="ab8" name="8" type="hidden" />
+  <input id="ab9" name="9" type="hidden" />
+  <input id="ab10" name="10" type="hidden" />
+  <input id="ab11" name="11" type="hidden" />
+  <input id="ab12" name="12" type="hidden" />
+  <input id="ab13" name="13" type="hidden" />
+  <input id="ab14" name="14" type="hidden" />
+  <input id="ab15" name="15" type="hidden" />
+  <input id="ab16" name="16" type="hidden" />
+  <input id="ab17" name="17" type="hidden" />
+  <input id="ab18" name="18" type="hidden" />
+  <input id="ab19" name="19" type="hidden" />
+  <input id="ab20" name="20" type="hidden" />
+  <input id="ab21" name="21" type="hidden" />
+  <input id="ab22" name="22" type="hidden" />
+  <input id="ab23" name="23" type="hidden" />
+  <input id="ab24" name="24" type="hidden" />
+  <input id="ab25" name="25" type="hidden" />
+  <input id="ab26" name="26" type="hidden" />
+  <input id="ab27" name="27" type="hidden" />
+  <input id="ab28" name="28" type="hidden" />
+
+  <input style="margin-bottom: 8px" type="submit" name="commit" value="Save Changes and Set as Backup" data-disable-with="Save Changes and Set as Backup" id="set_and_save">
+
+<% end%>
+
+<%= form_with(url: { action: "revert" }) do %>
+  <input type="submit" name="commit" value="Revert to Backup" data-disable-with="Revert to Backup" id="revert">
+<% end%>
+
+</div>
+</body>
+<script>
+
+    const SRC_FIELDS = 28
+
+    function fill_fields() {
+        for (i = 1; i <= SRC_FIELDS; i++) {
+          var first = document.getElementById('fd' + i);
+          var second = document.getElementById('fdfd' + i);
+          second.value = first.innerHTML;
+        }
+    }
+    function fill_and_set() {
+        for (i = 1; i <= SRC_FIELDS; i++) {
+          var first = document.getElementById('fd' + i);
+          var second = document.getElementById('ab' + i);
+          second.value = first.innerHTML;
+        }
+    }
+
+    document.getElementById("submit_button_thing").addEventListener("click", fill_fields);
+    document.getElementById("set_and_save").addEventListener("click", fill_and_set);
+
+    function checkboxesAreValid() {
+    nchecked = $('.required_checkboxes:checked').length;
+    radiocheck = $('input[name="pg_release"]:checked').val();
+    infocheck = false
+    a = $('input[name="name"]').val() != null;
+    b = $('input[name="email"]').val() != null;
+    re = new RegExp("[0-9]{3}-[0-9]{3}-[0-9]{4}")
+    c = re.test($('input[name="phone"]').val());
+    if (a && b && c) {
+      infocheck = true
+    }
+    isvalid = false
+
+
+    switch(radiocheck) {
+      case "parent":
+        a = $('input[name="p_name"]').val() != null;
+        b = $('input[name="p_sign"]').val() != null;
+        re = new RegExp("^[0-3][0-9]/[0-3][0-9]/(?:[0-9][0-9])?[0-9][0-9]$")
+        c = re.test($('input[name="p_date"]').val())
+        d = $('input[name="p_checkbox"]').is(':checked')
+        if (a && b && c && d) {
+          isvalid = true
+        }
+        break;
+      case "myself":
+        a = $('input[name="m_sign"]').val() != null;
+        re = new RegExp("^[0-3][0-9]/[0-3][0-9]/(?:[0-9][0-9])?[0-9][0-9]$")
+        b = re.test($('input[name="m_date"]').val())
+        c = $('input[name="m_checkbox"]').is(':checked');
+        if (a && b && c) {
+          isvalid = true
+        }
+        break;
+      case "other":
+       a = $('input[name="pg_other"]').val() != null;
+       if (a) {
+         isvalid = true
+       }
+       break;
+      default:
+
+    }
+
+    return nchecked == 9 && isvalid && infocheck
+  }
+
+  $('input[type=radio]').change(function() {
+    $('#parent').css('display', 'none')
+    $('#myself').css('display', 'none')
+    fieldToShow = $(this).val()
+    $('#' + fieldToShow).css('display', 'block')
+    return
+  });
+
+
+  $('#src_form').submit(function() {
+     return checkboxesAreValid()
+  });
+
+</script>
