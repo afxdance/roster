@@ -1,5 +1,6 @@
 class SrcController < ApplicationController
   def index
+    @srcformfields = SrcFormField.find_src_form_fields
     @src = Src.new
     # sees if redirect to index from submit happened
     if flash[:redirect] == "true"
