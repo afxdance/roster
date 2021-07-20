@@ -37,10 +37,17 @@ ActiveAdmin.register Team do
       f.input :practice_time,
               label: [
                 "Practice time",
-                "(EX. Thu 7-8:30, Sat 4-5:30)",
+                "(EX. Thu 7-8:30,Sat 4-5:30).",
+                "No space between commas and texts.",
                 "If add a space at the beginning or leave this blank, this team will be hidden in the team switch form.",
+              ].join("<br>").html_safe,
+              input_html: { style: "margin-bottom: 60px" }
+      f.input :practice_location,
+              label: [
+                "Practice location",
+                "(EX. Hass,Sproul).",
+                "No space between commas and texts.",
               ].join("<br>").html_safe
-      f.input :practice_location
       f.input :locked
       f.input :maximum_picks
     end
