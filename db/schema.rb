@@ -40,6 +40,12 @@ ActiveRecord::Schema.define(version: 20210426025618) do
     t.datetime "updated_at", null: false
     t.string "reach_workshop_interest"
     t.string "reach_news_interest"
+    t.string "has_paid_dues"
+    t.string "has_bought_tickets"
+    t.datetime "dues_changed_at"
+    t.datetime "tickets_changed_at"
+    t.string "dues_approved_by"
+    t.string "tickets_approved_by"
   end
 
   create_table "dancers_teams", id: false, force: :cascade do |t|
