@@ -6,8 +6,8 @@ ActiveAdmin.register Dancer, as: "Finances" do
 
   # Scope buttons to filter dancers that have paid dues/bought tickets
   scope :all, default: true
-  scope("Paid Dues") { |scope| scope.where("has_paid_dues LIKE ?", "%yes%") }
-  scope("Bought Tickets") { |scope| scope.where("has_bought_tickets LIKE ?", "%yes%") }
+  scope("Hasn't Paid Dues") { |scope| scope.where("has_paid_dues LIKE ?", "%no%") }
+  scope("Hasn't Bought Tickets") { |scope| scope.where("has_bought_tickets LIKE ?", "%no%") }
 
   member_action :paid_dues, method: :post do
     dancer_id = params[:id]
