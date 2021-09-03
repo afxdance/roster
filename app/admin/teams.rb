@@ -22,6 +22,7 @@ ActiveAdmin.register Team do
       :name,
       :project,
       :practice_time,
+      :practice_location,
       :locked,
       :maximum_picks,
       :level,
@@ -40,8 +41,16 @@ ActiveAdmin.register Team do
       f.input :practice_time,
               label: [
                 "Practice time",
-                "(EX. Thu 7-8:30, Sat 4-5:30)",
+                "(EX. Thu 7-8:30,Sat 4-5:30).",
+                "No space between commas and texts.",
                 "If add a space at the beginning or leave this blank, this team will be hidden in the team switch form.",
+              ].join("<br>").html_safe,
+              input_html: { style: "margin-bottom: 60px" }
+      f.input :practice_location,
+              label: [
+                "Practice location",
+                "(EX. Hass,Sproul).",
+                "No space between commas and texts.",
               ].join("<br>").html_safe
       f.input :locked
       f.input :maximum_picks
@@ -54,6 +63,7 @@ ActiveAdmin.register Team do
     column :name
     column :level
     column :practice_time
+    column :practice_location
     column :locked
     column :maximum_picks
     # Allows us to view the Users that are connected to the team
@@ -75,6 +85,7 @@ ActiveAdmin.register Team do
         row :name
         row :level
         row :practice_time
+        row :practice_location
         row :locked
         row :maximum_picks
       end

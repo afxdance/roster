@@ -13,7 +13,7 @@ group :production, :development, :test do
   # sqlite is disabled here because we want to use it only for development.
   # gem "sqlite3", require: false
   # Use Puma as the app server
-  gem "puma", "~> 3.7", require: false
+  gem "puma", ">= 4.3.8", require: false
   # Use SCSS for stylesheets
   gem "sass-rails", "~> 5.0", require: false
   # Use Uglifier as compressor for JavaScript assets
@@ -30,7 +30,7 @@ group :production, :development, :test do
   # Use Redis adapter to run Action Cable in production
   # gem 'redis', '~> 4.0'
   # Use ActiveModel has_secure_password
-  # gem 'bcrypt', '~> 3.1.7'
+  gem "bcrypt", "~> 3.1.11"
 
   # Use Capistrano for deployment
   # gem 'capistrano-rails', group: :development

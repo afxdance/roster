@@ -1,5 +1,5 @@
 #audition-form-body {
-    background: url('/assets/blurred-bg.jpg') no-repeat center center fixed;
+    background: url('blurred-bg.jpg') no-repeat center center fixed;
     vertical-align: middle;
     text-align: left;
     padding: 50px 0;
@@ -141,4 +141,9 @@ form p {
 
 html, body {
     overflow: auto;
+}
+#parent,
+#myself
+{
+  display: none;
 }

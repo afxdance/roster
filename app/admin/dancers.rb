@@ -143,9 +143,12 @@ ActiveAdmin.register Dancer do
     # Should eventually change the buttons below to support the possiblility of users with multiple teams
     column :add_dancer do |dancer|
       # If the dancer is already on a team, hide the "Add to team" button.
-      next if dancer.teams.any?
-
+      cur_teams = dancer.teams
       current_user.teams.map do |team|
+        if cur_teams.include? team
+          next
+        end
+
         content_tag :div do
           link_to("/admin/dancers/#{dancer.id}/add_to_team?" + { team_id: team.id }.to_query, method: :post) do
             "+ #{team.name}"
@@ -164,8 +167,20 @@ ActiveAdmin.register Dancer do
       end.join.html_safe
     end
 
+    column :src do |dancer|
+      if dancer.src.nil?
+        columns("INCOMPLETE")
+      else
+        columns("COMPLETE")
+      end
+    end
+
     actions
   end
+
+  preserve_default_filters!
+
+  filter :src_id_not_null, label: "Src present?", as: :boolean
 
   current_user_teams_lambda = lambda do
     {
