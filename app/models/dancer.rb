@@ -83,6 +83,9 @@ class Dancer < ApplicationRecord
   has_many :team_switch_requests
   has_one :src
 
+  attribute :has_paid_dues, :string, default: "no"
+  attribute :has_bought_tickets, :string, default: "no"
+
   for column in REQUIRED_FIELDS
     validates column, length: { minimum: 1 }
   end
