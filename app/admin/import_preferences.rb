@@ -5,15 +5,8 @@ ActiveAdmin.register_page "Import Preferences" do
   page_action :update, method: :post do
     csv = CSV.read(params[:csv][:uploaded_file].tempfile, headers: true, encoding: "bom|utf-8")
     ActiveRecord::Base.transaction do
-      director = current_user.id # Gets the currently logged in user
-
-      results = ActiveRecord::Base.connection.execute("SELECT team_id from 'teams_users' WHERE user_id=#{director} LIMIT 1")
-
       # Makes assumption that a user can only be the director of 1 team at a time
-      my_team_id = nil
-      for result_row in results
-        my_team_id = result_row["team_id"]
-      end
+      my_team_id = current_user.teams.first.id
 
       # creates set of all valid dancer id's
       dancers = Dancer.all
