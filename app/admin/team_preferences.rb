@@ -9,7 +9,7 @@ ActiveAdmin.register_page "Team Preferences" do
       redirect_to admin_team_preferences_path(errors: result[:errors])
     else
       # clears out dancers_teams table
-      ActiveRecord::Base.connection.execute("DELETE from 'dancers_teams'")
+      DancerTeam.delete_all
 
       # populates "initial_team" column in team_preferences table
       preferences = TeamPreference.all
@@ -19,7 +19,7 @@ ActiveAdmin.register_page "Team Preferences" do
 
         # populates the dancers_teams table
         for dancer in result[:teams][team_id]
-          ActiveRecord::Base.connection.execute("INSERT INTO 'dancers_teams' (dancer_id, team_id, created_at, updated_at) VALUES (#{dancer}, #{team_id}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)")
+          DancerTeam.create(dancer_id: dancer, team_id: team_id)
         end
       end
 
@@ -29,7 +29,7 @@ ActiveAdmin.register_page "Team Preferences" do
 
   page_action :delete_teams, method: :post do
     # clears out dancers_teams table
-    ActiveRecord::Base.connection.execute("DELETE from 'dancers_teams'")
+    DancerTeam.delete_all
     # clears our "initial_team" column in team_preferences table
     preferences = TeamPreference.all
     for pref in preferences
@@ -48,7 +48,7 @@ ActiveAdmin.register_page "Team Preferences" do
         initial_team = Set.new(JSON.parse(pref.initial_team))
         team_id = pref.team_id
         current_team = Set.new
-        results = ActiveRecord::Base.connection.execute("SELECT dancer_id from 'dancers_teams' WHERE team_id=#{team_id}")
+        results = DancerTeam.where(team_id: team_id)
         for row in results
           current_team.add(row["dancer_id"].to_s)
         end
