@@ -223,8 +223,7 @@ ActiveAdmin.register Dancer do
       dancers_started_with = []
 
       for team in training_teams
-        dancers_on_team = ActiveRecord::Base.connection.execute("SELECT dancer_id from 'dancers_teams' WHERE team_id=#{team.id}")
-
+        dancers_on_team = team.dancers
         team_ids.push(team.id)
         created_teams.push([])
         dancers_started_with.push(dancers_on_team.length)
@@ -249,9 +248,7 @@ ActiveAdmin.register Dancer do
       end
 
       team_ids.each_with_index do |team_id, index|
-        for dancer in created_teams[index]
-          ActiveRecord::Base.connection.execute("INSERT INTO 'dancers_teams' (dancer_id, team_id, created_at, updated_at) VALUES (#{dancer}, #{team_id}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)")
-        end
+        Team.find(id: team_id).add_dancers(created_teams[index])
       end
 
       flash[:notice] = "#{dancers_with_no_teams_count} dancers have been randomized."
