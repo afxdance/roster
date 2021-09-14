@@ -248,7 +248,7 @@ ActiveAdmin.register Dancer do
       end
 
       team_ids.each_with_index do |team_id, index|
-        Team.find(id: team_id).add_dancers(created_teams[index])
+        Team.find(team_id).add_dancers(created_teams[index])
       end
 
       flash[:notice] = "#{dancers_with_no_teams_count} dancers have been randomized."
