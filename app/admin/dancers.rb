@@ -273,7 +273,7 @@ ActiveAdmin.register Dancer do
     link_to "Next Audition Number", "/admin/dancers/next_audition_number"
   end
 
-  action_item :create_training_teams, only: :index do
+  action_item :create_training_teams_button, only: :index do
     link_to "Create Training Teams", "/admin/dancers/create_training_teams", data: { confirm: "Are you sure?" }
   end
 end
