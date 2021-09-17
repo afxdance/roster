@@ -23,6 +23,6 @@ class TeamSwitchRequest < ApplicationRecord
   # If the new team isn't nil then that means the request has been processed
   # Return relevant team switch requests, either the dancer just joined or just left team_id
   def self.get_processed_team_switch_requests(team_id)
-    TeamSwitchRequest.where.not(new_team_id: nil).where("new_team_id = '#{team_id}' or old_team_id = '#{team_id}'")
+    TeamSwitchRequest.where("new_team_id is not null and (new_team_id = ? or old_team_id = ?)", team_id, team_id)
   end
 end
