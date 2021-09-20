@@ -11,6 +11,10 @@ ActiveAdmin.register Team do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
+
+  # If the current user can't view the teams (just finance for now), don't let the page show up in the top bar
+  menu if: proc { current_user.can_view_teams? }
+  before_action :role_check
   scope_to :current_user
 
   permit_params do
@@ -18,6 +22,7 @@ ActiveAdmin.register Team do
       :name,
       :project,
       :practice_time,
+      :practice_location,
       :locked,
       :maximum_picks,
       :level,
@@ -36,8 +41,16 @@ ActiveAdmin.register Team do
       f.input :practice_time,
               label: [
                 "Practice time",
-                "(EX. Thu 7-8:30, Sat 4-5:30)",
+                "(EX. Thu 7-8:30,Sat 4-5:30).",
+                "No space between commas and texts.",
                 "If add a space at the beginning or leave this blank, this team will be hidden in the team switch form.",
+              ].join("<br>").html_safe,
+              input_html: { style: "margin-bottom: 60px" }
+      f.input :practice_location,
+              label: [
+                "Practice location",
+                "(EX. Hass,Sproul).",
+                "No space between commas and texts.",
               ].join("<br>").html_safe
       f.input :locked
       f.input :maximum_picks
@@ -50,6 +63,7 @@ ActiveAdmin.register Team do
     column :name
     column :level
     column :practice_time
+    column :practice_location
     column :locked
     column :maximum_picks
     # Allows us to view the Users that are connected to the team
@@ -71,6 +85,7 @@ ActiveAdmin.register Team do
         row :name
         row :level
         row :practice_time
+        row :practice_location
         row :locked
         row :maximum_picks
       end
@@ -103,6 +118,24 @@ ActiveAdmin.register Team do
         end
       end
     end
+
+    panel "Team Switch Requests" do
+      tabs do
+        for tab_name, sort_order in [
+          ["Most recently processed", "approved_at DESC"],
+          ["Sorted alphabetically", "lower(trim(name)), approved_at DESC"],
+        ]
+          tab tab_name do
+            table_for TeamSwitchRequest.get_processed_team_switch_requests(team.id).order(sort_order) do
+              TeamSwitchRequest::TABLE_VISIBLE_FIELDS.each do |field|
+                column field
+              end
+              column(:status) { |request| team.id == request.new_team_id ? "Joined" : "Left" }
+            end
+          end
+        end
+      end
+    end
   end
 
   member_action :drop_dancer, method: :post do
@@ -114,6 +147,10 @@ ActiveAdmin.register Team do
   controller do
     def back_url
       request.referrer
+    end
+
+    def role_check
+      redirect_to "/admin", alert: "You can't view the dancers page!!! >:( uwu" unless current_user.can_view_teams?
     end
 
     def drop_dancer_from_team(dancer_id, team_id)

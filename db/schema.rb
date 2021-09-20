@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200422035837) do
+ActiveRecord::Schema.define(version: 20210426025618) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -40,6 +40,12 @@ ActiveRecord::Schema.define(version: 20200422035837) do
     t.datetime "updated_at", null: false
     t.string "reach_workshop_interest"
     t.string "reach_news_interest"
+    t.string "has_paid_dues"
+    t.string "has_bought_tickets"
+    t.datetime "dues_changed_at"
+    t.datetime "tickets_changed_at"
+    t.string "dues_approved_by"
+    t.string "tickets_approved_by"
   end
 
   create_table "dancers_teams", id: false, force: :cascade do |t|
@@ -56,6 +62,12 @@ ActiveRecord::Schema.define(version: 20200422035837) do
   end
 
   create_table "form_fields", force: :cascade do |t|
+    t.text "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "src_form_fields", force: :cascade do |t|
     t.text "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -83,6 +95,15 @@ ActiveRecord::Schema.define(version: 20200422035837) do
     t.index ["dancer_id"], name: "index_srcs_on_dancer_id"
   end
 
+  create_table "team_preferences", force: :cascade do |t|
+    t.text "preferences"
+    t.text "initial_team"
+    t.integer "team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_team_preferences_on_team_id"
+  end
+
   create_table "team_switch_requests", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -95,6 +116,7 @@ ActiveRecord::Schema.define(version: 20200422035837) do
     t.integer "dancer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "rejection_reason"
     t.index ["dancer_id"], name: "index_team_switch_requests_on_dancer_id"
     t.index ["new_team_id"], name: "index_team_switch_requests_on_new_team_id"
     t.index ["old_team_id"], name: "index_team_switch_requests_on_old_team_id"
@@ -118,6 +140,7 @@ ActiveRecord::Schema.define(version: 20200422035837) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "practice_location"
     t.index ["user_id"], name: "index_teams_on_user_id"
   end
 
@@ -144,6 +167,7 @@ ActiveRecord::Schema.define(version: 20200422035837) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "role", null: false
+    t.string "name"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end

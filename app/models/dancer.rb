@@ -34,10 +34,17 @@ class Dancer < ApplicationRecord
     "false" => "No",
   }.freeze
 
+  FINANCE_VALUES = {
+    "yes" => "Has paid",
+    "no" => "Has not paid",
+    "other" => "Other",
+  }.freeze
   SHOW_CAMP_INTEREST = false
   SHOW_EXP_INTEREST = false
   SHOW_TECH_INTEREST = false
   SHOW_REACH_INTEREST = false
+  SHOW_DUES_PAID = false
+  SHOW_TICKETS_BOUGHT = false
 
   REQUIRED_FIELDS = [
     :name,
@@ -51,6 +58,8 @@ class Dancer < ApplicationRecord
     :camp_interest,
     :reach_workshop_interest,
     :reach_news_interest,
+    :has_paid_dues,
+    :has_bought_tickets,
   ].freeze
   TABLE_VISIBLE_FIELDS = [
     :name,
@@ -63,6 +72,8 @@ class Dancer < ApplicationRecord
     SHOW_TECH_INTEREST ? :tech_interest : nil,
     SHOW_REACH_INTEREST ? :reach_workshop_interest : nil,
     SHOW_REACH_INTEREST ? :reach_news_interest : nil,
+    SHOW_DUES_PAID ? :has_paid_dues : nil,
+    SHOW_TICKETS_BOUGHT ? :has_bought_tickets : nil,
   ].compact.freeze
   SENSITIVE_FIELDS = [
     :gender,
@@ -70,7 +81,10 @@ class Dancer < ApplicationRecord
 
   has_and_belongs_to_many :teams
   has_many :team_switch_requests
-  has_many :srcs
+  has_one :src
+
+  attribute :has_paid_dues, :string, default: "no"
+  attribute :has_bought_tickets, :string, default: "no"
 
   for column in REQUIRED_FIELDS
     validates column, length: { minimum: 1 }
@@ -96,17 +110,39 @@ class Dancer < ApplicationRecord
     if target_max_id < max_id
       raise "There are dancer ids that are greater or equal to the given id."
     elsif target_max_id == max_id
-      # Do nothing
+      if target_max_id == 0
+        temp = Dancer.new
+        temp.id = target_max_id
+        temp.save!(validate: false)
+        reset_id
+        temp.delete
+      else
+        reset_id
+      end
     elsif target_max_id > max_id
       temp = Dancer.new
       temp.id = target_max_id
       temp.save!(validate: false)
-      Dancer.reset_sequence_name
-      # temp.delete
+      reset_id
+      temp.delete
     else
       raise "Invalid given id: #{target_next_id}"
     end
     # rubocop:enable Style/GuardClause
+  end
+
+  def self.reset_id
+    case ActiveRecord::Base.connection.adapter_name
+      # reset id based on database: https://stackoverflow.com/questions/2097052/rails-way-to-reset-seed-on-id-field
+    when "SQLite"
+      new_max = Dancer.maximum(:id) || 0
+      update_seq_sql = "update sqlite_sequence set seq = #{new_max} where name = 'dancers';"
+      ActiveRecord::Base.connection.execute(update_seq_sql)
+    when "PostgreSQL"
+      ActiveRecord::Base.connection.reset_pk_sequence!("dancers")
+    else
+      raise "Task not implemented for this DB adapter"
+    end
   end
 
   def self.dancers_with_no_teams

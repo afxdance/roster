@@ -10,4 +10,19 @@ class TeamSwitchRequest < ApplicationRecord
   belongs_to :new_team, class_name: "Team", optional: true
 
   validates :dancer, presence: { message: ": You are not in our directory, please revise your information" }
+
+  TABLE_VISIBLE_FIELDS = [
+    :name,
+    :email,
+    :phone,
+    :approved_at,
+    :old_team,
+    :new_team,
+  ].freeze
+
+  # If the new team isn't nil then that means the request has been processed
+  # Return relevant team switch requests, either the dancer just joined or just left team_id
+  def self.get_processed_team_switch_requests(team_id)
+    TeamSwitchRequest.where("new_team_id is not null and (new_team_id = ? or old_team_id = ?)", team_id, team_id)
+  end
 end

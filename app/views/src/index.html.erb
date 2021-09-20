@@ -1,7 +1,7 @@
 <body id="audition-form-body">
 
 <%= form_with url: "/src", method: "post", :html => {:class => "audition-form", :id => "src_form"} do |f| %>
-  <h2>AFX Dance: Spring 2020 Member Safety and Responsibility Contract (SRC)</h2>
+  <h2><%= @srcformfields[27] %></h2>
 
   <% if @src.errors.any? %>
       <% @src.errors.full_messages.each do |message| %>
@@ -14,22 +14,18 @@
   <% if false %>
 
   <% else %>
-  <p><h1><center>Welcome to AFX Dance, Spring 2020!</center></h1></p>
 
-  <p>The Safety & Responsibility Contract is a <b>MANDATORY</b> and legally binding form that all members of AFX Dance must complete and sign in order to maintain their status as an active member of the organization. The Contract lists the guidelines to which all members of the community will be personally held accountable for and sets the expectations of the values and behaviors that all members must uphold. Each member is expected to do their personal best in creating and maintaining a safe and open environment in all AFX spaces. Failure to sign and complete the Safety & Responsibility Contract by the following deadline will result in immediate removal from the organization.
+<%= @srcformfields[0] %>
 
-  <p><b>[DEADLINE TO COMPLETE CONTRACT]: ***SUNDAY***, FEBRUARY 16, 2020 @ 11:59 PM.</b>
-  <p>Failure to complete this contract will REVOKE YOUR MEMBERSHIP in AFX Dance for the Spring 2020 Semester WITH NO REFUNDS.</p>
+<%= @srcformfields[1] %>
 
   <br>
 
-<p><h6> What is your AFX Team?: </h6></p>
-  <p>If you are on AFX Competitive Team and a Project/Training team, choose one and we will match the records. Directors, please choose the team you are directing.
-  </p>
+<%= @srcformfields[2] %>
 
   <%= f.text_field :name, required: true, placeholder: "FIRST AND LAST NAME" %><br>
-  <%= f.text_field :email, required: true, placeholder: "EMAIL", pattern: " ^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" %><br>
-  <%= f.text_field :phone, required: true, placeholder: "PHONE: XXX-XXX-XXXX", pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}" %>
+  <%= f.text_field :email, required: true, placeholder: "EMAIL", pattern: " ^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$", title: "Please input a valid email" %><br>
+  <%= f.text_field :phone, required: true, placeholder: "PHONE: XXX-XXX-XXXX", pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}", title: "Please match the requested format XXX-XXX-XXXX" %>
 
   <!-- still needs to be styled and add label -->
   <%= f.collection_select(
@@ -38,112 +34,90 @@
     :id,
     :name,
     {:prompt => "Choose your AFX Team"},
-    {class: "audition-form"}) %>
+    {class: "audition-form", required: true}) %>
+    <input type="button" id="part_one_button" value="validate my information">
 
+<!-- PART ONE ENDS HERE -->
 
-<hr>
-  <p><h3><center><b><u>General Behavior and Conduct Policy</u></b></center></h3>
-    <p>AFX Dance is an organization that gives those without dance experience an opportunity to experience urban dance. The organization name, [A]spirations, [F]amily, e[X]perience reflects our philosophy of creating a family environment for dancers to build up their confidence and support to reach new heights. Each member in AFX is responsible for upholding these values and at the same time, creating and maintaining a safe and open environment for all. All AFX members are held accountable to all federal and state laws. Even when outside of the organization's dance spaces, AFX holds its members accountable to proper behavior and conduct at all times as a member's actions is a reflection upon the organization. Behaviors such as hate crimes, peer pressure, indecent exposure, and theft are all severely inappropriate conduct and will not be tolerated. Failure to comply will result in expulsion from the org. In cases of misconduct, AFX encourages its members to report violations of our Safety and Responsibility Rules to either the Executive Board and/or campus resources such as PATH to Care.
+<div id="partTwoForm" style="display: none">
+  <hr>
+    <%= @srcformfields[3] %>
+    <%= @srcformfields[4] %>
+    <%= @srcformfields[5] %>
+    <%= @srcformfields[6] %>
+      <br>
+
+  </p>
+    <p>
+      <%= f.check_box :a, required:false, class: "required_checkboxes"%>
+      <label><%=@srcformfields[7]%></label>
     </p>
-  <p><h3><center><b><u>Harassment</u></b></center></h3>
-  <p>Providing a safe environment in AFX Dance is our top priority. AFX Dance has a zero-tolerance policy with regards to harassment. Harassment of any kind may result in a permanent expulsion of membership in AFX Dance. Harassment is governed by state laws, which vary by state, but is generally defined as a course of conduct which annoys, threatens, intimidates, alarms, or puts a person in fear of their safety. Harassment is unwanted, unwelcomed and uninvited behavior that demeans, threatens or offends the recipient and results in a hostile environment for the recipient.
-<br><br>
-  Harassment includes the following categories of behavior:
-<br><br>
-  - Discriminatory Behavior: Discrimination refers to treating people differently, negatively, or adversely because of one or more of the following prohibited grounds of discrimination: race, color, ancestry, place of origin, political belief, religion, age, gender identity, sexual orientation, marital status, family status, physical or mental disability, documentation status, or pardoned criminal conviction.
-<br><br>
-  - Personal Harassment: Personal harassment includes objectionable conduct, comment, or display made on either a one-time or continuous basis that demeans, belittles, or causes personal humiliation or embarrassment on the part of the recipient. It may or may not be linked to discriminatory behavior.
-<br><br>
-  - Bullying: Bullying consists of behavior to attack and diminish another by subjecting the recipient to unjustified criticism and trivial fault-finding, humiliating the recipient (especially in front of others), and/or ignoring, overruling, isolating and excluding the recipient.
-<br><br>
-  For University of California policy on sexual violence and sexual harassment, please read through this document: <a href="https://policy.ucop.edu/doc/4000385/SVSH">https://policy.ucop.edu/doc/4000385/SVSH</a>. </p>
-    <br>
+    <p>
+      <%= f.check_box :b, required:false, class: "required_checkboxes"%>
+      <label><%= @srcformfields[8]%></label>
+    </p>
 
-</p>
-  <p>
-    <%= f.check_box :a, required:true, class: "required_checkboxes"%>
-    <label>I understand that AFX Dance is an organization that gives those without dance experience an opportunity to experience urban dance. The organization name, [A]spirations, [F]amily, e[X]perience reflects our philosophy of creating a family environment for dancers to build up their confidence and support to reach new heights.</label>
-  </p>
-  <p>
-    <%= f.check_box :b, required:true, class: "required_checkboxes"%>
-    <label>I understand that AFX is a non-discriminatory organization with a ZERO TOLERANCE POLICY with regards to harassment. Harassment of any kind may result in immediate and/or permanent removal from AFX Dance.</label>
-  </p>
+    <p>
+      <%= f.check_box :c, required:false, class: "required_checkboxes"%>
+      <label><%= @srcformfields[9]%></label>
+    </p>
 
   <p>
-    <%= f.check_box :c, required:true, class: "required_checkboxes"%>
-    <label>I will respect all gender identities and use preferred gender pronouns.</label>
-  </p>
-
-<p>
 
 
+  <hr>
+    <p>
+      <%=@srcformfields[10]%>
 
+      <%=@srcformfields[11]%>
 
+      <%=@srcformfields[12]%>
 
+      <%=@srcformfields[13]%>
 
-<hr>
-  <p><h6> CONTENT WARNING: Mention of sexual harassment and sexual violence </h6></p>
+      <%= @srcformfields[14]%>
+    </p>
 
-  <p><h3><center><b><u>Sexual Harassment and Sexual Violence</u></b></center></h3>
-
-<p>
-Sexual harassment refers to any conduct, comment, gesture, or contact of a sexual nature, whether on a one-time basis or a series of incidents, that might reasonably be expected to cause offense or humiliation. Creating an intimidating, hostile, or offensive environment through sexually inappropriate conduct is sexual harassment. Examples of behavior that can constitute sexual harassment include, but are not limited to: sexual assault, unwanted touching, patting or leering, inquiries or comments about a person’s sex life, gender-based insults or jokes causing embarrassment or humiliation, repeated unwanted social or sexual requests or invitations, inappropriate or unwelcome focus/comments on a person’s physical attributes or appearance.
-
-Sexual violence is a physical sexual act engaged without consent. Examples of sexual violence include sexual assault, rape, battery, sexual coercion, dating violence, and stalking.
-
-AFX Dance has a zero-tolerance policy with regards to sexual harassment and sexual violence. A dancer's membership will be at risk for expulsion/suspension in cases where there is doubt. If there is a report, a dancer's membership will be immediately suspended until the case is resolved. Immediate expulsion and blacklisting from the organization will occur if the accused party is found guilty in such cases.
-
-AFX encourages its members to respect a survivor's wishes at all times in cases such as these.
-</p>
-
-  <p><h3><center><b><u>Consent Clause</u></b></center></h3>
-
-
-<p>Consent is informed and an affirmative, unambiguous, and conscious decision by each participant to engage in mutually agreed-upon activity. The activity may be physical, verbal, or otherwise. Consent is voluntary, must be ongoing, and can be revoked at any point in time. Consent cannot be given when a person is incapacitated, and the ability to give proper consent may be influenced by substance use and power dynamics.
-</p>
   <p>
-    <%= f.check_box :d, required: true, class: "required_checkboxes" %>
-    <label>I understand that consent is revocable, verbal, voluntary, conscious, and enthusiastic.</label>
-
+    <%= f.check_box :d, required: false, class: "required_checkboxes" %>
+    <label><%=@srcformfields[15]%></label>
 
   </p>
   <p>
-    <%= f.check_box :e, required: true, class: "required_checkboxes" %>
-    <label>I understand that AFX encourages its members to report violations of our Safety and Responsibility Rules to either the Executive Board and/or campus resources.</label>
+    <%= f.check_box :e, required: false, class: "required_checkboxes" %>
+     <label><%=@srcformfields[16]%></label>
   </p>
 
   <p>
-    <%= f.check_box :f, required: true, class: "required_checkboxes" %>
-    <label>I understand that I will cooperate to the fullest extent with the Executive Board and other members of AFX Dance to maintain a safe environment to fulfill the goals of AFX Dance.</label>
+    <%= f.check_box :f, required: false, class: "required_checkboxes" %>
+     <label><%=@srcformfields[17]%></label>
   </p>
 
 <p>
-    <%= f.check_box :g, required: true, class: "required_checkboxes" %>
-    <label>I understand and agree to follow all of the safety and responsibility rules set forth in this contract. I acknowledge that I must obey these rules in order to hold active membership in AFX Dance to ensure my own safety, and that of other members.
-</label>
+    <%= f.check_box :g, required: false, class: "required_checkboxes" %>
+     <label><%=@srcformfields[18]%></label>
   </p>
   <p>
-    <%= f.check_box :h, required: true, class: "required_checkboxes" %>
-    <label>I am aware that any violation of this contract or misbehavior on my part that results in unsafe conduct at events and practices affiliated with AFX Dance or events in the presence of members of the AFX community will result in prohibition of attending future AFX events and revocation of my membership immediately and/or permanently.</label>
+    <%= f.check_box :h, required: false, class: "required_checkboxes" %>
+     <label><%=@srcformfields[19]%></label>
   </p>
 
   <p>
-    <%= f.check_box :i, required: true, class: "required_checkboxes" %>
-    <label>I acknowledge that I have read this Safety and Responsibility Contract and that I understand the words and language in it. All potential risks and effects of the Safety and Responsibility Contract have been answered to my satisfaction.</label>
+    <%= f.check_box :i, required: false, class: "required_checkboxes" %>
+     <label><%=@srcformfields[20]%></label>
   </p>
 
 <hr>
 
 
-
-<p><h3>Parent / Guardian Release</h3></p>
+<%=@srcformfields[21]%>
     <p>
       <%= f.radio_button :pg_release, 'parent' %>
-      <label>I understand and agree that if I am signing this Safety and Responsibility Agreement on behalf of my minor child, that I will be giving up the same rights for said minor as I would be giving up if I signed this document on my own behalf.</label>
+      <label><%=@srcformfields[22]%></label>
   </p>
   <p>
     <%= f.radio_button :pg_release, 'myself' %>
-    <label>I am at least 18 years of age and am signing this form for myself.</label>
+    <label><%=@srcformfields[23]%></label>
   </p>
   <p>
     <%= f.radio_button :pg_release, 'other'  %> Other: <%= f.text_field :pg_other, :style => "display: inline-block; width: 51%" %>
@@ -153,50 +127,77 @@ AFX encourages its members to respect a survivor's wishes at all times in cases 
 
   <%= f.text_area :reason, required: false, placeholder: "Other:" %> <!-- gna need to change the required -->
 
-<hr>
-<div id="parent">
-<p><h3>[IF YOU ARE YOUNGER THAN 18 YEARS OF AGE] </h3></p>
+  <hr>
+  <div id="parent">
+  <p><h3>[IF YOU ARE YOUNGER THAN 18 YEARS OF AGE] </h3></p>
 
 
 
-  <%= f.text_field :p_name, placeholder: "Your Full Legal Name" %><br>
-  <%= f.text_field :p_sign, placeholder: "Parent / Guardian Signature (full legal name)" %><br>
-  <%= f.text_field :p_date, placeholder: "Date of signature: MM/DD/YYYY", pattern: "^[0-3][0-9]/[0-3][0-9]/(?:[0-9][0-9])?[0-9][0-9]$" %><br>
+    <%= f.text_field :p_name, placeholder: "Your Full Legal Name" %><br>
+    <%= f.text_field :p_sign, placeholder: "Parent / Guardian Signature (full legal name)" %><br>
+    <%= f.text_field :p_date, placeholder: "Date of signature: MM/DD/YYYY", pattern: "^[0-3][0-9]/[0-3][0-9]/(?:[0-9][0-9])?[0-9][0-9]$" %><br>
+
+    <p>
+      <%= f.check_box :p_checkbox %>
+      <label><%=@srcformfields[24]%></label>
+    </p>
+  <hr>
+  </div>
+  <div id="myself">
+  <p><h3>[IF YOU ARE 18 YEARS OF AGE OR OLDER]</h3></p>
+
+    <%= f.text_field :m_sign, placeholder: "Your Signature (full legal name)" %><br>
+    <%= f.text_field :m_date, placeholder: "Date of signature: MM/DD/YYYY", pattern: "^[0-3][0-9]/[0-3][0-9]/(?:[0-9][0-9])?[0-9][0-9]$" %><br>
+
+    <p>
+      <%= f.check_box :m_checkbox %>
+      <label><%=@srcformfields[25]%></label>
+    </p>
+  <hr>
+  </div>
 
   <p>
-    <%= f.check_box :p_checkbox %>
-    <label>I understand that checking this box constitutes a legal signature confirming that I acknowledge the above Safety and Responsibility Agreement for AFX Dance and am liable to the rules mutually agreed upon between me and the organization.
-    </label>
+    <%=@srcformfields[26]%>
   </p>
-<hr>
-</div>
-<div id="myself">
-<p><h3>[IF YOU ARE 18 YEARS OF AGE OR OLDER]</h3></p>
-
-  <%= f.text_field :m_sign, placeholder: "Your Signature (full legal name)" %><br>
-  <%= f.text_field :m_date, placeholder: "Date of signature: MM/DD/YYYY", pattern: "^[0-3][0-9]/[0-3][0-9]/(?:[0-9][0-9])?[0-9][0-9]$" %><br>
-
-  <p>
-    <%= f.check_box :m_checkbox %>
-    <label>I understand that checking this box constitutes a legal signature confirming that I acknowledge the above Safety and Responsibility Agreement for AFX Dance and am liable to the rules mutually agreed upon between me and the organization.
-    </label>
-  </p>
-
-  <p>
-    Thank you for submitting the AFX Dance Fall 2019 Member Safety and Responsibility Contract. Your response has been recorded. If you have further questions, please email afxdance@gmail.com.
-
   <br>
-
-
-
 
 
 
   <div class = "submit">
     <%= f.submit "Submit Safety and Responsibility Contract", class: "availability-form-submit" %>
   </div>
+</div>
 
   <script>
+      async function dancerIsValid() {
+          <!-- how to make a query to DB?, also display error -->
+          name = $('input[name="name"]').val();
+          email = $('input[name="email"]').val();
+          phone = $('input[name="phone"]').val();
+
+          var formData = new FormData();
+          formData.append('name', name);
+          formData.append('email', email);
+          formData.append('phone', phone);
+
+          var init = {
+              method: 'POST',
+              body: formData,
+              // CSRF token must be verified for post requests. https://stackoverflow.com/questions/27098239/post-422-unprocessable-entity-in-rails-due-to-the-routes-or-the-controller
+              headers: {
+                  'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+              }
+          };
+          //https://stackoverflow.com/questions/54164874/javascript-use-fetch-on-localhost-with-url-parameters
+          const url = new URL("<%= ENV["URL"] %>" + "/dancer_src");
+          var myRequest = new Request(url, init); //need to pass in global path to the request
+
+          return await fetch(myRequest)
+              .then(response => {
+                  return response.json();
+              })
+      }
+
   function checkboxesAreValid() {
     nchecked = $('.required_checkboxes:checked').length;
     radiocheck = $('input[name="pg_release"]:checked').val();
@@ -238,15 +239,19 @@ AFX encourages its members to respect a survivor's wishes at all times in cases 
        }
        break;
       default:
-
     }
-    console.log("nchecked: " + String(nchecked))
-    console.log("isvalid " + String(isvalid))
-    console.log("infocheck " + String(infocheck))
-
-    console.log(nchecked == 9 && isvalid && infocheck)
-
     return nchecked == 9 && isvalid && infocheck
+  }
+
+  function dancerFieldsAreValid() {
+    <!-- how to make a query to DB?, also display error -->
+    re = new RegExp("[0-9]{3}-[0-9]{3}-[0-9]{4}")
+    if ($('input[name="name"]').val() == null) {
+    }
+    if ($('input[name="email"]').val() == null) {
+    }
+    if (re.test($('input[name="phone"]').val())) {
+    } //alert ('') or somehow refresh the page & display new errors.
   }
 
   $('input[type=radio]').change(function() {
@@ -258,9 +263,41 @@ AFX encourages its members to respect a survivor's wishes at all times in cases 
   });
   // TODO What to show for other option
 
+  $('#src_form').submit(function() { //src_form.submit, function()
+     var valid = checkboxesAreValid();
+     if (!valid) {
+         alert("Please make sure to check all the checkboxes");
+      }
+     return valid;
+  });
+//Dancer.srcs is null
+  //searches the src_form form for the button that is clicked.
+  $('#src_form').on('click', '#part_one_button', function() {
+    dancer_exists = null;
+    src_exists = null;
+    // https://flaviocopes.com/how-to-return-result-asynchronous-function/
+    dancerIsValid().then(async (data) => {
+      json_response = await data;
+      dancer_exists = json_response['dancer_exists'];
+      src_exists = json_response['src_exists']
 
-  $('#src_form').submit(function() {
-     return checkboxesAreValid()
+      if (dancer_exists) {
+        // The 'required' fields of all checkboxes in the second part of the form are set to be false first.
+        // After submitting first part of the form, to get the form validator to pop up, the 'required' fields
+        // are toggled to be true: https://stackoverflow.com/questions/7168645/invalid-form-control-only-in-google-chrome/7264966#7264966
+        if (src_exists) {
+          alert("you've already submitted an SRC form! only submit again if you want to update information!")
+        }
+        $('.required_checkboxes').toggleClass('required', true);
+        $('#partTwoForm').toggle();
+        $('#part_one_button').hide();
+
+      } else {
+        alert("please check your information, you don't exist in our database!")
+        //checkboxesAreValid();
+        //dancerFieldsAreValid(); //how to validate fields after submit.
+      }
+    });
   });
 
   </script>

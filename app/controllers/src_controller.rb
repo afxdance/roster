@@ -1,5 +1,6 @@
 class SrcController < ApplicationController
   def index
+    @srcformfields = SrcFormField.find_src_form_fields
     @src = Src.new
     # sees if redirect to index from submit happened
     if flash[:redirect] == "true"
@@ -43,21 +44,22 @@ class SrcController < ApplicationController
     else
       @other = params["pg_other"]
     end
-    dancer = Dancer.where(email: params[:email])
+    name = params["name"]
+    email = params["email"]
+    phone = params["phone"]
+
+    dancer = Dancer.where(name: name, email: email, phone: phone)
     if dancer.empty?
       # sets redirect to true when dancer doesn't exist
       flash[:redirect] = "true"
       redirect_to "/src"
     else
-      if dancer[0].srcs.length != 0
-        Src.delete(Src.where(dancer_id: dancer[0].id))
-      end
       @src = Src.new(c1: @c1, c2: @c2, c3: @c3, c4: @c4, c5: @c5, c6: @c6, c7: @c7, c8: @c8, c9: @c9, pg_release: @pg_release, other: @other, full_name: @full_name, signature: @signature, date: @date, acknowledgment: @acknowledgment)
       # save stuff to src
+      dancer.first&.src&.destroy
       @src.dancer = dancer.first
       success = @src.save
       puts success
-      # dancer.first.srcs will give a collection of srcs, should only have one but can be multiple bc of has_many
       redirect_to "/src/confirm" if success
     end
   end

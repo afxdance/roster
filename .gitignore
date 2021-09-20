@@ -28,3 +28,9 @@
 # Ignore files that are commonly globally gitignored
 .DS_Store
 ._*
+
+# Ignore gmail configurations for security
+/config/local_env.yml
+
+# Ignore idea configurations
+.idea

@@ -1,4 +1,6 @@
 ActiveAdmin.register Dancer do
+  preserve_default_filters!
+  filter :id
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
@@ -13,6 +15,10 @@ ActiveAdmin.register Dancer do
   # end
 
   # Dancer.table_exists? &&
+
+  # If the current user can't view the dancers (just finance for now), don't let the dancers page show up in the top bar
+  menu if: proc { current_user.can_view_dancers? }
+  before_action :role_check
 
   # Skip during rake db:load:schema, because Dancer.columns isn't available yet
   if Dancer.table_exists?
@@ -40,6 +46,10 @@ ActiveAdmin.register Dancer do
   end
 
   controller do
+    def role_check
+      redirect_to "/admin", alert: "You can't view the dancers page!!! >:( uwu" unless current_user.can_view_dancers?
+    end
+
     def action_methods
       if current_user.can_modify_dancer_fields?
         super
@@ -131,9 +141,12 @@ ActiveAdmin.register Dancer do
     # Should eventually change the buttons below to support the possiblility of users with multiple teams
     column :add_dancer do |dancer|
       # If the dancer is already on a team, hide the "Add to team" button.
-      next if dancer.teams.any?
-
+      cur_teams = dancer.teams
       current_user.teams.map do |team|
+        if cur_teams.include? team
+          next
+        end
+
         content_tag :div do
           link_to("/admin/dancers/#{dancer.id}/add_to_team?" + { team_id: team.id }.to_query, method: :post) do
             "+ #{team.name}"
@@ -152,8 +165,8 @@ ActiveAdmin.register Dancer do
       end.join.html_safe
     end
 
-    column :srcs do |dancer|
-      if dancer.srcs.empty?
+    column :src do |dancer|
+      if dancer.src.nil?
         columns("INCOMPLETE")
       else
         columns("COMPLETE")
@@ -165,7 +178,7 @@ ActiveAdmin.register Dancer do
 
   preserve_default_filters!
 
-  filter :srcs_id_not_null, label: "Src present?", as: :boolean
+  filter :src_id_not_null, label: "Src present?", as: :boolean
 
   current_user_teams_lambda = lambda do
     {
@@ -193,7 +206,7 @@ ActiveAdmin.register Dancer do
     end
   end
 
-  collection_action :randomize, method: :get do
+  collection_action :create_training_teams, method: :get do
     if !current_user.can_modify_all_teams?
       flash[:alert] = "You do not have sufficient permissions to do this!"
     elsif Team.unlocked_teams.any?
@@ -204,21 +217,43 @@ ActiveAdmin.register Dancer do
       # 2. Apply all the changes all at once.
       # The benefit: if this code errors, we won't have a partially randomized set of dancers.
       dancers_with_no_teams = Dancer.dancers_with_no_teams.shuffle
+      dancers_with_no_teams_count = dancers_with_no_teams.count
+      training_teams = Team.training_teams
 
-      DancerTeam.transaction do
-        for dancer in dancers_with_no_teams
-          team = Team.training_teams_with_least_number_of_dancers.first
+      team_ids = []
+      created_teams = []
+      dancers_started_with = []
 
-          # Sanity check -- confirm that team does not have the dancer
-          raise if team.dancers.include? dancer
+      for team in training_teams
+        dancers_on_team = team.dancers
+        team_ids.push(team.id)
+        created_teams.push([])
+        dancers_started_with.push(dancers_on_team.length)
+      end
 
-          # This is like team.dancers.push(dancer)),
-          # but we're also storing a reason with the association.
-          # This makes so that we can see who was picked and who was randomized.
-          DancerTeam.create!(team: team, dancer: dancer, reason: "Randomization")
+      max_starting_number_of_dancers = dancers_started_with.max
+
+      # Ensures that all teams start out with the same number of dancers
+      team_ids.each_with_index do |_, index|
+        while dancers_started_with[index] + created_teams[index].length < max_starting_number_of_dancers
+          dancer_to_be_added = dancers_with_no_teams.pop
+          created_teams[index].push(dancer_to_be_added.id)
         end
       end
-      flash[:notice] = "#{dancers_with_no_teams.count} dancers have been randomized."
+
+      # Takes turns adding dancers to teams until the no more dancers left
+      team_index = 0
+      until dancers_with_no_teams.empty?
+        dancer_to_be_added = dancers_with_no_teams.pop
+        created_teams[team_index].push(dancer_to_be_added.id)
+        team_index = (team_index + 1) % team_ids.length
+      end
+
+      team_ids.each_with_index do |team_id, index|
+        Team.find(team_id).add_dancers(created_teams[index])
+      end
+
+      flash[:notice] = "#{dancers_with_no_teams_count} dancers have been randomized."
     end
     redirect_to "/admin/dancers"
   end
@@ -240,7 +275,7 @@ ActiveAdmin.register Dancer do
     link_to "Next Audition Number", "/admin/dancers/next_audition_number"
   end
 
-  action_item :randomize, only: :index do
-    link_to "Randomize", "/admin/dancers/randomize", data: { confirm: "Are you sure?" }
+  action_item :create_training_teams_button, only: :index do
+    link_to "Create Training Teams", "/admin/dancers/create_training_teams", data: { confirm: "Are you sure?" }
   end
 end
