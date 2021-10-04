@@ -1,0 +1,15 @@
+<div>
+  <ul>
+    <% for dancer in @dancers %>
+      <li><%= dancer.name + " | " + dancer.email + " | " + dancer.phone %></li>
+    <% end %>
+  </ul>
+  <%= button_to "Add Random Dancer", action: "new" %>
+  <%= button_to "Remove All", action: "remove" %>
+  <%= form_for :dancer do |f| %>
+    Enter Name: <%= f.text_field :name %><br />
+    Enter Email: <%= f.text_field :email %><br />
+    Enter Phone: <%= f.text_field :phone%><br />
+    <%= f.submit "Submit" %>
+  <% end %>
+</div>

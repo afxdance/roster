@@ -26,4 +26,9 @@ Rails.application.routes.draw do
   post "/answer/new", to: "answer#new"
   post "/answer/remove", to: "answer#remove"
   post "/answer", to: "answer#save"
+
+  get "/atutorial", to: "atutorial#index"
+  post "/atutorial/new", to: "atutorial#new"
+  post "/atutorial/remove", to: "atutorial#remove"
+  post "/atutorial", to: "atutorial#create"
 end
