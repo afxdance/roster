@@ -122,7 +122,7 @@
         :name
       ) do |option| %>
         <div><label>
-          <%= option.check_box(class: "availability-checkbox availability-checkbox-drop") %> Yes, I would like to withdraw from AFX Spring 2020 Project/Training. I acknowledge that my decision is final and that once I submit the form, I will no longer be able to join any team practice or perform in any AFX set this semester (NO EXCEPTIONS). If I violate these conditions and do not pay AFX dues, I will be charged at any time.
+          <%= option.check_box(class: "availability-checkbox availability-checkbox-drop") %> Yes, I would like to withdraw from AFX Fall 2021 Project/Training. I acknowledge that my decision is final and that once I submit the form, I will no longer be able to join any team practice or perform in any AFX set this semester (NO EXCEPTIONS). If I violate these conditions and do not pay AFX dues, I will be charged at any time.
         </label></div>
       <% end %>
 
@@ -174,8 +174,9 @@
 
               // If someone on a project team puts down a project team time and a training team time,
               // then that's okay.
-              if (nchecked.project == 0 && nchecked.training == 1)
-                  return false;
+              // Fa21: Commented below code out because there are only 2 training teams so we want to allow dancers to request only 1 team
+              // if (nchecked.project == 0 && nchecked.training == 1)
+              //     return false;
 
               return true;
           }
