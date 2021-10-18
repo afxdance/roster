@@ -39,9 +39,19 @@ class Dancer < ApplicationRecord
     "no" => "Has not paid",
     "other" => "Other",
   }.freeze
+
+  require "redis"
+  redis = Redis.new
+  redis.set("camp_interest", false)
+
+  # puts 1
+  # puts 0
+  # puts 0 && true
+
+
   SHOW_CAMP_INTEREST = false
-  SHOW_EXP_INTEREST = false
-  SHOW_TECH_INTEREST = false
+  SHOW_EXP_INTEREST = true
+  SHOW_TECH_INTEREST = true
   SHOW_REACH_INTEREST = false
 
   REQUIRED_FIELDS = [
