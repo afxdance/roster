@@ -1,5 +1,5 @@
 source "https://rubygems.org"
-ruby "2.5.0"
+ruby "2.7.2"
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -96,11 +96,11 @@ group :development do
   # Place all added gems below #
   ##############################
 
-  gem "debase", require: false
   gem "haml_lint", require: false
   gem "mdl", require: false
   gem "rails_db"
   gem "ruby-debug-ide", require: false
+  gem 'activeadmin_addons'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

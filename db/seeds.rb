@@ -37,12 +37,6 @@ dancer_extra_fields = {
   camp_interest: "not important rn",
   reach_workshop_interest: "not important rn",
   reach_news_interest: "not important rn",
-  has_paid_dues: "no",
-  has_bought_tickets: "no",
-  dues_changed_at: Time.new(2000),
-  tickets_changed_at: Time.new(2000),
-  dues_approved_by: "none",
-  tickets_approved_by: "none",
 }
 # Dancer.create!(name: "Peter Le",
 #                email: "peter@peter.peter",

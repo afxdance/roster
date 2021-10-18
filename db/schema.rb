@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210426025618) do
+ActiveRecord::Schema.define(version: 20211004033600) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -40,12 +40,6 @@ ActiveRecord::Schema.define(version: 20210426025618) do
     t.datetime "updated_at", null: false
     t.string "reach_workshop_interest"
     t.string "reach_news_interest"
-    t.string "has_paid_dues"
-    t.string "has_bought_tickets"
-    t.datetime "dues_changed_at"
-    t.datetime "tickets_changed_at"
-    t.string "dues_approved_by"
-    t.string "tickets_approved_by"
   end
 
   create_table "dancers_teams", id: false, force: :cascade do |t|
@@ -59,6 +53,17 @@ ActiveRecord::Schema.define(version: 20210426025618) do
   end
 
   create_table "director_users", force: :cascade do |t|
+  end
+
+  create_table "finances", force: :cascade do |t|
+    t.boolean "dues"
+    t.boolean "tickets"
+    t.text "dues_approved"
+    t.text "tickets_approved"
+    t.integer "dancer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dancer_id"], name: "index_finances_on_dancer_id"
   end
 
   create_table "form_fields", force: :cascade do |t|

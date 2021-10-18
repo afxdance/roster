@@ -43,8 +43,6 @@ class Dancer < ApplicationRecord
   SHOW_EXP_INTEREST = false
   SHOW_TECH_INTEREST = false
   SHOW_REACH_INTEREST = false
-  SHOW_DUES_PAID = false
-  SHOW_TICKETS_BOUGHT = false
 
   REQUIRED_FIELDS = [
     :name,
@@ -58,8 +56,6 @@ class Dancer < ApplicationRecord
     :camp_interest,
     :reach_workshop_interest,
     :reach_news_interest,
-    :has_paid_dues,
-    :has_bought_tickets,
   ].freeze
   TABLE_VISIBLE_FIELDS = [
     :name,
@@ -72,8 +68,6 @@ class Dancer < ApplicationRecord
     SHOW_TECH_INTEREST ? :tech_interest : nil,
     SHOW_REACH_INTEREST ? :reach_workshop_interest : nil,
     SHOW_REACH_INTEREST ? :reach_news_interest : nil,
-    SHOW_DUES_PAID ? :has_paid_dues : nil,
-    SHOW_TICKETS_BOUGHT ? :has_bought_tickets : nil,
   ].compact.freeze
   SENSITIVE_FIELDS = [
     :gender,
@@ -82,9 +76,8 @@ class Dancer < ApplicationRecord
   has_and_belongs_to_many :teams
   has_many :team_switch_requests
   has_one :src
+  has_one :finance
 
-  attribute :has_paid_dues, :string, default: "no"
-  attribute :has_bought_tickets, :string, default: "no"
 
   for column in REQUIRED_FIELDS
     validates column, length: { minimum: 1 }
