@@ -81,7 +81,7 @@ class Dancer < ApplicationRecord
 
   has_and_belongs_to_many :teams
   has_many :team_switch_requests
-  has_one :src
+  #has_one :src
 
   attribute :has_paid_dues, :string, default: "no"
   attribute :has_bought_tickets, :string, default: "no"
