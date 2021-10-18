@@ -40,18 +40,17 @@ class Dancer < ApplicationRecord
     "other" => "Other",
   }.freeze
 
-  require "redis"
-  redis = Redis.new
-  redis.set("camp_interest", false)
+  puts "we are inside dancer class"
 
-  # puts 1
-  # puts 0
-  # puts 0 && true
-
+  #redis = Redis.new
+  REDIS.set("camp_interest", false)
+  REDIS.set("exp_interest", false)
+  REDIS.set("tech_interest", false)
+  puts REDIS.get("camp_interest")
 
   SHOW_CAMP_INTEREST = false
-  SHOW_EXP_INTEREST = true
-  SHOW_TECH_INTEREST = true
+  SHOW_EXP_INTEREST = false
+  SHOW_TECH_INTEREST = false
   SHOW_REACH_INTEREST = false
 
   REQUIRED_FIELDS = [
