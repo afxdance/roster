@@ -1,19 +1,34 @@
 class Team < ApplicationRecord
   has_and_belongs_to_many :users
   has_and_belongs_to_many :dancers
-  has_one :team_preference
-
-  validate :practice_time_location_length_check
-
-  def practice_time_location_length_check
-    time = practice_time.split(",")
-    loc = practice_location.split(",")
-    errors.add(:practice_location, format("practice_time(%<time_len>d) must match practice_location(%<loc_len>d) length", time_len: time.length, loc_len: loc.length)) if time.length != loc.length
-  end
 
   PROJECT = "Project".freeze
   TRAINING = "Training".freeze
   DROP = "Drop".freeze
+
+  def get_directors
+    directors = []
+    self.user_ids.each do |user_id|
+      #if role is director
+      user = User.where(Id: user_id).first #.first['username']
+      if user['role'] == 'director'
+        directors.push(user['director_name']) #change to user name when migrated
+      end
+      #puts "HELOOOOOO"
+      #puts directors
+    end
+    return directors
+  end
+
+  def concat_time_and_loc
+    result = []
+    prac_time = practice_time.split(",")
+    loc = practice_location.split(",")
+    prac_time.each_with_index do |t, i|
+      result.append([t, loc[i]])
+    end
+    result
+  end
 
   def practice_time_sort_string
     practice_time
@@ -102,10 +117,13 @@ class Team < ApplicationRecord
   def add_dancers(dancer_ids)
     added = []
     already_in_this_team = []
+    already_in_another_team = []
 
     Dancer.find(dancer_ids).each do |dancer|
       if dancer.teams.include? self
         already_in_this_team << dancer
+      elsif dancer.teams.any?
+        already_in_another_team << dancer
       else
         added << dancer
       end
@@ -117,6 +135,7 @@ class Team < ApplicationRecord
     return {
       added: added,
       already_in_this_team: already_in_this_team,
+      already_in_another_team: already_in_another_team,
     }
   end
 
@@ -139,31 +158,5 @@ class Team < ApplicationRecord
       removed: removed,
       not_in_this_team: not_in_this_team,
     }
-  end
-
-  def filter_directors
-    directors = []
-    users.each do |user|
-      if user.role == "admin"
-        next
-      end
-
-      if user.name.nil?
-        directors.push(user.username)
-      else
-        directors.push(user.name) # change to user name when migrated
-      end
-    end
-    directors
-  end
-
-  def concat_time_and_loc
-    result = []
-    prac_time = practice_time.split(",")
-    loc = practice_location.split(",")
-    prac_time.each_with_index do |t, i|
-      result.append([t, loc[i]])
-    end
-    result
   end
 end

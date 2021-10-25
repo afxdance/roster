@@ -5,7 +5,7 @@
   </head>
   <body>
     <p>Hello <%= @dancer.name %>,</p>
-    <p>Your request to switch teams for AFX <%= @year %> has been successfully processed.</p>
+    <p>Your request to switch teams for AFX <%= ENV["YEAR"] %> has been successfully processed.</p>
     <p>You have been placed onto <%= @new_team.name %>, which has practices on: </p>
     <ul>
       <% @new_team.concat_time_and_loc.each do |val| %>

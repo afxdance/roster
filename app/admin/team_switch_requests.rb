@@ -66,6 +66,11 @@ ActiveAdmin.register TeamSwitchRequest do
     process_team_switch_request_into_team(team_switch_request_id, team_id)
   end
 
+  member_action :reject, method: :get do
+    team_switch_request_id = params[:id]
+    send_rejection_email(team_switch_request_id)
+  end
+
   controller do
     # checks if user can view the team switch requests page
     def role_check
@@ -82,6 +87,54 @@ ActiveAdmin.register TeamSwitchRequest do
 
     def back_url
       request.referrer
+    end
+
+    def send_rejection_email(team_switch_request_id)
+      # Is the request valid?
+      team_switch_request = TeamSwitchRequest.find(team_switch_request_id)
+      if team_switch_request.nil?
+        redirect_to :back, alert: "Team switch #{team_switch_request_id} does not exist."
+        return
+      end
+      dancer = team_switch_request.dancer
+      # Does the dancer exist?
+      if dancer.nil?
+        redirect_to :back, alert: "Team switch request not attached to a dancer."
+        return
+      end
+
+      # check the status of the request
+      if !team_switch_request.status.blank?
+        redirect_to :back, alert: "Team switch request id #{team_switch_request_id} for dancer #{dancer.name} has been fulfilled already." and return
+      end
+
+      # check the rejection reason field is null
+      if team_switch_request.rejection_reason.nil?
+        redirect_to :back, alert: "Team switch request id #{team_switch_request_id} for dancer #{dancer.name} has an empty rejection reason. Fill out the rejection reason by editing the team switch request and re-click the 'Reject' button." and return
+      end
+
+      # Else send rejection email
+      # Send rejection email
+      begin
+        UserMailer.reject_team_switch_email(dancer, team_switch_request.rejection_reason).deliver_now
+      rescue Net::SMTPAuthenticationError,
+        Net::SMTPServerBusy,
+        Net::SMTPSyntaxError,
+        Net::SMTPFatalError,
+        Net::SMTPUnknownError,
+        Errno::ECONNREFUSED => e
+        # do something with the messages in exception object e
+            flash[:error] = "Email not sent, please manually email dancer #{dancer.name} at email #{dancer.email} with rejection reason #{team_switch_request.rejection_reason}."
+      end
+
+      # Set approved time, and status of the request
+      team_switch_request.update(
+        approved_at: Time.now,
+        status: "Rejected",
+      )
+      # Due to Configuration over Convention, rails looks for the "reject" view. Must redirect back to the index and alert
+      redirect_to :back, notice: "Team switch request id #{team_switch_request_id} for dancer #{dancer.name} has been successfully rejected." and return
+
     end
 
     def process_team_switch_request_into_team(team_switch_request_id, team_id)
@@ -136,6 +189,11 @@ ActiveAdmin.register TeamSwitchRequest do
         return
       end
 
+      # check the status of the request
+      if !team_switch_request.status.blank?
+        redirect_to :back, alert: "Team switch request id #{team_switch_request_id} for dancer #{dancer.name} has been fulfilled already." and return
+      end
+
       # 3. Do the following in a transaction so that it either all succeeds or all fails
       DancerTeam.transaction do
         # 3a. Remove the dancer from the old team
@@ -154,7 +212,17 @@ ActiveAdmin.register TeamSwitchRequest do
           status: "Accepted",
         )
 
-        UserMailer.success_team_switch_email(dancer, old_team.name, new_team).deliver_now
+        begin
+          UserMailer.success_team_switch_email(dancer, old_team.name, new_team).deliver_now
+        rescue Net::SMTPAuthenticationError,
+          Net::SMTPServerBusy,
+          Net::SMTPSyntaxError,
+          Net::SMTPFatalError,
+          Net::SMTPUnknownError,
+          Errno::ECONNREFUSED => e
+          # do something with the messages in exception object e
+              flash[:error] = "Email not sent, please manually email dancer #{dancer.name} at email #{dancer.email}. "
+        end
 
         redirect_to :back, notice: "#{dancer.name} has been switched into #{new_team.name}."
       end
@@ -188,6 +256,8 @@ ActiveAdmin.register TeamSwitchRequest do
           concat content_tag(:div,
                              "[#{link}] #{team.name} (#{team_size} G:#{team_same_gender.to_i}% Y:#{team_same_year.to_i}%)".html_safe)
         end
+      reject = link_to("/admin/team_switch_requests/#{team_switch_request.id}/reject", method: :get) do "Reject" end
+        concat content_tag(:div, "#{reject}".html_safe)
       end
     end
 

@@ -140,7 +140,7 @@ ActiveRecord::Schema.define(version: 20210426025618) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "practice_location"
+    t.string "practice_location", default: "{}"
     t.index ["user_id"], name: "index_teams_on_user_id"
   end
 
@@ -167,7 +167,7 @@ ActiveRecord::Schema.define(version: 20210426025618) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "role", null: false
-    t.string "name"
+    t.string "director_name"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
