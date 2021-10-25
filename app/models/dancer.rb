@@ -77,6 +77,7 @@ class Dancer < ApplicationRecord
   has_many :team_switch_requests
   has_one :src
   has_one :finance
+  before_create :build_finance
 
 
   for column in REQUIRED_FIELDS
