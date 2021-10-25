@@ -167,15 +167,13 @@ ActiveAdmin.register Dancer do
       end.join.html_safe
     end
 
-=begin
-    column :src do |dancer|
-      if dancer.src.nil?
-        columns("INCOMPLETE")
+    column :src_submitted do |dancer|
+      if dancer.src_submitted?
+        columns("True")
       else
-        columns("COMPLETE")
+        columns("False")
       end
     end
-=end
 
     actions
   end

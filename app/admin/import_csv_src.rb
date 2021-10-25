@@ -6,34 +6,19 @@ ActiveAdmin.register_page "Import SRC from CSV" do
     csv = CSV.read(params[:csv][:uploaded_file].tempfile, headers: true, encoding: "bom|utf-8")
     errors = []
     ActiveRecord::Base.transaction do
-      puts "#{csv}"
       csv.each do |row|
-        hash_strings = row.to_hash
-        hash_symbols = {}
-        for key in hash_strings.keys
-          hash_symbols[key.tr(" ", "_").downcase.to_sym] = hash_strings
-          puts hash_symbols
-          [key]
-          #isolate the email (1st column entry)
-          #for every email
-          #   find the associated dancer
-          #   set boolean var to 'true' in Dancer model
+      email = row[0]
+      for dancer in Dancer.all  #@dancers = Dancer.all
+        if email == dancer.email
+          dancer.update(src_submitted: true)
         end
-        begin
-          #
-          #
-          #Dancer.create!(hash_symbols)
-          #
-          #
-        rescue ActiveRecord::RecordNotUnique
-          errors.push(hash_symbols)
-        end
+      end
       end
       if !errors.empty?
         redirect_to admin_import_src_from_csv_path, notice: "There are #{errors.length} invalid src : \n #{errors}"
         raise ActiveRecord::Rollback
       else
-        redirect_to admin_import_src_from_csv_path, notice: "Successfully imported src"
+        redirect_to admin_import_src_from_csv_path, notice: "Successfully imported src csv"
       end
     end
   end
