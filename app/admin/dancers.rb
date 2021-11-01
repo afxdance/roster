@@ -140,6 +140,14 @@ ActiveAdmin.register Dancer do
       end
     end
 
+    column :src_submitted do |dancer|
+      if dancer.src_submitted?
+        columns("True")
+      else
+        columns("False")
+      end
+    end
+
     # Should eventually change the buttons below to support the possiblility of users with multiple teams
     column :add_dancer do |dancer|
       # If the dancer is already on a team, hide the "Add to team" button.
@@ -165,14 +173,6 @@ ActiveAdmin.register Dancer do
           end
         end
       end.join.html_safe
-    end
-
-    column :src_submitted do |dancer|
-      if dancer.src_submitted?
-        columns("True")
-      else
-        columns("False")
-      end
     end
 
     actions

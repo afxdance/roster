@@ -85,6 +85,7 @@ class Dancer < ApplicationRecord
 
   attribute :has_paid_dues, :string, default: "no"
   attribute :has_bought_tickets, :string, default: "no"
+  attribute :src_submitted, :boolean, default: false
 
   for column in REQUIRED_FIELDS
     validates column, length: { minimum: 1 }
