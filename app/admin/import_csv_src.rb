@@ -9,9 +9,6 @@ ActiveAdmin.register_page "Import SRC from CSV" do
       csv.each do |row|
       email = row[0]
       for dancer in Dancer.all  #@dancers = Dancer.all
-        dancer.update(src_submitted: false)
-      end
-      for dancer in Dancer.all  #@dancers = Dancer.all
         if email == dancer.email
           dancer.update(src_submitted: true)
         end
