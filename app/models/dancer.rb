@@ -43,10 +43,16 @@ class Dancer < ApplicationRecord
   puts "we are inside dancer class"
 
   #redis = Redis.new
-  REDIS.set("camp_interest", false)
+  REDIS.set("camp_interest", true)
   REDIS.set("exp_interest", false)
   REDIS.set("tech_interest", false)
   puts REDIS.get("camp_interest")
+
+  TOGGLABLE_INTERESTS = [
+    "camp_interest",
+    "exp_interest",
+    "tech_interest",
+  ]
 
   SHOW_CAMP_INTEREST = false
   SHOW_EXP_INTEREST = false

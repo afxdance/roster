@@ -1,14 +1,29 @@
 # TODO this page is fucked
+# checkmark toggle for each option to toggle (False/True)
+# checkmark is set by default to whatever the setting currently is
+# button at the bottom called 'Update' that actually sends all updates at once to REDIS
 
 ActiveAdmin.register_page "Config" do
   menu label: "Config", parent: :dancers, if: proc { current_user.admin? }
+
+  page_action :update_preferences, method: :post do
+    camp_interest = params["camp_interest_cb"]
+    puts "Hello world"
+    puts camp_interest
+    puts params["exp_interest_cb"]
+    Dancer::TOGGLABLE_INTERESTS.each do |interest|
+      REDIS.set(interest, params.key?(interest + "_cb"))
+    end
+    # TODO for every interest in Dancer.INTERESTS
+    #   if params[] contains the corresponding key, redis.put('true'). otherwise put('false')
+  end
 
   page_action :create_project_teams, method: :post do
     team_size = params["team_size"].to_i
     result = TeamPreference.generate_project_teams(team_size)
 
     if !result[:errors].empty?
-      redirect_to admin_team_preferences_path(errors: result[:errors])
+      redirect_to admin_config_path(errors: result[:errors])
     else
       # clears out dancers_teams table
       DancerTeam.delete_all
@@ -25,7 +40,7 @@ ActiveAdmin.register_page "Config" do
         end
       end
 
-      redirect_to admin_team_preferences_path(teams: result[:teams], limbo: result[:limbo])
+      redirect_to admin_config_path(teams: result[:teams], limbo: result[:limbo])
     end
   end
 
@@ -38,7 +53,7 @@ ActiveAdmin.register_page "Config" do
       pref.update(initial_team: nil)
     end
 
-    redirect_to admin_team_preferences_path(delete_teams_message: "All teams have been cleared")
+    redirect_to admin_config_path(delete_teams_message: "All teams have been cleared")
   end
 
   content do
@@ -61,6 +76,6 @@ ActiveAdmin.register_page "Config" do
         end
       end
     end
-    render partial: "admin/team_preferences", locals: { disable_button: disable }
+    render partial: "admin/config", locals: { disable_button: disable }
   end
 end

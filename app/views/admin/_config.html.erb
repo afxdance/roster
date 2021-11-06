@@ -1,4 +1,4 @@
-; TODO this page is not yet personzlied to config
+<%# add checklist to toggle the fields (display all fields?) %>
 
 <style>
 .content-container {
@@ -15,8 +15,10 @@ form input {
 }
 </style>
 
+<%# need to replace @teams with some appropriate property defined in Dancers%>
 <%
   @teams = Team.project_teams
+  @interests = Dancer::TOGGLABLE_INTERESTS
   preferences = TeamPreference.all
   @team_submitted_preferences = Hash.new
 
@@ -29,94 +31,29 @@ form input {
   end
 %>
 
-<div class="content-container">
-  <table>
-    <tr>
-      <td>
-        Team
-      </td>
-      <td>
-        Preferences Submitted
-      </td>
-    </tr>
-    <% for team in @teams %>
-    <tr>
-      <td>
-        <%= team.name %>
-      </td>
-      <td>
-        <%= @team_submitted_preferences[team.id] %>
-      </td>
-    </tr>
-    <% end %>
-  </table>
-
-  <% if disable_button %>
-    <h3 style="color: #BD2100">Create Teams button is disabled because team rosters have changed since initial creation</h3>
-  <% end %>
-
-  <%= form_tag action: "create_project_teams", method: :post do %>
-    <p>Max Team Size<p>
-    <%= number_field_tag "team_size", nil, min: 1, step: 1, required: true %>
-    <%= submit_tag 'Create Project Teams', disabled: disable_button %>
-  <% end %>
-
-  <p><%= params[:errors] %></p>
-
-  <% if params[:teams] %>
-    <h2>Results:</h2>
-    <%
-      result_teams = params[:teams]
-      lengths = []
-      puts result_teams
-      for value in result_teams.values
-        lengths.push(value.length())
-      end
-      maxLength = lengths.max()
-    %>
+<%= form_tag action: "update_preferences", method: :post do %>
+  <div class="content-container">
     <table>
       <tr>
-        <% for key in result_teams.keys %>
-          <td>
-            <%= Team.find(key).name %>
-          </td>
-        <% end %>
+        <td>
+          Form Preference
+        </td>
+        <td>
+          Enabled?
+        </td>
       </tr>
-      <% for index in 0..maxLength-1 %>
+      <% for interest in @interests %>
         <tr>
-        <% for val in result_teams.values %>
-          <% if index < val.length() %>
-            <td>
-              <%= val[index] %>
-            </td>
-          <% else %>
-            <td>
-            </td>
-          <% end %>
-        <% end %>
+          <td>
+            <%= interest %>
+          </td>
+          <td>
+            <%= check_box_tag interest + "_cb", 1, REDIS.get(interest) == "true" %>
+            <%= REDIS.get(interest) %>
+          </td>
         </tr>
       <% end %>
     </table>
-    <h2>Dancers in Limbo:</h2>
-    <%
-      limbo = params[:limbo]
-    %>
-    <% if limbo %>
-    <table>
-      <% for index in 0..limbo.length()-1 %>
-        <tr>
-            <td>
-              <%= limbo[index] %>
-            </td>
-        </tr>
-      <% end %>
-    </table>
-    <% else %>
-    <p>(None)<p>
-    <% end %>
-  <% end %>
-
-  <h3>Button below clears existing created teams (Use with caution)</h3>
-  <%= button_to 'CLEAR TEAMS', { action: "delete_teams" }, method: :post, data: { confirm: "You are about to delete all teams in the database. Are you sure you want to do this?" } %>
-  <p><%= params[:delete_teams_message] %></p>
-</div>
+    <p>Toggle preferences as desired, then click Update to confirm<p>
+    <%= submit_tag 'Update Form Preferences'%>
+<% end %>
