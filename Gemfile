@@ -100,7 +100,6 @@ group :development do
   gem "mdl", require: false
   gem "rails_db"
   gem "ruby-debug-ide", require: false
-  gem 'activeadmin_addons'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
