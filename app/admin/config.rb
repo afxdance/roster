@@ -16,6 +16,7 @@ ActiveAdmin.register_page "Config" do
     end
     # TODO for every interest in Dancer.INTERESTS
     #   if params[] contains the corresponding key, redis.put('true'). otherwise put('false')
+    redirect_to admin_config_path(update_preferences_message: "All preferences have been updated")
   end
 
   page_action :create_project_teams, method: :post do

@@ -40,24 +40,22 @@ class Dancer < ApplicationRecord
     "other" => "Other",
   }.freeze
 
-  puts "we are inside dancer class"
-
-  #redis = Redis.new
-  REDIS.set("camp_interest", true)
-  REDIS.set("exp_interest", false)
-  REDIS.set("tech_interest", false)
-  puts REDIS.get("camp_interest")
-
   TOGGLABLE_INTERESTS = [
-    "camp_interest",
-    "exp_interest",
-    "tech_interest",
+    "Show Camp Interest",
+    "Show Exp Interest",
+    "Show Tech Interest",
+    "Show Reach Interest",
+    "Show Dues Paid",
+    "Show Tickets Bought",
   ]
 
-  SHOW_CAMP_INTEREST = false
+  # TODO once we are done, we should be able to remove all of these and replace them with TOGGLABLE_INTERESTS
+  SHOW_CAMP_INTEREST = true
   SHOW_EXP_INTEREST = false
   SHOW_TECH_INTEREST = false
   SHOW_REACH_INTEREST = false
+
+  puts "running dancer"
 
   REQUIRED_FIELDS = [
     :name,
@@ -72,6 +70,25 @@ class Dancer < ApplicationRecord
     :reach_workshop_interest,
     :reach_news_interest,
   ].freeze
+
+  # TODO make this a method? So that it doesn't have to know what everything is right away
+  def self.table_visible_fields
+    return [
+      :name,
+      :email,
+      :phone,
+      :year,
+      :dance_experience,
+      SHOW_CAMP_INTEREST ? :camp_interest : nil,
+      SHOW_EXP_INTEREST ? :exp_interest : nil,
+      SHOW_TECH_INTEREST ? :tech_interest : nil,
+      SHOW_REACH_INTEREST ? :reach_workshop_interest : nil,
+      SHOW_REACH_INTEREST ? :reach_news_interest : nil,
+      SHOW_DUES_PAID ? :has_paid_dues : nil,
+      SHOW_TICKETS_BOUGHT ? :has_bought_tickets : nil,
+    ].compact
+  end
+
   TABLE_VISIBLE_FIELDS = [
     :name,
     :email,
