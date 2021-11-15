@@ -1,13 +1,13 @@
-ActiveAdmin.register Dancer, as: "Finances" do
-  if Dancer.table_exists?
-    columns = Dancer.columns.map(&:name).map(&:to_sym)
+ActiveAdmin.register Finance do
+  if Finance.table_exists?
+    columns = Finance.columns.map(&:name).map(&:to_sym)
     permit_params columns
   end
 
   # Scope buttons to filter dancers that have paid dues/bought tickets
   scope :all, default: true
-  scope("Hasn't Paid Dues") { |scope| scope.where("has_paid_dues LIKE ?", "%no%") }
-  scope("Hasn't Bought Tickets") { |scope| scope.where("has_bought_tickets LIKE ?", "%no%") }
+  scope("Hasn't Paid Dues") { |scope| scope.where(dues: [false, nil]) }
+  scope("Hasn't Bought Tickets") { |scope| scope.where(tickets: [false, nil]) }
 
   member_action :paid_dues, method: :post do
     dancer_id = params[:id]
@@ -44,39 +44,39 @@ ActiveAdmin.register Dancer, as: "Finances" do
 
     # Modifying certain dancer fields, also tracks when modified and modified by who
     def dancer_has_paid_dues(dancer_id)
-      dancer = Dancer.find(dancer_id)
-      dancer.has_paid_dues = "yes"
-      dancer.dues_changed_at = Time.now
-      dancer.dues_approved_by = current_user.username
-      dancer.save
-      redirect_to :back, alert: "#{dancer.name} has paid their dues."
+      dancer_finance = Finance.find(dancer_id)
+      dancer_finance.dues = true
+      dancer_finance.dues_approved = current_user.username
+      dancer_finance.dues_updated = Time.now
+      dancer_finance.save
+      redirect_to :back, alert: "#{dancer_finance.dancer.name} has paid their dues."
     end
 
     def dancer_has_bought_tickets(dancer_id)
-      dancer = Dancer.find(dancer_id)
-      dancer.has_bought_tickets = "yes"
-      dancer.tickets_changed_at = Time.now
-      dancer.tickets_approved_by = current_user.username
-      dancer.save
-      redirect_to :back, alert: "#{dancer.name} has bought their tickets."
+      dancer_finance = Finance.find(dancer_id)
+      dancer_finance.tickets = true
+      dancer_finance.tickets_approved = current_user.username
+      dancer_finance.tickets_updated = Time.now
+      dancer_finance.save
+      redirect_to :back, alert: "#{dancer_finance.dancer.name} has bought their tickets."
     end
 
     def dancer_unpay_dues(dancer_id)
-      dancer = Dancer.find(dancer_id)
-      dancer.has_paid_dues = "no"
-      dancer.dues_changed_at = Time.now
-      dancer.dues_approved_by = current_user.username
-      dancer.save
-      redirect_to :back, alert: "#{dancer.name} has not paid their dues"
+      dancer_finance = Finance.find(dancer_id)
+      dancer_finance.dues = false
+      dancer_finance.dues_approved = current_user.username
+      dancer_finance.dues_updated = Time.now
+      dancer_finance.save
+      redirect_to :back, alert: "#{dancer_finance.dancer.name} has not paid their dues"
     end
 
     def dancer_unbuy_tickets(dancer_id)
-      dancer = Dancer.find(dancer_id)
-      dancer.has_bought_tickets = "no"
-      dancer.tickets_changed_at = Time.now
-      dancer.tickets_approved_by = current_user.username
-      dancer.save
-      redirect_to :back, alert: "#{dancer.name} has not bought their tickets"
+      dancer_finance = Finance.find(dancer_id)
+      dancer_finance.tickets = false
+      dancer_finance.tickets_approved = current_user.username
+      dancer_finance.dues_updated = Time.now
+      dancer_finance.save
+      redirect_to :back, alert: "#{dancer_finance.dancer.name} has not bought their tickets"
     end
   end
 
@@ -85,57 +85,49 @@ ActiveAdmin.register Dancer, as: "Finances" do
 
     # Columns from the Dancer table that should be shown in the finance page
     show_fields = [
+      :dancer_id,
       :name,
-      :has_paid_dues,
-      :has_bought_tickets,
-      :dues_changed_at,
-      :dues_approved_by,
-      :tickets_changed_at,
-      :tickets_approved_by,
+      :dues,
+      :tickets,
+      :dues_approved,
+      :tickets_approved,
+      :dues_updated,
+      :tickets_updated,
     ]
 
-    # The column name for each field on the page is the same as the column name from the Dancers table except for dues and tickets because the table was getting too fat
+    # Display columns and change dancer id to #
     show_fields.each do |field|
-      if field == :has_paid_dues
-        column("Dues", sortable: :has_paid_dues, &:has_paid_dues)
-      elsif field == :has_bought_tickets
-        column("Tickets", sortable: :has_bought_tickets, &:has_bought_tickets)
+      if field == :dancer_id
+        column("#", sortable: :dancer_id) { |finance| "##{finance.dancer_id}" }
+      elsif field == :name
+        # If the field is the name, get the name corresponding to the dancer ID
+        column :name do |finance|
+          columns(finance.dancer.name)
+        end
+      elsif [:tickets, :dues].include?(field)
+        # Make the dues and tickets fields toggleable
+        column field do |finance|
+          if field == :dues && finance.dues == true
+            text = "Yes"
+            method = "unpay_dues?"
+          elsif field == :dues && finance.dues == false
+            text = "No"
+            method = "paid_dues?"
+          elsif field == :tickets && finance.tickets == true
+            text = "Yes"
+            method = "unbuy_tickets?"
+          else
+            text = "No"
+            method = "bought_tickets?"
+          end
+          content_tag :div do
+            link_to("finances/#{finance.id}/#{method}", method: :post) do
+              text
+            end
+          end
+        end
       else
         column field
-      end
-    end
-
-    # Create column for editing dues
-    column :edit_dues do |dancer|
-      if dancer.has_paid_dues == "yes"
-        content_tag :div do
-          link_to("finances/#{dancer.id}/unpay_dues?", method: :post) do
-            "+ Undo"
-          end
-        end
-      else
-        content_tag :div do
-          link_to("finances/#{dancer.id}/paid_dues?", method: :post) do
-            "+ Paid Dues"
-          end
-        end
-      end
-    end
-
-    # Create column for editing tickets
-    column :edit_tickets do |dancer|
-      if dancer.has_bought_tickets == "yes"
-        content_tag :div do
-          link_to("finances/#{dancer.id}/unbuy_tickets?", method: :post) do
-            "+ Undo"
-          end
-        end
-      else
-        content_tag :div do
-          link_to("finances/#{dancer.id}/bought_tickets?", method: :post) do
-            "+ Bought Tickets"
-          end
-        end
       end
     end
 
