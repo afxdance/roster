@@ -13,33 +13,40 @@ table, td, th {
 form input {
   margin: 4px 0px;
 }
+
+table {
+  table-layout: fixed;
+  width: 600px;
+}
 </style>
 
 <%# need to replace @teams with some appropriate property defined in Dancers%>
 <%
-  @teams = Team.project_teams
   @interests = Dancer::TOGGLABLE_INTERESTS
-  preferences = TeamPreference.all
-  @team_submitted_preferences = Hash.new
-
-  for t in @teams
-    @team_submitted_preferences[t.id] = false
-  end
-
-  for pref in preferences
-    @team_submitted_preferences[pref.team_id] = true
-  end
 %>
 
 <%= form_tag action: "update_preferences", method: :post do %>
   <div class="content-container">
+    <h2><b>Toggle preferences as desired, then click Update to confirm.</b></h2>
     <table>
       <tr>
         <td>
-          Form Preference
+          <b> Team Switch Form Open?</b>
         </td>
         <td>
-          Enabled?
+          <%= check_box_tag "Team Switch Form_cb", 1, REDIS.get("Team Switch Form") == "true" %>
+          <%= REDIS.get("Team Switch Form") %>
+        </td>
+      </tr>
+    </table>
+
+    <table>
+      <tr>
+        <td>
+          <b>Dancer Table Preference</b>
+        </td>
+        <td>
+          <b>Enabled?</b>
         </td>
       </tr>
       <% for interest in @interests %>
@@ -48,12 +55,13 @@ form input {
             <%= interest %>
           </td>
           <td>
+            <%# check box with name, value, checked%>
             <%= check_box_tag interest + "_cb", 1, REDIS.get(interest) == "true" %>
             <%= REDIS.get(interest) %>
           </td>
         </tr>
       <% end %>
     </table>
-    <p>Toggle preferences as desired, then click Update to confirm<p>
-    <%= submit_tag 'Update Form Preferences'%>
+    <%= submit_tag 'Update Form Preferences', data: { confirm: "All preferences have been updated" }%>
+  </div>
 <% end %>

@@ -55,8 +55,6 @@ class Dancer < ApplicationRecord
   SHOW_TECH_INTEREST = false
   SHOW_REACH_INTEREST = false
 
-  puts "running dancer"
-
   REQUIRED_FIELDS = [
     :name,
     :email,
@@ -79,13 +77,13 @@ class Dancer < ApplicationRecord
       :phone,
       :year,
       :dance_experience,
-      SHOW_CAMP_INTEREST ? :camp_interest : nil,
-      SHOW_EXP_INTEREST ? :exp_interest : nil,
-      SHOW_TECH_INTEREST ? :tech_interest : nil,
-      SHOW_REACH_INTEREST ? :reach_workshop_interest : nil,
-      SHOW_REACH_INTEREST ? :reach_news_interest : nil,
-      SHOW_DUES_PAID ? :has_paid_dues : nil,
-      SHOW_TICKETS_BOUGHT ? :has_bought_tickets : nil,
+      REDIS.get("Show Camp Interest") == "true" ? :camp_interest : nil,
+      REDIS.get("Show Exp Interest") == "true" ? :exp_interest : nil,
+      REDIS.get("Show Tech Interest") == "true" ? :tech_interest : nil,
+      REDIS.get("Show Reach Interest") == "true" ? :reach_workshop_interest : nil,
+      REDIS.get("Show Reach Interest") == "true" ? :reach_news_interest : nil,
+      REDIS.get("Show Dues Paid") == "true" ? :has_paid_dues : nil,
+      REDIS.get("Show Tickets Bought") == "true" ? :has_bought_tickets : nil,
     ].compact
   end
 
