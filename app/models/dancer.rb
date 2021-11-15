@@ -79,7 +79,6 @@ class Dancer < ApplicationRecord
   has_one :finance, dependent: :destroy
   before_create :build_finance
 
-
   for column in REQUIRED_FIELDS
     validates column, length: { minimum: 1 }
   end

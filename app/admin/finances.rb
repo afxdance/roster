@@ -47,7 +47,7 @@ ActiveAdmin.register Finance do
       dancer_finance = Finance.find(dancer_id)
       dancer_finance.dues = true
       dancer_finance.dues_approved = current_user.username
-      dancer_finance.dues_updated = DateTime.now
+      dancer_finance.dues_updated = Time.now
       dancer_finance.save
       redirect_to :back, alert: "#{dancer_finance.dancer.name} has paid their dues."
     end
@@ -56,7 +56,7 @@ ActiveAdmin.register Finance do
       dancer_finance = Finance.find(dancer_id)
       dancer_finance.tickets = true
       dancer_finance.tickets_approved = current_user.username
-      dancer_finance.tickets_updated = DateTime.now
+      dancer_finance.tickets_updated = Time.now
       dancer_finance.save
       redirect_to :back, alert: "#{dancer_finance.dancer.name} has bought their tickets."
     end
@@ -65,7 +65,7 @@ ActiveAdmin.register Finance do
       dancer_finance = Finance.find(dancer_id)
       dancer_finance.dues = false
       dancer_finance.dues_approved = current_user.username
-      dancer_finance.dues_updated = DateTime.now
+      dancer_finance.dues_updated = Time.now
       dancer_finance.save
       redirect_to :back, alert: "#{dancer_finance.dancer.name} has not paid their dues"
     end
@@ -74,7 +74,7 @@ ActiveAdmin.register Finance do
       dancer_finance = Finance.find(dancer_id)
       dancer_finance.tickets = false
       dancer_finance.tickets_approved = current_user.username
-      dancer_finance.dues_updated = DateTime.now
+      dancer_finance.dues_updated = Time.now
       dancer_finance.save
       redirect_to :back, alert: "#{dancer_finance.dancer.name} has not bought their tickets"
     end
@@ -92,7 +92,7 @@ ActiveAdmin.register Finance do
       :dues_approved,
       :tickets_approved,
       :dues_updated,
-      :tickets_updated
+      :tickets_updated,
     ]
 
     # Display columns and change dancer id to #
@@ -104,25 +104,21 @@ ActiveAdmin.register Finance do
         column :name do |finance|
           columns(finance.dancer.name)
         end
-      elsif field == :dues || field == :tickets
+      elsif [:tickets, :dues].include?(field)
         # Make the dues and tickets fields toggleable
         column field do |finance|
-          if field == :dues
-            if finance.dues == true
-              text = "Yes"
-              method = "unpay_dues?"
-            else
-              text = "No"
-              method = "paid_dues?"
-            end
+          if field == :dues && finance.dues == true
+            text = "Yes"
+            method = "unpay_dues?"
+          elsif field == :dues && finance.dues == false
+            text = "No"
+            method = "paid_dues?"
+          elsif field == :tickets && finance.tickets == true
+            text = "Yes"
+            method = "unbuy_tickets?"
           else
-            if finance.tickets ==true
-              text = "Yes"
-              method = "unbuy_tickets?"
-            else
-              text = "No"
-              method = "bought_tickets?"
-            end
+            text = "No"
+            method = "bought_tickets?"
           end
           content_tag :div do
             link_to("finances/#{finance.id}/#{method}", method: :post) do
