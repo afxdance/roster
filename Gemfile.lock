@@ -331,8 +331,9 @@ GEM
       tilt
     seedbank (0.5.0)
       rake (>= 10.0)
-    selenium-webdriver (3.142.7)
-      childprocess (>= 0.5, < 4.0)
+    selenium-webdriver (4.0.3)
+      childprocess (>= 0.5, < 5.0)
+      rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2)
     simple_form (5.0.3)
       actionpack (>= 5.0)
@@ -383,6 +384,7 @@ GEM
 
 PLATFORMS
   ruby
+  x86_64-darwin-19
 
 DEPENDENCIES
   activeadmin
@@ -397,7 +399,6 @@ DEPENDENCIES
   cucumber-rails
   cucumber_lint
   database_cleaner
-  debase
   devise
   haml
   haml_lint
