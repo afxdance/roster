@@ -50,10 +50,6 @@ class Dancer < ApplicationRecord
   ]
 
   # TODO once we are done, we should be able to remove all of these and replace them with TOGGLABLE_INTERESTS
-  SHOW_CAMP_INTEREST = true
-  SHOW_EXP_INTEREST = false
-  SHOW_TECH_INTEREST = false
-  SHOW_REACH_INTEREST = false
 
   REQUIRED_FIELDS = [
     :name,
@@ -69,7 +65,7 @@ class Dancer < ApplicationRecord
     :reach_news_interest,
   ].freeze
 
-  # TODO make this a method? So that it doesn't have to know what everything is right away
+  # Make this a method so that it doesn't have to know what everything is right away (it queries Redis)
   def self.table_visible_fields
     return [
       :name,
@@ -87,18 +83,6 @@ class Dancer < ApplicationRecord
     ].compact
   end
 
-  TABLE_VISIBLE_FIELDS = [
-    :name,
-    :email,
-    :phone,
-    :year,
-    :dance_experience,
-    SHOW_CAMP_INTEREST ? :camp_interest : nil,
-    SHOW_EXP_INTEREST ? :exp_interest : nil,
-    SHOW_TECH_INTEREST ? :tech_interest : nil,
-    SHOW_REACH_INTEREST ? :reach_workshop_interest : nil,
-    SHOW_REACH_INTEREST ? :reach_news_interest : nil,
-  ].compact.freeze
   SENSITIVE_FIELDS = [
     :gender,
   ].freeze

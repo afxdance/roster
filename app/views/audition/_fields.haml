@@ -64,7 +64,7 @@
       - else
         = Dancer::DANCE_EXPERIENCE_VALUES[@dancer.dance_experience]
 
-  - if Dancer::SHOW_CAMP_INTEREST
+  - if REDIS.get("Show Camp Interest") == "true"
     %tr
       %td
         Interested in AFXsi Dance Camp?
@@ -78,7 +78,7 @@
   - else
     = f.hidden_field(:camp_interest, value: 'field_hidden') if f
 
-  - if Dancer::SHOW_EXP_INTEREST
+  - if REDIS.get("Show Exp Interest") == "true"
     %tr
       %td
         Are you interested in EXP?
@@ -92,7 +92,7 @@
   - else
     = f.hidden_field(:exp_interest, value: 'field_hidden') if f
 
-  - if Dancer::SHOW_TECH_INTEREST
+  - if REDIS.get("Show Tech Interest") == "true"
     %tr
       %td
         Are you interested in AFX Tech?
@@ -106,7 +106,7 @@
   - else
     = f.hidden_field(:tech_interest, value: 'field_hidden') if f
 
-  - if Dancer::SHOW_REACH_INTEREST
+  - if REDIS.get("Show Reach Interest") == "true"
     %tr
       %td
         Interested in AFX Reach?
