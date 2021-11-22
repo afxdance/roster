@@ -34,3 +34,6 @@
 
 # Ignore idea configurations
 .idea
+
+# Ignore bin files
+/bin
