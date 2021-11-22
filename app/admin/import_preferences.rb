@@ -23,7 +23,7 @@ ActiveAdmin.register_page "Import Preferences" do
           redirect_to admin_import_preferences_path, alert: "Invalid dancer id: #{dancer_id}"
           return
         elsif dancer_preferences.include?(dancer_id)
-          dup = true
+          next
         else
           dancer_preferences.add(dancer_id)
         end
