@@ -25,13 +25,6 @@ User.create_with(
 ).find_or_create_by(id: 2)
 
 User.create_with(
-  username: "direc cai",
-  password: "password123",
-  password_confirmation: "password123",
-  role: "director",
-).find_or_create_by(id: 4)
-
-User.create_with(
   username: "finance",
   password: "123password",
   password_confirmation: "123password",
@@ -73,16 +66,6 @@ Dancer.create_with(
   dance_experience: "no",
   **dancer_extra_fields,
 ).find_or_create_by(name: "Evelyn Liu", email: "peter@peter.peter")
-
-(1...200).each do |n|
-  Dancer.create_with(
-    phone: "%03d-erp-eter" % n,
-    gender: ["male", "female"][n % 2],
-    year: ((n % 4) + 1).to_s,
-    dance_experience: "no",
-    **dancer_extra_fields,
-  ).find_or_create_by(name: "Dancer #{n}", email: "dancer#{n}@peter.peter")
-end
 
 Team.create_with(
   level: "Project",
