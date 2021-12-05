@@ -20,30 +20,35 @@ table {
 }
 </style>
 
-<%# need to replace @teams with some appropriate property defined in Dancers%>
 <%
   @interests = Dancer::TOGGLABLE_INTERESTS
+  @form_toggles = [
+    "Team Switch Form",
+    "Audition Form"
+  ]
 %>
 
 <%= form_tag action: "update_preferences", method: :post do %>
   <div class="content-container">
     <h2><b>Toggle preferences as desired, then click Update to confirm.</b></h2>
     <table>
-      <tr>
-        <td>
-          <b> Team Switch Form Open?</b>
-        </td>
-        <td>
-          <%= check_box_tag "Team Switch Form_cb", 1, REDIS.get("Team Switch Form") == "true" %>
-          <%= REDIS.get("Team Switch Form") %>
-        </td>
-      </tr>
-    </table>
+    <% for form in @form_toggles %>
+        <tr>
+          <td>
+            <b><%= form %> Open?</b>
+          </td>
+          <td>
+            <%# check box with name, value, checked%>
+            <%= check_box_tag form + "_cb", 1, REDIS.get(form) == "true" %>
+            <%= REDIS.get(form) %>
+          </td>
+        </tr>
+    <% end %>
 
     <table>
       <tr>
         <td>
-          <b>Dancer Table Preference</b>
+          <b>Dancer Table/Audition Form Preference</b>
         </td>
         <td>
           <b>Enabled?</b>

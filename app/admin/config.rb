@@ -9,6 +9,7 @@ ActiveAdmin.register_page "Config" do
   page_action :update_preferences, method: :post do
     camp_interest = params["camp_interest_cb"]
     REDIS.set("Team Switch Form", params.key?("Team Switch Form_cb"))
+    REDIS.set("Audition Form", params.key?("Audition Form_cb"))
     Dancer::TOGGLABLE_INTERESTS.each do |interest|
       REDIS.set(interest, params.key?(interest + "_cb"))
     end
