@@ -20,7 +20,7 @@ class SrcController < ApplicationController
     # save form info to db
     # params["name of form element"] such as p_name, p_sign, etc...
 
-    # TODO, i would reccomend writing all this logic of extracting parameters in the src_params method for cleaner code
+    # TODO, i would recommend writing all this logic of extracting parameters in the src_params method for cleaner code
 
     @c1 = params["a"]
     @c2 = params["b"]

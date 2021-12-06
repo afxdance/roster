@@ -47,9 +47,7 @@ class Dancer < ApplicationRecord
     "Show Reach Interest",
     "Show Dues Paid",
     "Show Tickets Bought",
-  ]
-
-  # TODO once we are done, we should be able to remove all of these and replace them with TOGGLABLE_INTERESTS
+  ].freeze
 
   REQUIRED_FIELDS = [
     :name,

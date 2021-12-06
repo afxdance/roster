@@ -1,6 +1,7 @@
-# Require redis gem and create new Redis client that points to localhost:6379 by default (TODO make this different for prod and dev)
+# Require redis gem and create new Redis client that points to localhost:6379 by default (on dev)
 
-$redis = Redis.new(url: ENV["REDIS_URL"], ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE })
+# TODO: on prod, we need to use Heroku instead of a local Redis server. So `REDIS` below will
+# need to be defined differently based on whether we're on dev or prod.
 
 require "redis"
 REDIS = Redis.new
