@@ -60,9 +60,9 @@ ActiveRecord::Schema.define(version: 20211004033600) do
     t.boolean "tickets"
     t.text "dues_approved"
     t.text "tickets_approved"
+    t.datetime "dues_updated"
+    t.datetime "tickets_updated"
     t.integer "dancer_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.index ["dancer_id"], name: "index_finances_on_dancer_id"
   end
 

@@ -30,7 +30,6 @@ jobs:
           name: Install dependencies
           command: |
             bundle install --jobs=4 --retry=3 --path vendor/bundle
-
       - save_cache:
           name: Cache dependencies
           paths:
@@ -42,22 +41,18 @@ jobs:
           command: |
             bundle exec rake db:create
             bundle exec rake db:schema:load
-
       - run:
           name: Run RuboCop
           command: |
             bundle exec rubocop
-
       - run:
           name: Run tests
           command: |
             bundle exec rake test
-
       - run:
           name: Run `rails afx:db:reset`
           command: |
             bundle exec rails afx:db:reset
-
       # # These are the sample instructions provided by CircleCI
       # - run:
       #     name: Run tests

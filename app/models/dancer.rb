@@ -76,8 +76,8 @@ class Dancer < ApplicationRecord
   has_and_belongs_to_many :teams
   has_many :team_switch_requests
   has_one :src
-  has_one :finance
-
+  has_one :finance, dependent: :destroy
+  before_create :build_finance
 
   for column in REQUIRED_FIELDS
     validates column, length: { minimum: 1 }
