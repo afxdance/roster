@@ -3,10 +3,10 @@ class Finance < ActiveRecord::Base
   before_save :default_values
   def default_values
     if self.tickets.nil?
-      self.tickets = False
+      self.tickets = false
     end
     if self.dues.nil?
-      self.dues = False
+      self.dues = false
     end
   end
 end
