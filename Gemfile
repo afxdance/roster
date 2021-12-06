@@ -1,10 +1,11 @@
 source "https://rubygems.org"
-ruby "2.5.0"
+ruby "2.7.4"
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
 end
+#gem "multi_json", "~> 1.14.1"
 
 group :production, :development, :test do
   # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -46,6 +47,7 @@ group :production, :development, :test do
   gem "devise"
   gem "haml"
   gem "seedbank"
+  gem "google-apis-sheets_v4"#, "~> 0.10.0"
 end
 
 group :production do
@@ -68,8 +70,8 @@ group :development, :test do
   ##############################
 
   gem "awesome_print", require: true
-  gem "cucumber", require: false
-  gem "cucumber_lint", require: false
+#  gem "cucumber", require: false
+#  gem "cucumber_lint", require: false
   gem "pry-nav", require: true
   gem "pry-rails", require: true
   gem "rubocop", "~> 0.54.0", require: false
