@@ -193,3 +193,8 @@ User.find(1).teams = Team.all
 User.find(2).teams = [Team.first]
 
 Rails.env.development?
+
+# set default form preference values (all false)
+Dancer::TOGGLABLE_INTERESTS.each do |interest|
+  REDIS.set(interest, false)
+end
