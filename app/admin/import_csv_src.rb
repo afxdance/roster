@@ -42,25 +42,19 @@ ActiveAdmin.register_page "Import SRC from CSV" do
     url_link = params[:urls][:google_form_url]
     spreadsheet_id = url_link.split(/\/(?=[\w])/)[-2]
 
-    range = "Sheet1!A2:A"
+    range = "Sheet1!A2:A" # Only get email addresses
     response = service.get_spreadsheet_values spreadsheet_id, range
 
     ActiveRecord::Base.transaction do
       response.values.each do |row|
         for dancer in Dancer.all
-          puts "here"
-          puts row[0]
-          puts dancer.email
           if dancer.email == row[0]
-            puts "updatingj"
-            puts dancer.src_submitted
             dancer.update(src_submitted: true)
-            puts dancer.src_submitted
           end
         end
       end
 
-      redirect_to admin_import_src_from_csv_path, notice: "Successfully entered Google Form url"
+      redirect_to admin_import_src_from_csv_path, notice: "Successfully updated from Google Sheets"
     end
   end
 
@@ -71,14 +65,9 @@ ActiveAdmin.register_page "Import SRC from CSV" do
     end
 
     #create a form field
-    form method: :get, url: { action: "submiturl" } do |f|
-      f.input name: "hi", required: true, placeholder: "Google Form URL"
-      f.input :submit, type: :submit, value: "Submit URL1"
-    end
-
-    form_for :urls, url: { action: "submiturl" }, html: { multipart: true } do |f|
-      f.url_field :google_form_url, placeholder: "Google Form URL"
-      f.submit "Submit URL2"
+    form_for :urls, url: { action: "submiturl" } do |f|
+      f.url_field :google_form_url, placeholder: "Google Sheets URL"
+      f.submit "Submit URL"
     end
   end
 end
