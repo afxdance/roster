@@ -66,6 +66,7 @@ Dancer.create_with(
   dance_experience: "no",
   **dancer_extra_fields,
 ).find_or_create_by(name: "Evelyn Liu", email: "peter@peter.peter")
+
 Team.create_with(
   level: "Project",
   practice_time: "Tuesday,Thursday",
