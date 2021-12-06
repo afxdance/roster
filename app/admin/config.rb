@@ -15,4 +15,10 @@ ActiveAdmin.register_page "Config" do
     end
     redirect_to admin_config_path(update_preferences_message: "All preferences have been updated")
   end
+
+  content do
+    # checks to see if teams have changed from initial creation and if so, disables the "Create Teams" button
+    disable = false
+    render partial: "admin/config", locals: { disable_button: disable }
+  end
 end
