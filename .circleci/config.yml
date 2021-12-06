@@ -8,7 +8,7 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/ruby:2.7.4-node-browsers
-
+      - image: redis@sha256:54057dd7e125ca41afe526a877e8bd35ec2cdd33b9217e022ed37bdcf7d09673
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
