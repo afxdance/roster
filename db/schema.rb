@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20211018015553) do
+ActiveRecord::Schema.define(version: 20211223200704) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -38,14 +38,14 @@ ActiveRecord::Schema.define(version: 20211018015553) do
     t.string "camp_interest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "reach_workshop_interest"
-    t.string "reach_news_interest"
     t.string "has_paid_dues"
     t.string "has_bought_tickets"
     t.datetime "dues_changed_at"
     t.datetime "tickets_changed_at"
     t.string "dues_approved_by"
     t.string "tickets_approved_by"
+    t.string "reach_workshop_interest"
+    t.string "reach_news_interest"
     t.boolean "src_submitted"
   end
 
@@ -62,6 +62,17 @@ ActiveRecord::Schema.define(version: 20211018015553) do
   create_table "director_users", force: :cascade do |t|
   end
 
+  create_table "finances", force: :cascade do |t|
+    t.boolean "dues"
+    t.boolean "tickets"
+    t.text "dues_approved"
+    t.text "tickets_approved"
+    t.datetime "dues_updated"
+    t.datetime "tickets_updated"
+    t.integer "dancer_id"
+    t.index ["dancer_id"], name: "index_finances_on_dancer_id"
+  end
+
   create_table "form_fields", force: :cascade do |t|
     t.text "data"
     t.datetime "created_at", null: false
@@ -72,6 +83,28 @@ ActiveRecord::Schema.define(version: 20211018015553) do
     t.text "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "srcs", force: :cascade do |t|
+    t.boolean "c1", null: false
+    t.boolean "c2", null: false
+    t.boolean "c3", null: false
+    t.boolean "c4", null: false
+    t.boolean "c5", null: false
+    t.boolean "c6", null: false
+    t.boolean "c7", null: false
+    t.boolean "c8", null: false
+    t.boolean "c9", null: false
+    t.string "pg_release", null: false
+    t.string "other"
+    t.string "full_name"
+    t.string "signature"
+    t.string "date"
+    t.boolean "acknowledgment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "dancer_id"
+    t.index ["dancer_id"], name: "index_srcs_on_dancer_id"
   end
 
   create_table "team_preferences", force: :cascade do |t|

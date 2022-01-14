@@ -98,7 +98,6 @@ group :development do
   # Place all added gems below #
   ##############################
 
-  gem "debase", require: false
   gem "haml_lint", require: false
   gem "mdl", require: false
   gem "rails_db"

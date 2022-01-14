@@ -60,6 +60,7 @@ class Dancer < ApplicationRecord
     :reach_news_interest,
     :has_paid_dues,
     :has_bought_tickets,
+    :src_submitted,
   ].freeze
   TABLE_VISIBLE_FIELDS = [
     :name,
@@ -77,6 +78,7 @@ class Dancer < ApplicationRecord
   ].compact.freeze
   SENSITIVE_FIELDS = [
     :gender,
+    :src_submitted
   ].freeze
 
   has_and_belongs_to_many :teams
