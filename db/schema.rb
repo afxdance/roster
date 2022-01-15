@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(version: 20211223200704) do
     t.string "camp_interest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "reach_workshop_interest"
+    t.string "reach_news_interest"
     t.string "has_paid_dues"
     t.string "has_bought_tickets"
     t.datetime "dues_changed_at"

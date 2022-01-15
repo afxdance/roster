@@ -66,8 +66,9 @@ ActiveAdmin.register_page "Import SRC from CSV" do
 
     #create a form field
     form_for :urls, url: { action: "submiturl" } do |f|
+
       f.url_field :google_form_url, placeholder: "Google Sheets URL"
-      f.submit "Submit URL"
+      f.submit "Submit Google Sheets URL"
     end
   end
 end
