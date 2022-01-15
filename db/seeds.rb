@@ -66,6 +66,7 @@ Dancer.create_with(
   dance_experience: "no",
   **dancer_extra_fields,
 ).find_or_create_by(name: "Evelyn Liu", email: "peter@peter.peter")
+
 Team.create_with(
   level: "Project",
   practice_time: "Tuesday,Thursday",
@@ -192,3 +193,8 @@ User.find(1).teams = Team.all
 User.find(2).teams = [Team.first]
 
 Rails.env.development?
+
+# set default form preference values (all false)
+Dancer::TOGGLABLE_INTERESTS.each do |interest|
+  REDIS.set(interest, false)
+end
