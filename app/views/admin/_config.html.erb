@@ -1,0 +1,72 @@
+<%# add checklist to toggle the fields (display all fields?) %>
+
+<style>
+.content-container {
+  width: 50%;
+}
+
+table, td, th {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+form input {
+  margin: 4px 0px;
+}
+
+table {
+  table-layout: fixed;
+  width: 600px;
+}
+</style>
+
+<%
+  @interests = Dancer::TOGGLABLE_INTERESTS
+  @form_toggles = [
+    "Team Switch Form",
+    "Audition Form"
+  ]
+%>
+
+<%= form_tag action: "update_preferences", method: :post do %>
+  <div class="content-container">
+    <h2><b>Toggle preferences as desired, then click Update to confirm.</b></h2>
+    <table>
+    <% for form in @form_toggles %>
+        <tr>
+          <td>
+            <b><%= form %> Open?</b>
+          </td>
+          <td>
+            <%# check box with name, value, checked%>
+            <%= check_box_tag form + "_cb", 1, REDIS.get(form) == "true" %>
+            <%= REDIS.get(form) %>
+          </td>
+        </tr>
+    <% end %>
+
+    <table>
+      <tr>
+        <td>
+          <b>Dancer Table/Audition Form Preference</b>
+        </td>
+        <td>
+          <b>Enabled?</b>
+        </td>
+      </tr>
+      <% for interest in @interests %>
+        <tr>
+          <td>
+            <%= interest %>
+          </td>
+          <td>
+            <%# check box with name, value, checked%>
+            <%= check_box_tag interest + "_cb", 1, REDIS.get(interest) == "true" %>
+            <%= REDIS.get(interest) %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+    <%= submit_tag 'Update', data: { confirm: "All preferences have been updated" }%>
+  </div>
+<% end %>

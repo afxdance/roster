@@ -54,10 +54,14 @@ class User < ApplicationRecord
   end
 
   def table_visible_dancer_fields
+    # puts Dancer.table_visible_fields
+    # puts Dancer::TABLE_VISIBLE_FIELDS
     if can_view_sensitive_dancer_fields?
-      [:id] + Dancer::TABLE_VISIBLE_FIELDS
+      # [:id] + Dancer::TABLE_VISIBLE_FIELDS
+      [:id] + Dancer.table_visible_fields
     else
-      [:id] + (Dancer::TABLE_VISIBLE_FIELDS - Dancer::SENSITIVE_FIELDS)
+      # [:id] + (Dancer::TABLE_VISIBLE_FIELDS - Dancer::SENSITIVE_FIELDS)
+      [:id] + (Dancer.table_visible_fields - Dancer::SENSITIVE_FIELDS)
     end
   end
 

@@ -3,142 +3,146 @@
   - @dancer.errors.full_messages.each do |message|
     %li= message
 
-%table
-  %tr
-    %td
-      Full Name
-    %td
-      - if f
-        = f.text_field(:name, required: true, pattern: Dancer::NAME_PATTERN)
-      - else
-        = @dancer.name
 
-  %tr
-    %td
-      Email
-    %td
-      - if f
-        = f.text_field(:email, required: true, pattern: Dancer::EMAIL_PATTERN)
-        %small
-          We strongly recommend entering your primary email. Note that berkeley.com and berkeley.edu are very different!
-      - else
-        = @dancer.email
-
-  %tr
-    %td
-      Phone
-    %td
-      - if f
-        = f.text_field(:phone, required: true, pattern: Dancer::PHONE_PATTERN)
-        %small
-          MUST be XXX-XXX-XXXX format
-      - else
-        = @dancer.phone
-
-  %tr
-    %td
-      Gender
-    %td
-      - if f
-        = f.select(:gender, options_for_select(Dancer::GENDER_VALUES.invert, @dancer.gender), {include_blank: ""}, {required: true})
-        %small
-          This information is used to ensure teams are balanced, diverse, and inclusive. The form is processed by an algorithm and your response will be kept confidential within the AFX Dance Executive Board.
-      - else
-        = Dancer::GENDER_VALUES[@dancer.gender]
-
-  %tr
-    %td
-      Year
-    %td
-      - if f
-        = f.select(:year, options_for_select(Dancer::YEAR_VALUES.invert, @dancer.year), {include_blank: ""}, {required: true})
-      - else
-        = Dancer::YEAR_VALUES[@dancer.year]
-
-  %tr
-    %td
-      Prior Dance Experience
-    %td
-      - if f
-        = f.select(:dance_experience, options_for_select(Dancer::DANCE_EXPERIENCE_VALUES.invert, @dancer.dance_experience), {include_blank: ""}, {required: true})
-      - else
-        = Dancer::DANCE_EXPERIENCE_VALUES[@dancer.dance_experience]
-
-  - if Dancer::SHOW_CAMP_INTEREST
+- if REDIS.get("Audition Form") == "false"
+  %h3 Thank you for your interest in AFX! Our audition season has concluded. If you were unable to make it this time, we hope to see you in a future semester.
+- else
+  %table
     %tr
       %td
-        Interested in AFXsi Dance Camp?
+        Full Name
       %td
         - if f
-          = f.select(:camp_interest, options_for_select(Dancer::BOOLEAN_OPTION_VALUES.invert, @dancer.camp_interest), {include_blank: ""}, {required: true})
-          %small
-            Applications are due Tuesday, June 25th at 5PM. If you would like to apply, please check out our event page on Facebook from the Gen Audition page!
+          = f.text_field(:name, required: true, pattern: Dancer::NAME_PATTERN)
         - else
-          = Dancer::BOOLEAN_OPTION_VALUES[@dancer.camp_interest]
-  - else
-    = f.hidden_field(:camp_interest, value: 'field_hidden') if f
+          = @dancer.name
 
-  - if Dancer::SHOW_EXP_INTEREST
     %tr
       %td
-        Are you interested in EXP?
+        Email
       %td
         - if f
-          = f.select(:exp_interest, options_for_select(Dancer::BOOLEAN_OPTION_VALUES.invert, @dancer.exp_interest), {include_blank: ""}, {required: true})
+          = f.text_field(:email, required: true, pattern: Dancer::EMAIL_PATTERN)
           %small
-            EXP is a dance organization partnered with AFX that focuses on dancer growth through urban and hip-hop fundamentals and freestyle training! Please indicate if you are interested in receiving more information via email!
+            We strongly recommend entering your primary email. Note that berkeley.com and berkeley.edu are very different!
         - else
-          = Dancer::BOOLEAN_OPTION_VALUES[@dancer.exp_interest]
-  - else
-    = f.hidden_field(:exp_interest, value: 'field_hidden') if f
+          = @dancer.email
 
-  - if Dancer::SHOW_TECH_INTEREST
     %tr
       %td
-        Are you interested in AFX Tech?
+        Phone
       %td
         - if f
-          = f.select(:tech_interest, options_for_select(Dancer::BOOLEAN_OPTION_VALUES.invert, @dancer.tech_interest), {include_blank: ""}, {required: true})
+          = f.text_field(:phone, required: true, pattern: Dancer::PHONE_PATTERN)
           %small
-            AFX Tech is a project-based technical organization that contributes to the Berkeley Dance Community through a variety of outlets, from front-end web development/design to back-end algorithmic programming.
+            MUST be XXX-XXX-XXXX format
         - else
-          = Dancer::BOOLEAN_OPTION_VALUES[@dancer.tech_interest]
-  - else
-    = f.hidden_field(:tech_interest, value: 'field_hidden') if f
+          = @dancer.phone
 
-  - if Dancer::SHOW_REACH_INTEREST
     %tr
       %td
-        Interested in AFX Reach?
-        %br
-        %small
-          We expand AFX’s community involvement
-          %br
-          via workshops and dance exercises at
-          %br
-          schools, nursing care facilities, and youth
-          %br
-          programs, and host community service
-          %br
-          and charity events.
+        Gender
       %td
         - if f
-          = f.select(:reach_workshop_interest, options_for_select(Dancer::BOOLEAN_OPTION_VALUES.invert, @dancer.reach_workshop_interest), {include_blank: ""}, {required: true})
+          = f.select(:gender, options_for_select(Dancer::GENDER_VALUES.invert, @dancer.gender), {include_blank: ""}, {required: true})
           %small
-            I’m interested in teaching choreography at AFX Reach workshops.
-          = f.select(:reach_news_interest, options_for_select(Dancer::BOOLEAN_OPTION_VALUES.invert, @dancer.reach_news_interest), {include_blank: ""}, {required: true})
-          %small
-            I’m interested in the AFX Reach newsletter to be notified of our community involvements!
+            This information is used to ensure teams are balanced, diverse, and inclusive. The form is processed by an algorithm and your response will be kept confidential within the AFX Dance Executive Board.
         - else
-          = Dancer::BOOLEAN_OPTION_VALUES[@dancer.reach_workshop_interest]
-          = Dancer::BOOLEAN_OPTION_VALUES[@dancer.reach_news_interest]
-  - else
-    = f.hidden_field(:reach_workshop_interest, value: 'field_hidden') if f
-    = f.hidden_field(:reach_news_interest, value: 'field_hidden') if f
+          = Dancer::GENDER_VALUES[@dancer.gender]
 
-
-  - if f
     %tr
       %td
+        Year
       %td
-        = f.submit "I'm ready to audition!"
+        - if f
+          = f.select(:year, options_for_select(Dancer::YEAR_VALUES.invert, @dancer.year), {include_blank: ""}, {required: true})
+        - else
+          = Dancer::YEAR_VALUES[@dancer.year]
+
+    %tr
+      %td
+        Prior Dance Experience
+      %td
+        - if f
+          = f.select(:dance_experience, options_for_select(Dancer::DANCE_EXPERIENCE_VALUES.invert, @dancer.dance_experience), {include_blank: ""}, {required: true})
+        - else
+          = Dancer::DANCE_EXPERIENCE_VALUES[@dancer.dance_experience]
+
+    - if REDIS.get("Show Camp Interest") == "true"
+      %tr
+        %td
+          Interested in AFXsi Dance Camp?
+        %td
+          - if f
+            = f.select(:camp_interest, options_for_select(Dancer::BOOLEAN_OPTION_VALUES.invert, @dancer.camp_interest), {include_blank: ""}, {required: true})
+            %small
+              Applications are due Tuesday, June 25th at 5PM. If you would like to apply, please check out our event page on Facebook from the Gen Audition page!
+          - else
+            = Dancer::BOOLEAN_OPTION_VALUES[@dancer.camp_interest]
+    - else
+      = f.hidden_field(:camp_interest, value: 'field_hidden') if f
+
+    - if REDIS.get("Show Exp Interest") == "true"
+      %tr
+        %td
+          Are you interested in EXP?
+        %td
+          - if f
+            = f.select(:exp_interest, options_for_select(Dancer::BOOLEAN_OPTION_VALUES.invert, @dancer.exp_interest), {include_blank: ""}, {required: true})
+            %small
+              EXP is a dance organization partnered with AFX that focuses on dancer growth through urban and hip-hop fundamentals and freestyle training! Please indicate if you are interested in receiving more information via email!
+          - else
+            = Dancer::BOOLEAN_OPTION_VALUES[@dancer.exp_interest]
+    - else
+      = f.hidden_field(:exp_interest, value: 'field_hidden') if f
+
+    - if REDIS.get("Show Tech Interest") == "true"
+      %tr
+        %td
+          Are you interested in AFX Tech?
+        %td
+          - if f
+            = f.select(:tech_interest, options_for_select(Dancer::BOOLEAN_OPTION_VALUES.invert, @dancer.tech_interest), {include_blank: ""}, {required: true})
+            %small
+              AFX Tech is a project-based technical organization that contributes to the Berkeley Dance Community through a variety of outlets, from front-end web development/design to back-end algorithmic programming.
+          - else
+            = Dancer::BOOLEAN_OPTION_VALUES[@dancer.tech_interest]
+    - else
+      = f.hidden_field(:tech_interest, value: 'field_hidden') if f
+
+    - if REDIS.get("Show Reach Interest") == "true"
+      %tr
+        %td
+          Interested in AFX Reach?
+          %br
+          %small
+            We expand AFX’s community involvement
+            %br
+            via workshops and dance exercises at
+            %br
+            schools, nursing care facilities, and youth
+            %br
+            programs, and host community service
+            %br
+            and charity events.
+        %td
+          - if f
+            = f.select(:reach_workshop_interest, options_for_select(Dancer::BOOLEAN_OPTION_VALUES.invert, @dancer.reach_workshop_interest), {include_blank: ""}, {required: true})
+            %small
+              I’m interested in teaching choreography at AFX Reach workshops.
+            = f.select(:reach_news_interest, options_for_select(Dancer::BOOLEAN_OPTION_VALUES.invert, @dancer.reach_news_interest), {include_blank: ""}, {required: true})
+            %small
+              I’m interested in the AFX Reach newsletter to be notified of our community involvements!
+          - else
+            = Dancer::BOOLEAN_OPTION_VALUES[@dancer.reach_workshop_interest]
+            = Dancer::BOOLEAN_OPTION_VALUES[@dancer.reach_news_interest]
+    - else
+      = f.hidden_field(:reach_workshop_interest, value: 'field_hidden') if f
+      = f.hidden_field(:reach_news_interest, value: 'field_hidden') if f
+
+
+    - if f
+      %tr
+        %td
+        %td
+          = f.submit "I'm ready to audition!"
