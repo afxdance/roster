@@ -65,8 +65,8 @@ ActiveRecord::Schema.define(version: 20211223200704) do
   end
 
   create_table "finances", force: :cascade do |t|
-    t.boolean "dues"
-    t.boolean "tickets"
+    t.boolean "dues", default: false, null: false
+    t.boolean "tickets", default: false, null: false
     t.text "dues_approved"
     t.text "tickets_approved"
     t.datetime "dues_updated"

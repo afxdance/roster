@@ -93,6 +93,7 @@ class Dancer < ApplicationRecord
   has_many :team_switch_requests
   has_one :src
   has_one :finance, dependent: :destroy
+  before_create :build_finance
 
   attribute :has_paid_dues, :string, default: "no"
   attribute :has_bought_tickets, :string, default: "no"
