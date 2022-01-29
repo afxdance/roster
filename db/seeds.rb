@@ -12,16 +12,18 @@
 
 User.create_with(
   username: "admin",
-  password: "password",
-  password_confirmation: "password",
+  password: "adminpassword",
+  password_confirmation: "adminpassword",
   role: "admin",
+  name: "Admin"
 ).find_or_create_by(id: 1)
 
 User.create_with(
-  username: "young cai",
+  username: "youngcai",
   password: "password123",
   password_confirmation: "password123",
   role: "director",
+  name: "Young Cai"
 ).find_or_create_by(id: 2)
 
 User.create_with(
@@ -29,6 +31,7 @@ User.create_with(
   password: "123password",
   password_confirmation: "123password",
   role: "finance",
+  name: "Finance"
 ).find_or_create_by(id: 3)
 
 dancer_extra_fields = {

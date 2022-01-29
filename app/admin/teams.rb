@@ -37,7 +37,7 @@ ActiveAdmin.register Team do
       # Creates a drop down that allows you to choose from "Project" and "Training"
       f.input :level, collection: [Team::PROJECT, Team::TRAINING, Team::DROP]
       # Creates a selection menu so the team can be linked to a user
-      f.input :users
+      f.input :users, collection: User.all.map { |user| [user.name, user.id] }
       f.input :practice_time,
               label: [
                 "Practice time",
@@ -45,7 +45,7 @@ ActiveAdmin.register Team do
                 "No space between commas and texts.",
                 "If add a space at the beginning or leave this blank, this team will be hidden in the team switch form.",
               ].join("<br>").html_safe,
-              input_html: { style: "margin-bottom: 60px" }
+              input_html: { style: "margin-bottom: 80px" }
       f.input :practice_location,
               label: [
                 "Practice location",

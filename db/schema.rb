@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20211223200704) do
+ActiveRecord::Schema.define(version: 20211018013816) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -38,14 +38,6 @@ ActiveRecord::Schema.define(version: 20211223200704) do
     t.string "camp_interest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "reach_workshop_interest"
-    t.string "reach_news_interest"
-    t.string "has_paid_dues"
-    t.string "has_bought_tickets"
-    t.datetime "dues_changed_at"
-    t.datetime "tickets_changed_at"
-    t.string "dues_approved_by"
-    t.string "tickets_approved_by"
     t.string "reach_workshop_interest"
     t.string "reach_news_interest"
     t.boolean "src_submitted"

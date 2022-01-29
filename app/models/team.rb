@@ -151,7 +151,7 @@ class Team < ApplicationRecord
       if user.name.nil?
         directors.push(user.username)
       else
-        directors.push(user.name) # change to user name when migrated
+        directors.push(user.name)
       end
     end
     directors
