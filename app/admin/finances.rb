@@ -103,7 +103,7 @@ ActiveAdmin.register Finance do
       elsif field == :name
         # If the field is the name, get the name corresponding to the dancer ID
         column :name do |finance|
-          if finance.dancer != nil
+          if !finance.dancer.nil?
             columns(finance.dancer.name)
           end
         end

@@ -12,3 +12,4 @@ ActiveAdmin.register Src do
   #   permitted
   #   end
 end
+
