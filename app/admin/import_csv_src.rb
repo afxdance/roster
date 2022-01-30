@@ -4,8 +4,7 @@ require "googleauth/stores/file_token_store"
 require "fileutils"
 
 ActiveAdmin.register_page "Import SRC from CSV" do
-  menu if: proc { current_user.admin? }
-  menu label: "Import SRC from CSV", parent: :dancers
+  menu label: "Import SRC from CSV", parent: :dancers, if: proc { current_user.admin? }
 
   content do
     form_for :csv, url: { action: "update" }, html: { multipart: true } do |f|

@@ -99,7 +99,7 @@ ActiveAdmin.register Finance do
     selectable_column
     show_fields.each do |field|
       if field == :dancer_id
-        column("#", sortable: :dancer_id) { |finance| "##{finance.dancer_id}" }
+        column("Dancer ID", sortable: :dancer_id) { |finance| finance.dancer_id.to_s }
       elsif field == :name
         # If the field is the name, get the name corresponding to the dancer ID
         column :name do |finance|

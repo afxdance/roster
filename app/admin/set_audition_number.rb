@@ -1,5 +1,5 @@
 ActiveAdmin.register_page "Set Audition Number" do
-  menu label: "Set Audition Number", parent: :dancers
+  menu label: "Set Audition Number", parent: :dancers, if: proc { current_user.admin? }
 
   controller do
     before_action :update, only: :index
