@@ -36,7 +36,7 @@ ActiveAdmin.register_page "Import SRC from CSV" do
           redirect_to admin_import_src_from_csv_path, notice: "There are #{errors.length} invalid src : \n #{errors}"
           raise ActiveRecord::Rollback
         else
-          redirect_to admin_import_src_from_csv_path, notice: "Successfully imported src csv"
+          redirect_to admin_import_src_from_csv_path, notice: "Successfully imported SRC CSV"
         end
       end
     end
