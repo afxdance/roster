@@ -96,13 +96,16 @@ ActiveAdmin.register Finance do
     ]
 
     # Display columns and change dancer id to #
+    selectable_column
     show_fields.each do |field|
       if field == :dancer_id
         column("#", sortable: :dancer_id) { |finance| "##{finance.dancer_id}" }
       elsif field == :name
         # If the field is the name, get the name corresponding to the dancer ID
         column :name do |finance|
-          columns(finance.dancer.name)
+          if finance.dancer != nil
+            columns(finance.dancer.name)
+          end
         end
       elsif [:tickets, :dues].include?(field)
         # Make the dues and tickets fields toggleable

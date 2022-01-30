@@ -1,5 +1,5 @@
 ActiveAdmin.register_page "Import Preferences" do
-  menu label: "Import Preferences", parent: :dancers, if: proc { current_user.admin? or current_user.director? }
+  menu label: "Import Preferences", parent: :dancers, if: proc { current_user.admin? || current_user.director? }
 
   # https://activeadmin.info/10-custom-pages.html
   page_action :update, method: :post do

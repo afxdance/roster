@@ -86,7 +86,7 @@ class Dancer < ApplicationRecord
 
   SENSITIVE_FIELDS = [
     :gender,
-    :src_submitted
+    :src_submitted,
   ].freeze
 
   has_and_belongs_to_many :teams
@@ -107,7 +107,8 @@ class Dancer < ApplicationRecord
     temp = Dancer.new
     temp.save!(validate: false)
     next_id = temp.id
-    temp.delete
+    temp.finance.delete
+    temp.destroy
 
     Dancer.next_id = next_id
 
@@ -125,6 +126,7 @@ class Dancer < ApplicationRecord
     elsif target_max_id == max_id
       if target_max_id == 0
         Dancer.destroy_all
+        Finance.destroy_all
       end
       reset_id
     elsif target_max_id > max_id
@@ -132,6 +134,7 @@ class Dancer < ApplicationRecord
       temp.id = target_max_id
       temp.save!(validate: false)
       reset_id
+      temp.finance.destroy
       temp.delete
     else
       raise "Invalid given id: #{target_next_id}"

@@ -108,9 +108,11 @@ class User < ApplicationRecord
       true
     end
   end
-  
-  def get_name
-    return name if name != ""
-    username
+
+  def find_name
+    if name == ""
+      return username
+    end
+    name
   end
 end

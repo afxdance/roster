@@ -178,8 +178,6 @@ ActiveAdmin.register Dancer do
 
   preserve_default_filters!
 
-#  filter :src_id_not_null, label: "Src present?", as: :boolean
-
   current_user_teams_lambda = lambda do
     {
       team: current_user.teams.map { |team| [team.name, team.id] },

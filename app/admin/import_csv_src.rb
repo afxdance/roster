@@ -54,14 +54,14 @@ ActiveAdmin.register_page "Import SRC from CSV" do
 
   page_action :submiturl, method: :post do
     url_link = params[:urls][:google_form_url]
-    spreadsheet_id = url_link.split(/\/(?=[\w])/)[-2]
+    spreadsheet_id = url_link.split(%r{\/(?=[\w])})[-2]
 
     range = "Sheet1!A2:A" # Only get email addresses
     response = service.get_spreadsheet_values spreadsheet_id, range
 
     ActiveRecord::Base.transaction do
       response.values.each do |row|
-        Dancer.all.each do | dancer |
+        Dancer.all.each do |dancer|
           if dancer.email == row[0]
             dancer.update(src_submitted: true)
           end
