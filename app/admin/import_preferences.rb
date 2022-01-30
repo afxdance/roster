@@ -21,11 +21,15 @@ ActiveAdmin.register_page "Import Preferences" do
         end
 
         dancer_preferences = Set.new
+        duplicates = Set.new
+        invalid_ids = Set.new
         csv.each do |row|
           dancer_id = row.to_hash["dancer_id"]
           # checks that dancer_id is a valid dancer id or if they have duplicate dancer id's on their preferences
-          if !all_dancers.include?(dancer_id) || dancer_preferences.include?(dancer_id)
-            next
+          if !all_dancers.include?(dancer_id)
+            invalid_ids.add(dancer_id)
+          elsif dancer_preferences.include?(dancer_id)
+            duplicates.add(dancer_id)
           else
             dancer_preferences.add(dancer_id)
           end
@@ -39,7 +43,14 @@ ActiveAdmin.register_page "Import Preferences" do
         else
           TeamPreference.create(team_id: input_team_id, preferences: dancer_preferences)
         end
-        redirect_to admin_import_preferences_path, notice: "Successfully imported preferences"
+        notice = "Successfully imported preferences"
+        if !duplicates.empty?
+          notice += " with duplicated dancer ids #{duplicates.to_a}"
+        end
+        if !invalid_ids.empty?
+          notice += " and invalid dancer ids #{invalid_ids.to_a}"
+        end
+        redirect_to admin_import_preferences_path, notice: notice
       end
     end
   end
