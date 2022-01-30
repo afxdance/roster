@@ -107,7 +107,7 @@ class Dancer < ApplicationRecord
     temp = Dancer.new
     temp.save!(validate: false)
     next_id = temp.id
-    temp.destroy
+    temp.delete
 
     Dancer.next_id = next_id
 
@@ -124,24 +124,15 @@ class Dancer < ApplicationRecord
       raise "There are dancer ids that are greater or equal to the given id."
     elsif target_max_id == max_id
       if target_max_id == 0
-        if Dancer.ids.include?(0)
-          temp = Dancer.where(id: 0)
-        else
-          temp = Dancer.new
-          temp.id =e target_max_id
-          temp.save!(validate: false)
-          end
-        reset_id
-        temp.destroy
-      else
-        reset_id
+        Dancer.destroy_all
       end
+      reset_id
     elsif target_max_id > max_id
       temp = Dancer.new
       temp.id = target_max_id
       temp.save!(validate: false)
       reset_id
-      temp.destroy
+      temp.delete
     else
       raise "Invalid given id: #{target_next_id}"
     end
