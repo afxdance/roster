@@ -20,7 +20,7 @@ ActiveAdmin.register TeamSwitchRequest do
       :email,
       :phone,
       :reason,
-      :approved_at,
+      :approved_or_rejected_at,
       :status,
       :old_team_id,
       :new_team_id,
@@ -36,7 +36,7 @@ ActiveAdmin.register TeamSwitchRequest do
       f.input :email
       f.input :phone
       f.input :reason
-      f.input :approved_at, as: :datetime_picker
+      f.input :approved_or_rejected_at, as: :datetime_picker
       f.input :status
       f.input :rejection_reason
       f.input :old_team
@@ -109,7 +109,7 @@ ActiveAdmin.register TeamSwitchRequest do
       end
 
       # check the rejection reason field is null
-      if team_switch_request.rejection_reason.nil?
+      if team_switch_request.rejection_reason.blank?
         redirect_to :back, alert: "Team switch request id #{team_switch_request_id} for dancer #{dancer.name} has an empty rejection reason. Fill out the rejection reason by editing the team switch request and re-click the 'Reject' button." and return
       end
 
@@ -129,7 +129,7 @@ ActiveAdmin.register TeamSwitchRequest do
 
       # Set approved time, and status of the request
       team_switch_request.update(
-        approved_at: Time.now,
+        approved_or_rejected_at: Time.now,
         status: "Rejected",
       )
       # Due to Configuration over Convention, rails looks for the "reject" view. Must redirect back to the index and alert
@@ -208,7 +208,7 @@ ActiveAdmin.register TeamSwitchRequest do
         # 3d. Set the new team, approved time, and status of the request
         team_switch_request.update(
           new_team: new_team,
-          approved_at: Time.now,
+          approved_or_rejected_at: Time.now,
           status: "Accepted",
         )
 

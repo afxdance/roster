@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210426025618) do
+ActiveRecord::Schema.define(version: 20220211211431) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -40,12 +40,6 @@ ActiveRecord::Schema.define(version: 20210426025618) do
     t.datetime "updated_at", null: false
     t.string "reach_workshop_interest"
     t.string "reach_news_interest"
-    t.string "has_paid_dues"
-    t.string "has_bought_tickets"
-    t.datetime "dues_changed_at"
-    t.datetime "tickets_changed_at"
-    t.string "dues_approved_by"
-    t.string "tickets_approved_by"
   end
 
   create_table "dancers_teams", id: false, force: :cascade do |t|
@@ -59,6 +53,17 @@ ActiveRecord::Schema.define(version: 20210426025618) do
   end
 
   create_table "director_users", force: :cascade do |t|
+  end
+
+  create_table "finances", force: :cascade do |t|
+    t.boolean "dues", default: false, null: false
+    t.boolean "tickets", default: false, null: false
+    t.text "dues_approved"
+    t.text "tickets_approved"
+    t.datetime "dues_updated"
+    t.datetime "tickets_updated"
+    t.integer "dancer_id"
+    t.index ["dancer_id"], name: "index_finances_on_dancer_id"
   end
 
   create_table "form_fields", force: :cascade do |t|
@@ -109,7 +114,7 @@ ActiveRecord::Schema.define(version: 20210426025618) do
     t.string "email"
     t.string "phone"
     t.text "reason"
-    t.datetime "approved_at"
+    t.datetime "approved_or_rejected_at"
     t.string "status"
     t.integer "old_team_id"
     t.integer "new_team_id"
@@ -140,7 +145,7 @@ ActiveRecord::Schema.define(version: 20210426025618) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "practice_location", default: "{}"
+    t.string "practice_location"
     t.index ["user_id"], name: "index_teams_on_user_id"
   end
 
@@ -167,7 +172,7 @@ ActiveRecord::Schema.define(version: 20210426025618) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "role", null: false
-    t.string "director_name"
+    t.string "name"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end

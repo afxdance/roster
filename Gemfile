@@ -1,5 +1,5 @@
 source "https://rubygems.org"
-ruby "2.5.0"
+ruby "2.7.4"
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -28,7 +28,8 @@ group :production, :development, :test do
   # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
   gem "jbuilder", "~> 2.5", require: false
   # Use Redis adapter to run Action Cable in production
-  # gem 'redis', '~> 4.0'
+  gem "redis", "~> 4.0"
+  gem "redis-rails"
   # Use ActiveModel has_secure_password
   gem "bcrypt", "~> 3.1.11"
 
@@ -96,7 +97,6 @@ group :development do
   # Place all added gems below #
   ##############################
 
-  gem "debase", require: false
   gem "haml_lint", require: false
   gem "mdl", require: false
   gem "rails_db"
