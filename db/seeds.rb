@@ -101,7 +101,7 @@ Team.create_with(
   locked: false,
   maximum_picks: 50,
   practice_location: "Sproul",
-).find_or_create_by(name: "AFX Something extra")
+).find_or_create_by(name: "AFX extra")
 # Team.create(name: "AFX Help",
 #              level: "Project",
 #              practice_time: "all the time",
