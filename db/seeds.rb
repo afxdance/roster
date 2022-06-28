@@ -81,6 +81,27 @@ Team.create_with(
   maximum_picks: 50,
   practice_location: "Sproul",
 ).find_or_create_by(name: "AFX Oasis")
+Team.create_with(
+  level: "Project",
+  practice_time: "Tuesday,Thursday",
+  locked: false,
+  maximum_picks: 100,
+  practice_location: "Underhill,Hass",
+).find_or_create_by(name: "AFX HAG$")
+Team.create_with(
+  level: "Training",
+  practice_time: "Wednesday",
+  locked: false,
+  maximum_picks: 50,
+  practice_location: "Sproul",
+).find_or_create_by(name: "AFX Something else")
+Team.create_with(
+  level: "Training",
+  practice_time: "Wednesday",
+  locked: false,
+  maximum_picks: 50,
+  practice_location: "Sproul",
+).find_or_create_by(name: "AFX Something extra")
 # Team.create(name: "AFX Help",
 #              level: "Project",
 #              practice_time: "all the time",
