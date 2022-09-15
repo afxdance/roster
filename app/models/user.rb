@@ -29,6 +29,7 @@ class User < ApplicationRecord
       true
     else
       false
+    end
   end
 
   def board_privileges?
