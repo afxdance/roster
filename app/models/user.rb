@@ -25,7 +25,10 @@ class User < ApplicationRecord
   end
 
   def can_modify_all_teams?
-    Set.new(teams) == Set.new(Team.all)
+    if admin
+      true
+    else
+      false
   end
 
   def board_privileges?
