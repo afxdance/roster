@@ -6,7 +6,7 @@
 require "redis"
 # REDIS = Redis.new
 REDIS = Redis.new(ssl_params: {verify_mode: OpenSSL::SSL::VERIFY_NONE})
-
+REDIS.set
 
 # REDIS.set("camp_interest", true)
 # REDIS.set("exp_interest", false)
