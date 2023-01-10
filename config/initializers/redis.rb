@@ -5,7 +5,7 @@
 
 require "redis"
 # REDIS = Redis.new
-REDIS = Redis.new(ssl_params: {verify_mode: OpenSSL::SSL::VERIFY_NONE})
+REDIS = Redis.new(url: ENV["REDIS_URL"], ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE })
 #REDIS.set
 
 REDIS.set("camp_interest", true)
