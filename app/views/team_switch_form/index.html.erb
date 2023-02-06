@@ -176,8 +176,8 @@
               // If someone on a project team puts down a project team time and a training team time,
               // then that's okay.
               // Fa21: Commented below code out because there are only 2 training teams so we want to allow dancers to request only 1 team
-              // if (nchecked.project == 0 && nchecked.training == 1)
-              //     return false;
+              if (nchecked.project == 0 && nchecked.training < 1)
+                  return false;
 
               return true;
           }
