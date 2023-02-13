@@ -1,0 +1,44 @@
+[
+    {
+      "id": 1,
+      "name": "Klaire Li",
+      "email": "klaire@berkeley.edu",
+      "phone": "650-942-5061",
+      "year": "3",
+      "danceExperience": "yes_in_afx"
+    },
+    {
+      "id": 2,
+      "name": "Jackie Pei",
+      "email": "jackiew@berkeley.edu",
+      "phone": "949-313-8175",
+      "year": "3",
+      "danceExperience": "yes_in_afx"
+    },
+    {
+      "id": 3,
+      "name": "Anusha Muley",
+      "email": "anusha.muley@berkeley.edu",
+      "phone": "510-456-8241",
+      "year": "3",
+      "danceExperience": "yes_in_afx"
+    },
+    {
+      "id": 4,
+      "name": "Jolie He",
+      "email": "zhilin.he@berkeley.edu",
+      "phone": "514-735-8031",
+      "year": "3",
+      "danceExperience": "yes_not_in_afx"
+    },
+    {
+      "id": 5,
+      "name": "David Lin",
+      "email": "davidwlin@berkeley.edu",
+      "phone": "970-873-5648",
+      "year": "4",
+      "danceExperience": "yes_in_afx"
+    }
+    
+    
+  ]
