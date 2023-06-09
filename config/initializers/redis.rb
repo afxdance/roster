@@ -4,8 +4,10 @@
 # need to be defined differently based on whether we're on dev or prod.
 
 require "redis"
-REDIS = Redis.new
+# REDIS = Redis.new
+REDIS = Redis.new(url: ENV["REDIS_URL"], ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE })
+#REDIS.set
 
-# REDIS.set("camp_interest", true)
-# REDIS.set("exp_interest", false)
+REDIS.set("camp_interest", true)
+REDIS.set("exp_interest", false)
 # REDIS.set("tech_interest", false)
